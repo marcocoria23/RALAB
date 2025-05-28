@@ -3,6 +3,7 @@ package Conexion;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /* @author ALEJANDRO.CASTILLO  */
 
@@ -32,6 +33,7 @@ public class ConexionPostgreSQL {
             e.printStackTrace();
         } catch (SQLException e) {
             System.err.println("❌ Error al conectar a PostgreSQL");
+            JOptionPane.showMessageDialog(null, "❌ Error al conectar a PostgreSQL", "Conexion", JOptionPane.WARNING_MESSAGE);
             e.printStackTrace();
         }
         setConexion(conexion);

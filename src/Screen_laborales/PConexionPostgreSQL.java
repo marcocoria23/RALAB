@@ -77,6 +77,7 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
         ActualizarBD = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         CBD = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Lable = new javax.swing.JLabel();
@@ -170,14 +171,30 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
 
         jLabel6.setText("Base Datos:");
 
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PAgrupamientoLayout = new javax.swing.GroupLayout(PAgrupamiento);
         PAgrupamiento.setLayout(PAgrupamientoLayout);
         PAgrupamientoLayout.setHorizontalGroup(
             PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(194, 194, 194)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 398, Short.MAX_VALUE)
+                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(142, Short.MAX_VALUE))
+            .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                .addGap(184, 184, 184)
+                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(EliminarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(184, 184, 184)
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3)
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
@@ -192,21 +209,12 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CBD, 0, 149, Short.MAX_VALUE))))
-                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(jLabel4)
+                                .addComponent(CBD, 0, 150, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
-                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 374, Short.MAX_VALUE)
-                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(117, Short.MAX_VALUE))
-            .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                .addGap(195, 195, 195)
-                .addComponent(EliminarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ActualizarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(309, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PAgrupamientoLayout.setVerticalGroup(
             PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +231,9 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
                                 .addComponent(jLabel6))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(CBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -326,20 +336,7 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
   
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here
-       QueryPostgreSQL queryPostgreSQL   = new QueryPostgreSQL();
-       ArrayList<ArrayList<String>> ArrayBD;
-        ArrayBD = new ArrayList<>();
-        try {   
-            ArrayBD=queryPostgreSQL.NombreBDPostgres(usuario.getText(),contrasenia.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(PConexionPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        CBD.removeAllItems();
-         for (int i=0;i<ArrayBD.size();i++){
-          String[] datos = ArrayBD.get(i).toArray(new String[0]);
-         String Organo = Arrays.toString(datos).replace("[", "").replace("]", "");
-          CBD.addItem(Organo.replace("[","").replace("]",""));
-         }
+       
         
     }//GEN-LAST:event_formWindowOpened
 
@@ -529,6 +526,24 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ActualizarBDActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    QueryPostgreSQL queryPostgreSQL   = new QueryPostgreSQL();
+       ArrayList<ArrayList<String>> ArrayBD;
+        ArrayBD = new ArrayList<>();
+        try {   
+            ArrayBD=queryPostgreSQL.NombreBDPostgres(usuario.getText(),contrasenia.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(PConexionPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        CBD.removeAllItems();
+         for (int i=0;i<ArrayBD.size();i++){
+          String[] datos = ArrayBD.get(i).toArray(new String[0]);
+         String Organo = Arrays.toString(datos).replace("[", "").replace("]", "");
+          CBD.addItem(Organo.replace("[","").replace("]",""));
+         }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -554,6 +569,7 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JPasswordField contrasenia;
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;

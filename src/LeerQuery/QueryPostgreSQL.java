@@ -46,7 +46,7 @@ public class QueryPostgreSQL {
                     if (resul != null) {
                         resul.close();
                     }
-                    conexion.close();
+                    cone.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
