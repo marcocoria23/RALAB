@@ -4,7 +4,6 @@
  */
 package mx.org.querys.NotNull_Estruc_Definitiva;
 
-
 import Conexion.OracleConexionDesarrollo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,20 +11,18 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  *
  * @author JOSE.CABRERA
  */
 public class EDQNuevosColectivoEconomico {
-OracleConexionDesarrollo conexion = new OracleConexionDesarrollo ();
-String sql,NMunicipio;
-ArrayList<String[]> Array;
-ResultSet resul;   
 
+    OracleConexionDesarrollo conexion = new OracleConexionDesarrollo();
+    String sql, NMunicipio;
+    ArrayList<String[]> Array;
+    ResultSet resul;
 
-
-/* No aplica -----------------
+    /* No aplica -----------------
 
 
 public ArrayList  OrdinarioEstatusFE(String claveorgano,String entidad,String periodo){
@@ -352,43 +349,42 @@ public ArrayList  HuelgaEstatusH(String claveorgano,String entidad,String period
     return Array;
  }
 
-*/
-
-public ArrayList  Colect_EconomEstatusCE(String claveorgano,String entidad,String periodo){
-     conexion.Conectar();
-      Array = new ArrayList();
-      sql="SELECT 	\n" +
-"    ID_EXPEDIENTE, 	\n" +
-"    ID_ORGANOJ, 	\n" +
-"    CLAVE_EXPEDIENTE,	\n" +
-"    DECODE(ID_ESTATUS_EXPED, '1', 'Solucionado') ID_ESTATUS_EXPED,	\n" +
-"    DECODE(ID_FASE_SOL_EXPED, '8', 'Audiencia dentro del procedimiento colectivo de naturaleza económica') ID_FASE_SOL_EXPED,	\n" +
-"    FECHA_DICTO_SOLUCION,	\n" +
-"    COMENTARIOS  	\n" +
-"FROM TR_EXPEDIENTE 	\n" +
-"WHERE ID_ESTATUS_EXPED=1 	\n" +
-"AND ID_FASE_SOL_EXPED=8 	\n" +
-"AND (FECHA_DICTO_SOLUCION IS NULL OR FECHA_DICTO_SOLUCION='09/09/1899') 	\n" +
-"AND ((ID_ORGANOJ='"+claveorgano+"' AND PERIODO='"+periodo+"' AND ID_TIPO_EXPEDIENTE = 5)	\n" +
-"OR (SUBSTR(ID_ORGANOJ,0,2)='"+entidad+"' AND PERIODO='"+periodo+"' AND ID_TIPO_EXPEDIENTE = 5))";
-      System.out.println(sql);
-      resul=conexion.consultar(sql);
-      try {
-          while (resul.next()) {
-              Array.add(new String[]{
-                  resul.getString("ID_ORGANOJ"),
-                  resul.getString("CLAVE_EXPEDIENTE"),
-                  resul.getString("COMENTARIOS")
+     */
+    public ArrayList Colect_EconomEstatusCE(String claveorgano, String entidad, String periodo) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT 	\n"
+                + "    ID_EXPEDIENTE, 	\n"
+                + "    ID_ORGANOJ, 	\n"
+                + "    CLAVE_EXPEDIENTE,	\n"
+                + "    DECODE(ID_ESTATUS_EXPED, '1', 'Solucionado') ID_ESTATUS_EXPED,	\n"
+                + "    DECODE(ID_FASE_SOL_EXPED, '8', 'Audiencia dentro del procedimiento colectivo de naturaleza económica') ID_FASE_SOL_EXPED,	\n"
+                + "    FECHA_DICTO_SOLUCION,	\n"
+                + "    COMENTARIOS  	\n"
+                + "FROM TR_EXPEDIENTE 	\n"
+                + "WHERE ID_ESTATUS_EXPED=1 	\n"
+                + "AND ID_FASE_SOL_EXPED=8 	\n"
+                + "AND (FECHA_DICTO_SOLUCION IS NULL OR FECHA_DICTO_SOLUCION='09/09/1899') 	\n"
+                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "' AND ID_TIPO_EXPEDIENTE = 5)	\n"
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + entidad + "' AND PERIODO='" + periodo + "' AND ID_TIPO_EXPEDIENTE = 5))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
                 });
-          }
-      conexion.close();
-     } catch (SQLException ex) {
+            }
+            conexion.close();
+        } catch (SQLException ex) {
             Logger.getLogger(EDQNuevosColectivoEconomico.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return Array;
- }
+        return Array;
+    }
 
-/*
+    /*
 
 public ArrayList  ParaprocesalEstatus(String claveorgano,String entidad,String periodo){
      conexion.Conectar();
@@ -439,6 +435,34 @@ public ArrayList  EjecucionEstatus(String claveorgano,String entidad,String peri
         }
     return Array;
  }
-*/
+     */
+    
+    //Si en los campos ¿Hubo celebración de audiencia dentro del procedimiento colectivo de naturaleza económica? (PREG_AUDIENCIA_COL_NAT_ECO) se selecciona la opcion Sí, en el campo Estatus de la demanda (ID_ESTATUS_DEMANDA) debe contener la opción Admitida. 
+    public ArrayList Colect_EconomEstatusDemanda(String claveorgano, String entidad, String periodo) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, COMENTARIOS\n"
+                + "FROM TR_EXPEDIENTE \n"
+                + "WHERE ID_TIPO_EXPEDIENTE = 5\n"
+                + "AND ID_ESTATUS_DEMANDA <> 1\n"
+                + "AND PREG_AUDIENCIA_COL_NAT_ECO = 1\n"
+                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + entidad + "' AND PERIODO='" + periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EDQNuevosColectivoEconomico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
 
 }

@@ -34,7 +34,7 @@ public class EDQNuevosIndividual {
                 + "AND ID_FASE_SOL_EXPED=3\n"
                 + "AND ID_TIPO_EXPEDIENTE=2\n"
                 + "AND (FECHA_DICTO_SOLUCION IS NULL OR FECHA_DICTO_SOLUCION='09/09/1899')\n"
-                + "AND ((ID_ORGANOJ='+claveorgano+' AND PERIODO='+periodo+') OR (SUBSTR(ID_ORGANOJ,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"' ))";
+                + "AND ((ID_ORGANOJ='+claveorgano+' AND PERIODO='+periodo+') OR (SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' ))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
@@ -62,7 +62,7 @@ public class EDQNuevosIndividual {
                 + "AND ID_TIPO_EXPEDIENTE = 2\n"
                 + "AND (FECHA_DICTO_SOLUCION IS NULL OR FECHA_DICTO_SOLUCION='09/09/1899')\n"
                 + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
-                + "OR (SUBSTR(ID_ORGANOJ,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"' ))";
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' ))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
@@ -90,7 +90,7 @@ public class EDQNuevosIndividual {
                 + "AND ID_TIPO_EXPEDIENTE = 2\n"
                 + "AND (FECHA_DICTO_SOLUCION IS NULL OR FECHA_DICTO_SOLUCION='09/09/1899')\n"
                 + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
-                + "OR (SUBSTR(ID_ORGANOJ,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"' ))";
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' ))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
@@ -118,7 +118,35 @@ public class EDQNuevosIndividual {
                 + "AND ID_TIPO_EXPEDIENTE = 2\n"
                 + "AND (FECHA_DICTO_SOLUCION IS NULL OR FECHA_DICTO_SOLUCION='09/09/1899')\n"
                 + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
-                + "                OR (SUBSTR(ID_ORGANOJ,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"' ))";
+                + "                OR (SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' ))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
+    // Si en los campos ¿Hubo tramitación  por auto de depuración? (PREG_AUTO_DEPURACION_TRAM), ¿Hubo celebración de audiencia preliminar?(PREG_AUD_PRELIM_CELEBR) y ¿Hubo celebración de audiencia de juicio? (PREG_CELEBRA_AUD_JUICIO) se selecciona la opcion Sí, en el campo Estatus de la demanda (ID_ESTATUS_DEMANDA) debe contener la opción Admitida. 
+    public ArrayList IndividualEstatusDemanda(String claveorgano, String entidad, String periodo) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, COMENTARIOS\n"
+                + "FROM TR_EXPEDIENTE \n"
+                + "WHERE ID_TIPO_EXPEDIENTE = 2\n"
+                + "AND ID_ESTATUS_DEMANDA <> 1\n"
+                + "AND (PREG_AUD_PRELIM_CELEBR = 1 OR PREG_CELEBRA_AUD_JUICIO = 1 OR PREG_AUTO_DEPURACION_TRAM = 1)\n"
+                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' ))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
