@@ -163,4 +163,35 @@ public class EDQNuevosIndividual {
         }
         return Array;
     }
+
+    // Si se encuentra registro en los campos Forma de solución (ID_FORMA_SOLUCION), Fecha en la que se dictó la resolución (FECHA_DICTO_SOLUCION), Tipo sentencia (ID_TIPO_SENTENCIA) y Monto estipulado en la forma de solución(MONTO_SOLUCION), el campo Fase en la que se solucionó el expediente (ID_FASE_SOL_EXPED) debe seleccionar alguna de estas opciones Audiencia preliminar, Audiencia de juicio, Tramitación por auto de depuración ó Tramitación sin audiencias.
+    public ArrayList IndividualFaseSolExp(String claveorgano, String entidad, String periodo) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, COMENTARIOS\n"
+                + "FROM TR_EXPEDIENTE\n"
+                + "WHERE ID_TIPO_EXPEDIENTE = 2\n"
+                + "AND ((ID_FASE_SOL_EXPED IN '-1') OR (ID_FASE_SOL_EXPED IS NULL)) \n"
+                + "AND (ID_FORMA_SOLUCION IS NOT NULL\n"
+                + "OR FECHA_DICTO_SOLUCION IS NOT NULL\n"
+                + "OR MONTO_SOLUCION IS NOT NULL\n"
+                + "OR ID_TIPO_SENTENCIA IS NOT NULL)\n"
+                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' ))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
 }

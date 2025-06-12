@@ -155,6 +155,37 @@ public class EDQNuevosOrdinario {
         return Array;
     }
 
+    // Si se encuentra registro en los campos Forma de solución (ID_FORMA_SOLUCION), Fecha en la que se dictó la resolución (FECHA_DICTO_SOLUCION),Monto estipulado en la forma de solución(MONTO_SOLUCION) Y Tipo de sentencia (ID_TIPO_SENTENCIA)(Sí este campo tiene registro debe seleccionar la opción de Audiencia de Juicio), el campo Fase en la que se solucionó el expediente (ID_FASE_SOL_EXPED) debe contener alguna de las opciones Fase escrita, Adiencia preliminar ó Adiencia de Juicio.
+    public ArrayList OrdinarioFaseSolExp(String claveorgano, String entidad, String periodo) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, COMENTARIOS\n"
+                + "FROM TR_EXPEDIENTE\n"
+                + "WHERE ID_TIPO_EXPEDIENTE = 1\n"
+                + "AND ((ID_FASE_SOL_EXPED IN '-1') OR (ID_FASE_SOL_EXPED IS NULL)) -- AUDIENCIA PRELIMINAR\n"
+                + "AND (ID_FORMA_SOLUCION IS NOT NULL\n"
+                + "OR FECHA_DICTO_SOLUCION IS NOT NULL\n"
+                + "OR MONTO_SOLUCION IS NOT NULL\n"
+                + "OR ID_TIPO_SENTENCIA IS NOT NULL)\n"
+                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + entidad + "' AND PERIODO='" + periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EDQNuevosOrdinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
     /* NO APLICA 
 
 public ArrayList  IndividualEstatusAD(String claveorgano,String entidad,String periodo){

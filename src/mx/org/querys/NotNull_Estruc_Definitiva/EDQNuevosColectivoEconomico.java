@@ -465,4 +465,37 @@ public ArrayList  EjecucionEstatus(String claveorgano,String entidad,String peri
         return Array;
     }
 
+    // Si se encuentra registro en los campos Forma de solución (ID_FORMA_SOLUCION), Fecha en la que se dictó la resolución (FECHA_DICTO_SOLUCION), Tipo de sentencia (ID_TIPO_SENTENCIA), Efectos de la sentencia (ID_SENTENCIA_EFECTO) y Efectos de la sentencia (ID_SENTENCIA_EFECTO), el campo Fase en la que se solucionó el expediente (ID_FASE_SOL_EXPED) debe contener la opcion Audiencia dentro del procedimiento colectivo de naturaleza económica.
+    public ArrayList Colect_EconomFaseSolExp(String claveorgano, String entidad, String periodo) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT EXP.ID_ORGANOJ, EXP.CLAVE_EXPEDIENTE, EXP.COMENTARIOS, EXP.ID_FASE_SOL_EXPED\n"
+                + "FROM TR_EXPEDIENTE EXP\n"
+                + "LEFT JOIN TR_EXP_EFECTOS_SENTENCIA ES\n"
+                + "  ON EXP.ID_ORGANOJ = ES.ID_ORGANOJ AND EXP.PERIODO = ES.PERIODO\n"
+                + "WHERE ID_TIPO_EXPEDIENTE = 5\n"
+                + "and ((ID_FASE_SOL_EXPED IN '-1') OR (ID_FASE_SOL_EXPED IS NULL))\n"
+                + "AND (ID_FORMA_SOLUCION IS NOT NULL\n"
+                + "OR FECHA_DICTO_SOLUCION IS NOT NULL\n"
+                + "OR ID_TIPO_SENTENCIA IS NOT NULL\n"
+                + "OR ID_EFECTO_SENTENCIA IS NOT NULL)\n"
+                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
+                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + entidad + "' AND PERIODO='" + periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EDQNuevosColectivoEconomico.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
 }
