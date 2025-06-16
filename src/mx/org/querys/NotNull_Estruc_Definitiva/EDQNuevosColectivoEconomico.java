@@ -479,8 +479,8 @@ public ArrayList  EjecucionEstatus(String claveorgano,String entidad,String peri
                 + "OR FECHA_DICTO_SOLUCION IS NOT NULL\n"
                 + "OR ID_TIPO_SENTENCIA IS NOT NULL\n"
                 + "OR ID_EFECTO_SENTENCIA IS NOT NULL)\n"
-                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
-                + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + entidad + "' AND PERIODO='" + periodo + "'))";
+                + "AND ((EXP.ID_ORGANOJ='" + claveorgano + "' AND EXP.PERIODO='" + periodo + "')\n"
+                + "OR (SUBSTR(EXP.ID_ORGANOJ,0,2)='" + entidad + "' AND EXP.PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {

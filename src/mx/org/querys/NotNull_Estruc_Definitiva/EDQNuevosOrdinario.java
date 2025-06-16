@@ -136,7 +136,7 @@ public class EDQNuevosOrdinario {
                 + "WHERE ID_TIPO_EXPEDIENTE = 1\n"
                 + "AND ID_ESTATUS_DEMANDA <> 1\n"
                 + "AND (PREG_AUD_PRELIM_CELEBR = 1 OR PREG_CELEBRA_AUD_JUICIO = 1)\n"
-                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')n"
+                + "AND ((ID_ORGANOJ='" + claveorgano + "' AND PERIODO='" + periodo + "')\n"
                 + "OR (SUBSTR(ID_ORGANOJ,0,2)='" + entidad + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);

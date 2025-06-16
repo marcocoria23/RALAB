@@ -750,8 +750,8 @@ public class QNuevos {
                 + "AND (FORMA_SOLUCION_AD IS NOT NULL\n"
                 + "OR FECHA_DICTO_RESOLUCION_AD IS NOT NULL\n"
                 + "OR TIPO_SENTENCIA_AD IS NOT NULL\n"
+                + "OR MONTO_SOLUCION_AD IS NOT NULL\n"
                 + "OR MONTO_SOLUCION_AD IS NOT NULL)\n"
-                + "OR MONTO_SOLUCION_AJ IS NOT NULL)\n"
                 + "AND ((CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "') OR (SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
