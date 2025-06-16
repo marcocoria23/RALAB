@@ -518,7 +518,7 @@ public class QNuevos {
         Array = new ArrayList();
         sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, COMENTARIOS, FASE_SOLI_EXPEDIENTE\n"
                 + "FROM V3_TR_ORDINARIOJL\n"
-                + "WHERE ((FASE_SOLI_EXPEDIENTE IN 9) OR (FASE_SOLI_EXPEDIENTE IS NULL))\n"
+                + "WHERE ((FASE_SOLI_EXPEDIENTE IN 99) OR (FASE_SOLI_EXPEDIENTE IS NULL))\n"
                 + "AND (FORMA_SOLUCIONFE IS NOT NULL\n"
                 + "OR FECHA_DICTO_RESOLUCIONFE IS NOT NULL\n"
                 + "OR MONTO_SOLUCION_FE IS NOT NULL)\n"
@@ -546,7 +546,7 @@ public class QNuevos {
         Array = new ArrayList();
         sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, COMENTARIOS, FASE_SOLI_EXPEDIENTE\n"
                 + "FROM V3_TR_ORDINARIOJL\n"
-                + "WHERE ((FASE_SOLI_EXPEDIENTE IN 9) OR (FASE_SOLI_EXPEDIENTE IS NULL))\n"
+                + "WHERE ((FASE_SOLI_EXPEDIENTE IN 99) OR (FASE_SOLI_EXPEDIENTE IS NULL))\n"
                 + "AND (FORMA_SOLUCIONAP IS NOT NULL\n"
                 + "OR FECHA_DICTO_RESOLUCIONAP IS NOT NULL\n"
                 + "OR MONTO_SOLUCION_AP IS NOT NULL)\n"
@@ -574,7 +574,7 @@ public class QNuevos {
         Array = new ArrayList();
         sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, COMENTARIOS, FASE_SOLI_EXPEDIENTE\n"
                 + "FROM V3_TR_ORDINARIOJL\n"
-                + "WHERE ((FASE_SOLI_EXPEDIENTE IN 9) OR (FASE_SOLI_EXPEDIENTE IS NULL))\n"
+                + "WHERE ((FASE_SOLI_EXPEDIENTE IN 99) OR (FASE_SOLI_EXPEDIENTE IS NULL))\n"
                 + "AND (FORMA_SOLUCIONAJ IS NOT NULL\n"
                 + "OR FECHA_RESOLUCIONAJ IS NOT NULL\n"
                 + "OR MONTO_SOLUCIONAJ IS NOT NULL)\n"
