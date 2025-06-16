@@ -799,7 +799,7 @@ public class QNuevos {
         return Array;
     }
     
-    // Si se encuentra registro en los campos Forma de solución (FORMA_SOLUCION_HUELGA), Fecha en la que se dictó la resolución (FECHA_RESOLU_HUELGA) y Monto estipulado en la forma de solución(MONTO_SOLUCION_AP), el campo Fase en la que se solucionó el expediente (FASE_SOLI_EXPEDIENTE) debe contener la opción Huelga.
+    // Si se encuentra registro en los campos Forma de solución (FORMA_SOLUCION_HUELGA), Fecha en la que se dictó la resolución (FECHA_RESOLU_HUELGA),Tipo de sentencia (Tipo_sentencia),Fecha de estallamiento a huelga,fecha de levantamiento a huelga,porcentaje por salarios caido y Monto estipulado, el campo Fase en la que se solucionó el expediente (FASE_SOLI_EXPEDIENTE) debe contener la opción Huelga.
     public ArrayList HuelgaFaseSolExpHu(String claveorgano, String entidad, String periodo) {
         conexion.Conectar();
         Array = new ArrayList();
@@ -811,7 +811,6 @@ public class QNuevos {
                 + "OR TIPO_SENTENCIA IS NOT NULL\n"
                 + "OR FECHA_ESTALLAM_HUELGA IS NOT NULL\n"
                 + "OR FECHA_LEVANT_HUELGA IS NOT NULL\n"
-                + "OR DIAS_HUELGA IS NOT NULL\n"
                 + "OR MONTO_ESTIPULADO IS NOT NULL\n"
                 + "OR SALARIOS_CAIDOS IS NOT NULL)\n"
                 + "AND ((CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "') OR (SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "'))";

@@ -29459,7 +29459,7 @@ PValidacion validacion = new PValidacion();
                 HSSFCell celdaE9 = filaE9.createCell((short) 3);//COLUMNA
                 celdaE9.setCellStyle(estiloCeldabordes0);
                 celdaE9.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txtE9 = "Si se encuentra registro en los campos Forma de solución (FORMA_SOLUCION_HUELGA), Fecha en la que se dictó la resolución (FECHA_RESOLU_HUELGA) y Monto estipulado en la forma de solución(MONTO_SOLUCION_AP), el campo Fase en la que se solucionó el expediente (FASE_SOLI_EXPEDIENTE) debe contener la opción Huelga.";
+                String txtE9 = " Si se encuentra registro en los campos Forma de solución (FORMA_SOLUCION_HUELGA), Fecha en la que se dictó la resolución (FECHA_RESOLU_HUELGA),Tipo de sentencia (Tipo_sentencia),Fecha de estallamiento a huelga,fecha de levantamiento a huelga,porcentaje por salarios caido y Monto estipulado, el campo Fase en la que se solucionó el expediente (FASE_SOLI_EXPEDIENTE) debe contener la opción Huelga.";
                 //System.out.println(Arrays.toString(ArrayResult.get(i)));
                 HSSFRichTextString textoD9 = new HSSFRichTextString(txtE9);
                 celdaE9.setCellValue(textoD9);
