@@ -41533,7 +41533,7 @@ PValidacion validacion = new PValidacion();
                 HSSFCell celdaE9 = filaE9.createCell((short) 3);//COLUMNA
                 celdaE9.setCellStyle(estiloCeldabordes0);
                 celdaE9.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txtE9 = "Favor de capturar Fecha en la que se dictó la resolución (FECHA_RESOLUCION).";
+                String txtE9 = "Favor de capturar Fecha en la que se dictó la resolución (FECHA_CONCLUSION_EXPE).";
                 //System.out.println(Arrays.toString(ArrayResult.get(i)));
                 HSSFRichTextString textoD9 = new HSSFRichTextString(txtE9);
                 celdaE9.setCellValue(textoD9);
