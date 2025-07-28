@@ -5,7 +5,7 @@
 -- Dumped from database version 17.4
 -- Dumped by pg_dump version 17.4
 
--- Started on 2025-05-28 10:26:34
+-- Started on 2025-07-25 15:09:37
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -24,7 +24,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 217 (class 1259 OID 17358)
+-- TOC entry 217 (class 1259 OID 22093)
 -- Name: email_verificacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -39,7 +39,7 @@ CREATE TABLE public.email_verificacion (
 ALTER TABLE public.email_verificacion OWNER TO postgres;
 
 --
--- TOC entry 218 (class 1259 OID 17362)
+-- TOC entry 218 (class 1259 OID 22097)
 -- Name: email_verificacion_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -55,7 +55,7 @@ CREATE SEQUENCE public.email_verificacion_id_seq
 ALTER SEQUENCE public.email_verificacion_id_seq OWNER TO postgres;
 
 --
--- TOC entry 5414 (class 0 OID 0)
+-- TOC entry 5420 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: email_verificacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -64,7 +64,7 @@ ALTER SEQUENCE public.email_verificacion_id_seq OWNED BY public.email_verificaci
 
 
 --
--- TOC entry 219 (class 1259 OID 17363)
+-- TOC entry 219 (class 1259 OID 22098)
 -- Name: tc_actor; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -77,7 +77,7 @@ CREATE TABLE public.tc_actor (
 ALTER TABLE public.tc_actor OWNER TO postgres;
 
 --
--- TOC entry 220 (class 1259 OID 17368)
+-- TOC entry 220 (class 1259 OID 22103)
 -- Name: tc_actor_id_tipo_actor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -93,7 +93,7 @@ CREATE SEQUENCE public.tc_actor_id_tipo_actor_seq
 ALTER SEQUENCE public.tc_actor_id_tipo_actor_seq OWNER TO postgres;
 
 --
--- TOC entry 5415 (class 0 OID 0)
+-- TOC entry 5421 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: tc_actor_id_tipo_actor_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -102,7 +102,7 @@ ALTER SEQUENCE public.tc_actor_id_tipo_actor_seq OWNED BY public.tc_actor.id_tip
 
 
 --
--- TOC entry 221 (class 1259 OID 17369)
+-- TOC entry 221 (class 1259 OID 22104)
 -- Name: tc_asunto; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -115,7 +115,7 @@ CREATE TABLE public.tc_asunto (
 ALTER TABLE public.tc_asunto OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 17374)
+-- TOC entry 222 (class 1259 OID 22109)
 -- Name: tc_asunto_id_tipo_asunto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -131,7 +131,7 @@ CREATE SEQUENCE public.tc_asunto_id_tipo_asunto_seq
 ALTER SEQUENCE public.tc_asunto_id_tipo_asunto_seq OWNER TO postgres;
 
 --
--- TOC entry 5416 (class 0 OID 0)
+-- TOC entry 5422 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: tc_asunto_id_tipo_asunto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -140,7 +140,7 @@ ALTER SEQUENCE public.tc_asunto_id_tipo_asunto_seq OWNED BY public.tc_asunto.id_
 
 
 --
--- TOC entry 223 (class 1259 OID 17375)
+-- TOC entry 223 (class 1259 OID 22110)
 -- Name: tc_causas_impedim_demanda; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -153,7 +153,7 @@ CREATE TABLE public.tc_causas_impedim_demanda (
 ALTER TABLE public.tc_causas_impedim_demanda OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 17380)
+-- TOC entry 224 (class 1259 OID 22115)
 -- Name: tc_causas_impedim_demanda_id_causas_imp_dem_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -169,7 +169,7 @@ CREATE SEQUENCE public.tc_causas_impedim_demanda_id_causas_imp_dem_seq
 ALTER SEQUENCE public.tc_causas_impedim_demanda_id_causas_imp_dem_seq OWNER TO postgres;
 
 --
--- TOC entry 5417 (class 0 OID 0)
+-- TOC entry 5423 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: tc_causas_impedim_demanda_id_causas_imp_dem_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -178,7 +178,7 @@ ALTER SEQUENCE public.tc_causas_impedim_demanda_id_causas_imp_dem_seq OWNED BY p
 
 
 --
--- TOC entry 225 (class 1259 OID 17381)
+-- TOC entry 225 (class 1259 OID 22116)
 -- Name: tc_circunscripcion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -191,7 +191,7 @@ CREATE TABLE public.tc_circunscripcion (
 ALTER TABLE public.tc_circunscripcion OWNER TO postgres;
 
 --
--- TOC entry 226 (class 1259 OID 17386)
+-- TOC entry 226 (class 1259 OID 22121)
 -- Name: tc_circunscripcion_id_circunscripcion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -207,7 +207,7 @@ CREATE SEQUENCE public.tc_circunscripcion_id_circunscripcion_seq
 ALTER SEQUENCE public.tc_circunscripcion_id_circunscripcion_seq OWNER TO postgres;
 
 --
--- TOC entry 5418 (class 0 OID 0)
+-- TOC entry 5424 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: tc_circunscripcion_id_circunscripcion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -216,7 +216,7 @@ ALTER SEQUENCE public.tc_circunscripcion_id_circunscripcion_seq OWNED BY public.
 
 
 --
--- TOC entry 227 (class 1259 OID 17387)
+-- TOC entry 227 (class 1259 OID 22122)
 -- Name: tc_concepto_reclamado; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -229,7 +229,7 @@ CREATE TABLE public.tc_concepto_reclamado (
 ALTER TABLE public.tc_concepto_reclamado OWNER TO postgres;
 
 --
--- TOC entry 228 (class 1259 OID 17392)
+-- TOC entry 228 (class 1259 OID 22127)
 -- Name: tc_concepto_reclamado_id_concepto_reclam_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -245,7 +245,7 @@ CREATE SEQUENCE public.tc_concepto_reclamado_id_concepto_reclam_seq
 ALTER SEQUENCE public.tc_concepto_reclamado_id_concepto_reclam_seq OWNER TO postgres;
 
 --
--- TOC entry 5419 (class 0 OID 0)
+-- TOC entry 5425 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: tc_concepto_reclamado_id_concepto_reclam_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -254,7 +254,7 @@ ALTER SEQUENCE public.tc_concepto_reclamado_id_concepto_reclam_seq OWNED BY publ
 
 
 --
--- TOC entry 229 (class 1259 OID 17393)
+-- TOC entry 229 (class 1259 OID 22128)
 -- Name: tc_contrato; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -267,7 +267,7 @@ CREATE TABLE public.tc_contrato (
 ALTER TABLE public.tc_contrato OWNER TO postgres;
 
 --
--- TOC entry 230 (class 1259 OID 17398)
+-- TOC entry 230 (class 1259 OID 22133)
 -- Name: tc_contrato_id_tipo_contrato_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -283,7 +283,7 @@ CREATE SEQUENCE public.tc_contrato_id_tipo_contrato_seq
 ALTER SEQUENCE public.tc_contrato_id_tipo_contrato_seq OWNER TO postgres;
 
 --
--- TOC entry 5420 (class 0 OID 0)
+-- TOC entry 5426 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: tc_contrato_id_tipo_contrato_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -292,7 +292,7 @@ ALTER SEQUENCE public.tc_contrato_id_tipo_contrato_seq OWNED BY public.tc_contra
 
 
 --
--- TOC entry 231 (class 1259 OID 17399)
+-- TOC entry 231 (class 1259 OID 22134)
 -- Name: tc_defensa; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -305,7 +305,7 @@ CREATE TABLE public.tc_defensa (
 ALTER TABLE public.tc_defensa OWNER TO postgres;
 
 --
--- TOC entry 232 (class 1259 OID 17404)
+-- TOC entry 232 (class 1259 OID 22139)
 -- Name: tc_defensa_id_defensa_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -321,7 +321,7 @@ CREATE SEQUENCE public.tc_defensa_id_defensa_seq
 ALTER SEQUENCE public.tc_defensa_id_defensa_seq OWNER TO postgres;
 
 --
--- TOC entry 5421 (class 0 OID 0)
+-- TOC entry 5427 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: tc_defensa_id_defensa_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -330,7 +330,7 @@ ALTER SEQUENCE public.tc_defensa_id_defensa_seq OWNED BY public.tc_defensa.id_de
 
 
 --
--- TOC entry 233 (class 1259 OID 17405)
+-- TOC entry 233 (class 1259 OID 22140)
 -- Name: tc_demandado; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -343,7 +343,7 @@ CREATE TABLE public.tc_demandado (
 ALTER TABLE public.tc_demandado OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1259 OID 17410)
+-- TOC entry 234 (class 1259 OID 22145)
 -- Name: tc_demandado_id_tipo_demandado_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -359,7 +359,7 @@ CREATE SEQUENCE public.tc_demandado_id_tipo_demandado_seq
 ALTER SEQUENCE public.tc_demandado_id_tipo_demandado_seq OWNER TO postgres;
 
 --
--- TOC entry 5422 (class 0 OID 0)
+-- TOC entry 5428 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: tc_demandado_id_tipo_demandado_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -368,7 +368,7 @@ ALTER SEQUENCE public.tc_demandado_id_tipo_demandado_seq OWNED BY public.tc_dema
 
 
 --
--- TOC entry 235 (class 1259 OID 17411)
+-- TOC entry 235 (class 1259 OID 22146)
 -- Name: tc_entidad_mpio; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -384,7 +384,7 @@ CREATE TABLE public.tc_entidad_mpio (
 ALTER TABLE public.tc_entidad_mpio OWNER TO postgres;
 
 --
--- TOC entry 236 (class 1259 OID 17416)
+-- TOC entry 236 (class 1259 OID 22151)
 -- Name: tc_estatus_demanda; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -397,7 +397,7 @@ CREATE TABLE public.tc_estatus_demanda (
 ALTER TABLE public.tc_estatus_demanda OWNER TO postgres;
 
 --
--- TOC entry 237 (class 1259 OID 17421)
+-- TOC entry 237 (class 1259 OID 22156)
 -- Name: tc_estatus_demanda_id_estatus_demanda_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -413,7 +413,7 @@ CREATE SEQUENCE public.tc_estatus_demanda_id_estatus_demanda_seq
 ALTER SEQUENCE public.tc_estatus_demanda_id_estatus_demanda_seq OWNER TO postgres;
 
 --
--- TOC entry 5423 (class 0 OID 0)
+-- TOC entry 5429 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: tc_estatus_demanda_id_estatus_demanda_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -422,7 +422,7 @@ ALTER SEQUENCE public.tc_estatus_demanda_id_estatus_demanda_seq OWNED BY public.
 
 
 --
--- TOC entry 238 (class 1259 OID 17422)
+-- TOC entry 238 (class 1259 OID 22157)
 -- Name: tc_estatus_expediente; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -435,7 +435,7 @@ CREATE TABLE public.tc_estatus_expediente (
 ALTER TABLE public.tc_estatus_expediente OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1259 OID 17427)
+-- TOC entry 239 (class 1259 OID 22162)
 -- Name: tc_estatus_expediente_id_estatus_expediente_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -451,7 +451,7 @@ CREATE SEQUENCE public.tc_estatus_expediente_id_estatus_expediente_seq
 ALTER SEQUENCE public.tc_estatus_expediente_id_estatus_expediente_seq OWNER TO postgres;
 
 --
--- TOC entry 5424 (class 0 OID 0)
+-- TOC entry 5430 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: tc_estatus_expediente_id_estatus_expediente_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -460,7 +460,7 @@ ALTER SEQUENCE public.tc_estatus_expediente_id_estatus_expediente_seq OWNED BY p
 
 
 --
--- TOC entry 240 (class 1259 OID 17428)
+-- TOC entry 240 (class 1259 OID 22163)
 -- Name: tc_fase_conclusion_ejecu; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -473,7 +473,7 @@ CREATE TABLE public.tc_fase_conclusion_ejecu (
 ALTER TABLE public.tc_fase_conclusion_ejecu OWNER TO postgres;
 
 --
--- TOC entry 241 (class 1259 OID 17433)
+-- TOC entry 241 (class 1259 OID 22168)
 -- Name: tc_fase_conclusion_ejecu_id_fase_concl_ejec_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -489,7 +489,7 @@ CREATE SEQUENCE public.tc_fase_conclusion_ejecu_id_fase_concl_ejec_seq
 ALTER SEQUENCE public.tc_fase_conclusion_ejecu_id_fase_concl_ejec_seq OWNER TO postgres;
 
 --
--- TOC entry 5425 (class 0 OID 0)
+-- TOC entry 5431 (class 0 OID 0)
 -- Dependencies: 241
 -- Name: tc_fase_conclusion_ejecu_id_fase_concl_ejec_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -498,7 +498,7 @@ ALTER SEQUENCE public.tc_fase_conclusion_ejecu_id_fase_concl_ejec_seq OWNED BY p
 
 
 --
--- TOC entry 242 (class 1259 OID 17434)
+-- TOC entry 242 (class 1259 OID 22169)
 -- Name: tc_fase_solucion_exp; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -511,7 +511,7 @@ CREATE TABLE public.tc_fase_solucion_exp (
 ALTER TABLE public.tc_fase_solucion_exp OWNER TO postgres;
 
 --
--- TOC entry 243 (class 1259 OID 17439)
+-- TOC entry 243 (class 1259 OID 22174)
 -- Name: tc_fase_solucion_exp_id_fase_solucion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -527,7 +527,7 @@ CREATE SEQUENCE public.tc_fase_solucion_exp_id_fase_solucion_seq
 ALTER SEQUENCE public.tc_fase_solucion_exp_id_fase_solucion_seq OWNER TO postgres;
 
 --
--- TOC entry 5426 (class 0 OID 0)
+-- TOC entry 5432 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: tc_fase_solucion_exp_id_fase_solucion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -536,7 +536,7 @@ ALTER SEQUENCE public.tc_fase_solucion_exp_id_fase_solucion_seq OWNED BY public.
 
 
 --
--- TOC entry 244 (class 1259 OID 17440)
+-- TOC entry 244 (class 1259 OID 22175)
 -- Name: tc_forma_solucion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -549,7 +549,7 @@ CREATE TABLE public.tc_forma_solucion (
 ALTER TABLE public.tc_forma_solucion OWNER TO postgres;
 
 --
--- TOC entry 245 (class 1259 OID 17445)
+-- TOC entry 245 (class 1259 OID 22180)
 -- Name: tc_forma_solucion_id_forma_solucion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -565,7 +565,7 @@ CREATE SEQUENCE public.tc_forma_solucion_id_forma_solucion_seq
 ALTER SEQUENCE public.tc_forma_solucion_id_forma_solucion_seq OWNER TO postgres;
 
 --
--- TOC entry 5427 (class 0 OID 0)
+-- TOC entry 5433 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: tc_forma_solucion_id_forma_solucion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -574,7 +574,7 @@ ALTER SEQUENCE public.tc_forma_solucion_id_forma_solucion_seq OWNED BY public.tc
 
 
 --
--- TOC entry 246 (class 1259 OID 17446)
+-- TOC entry 246 (class 1259 OID 22181)
 -- Name: tc_huelga_existencia; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -587,7 +587,7 @@ CREATE TABLE public.tc_huelga_existencia (
 ALTER TABLE public.tc_huelga_existencia OWNER TO postgres;
 
 --
--- TOC entry 247 (class 1259 OID 17451)
+-- TOC entry 247 (class 1259 OID 22186)
 -- Name: tc_huelga_existencia_id_huelga_exist_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -603,7 +603,7 @@ CREATE SEQUENCE public.tc_huelga_existencia_id_huelga_exist_seq
 ALTER SEQUENCE public.tc_huelga_existencia_id_huelga_exist_seq OWNER TO postgres;
 
 --
--- TOC entry 5428 (class 0 OID 0)
+-- TOC entry 5434 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: tc_huelga_existencia_id_huelga_exist_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -612,7 +612,7 @@ ALTER SEQUENCE public.tc_huelga_existencia_id_huelga_exist_seq OWNED BY public.t
 
 
 --
--- TOC entry 248 (class 1259 OID 17452)
+-- TOC entry 248 (class 1259 OID 22187)
 -- Name: tc_huelga_licitud; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -625,7 +625,7 @@ CREATE TABLE public.tc_huelga_licitud (
 ALTER TABLE public.tc_huelga_licitud OWNER TO postgres;
 
 --
--- TOC entry 249 (class 1259 OID 17457)
+-- TOC entry 249 (class 1259 OID 22192)
 -- Name: tc_huelga_licitud_id_huelga_licitud_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -641,7 +641,7 @@ CREATE SEQUENCE public.tc_huelga_licitud_id_huelga_licitud_seq
 ALTER SEQUENCE public.tc_huelga_licitud_id_huelga_licitud_seq OWNER TO postgres;
 
 --
--- TOC entry 5429 (class 0 OID 0)
+-- TOC entry 5435 (class 0 OID 0)
 -- Dependencies: 249
 -- Name: tc_huelga_licitud_id_huelga_licitud_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -650,7 +650,7 @@ ALTER SEQUENCE public.tc_huelga_licitud_id_huelga_licitud_seq OWNED BY public.tc
 
 
 --
--- TOC entry 250 (class 1259 OID 17458)
+-- TOC entry 250 (class 1259 OID 22193)
 -- Name: tc_incidente; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -663,7 +663,7 @@ CREATE TABLE public.tc_incidente (
 ALTER TABLE public.tc_incidente OWNER TO postgres;
 
 --
--- TOC entry 251 (class 1259 OID 17463)
+-- TOC entry 251 (class 1259 OID 22198)
 -- Name: tc_incidente_id_tipo_incidente__seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -679,7 +679,7 @@ CREATE SEQUENCE public.tc_incidente_id_tipo_incidente__seq
 ALTER SEQUENCE public.tc_incidente_id_tipo_incidente__seq OWNER TO postgres;
 
 --
--- TOC entry 5430 (class 0 OID 0)
+-- TOC entry 5436 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: tc_incidente_id_tipo_incidente__seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -688,7 +688,7 @@ ALTER SEQUENCE public.tc_incidente_id_tipo_incidente__seq OWNED BY public.tc_inc
 
 
 --
--- TOC entry 252 (class 1259 OID 17464)
+-- TOC entry 252 (class 1259 OID 22199)
 -- Name: tc_incompetencia; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -701,7 +701,7 @@ CREATE TABLE public.tc_incompetencia (
 ALTER TABLE public.tc_incompetencia OWNER TO postgres;
 
 --
--- TOC entry 253 (class 1259 OID 17469)
+-- TOC entry 253 (class 1259 OID 22204)
 -- Name: tc_incompetencia_id_tipo_incompetencia_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -717,7 +717,7 @@ CREATE SEQUENCE public.tc_incompetencia_id_tipo_incompetencia_seq
 ALTER SEQUENCE public.tc_incompetencia_id_tipo_incompetencia_seq OWNER TO postgres;
 
 --
--- TOC entry 5431 (class 0 OID 0)
+-- TOC entry 5437 (class 0 OID 0)
 -- Dependencies: 253
 -- Name: tc_incompetencia_id_tipo_incompetencia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -726,7 +726,7 @@ ALTER SEQUENCE public.tc_incompetencia_id_tipo_incompetencia_seq OWNED BY public
 
 
 --
--- TOC entry 254 (class 1259 OID 17470)
+-- TOC entry 254 (class 1259 OID 22205)
 -- Name: tc_jornada; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -739,7 +739,7 @@ CREATE TABLE public.tc_jornada (
 ALTER TABLE public.tc_jornada OWNER TO postgres;
 
 --
--- TOC entry 255 (class 1259 OID 17475)
+-- TOC entry 255 (class 1259 OID 22210)
 -- Name: tc_jornada_id_jornada_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -755,7 +755,7 @@ CREATE SEQUENCE public.tc_jornada_id_jornada_seq
 ALTER SEQUENCE public.tc_jornada_id_jornada_seq OWNER TO postgres;
 
 --
--- TOC entry 5432 (class 0 OID 0)
+-- TOC entry 5438 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: tc_jornada_id_jornada_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -764,7 +764,7 @@ ALTER SEQUENCE public.tc_jornada_id_jornada_seq OWNED BY public.tc_jornada.id_jo
 
 
 --
--- TOC entry 256 (class 1259 OID 17476)
+-- TOC entry 256 (class 1259 OID 22211)
 -- Name: tc_jurisdiccion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -777,7 +777,7 @@ CREATE TABLE public.tc_jurisdiccion (
 ALTER TABLE public.tc_jurisdiccion OWNER TO postgres;
 
 --
--- TOC entry 257 (class 1259 OID 17481)
+-- TOC entry 257 (class 1259 OID 22216)
 -- Name: tc_jurisdiccion_id_jurisdiccion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -793,7 +793,7 @@ CREATE SEQUENCE public.tc_jurisdiccion_id_jurisdiccion_seq
 ALTER SEQUENCE public.tc_jurisdiccion_id_jurisdiccion_seq OWNER TO postgres;
 
 --
--- TOC entry 5433 (class 0 OID 0)
+-- TOC entry 5439 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: tc_jurisdiccion_id_jurisdiccion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -802,7 +802,7 @@ ALTER SEQUENCE public.tc_jurisdiccion_id_jurisdiccion_seq OWNED BY public.tc_jur
 
 
 --
--- TOC entry 258 (class 1259 OID 17482)
+-- TOC entry 258 (class 1259 OID 22217)
 -- Name: tc_motivo_conflicto; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -815,7 +815,7 @@ CREATE TABLE public.tc_motivo_conflicto (
 ALTER TABLE public.tc_motivo_conflicto OWNER TO postgres;
 
 --
--- TOC entry 259 (class 1259 OID 17487)
+-- TOC entry 259 (class 1259 OID 22222)
 -- Name: tc_motivo_conflicto_circunst; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -828,7 +828,7 @@ CREATE TABLE public.tc_motivo_conflicto_circunst (
 ALTER TABLE public.tc_motivo_conflicto_circunst OWNER TO postgres;
 
 --
--- TOC entry 260 (class 1259 OID 17492)
+-- TOC entry 260 (class 1259 OID 22227)
 -- Name: tc_motivo_conflicto_circunst_id_circuns_mot_conf_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -844,7 +844,7 @@ CREATE SEQUENCE public.tc_motivo_conflicto_circunst_id_circuns_mot_conf_seq
 ALTER SEQUENCE public.tc_motivo_conflicto_circunst_id_circuns_mot_conf_seq OWNER TO postgres;
 
 --
--- TOC entry 5434 (class 0 OID 0)
+-- TOC entry 5440 (class 0 OID 0)
 -- Dependencies: 260
 -- Name: tc_motivo_conflicto_circunst_id_circuns_mot_conf_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -853,7 +853,7 @@ ALTER SEQUENCE public.tc_motivo_conflicto_circunst_id_circuns_mot_conf_seq OWNED
 
 
 --
--- TOC entry 261 (class 1259 OID 17493)
+-- TOC entry 261 (class 1259 OID 22228)
 -- Name: tc_motivo_conflicto_id_motivo_conflicto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -869,7 +869,7 @@ CREATE SEQUENCE public.tc_motivo_conflicto_id_motivo_conflicto_seq
 ALTER SEQUENCE public.tc_motivo_conflicto_id_motivo_conflicto_seq OWNER TO postgres;
 
 --
--- TOC entry 5435 (class 0 OID 0)
+-- TOC entry 5441 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: tc_motivo_conflicto_id_motivo_conflicto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -878,7 +878,7 @@ ALTER SEQUENCE public.tc_motivo_conflicto_id_motivo_conflicto_seq OWNED BY publi
 
 
 --
--- TOC entry 262 (class 1259 OID 17494)
+-- TOC entry 262 (class 1259 OID 22229)
 -- Name: tc_motivo_huelga; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -891,7 +891,7 @@ CREATE TABLE public.tc_motivo_huelga (
 ALTER TABLE public.tc_motivo_huelga OWNER TO postgres;
 
 --
--- TOC entry 263 (class 1259 OID 17499)
+-- TOC entry 263 (class 1259 OID 22234)
 -- Name: tc_motivo_huelga_id_huelga_motivo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -907,7 +907,7 @@ CREATE SEQUENCE public.tc_motivo_huelga_id_huelga_motivo_seq
 ALTER SEQUENCE public.tc_motivo_huelga_id_huelga_motivo_seq OWNER TO postgres;
 
 --
--- TOC entry 5436 (class 0 OID 0)
+-- TOC entry 5442 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: tc_motivo_huelga_id_huelga_motivo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -916,7 +916,7 @@ ALTER SEQUENCE public.tc_motivo_huelga_id_huelga_motivo_seq OWNED BY public.tc_m
 
 
 --
--- TOC entry 264 (class 1259 OID 17500)
+-- TOC entry 264 (class 1259 OID 22235)
 -- Name: tc_motivo_solic_prom; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -929,7 +929,7 @@ CREATE TABLE public.tc_motivo_solic_prom (
 ALTER TABLE public.tc_motivo_solic_prom OWNER TO postgres;
 
 --
--- TOC entry 265 (class 1259 OID 17505)
+-- TOC entry 265 (class 1259 OID 22240)
 -- Name: tc_motivo_solic_prom_id_motivo_sol_promo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -945,7 +945,7 @@ CREATE SEQUENCE public.tc_motivo_solic_prom_id_motivo_sol_promo_seq
 ALTER SEQUENCE public.tc_motivo_solic_prom_id_motivo_sol_promo_seq OWNER TO postgres;
 
 --
--- TOC entry 5437 (class 0 OID 0)
+-- TOC entry 5443 (class 0 OID 0)
 -- Dependencies: 265
 -- Name: tc_motivo_solic_prom_id_motivo_sol_promo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -954,7 +954,7 @@ ALTER SEQUENCE public.tc_motivo_solic_prom_id_motivo_sol_promo_seq OWNED BY publ
 
 
 --
--- TOC entry 266 (class 1259 OID 17506)
+-- TOC entry 266 (class 1259 OID 22241)
 -- Name: tc_nat_conflicto; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -967,7 +967,7 @@ CREATE TABLE public.tc_nat_conflicto (
 ALTER TABLE public.tc_nat_conflicto OWNER TO postgres;
 
 --
--- TOC entry 267 (class 1259 OID 17511)
+-- TOC entry 267 (class 1259 OID 22246)
 -- Name: tc_nat_conflicto_id_nat_conflicto_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -983,7 +983,7 @@ CREATE SEQUENCE public.tc_nat_conflicto_id_nat_conflicto_seq
 ALTER SEQUENCE public.tc_nat_conflicto_id_nat_conflicto_seq OWNER TO postgres;
 
 --
--- TOC entry 5438 (class 0 OID 0)
+-- TOC entry 5444 (class 0 OID 0)
 -- Dependencies: 267
 -- Name: tc_nat_conflicto_id_nat_conflicto_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -992,7 +992,7 @@ ALTER SEQUENCE public.tc_nat_conflicto_id_nat_conflicto_seq OWNED BY public.tc_n
 
 
 --
--- TOC entry 268 (class 1259 OID 17512)
+-- TOC entry 268 (class 1259 OID 22247)
 -- Name: tc_ocupacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1005,7 +1005,7 @@ CREATE TABLE public.tc_ocupacion (
 ALTER TABLE public.tc_ocupacion OWNER TO postgres;
 
 --
--- TOC entry 269 (class 1259 OID 17517)
+-- TOC entry 269 (class 1259 OID 22252)
 -- Name: tc_ocupacion_id_ocupacion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1021,7 +1021,7 @@ CREATE SEQUENCE public.tc_ocupacion_id_ocupacion_seq
 ALTER SEQUENCE public.tc_ocupacion_id_ocupacion_seq OWNER TO postgres;
 
 --
--- TOC entry 5439 (class 0 OID 0)
+-- TOC entry 5445 (class 0 OID 0)
 -- Dependencies: 269
 -- Name: tc_ocupacion_id_ocupacion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1030,7 +1030,7 @@ ALTER SEQUENCE public.tc_ocupacion_id_ocupacion_seq OWNED BY public.tc_ocupacion
 
 
 --
--- TOC entry 270 (class 1259 OID 17518)
+-- TOC entry 270 (class 1259 OID 22253)
 -- Name: tc_org_obr; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1043,7 +1043,7 @@ CREATE TABLE public.tc_org_obr (
 ALTER TABLE public.tc_org_obr OWNER TO postgres;
 
 --
--- TOC entry 271 (class 1259 OID 17523)
+-- TOC entry 271 (class 1259 OID 22258)
 -- Name: tc_org_obr_id_org_obr_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1059,7 +1059,7 @@ CREATE SEQUENCE public.tc_org_obr_id_org_obr_seq
 ALTER SEQUENCE public.tc_org_obr_id_org_obr_seq OWNER TO postgres;
 
 --
--- TOC entry 5440 (class 0 OID 0)
+-- TOC entry 5446 (class 0 OID 0)
 -- Dependencies: 271
 -- Name: tc_org_obr_id_org_obr_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1068,7 +1068,7 @@ ALTER SEQUENCE public.tc_org_obr_id_org_obr_seq OWNED BY public.tc_org_obr.id_or
 
 
 --
--- TOC entry 272 (class 1259 OID 17524)
+-- TOC entry 272 (class 1259 OID 22259)
 -- Name: tc_patron; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1081,7 +1081,7 @@ CREATE TABLE public.tc_patron (
 ALTER TABLE public.tc_patron OWNER TO postgres;
 
 --
--- TOC entry 273 (class 1259 OID 17529)
+-- TOC entry 273 (class 1259 OID 22264)
 -- Name: tc_patron_id_tipo_patron_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1097,7 +1097,7 @@ CREATE SEQUENCE public.tc_patron_id_tipo_patron_seq
 ALTER SEQUENCE public.tc_patron_id_tipo_patron_seq OWNER TO postgres;
 
 --
--- TOC entry 5441 (class 0 OID 0)
+-- TOC entry 5447 (class 0 OID 0)
 -- Dependencies: 273
 -- Name: tc_patron_id_tipo_patron_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1106,20 +1106,20 @@ ALTER SEQUENCE public.tc_patron_id_tipo_patron_seq OWNED BY public.tc_patron.id_
 
 
 --
--- TOC entry 274 (class 1259 OID 17530)
+-- TOC entry 274 (class 1259 OID 22265)
 -- Name: tc_pregunta_recuperacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tc_pregunta_recuperacion (
     id_pregunta integer NOT NULL,
-    descripcion text
+    descripcion text NOT NULL
 );
 
 
 ALTER TABLE public.tc_pregunta_recuperacion OWNER TO postgres;
 
 --
--- TOC entry 275 (class 1259 OID 17535)
+-- TOC entry 275 (class 1259 OID 22270)
 -- Name: tc_prestacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1132,7 +1132,7 @@ CREATE TABLE public.tc_prestacion (
 ALTER TABLE public.tc_prestacion OWNER TO postgres;
 
 --
--- TOC entry 276 (class 1259 OID 17540)
+-- TOC entry 276 (class 1259 OID 22275)
 -- Name: tc_prestacion_id_prestacion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1148,7 +1148,7 @@ CREATE SEQUENCE public.tc_prestacion_id_prestacion_seq
 ALTER SEQUENCE public.tc_prestacion_id_prestacion_seq OWNER TO postgres;
 
 --
--- TOC entry 5442 (class 0 OID 0)
+-- TOC entry 5448 (class 0 OID 0)
 -- Dependencies: 276
 -- Name: tc_prestacion_id_prestacion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1157,7 +1157,7 @@ ALTER SEQUENCE public.tc_prestacion_id_prestacion_seq OWNED BY public.tc_prestac
 
 
 --
--- TOC entry 277 (class 1259 OID 17541)
+-- TOC entry 277 (class 1259 OID 22276)
 -- Name: tc_procedimiento; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1170,7 +1170,7 @@ CREATE TABLE public.tc_procedimiento (
 ALTER TABLE public.tc_procedimiento OWNER TO postgres;
 
 --
--- TOC entry 278 (class 1259 OID 17546)
+-- TOC entry 278 (class 1259 OID 22281)
 -- Name: tc_procedimiento_id_tipo_procedimiento_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1186,7 +1186,7 @@ CREATE SEQUENCE public.tc_procedimiento_id_tipo_procedimiento_seq
 ALTER SEQUENCE public.tc_procedimiento_id_tipo_procedimiento_seq OWNER TO postgres;
 
 --
--- TOC entry 5443 (class 0 OID 0)
+-- TOC entry 5449 (class 0 OID 0)
 -- Dependencies: 278
 -- Name: tc_procedimiento_id_tipo_procedimiento_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1195,7 +1195,7 @@ ALTER SEQUENCE public.tc_procedimiento_id_tipo_procedimiento_seq OWNED BY public
 
 
 --
--- TOC entry 279 (class 1259 OID 17547)
+-- TOC entry 279 (class 1259 OID 22282)
 -- Name: tc_promovente; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1208,7 +1208,7 @@ CREATE TABLE public.tc_promovente (
 ALTER TABLE public.tc_promovente OWNER TO postgres;
 
 --
--- TOC entry 280 (class 1259 OID 17552)
+-- TOC entry 280 (class 1259 OID 22287)
 -- Name: tc_promovente_id_promovente_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1224,7 +1224,7 @@ CREATE SEQUENCE public.tc_promovente_id_promovente_seq
 ALTER SEQUENCE public.tc_promovente_id_promovente_seq OWNER TO postgres;
 
 --
--- TOC entry 5444 (class 0 OID 0)
+-- TOC entry 5450 (class 0 OID 0)
 -- Dependencies: 280
 -- Name: tc_promovente_id_promovente_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1233,33 +1233,33 @@ ALTER SEQUENCE public.tc_promovente_id_promovente_seq OWNED BY public.tc_promove
 
 
 --
--- TOC entry 281 (class 1259 OID 17553)
+-- TOC entry 281 (class 1259 OID 22288)
 -- Name: tc_respuesta_simple; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tc_respuesta_simple (
     id_respuesta integer NOT NULL,
-    descripcion character varying
+    descripcion character varying NOT NULL
 );
 
 
 ALTER TABLE public.tc_respuesta_simple OWNER TO postgres;
 
 --
--- TOC entry 282 (class 1259 OID 17558)
+-- TOC entry 282 (class 1259 OID 22293)
 -- Name: tc_roles; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tc_roles (
     id integer NOT NULL,
-    descripcion character varying
+    descripcion character varying NOT NULL
 );
 
 
 ALTER TABLE public.tc_roles OWNER TO postgres;
 
 --
--- TOC entry 283 (class 1259 OID 17563)
+-- TOC entry 283 (class 1259 OID 22298)
 -- Name: tc_sector_sbstor; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1273,7 +1273,7 @@ CREATE TABLE public.tc_sector_sbstor (
 ALTER TABLE public.tc_sector_sbstor OWNER TO postgres;
 
 --
--- TOC entry 284 (class 1259 OID 17568)
+-- TOC entry 284 (class 1259 OID 22303)
 -- Name: tc_sector_sbstor_id_sector_sbstor_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1289,7 +1289,7 @@ CREATE SEQUENCE public.tc_sector_sbstor_id_sector_sbstor_seq
 ALTER SEQUENCE public.tc_sector_sbstor_id_sector_sbstor_seq OWNER TO postgres;
 
 --
--- TOC entry 5445 (class 0 OID 0)
+-- TOC entry 5451 (class 0 OID 0)
 -- Dependencies: 284
 -- Name: tc_sector_sbstor_id_sector_sbstor_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1298,7 +1298,7 @@ ALTER SEQUENCE public.tc_sector_sbstor_id_sector_sbstor_seq OWNED BY public.tc_s
 
 
 --
--- TOC entry 285 (class 1259 OID 17569)
+-- TOC entry 285 (class 1259 OID 22304)
 -- Name: tc_sentencia; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1311,7 +1311,7 @@ CREATE TABLE public.tc_sentencia (
 ALTER TABLE public.tc_sentencia OWNER TO postgres;
 
 --
--- TOC entry 286 (class 1259 OID 17574)
+-- TOC entry 286 (class 1259 OID 22309)
 -- Name: tc_sentencia_efecto; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1324,7 +1324,7 @@ CREATE TABLE public.tc_sentencia_efecto (
 ALTER TABLE public.tc_sentencia_efecto OWNER TO postgres;
 
 --
--- TOC entry 287 (class 1259 OID 17579)
+-- TOC entry 287 (class 1259 OID 22314)
 -- Name: tc_sentencia_efecto_id_efecto_sentencia_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1340,7 +1340,7 @@ CREATE SEQUENCE public.tc_sentencia_efecto_id_efecto_sentencia_seq
 ALTER SEQUENCE public.tc_sentencia_efecto_id_efecto_sentencia_seq OWNER TO postgres;
 
 --
--- TOC entry 5446 (class 0 OID 0)
+-- TOC entry 5452 (class 0 OID 0)
 -- Dependencies: 287
 -- Name: tc_sentencia_efecto_id_efecto_sentencia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1349,7 +1349,7 @@ ALTER SEQUENCE public.tc_sentencia_efecto_id_efecto_sentencia_seq OWNED BY publi
 
 
 --
--- TOC entry 288 (class 1259 OID 17580)
+-- TOC entry 288 (class 1259 OID 22315)
 -- Name: tc_sentencia_id_tipo_sentencia_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1365,7 +1365,7 @@ CREATE SEQUENCE public.tc_sentencia_id_tipo_sentencia_seq
 ALTER SEQUENCE public.tc_sentencia_id_tipo_sentencia_seq OWNER TO postgres;
 
 --
--- TOC entry 5447 (class 0 OID 0)
+-- TOC entry 5453 (class 0 OID 0)
 -- Dependencies: 288
 -- Name: tc_sentencia_id_tipo_sentencia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1374,7 +1374,7 @@ ALTER SEQUENCE public.tc_sentencia_id_tipo_sentencia_seq OWNED BY public.tc_sent
 
 
 --
--- TOC entry 289 (class 1259 OID 17581)
+-- TOC entry 289 (class 1259 OID 22316)
 -- Name: tc_sexo; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1387,7 +1387,7 @@ CREATE TABLE public.tc_sexo (
 ALTER TABLE public.tc_sexo OWNER TO postgres;
 
 --
--- TOC entry 290 (class 1259 OID 17586)
+-- TOC entry 290 (class 1259 OID 22321)
 -- Name: tc_sexo_id_sexo_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1403,7 +1403,7 @@ CREATE SEQUENCE public.tc_sexo_id_sexo_seq
 ALTER SEQUENCE public.tc_sexo_id_sexo_seq OWNER TO postgres;
 
 --
--- TOC entry 5448 (class 0 OID 0)
+-- TOC entry 5454 (class 0 OID 0)
 -- Dependencies: 290
 -- Name: tc_sexo_id_sexo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1412,7 +1412,7 @@ ALTER SEQUENCE public.tc_sexo_id_sexo_seq OWNED BY public.tc_sexo.id_sexo;
 
 
 --
--- TOC entry 291 (class 1259 OID 17587)
+-- TOC entry 291 (class 1259 OID 22322)
 -- Name: tc_sindicato; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1425,7 +1425,7 @@ CREATE TABLE public.tc_sindicato (
 ALTER TABLE public.tc_sindicato OWNER TO postgres;
 
 --
--- TOC entry 292 (class 1259 OID 17592)
+-- TOC entry 292 (class 1259 OID 22327)
 -- Name: tc_sindicato_id_tipo_sindicato_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1441,7 +1441,7 @@ CREATE SEQUENCE public.tc_sindicato_id_tipo_sindicato_seq
 ALTER SEQUENCE public.tc_sindicato_id_tipo_sindicato_seq OWNER TO postgres;
 
 --
--- TOC entry 5449 (class 0 OID 0)
+-- TOC entry 5455 (class 0 OID 0)
 -- Dependencies: 292
 -- Name: tc_sindicato_id_tipo_sindicato_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1450,7 +1450,7 @@ ALTER SEQUENCE public.tc_sindicato_id_tipo_sindicato_seq OWNED BY public.tc_sind
 
 
 --
--- TOC entry 293 (class 1259 OID 17593)
+-- TOC entry 293 (class 1259 OID 22328)
 -- Name: tc_susp_temp; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1463,7 +1463,7 @@ CREATE TABLE public.tc_susp_temp (
 ALTER TABLE public.tc_susp_temp OWNER TO postgres;
 
 --
--- TOC entry 294 (class 1259 OID 17598)
+-- TOC entry 294 (class 1259 OID 22333)
 -- Name: tc_susp_temp_id_tipo_suspension_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1479,7 +1479,7 @@ CREATE SEQUENCE public.tc_susp_temp_id_tipo_suspension_seq
 ALTER SEQUENCE public.tc_susp_temp_id_tipo_suspension_seq OWNER TO postgres;
 
 --
--- TOC entry 5450 (class 0 OID 0)
+-- TOC entry 5456 (class 0 OID 0)
 -- Dependencies: 294
 -- Name: tc_susp_temp_id_tipo_suspension_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1488,7 +1488,7 @@ ALTER SEQUENCE public.tc_susp_temp_id_tipo_suspension_seq OWNED BY public.tc_sus
 
 
 --
--- TOC entry 295 (class 1259 OID 17599)
+-- TOC entry 295 (class 1259 OID 22334)
 -- Name: tc_term_colectiva; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1501,7 +1501,7 @@ CREATE TABLE public.tc_term_colectiva (
 ALTER TABLE public.tc_term_colectiva OWNER TO postgres;
 
 --
--- TOC entry 296 (class 1259 OID 17604)
+-- TOC entry 296 (class 1259 OID 22339)
 -- Name: tc_term_colectiva_id_tipo_terminacion_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1517,7 +1517,7 @@ CREATE SEQUENCE public.tc_term_colectiva_id_tipo_terminacion_seq
 ALTER SEQUENCE public.tc_term_colectiva_id_tipo_terminacion_seq OWNER TO postgres;
 
 --
--- TOC entry 5451 (class 0 OID 0)
+-- TOC entry 5457 (class 0 OID 0)
 -- Dependencies: 296
 -- Name: tc_term_colectiva_id_tipo_terminacion_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1526,7 +1526,7 @@ ALTER SEQUENCE public.tc_term_colectiva_id_tipo_terminacion_seq OWNED BY public.
 
 
 --
--- TOC entry 297 (class 1259 OID 17605)
+-- TOC entry 297 (class 1259 OID 22340)
 -- Name: tc_tipo_audiencia; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1539,7 +1539,7 @@ CREATE TABLE public.tc_tipo_audiencia (
 ALTER TABLE public.tc_tipo_audiencia OWNER TO postgres;
 
 --
--- TOC entry 298 (class 1259 OID 17610)
+-- TOC entry 298 (class 1259 OID 22345)
 -- Name: tc_tipo_audiencia_id_tipo_audiencia_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1555,7 +1555,7 @@ CREATE SEQUENCE public.tc_tipo_audiencia_id_tipo_audiencia_seq
 ALTER SEQUENCE public.tc_tipo_audiencia_id_tipo_audiencia_seq OWNER TO postgres;
 
 --
--- TOC entry 5452 (class 0 OID 0)
+-- TOC entry 5458 (class 0 OID 0)
 -- Dependencies: 298
 -- Name: tc_tipo_audiencia_id_tipo_audiencia_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1564,7 +1564,7 @@ ALTER SEQUENCE public.tc_tipo_audiencia_id_tipo_audiencia_seq OWNED BY public.tc
 
 
 --
--- TOC entry 299 (class 1259 OID 17611)
+-- TOC entry 299 (class 1259 OID 22346)
 -- Name: tc_violacion_dh; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1577,7 +1577,7 @@ CREATE TABLE public.tc_violacion_dh (
 ALTER TABLE public.tc_violacion_dh OWNER TO postgres;
 
 --
--- TOC entry 300 (class 1259 OID 17616)
+-- TOC entry 300 (class 1259 OID 22351)
 -- Name: tc_violacion_dh_id_tipo_viol_dh_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1593,7 +1593,7 @@ CREATE SEQUENCE public.tc_violacion_dh_id_tipo_viol_dh_seq
 ALTER SEQUENCE public.tc_violacion_dh_id_tipo_viol_dh_seq OWNER TO postgres;
 
 --
--- TOC entry 5453 (class 0 OID 0)
+-- TOC entry 5459 (class 0 OID 0)
 -- Dependencies: 300
 -- Name: tc_violacion_dh_id_tipo_viol_dh_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -1602,7 +1602,7 @@ ALTER SEQUENCE public.tc_violacion_dh_id_tipo_viol_dh_seq OWNED BY public.tc_vio
 
 
 --
--- TOC entry 301 (class 1259 OID 17617)
+-- TOC entry 303 (class 1259 OID 22478)
 -- Name: tr_actor; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1647,7 +1647,7 @@ CREATE TABLE public.tr_actor (
 ALTER TABLE public.tr_actor OWNER TO postgres;
 
 --
--- TOC entry 302 (class 1259 OID 17622)
+-- TOC entry 304 (class 1259 OID 22483)
 -- Name: tr_audiencia; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1669,7 +1669,7 @@ CREATE TABLE public.tr_audiencia (
 ALTER TABLE public.tr_audiencia OWNER TO postgres;
 
 --
--- TOC entry 303 (class 1259 OID 17627)
+-- TOC entry 305 (class 1259 OID 22488)
 -- Name: tr_demandado; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1708,7 +1708,7 @@ CREATE TABLE public.tr_demandado (
 ALTER TABLE public.tr_demandado OWNER TO postgres;
 
 --
--- TOC entry 304 (class 1259 OID 17632)
+-- TOC entry 306 (class 1259 OID 22493)
 -- Name: tr_exp_actor; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1721,7 +1721,7 @@ CREATE TABLE public.tr_exp_actor (
 ALTER TABLE public.tr_exp_actor OWNER TO postgres;
 
 --
--- TOC entry 305 (class 1259 OID 17637)
+-- TOC entry 307 (class 1259 OID 22498)
 -- Name: tr_exp_circunst; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1734,7 +1734,7 @@ CREATE TABLE public.tr_exp_circunst (
 ALTER TABLE public.tr_exp_circunst OWNER TO postgres;
 
 --
--- TOC entry 306 (class 1259 OID 17640)
+-- TOC entry 308 (class 1259 OID 22501)
 -- Name: tr_exp_concepto_reclam; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1747,20 +1747,20 @@ CREATE TABLE public.tr_exp_concepto_reclam (
 ALTER TABLE public.tr_exp_concepto_reclam OWNER TO postgres;
 
 --
--- TOC entry 307 (class 1259 OID 17643)
+-- TOC entry 309 (class 1259 OID 22504)
 -- Name: tr_exp_efectos_sentencia; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.tr_exp_efectos_sentencia (
     id_efecto_sentencia integer NOT NULL,
-    id_expediente integer
+    id_expediente integer NOT NULL
 );
 
 
 ALTER TABLE public.tr_exp_efectos_sentencia OWNER TO postgres;
 
 --
--- TOC entry 308 (class 1259 OID 17646)
+-- TOC entry 310 (class 1259 OID 22507)
 -- Name: tr_exp_motivo_conf; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1773,7 +1773,7 @@ CREATE TABLE public.tr_exp_motivo_conf (
 ALTER TABLE public.tr_exp_motivo_conf OWNER TO postgres;
 
 --
--- TOC entry 309 (class 1259 OID 17649)
+-- TOC entry 311 (class 1259 OID 22510)
 -- Name: tr_exp_motivo_huelga; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1786,7 +1786,7 @@ CREATE TABLE public.tr_exp_motivo_huelga (
 ALTER TABLE public.tr_exp_motivo_huelga OWNER TO postgres;
 
 --
--- TOC entry 310 (class 1259 OID 17652)
+-- TOC entry 312 (class 1259 OID 22513)
 -- Name: tr_exp_motivo_solic; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1799,7 +1799,7 @@ CREATE TABLE public.tr_exp_motivo_solic (
 ALTER TABLE public.tr_exp_motivo_solic OWNER TO postgres;
 
 --
--- TOC entry 311 (class 1259 OID 17655)
+-- TOC entry 313 (class 1259 OID 22516)
 -- Name: tr_exp_prestacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1812,7 +1812,7 @@ CREATE TABLE public.tr_exp_prestacion (
 ALTER TABLE public.tr_exp_prestacion OWNER TO postgres;
 
 --
--- TOC entry 312 (class 1259 OID 17658)
+-- TOC entry 314 (class 1259 OID 22519)
 -- Name: tr_exp_suspension; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1825,7 +1825,7 @@ CREATE TABLE public.tr_exp_suspension (
 ALTER TABLE public.tr_exp_suspension OWNER TO postgres;
 
 --
--- TOC entry 313 (class 1259 OID 17661)
+-- TOC entry 315 (class 1259 OID 22522)
 -- Name: tr_exp_terminacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1838,7 +1838,7 @@ CREATE TABLE public.tr_exp_terminacion (
 ALTER TABLE public.tr_exp_terminacion OWNER TO postgres;
 
 --
--- TOC entry 314 (class 1259 OID 17664)
+-- TOC entry 316 (class 1259 OID 22525)
 -- Name: tr_exp_violacion; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1851,7 +1851,7 @@ CREATE TABLE public.tr_exp_violacion (
 ALTER TABLE public.tr_exp_violacion OWNER TO postgres;
 
 --
--- TOC entry 315 (class 1259 OID 17667)
+-- TOC entry 317 (class 1259 OID 22528)
 -- Name: tr_exped_demandado; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1864,7 +1864,7 @@ CREATE TABLE public.tr_exped_demandado (
 ALTER TABLE public.tr_exped_demandado OWNER TO postgres;
 
 --
--- TOC entry 316 (class 1259 OID 17672)
+-- TOC entry 318 (class 1259 OID 22533)
 -- Name: tr_expediente; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -1952,7 +1952,7 @@ CREATE TABLE public.tr_expediente (
 ALTER TABLE public.tr_expediente OWNER TO postgres;
 
 --
--- TOC entry 317 (class 1259 OID 17677)
+-- TOC entry 319 (class 1259 OID 22538)
 -- Name: tr_expediente_id_expediente_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -1968,8 +1968,8 @@ CREATE SEQUENCE public.tr_expediente_id_expediente_seq
 ALTER SEQUENCE public.tr_expediente_id_expediente_seq OWNER TO postgres;
 
 --
--- TOC entry 5454 (class 0 OID 0)
--- Dependencies: 317
+-- TOC entry 5460 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: tr_expediente_id_expediente_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -1977,7 +1977,7 @@ ALTER SEQUENCE public.tr_expediente_id_expediente_seq OWNED BY public.tr_expedie
 
 
 --
--- TOC entry 318 (class 1259 OID 17678)
+-- TOC entry 320 (class 1259 OID 22539)
 -- Name: tr_general; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -2012,7 +2012,7 @@ CREATE TABLE public.tr_general (
 ALTER TABLE public.tr_general OWNER TO postgres;
 
 --
--- TOC entry 319 (class 1259 OID 17683)
+-- TOC entry 321 (class 1259 OID 22544)
 -- Name: tr_general_id_general_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -2028,8 +2028,8 @@ CREATE SEQUENCE public.tr_general_id_general_seq
 ALTER SEQUENCE public.tr_general_id_general_seq OWNER TO postgres;
 
 --
--- TOC entry 5455 (class 0 OID 0)
--- Dependencies: 319
+-- TOC entry 5461 (class 0 OID 0)
+-- Dependencies: 321
 -- Name: tr_general_id_general_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -2037,7 +2037,7 @@ ALTER SEQUENCE public.tr_general_id_general_seq OWNED BY public.tr_general.id_ge
 
 
 --
--- TOC entry 320 (class 1259 OID 17684)
+-- TOC entry 322 (class 1259 OID 22545)
 -- Name: tr_organoj; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -2062,7 +2062,7 @@ CREATE TABLE public.tr_organoj (
 ALTER TABLE public.tr_organoj OWNER TO postgres;
 
 --
--- TOC entry 321 (class 1259 OID 17689)
+-- TOC entry 301 (class 1259 OID 22424)
 -- Name: tr_usuarios; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -2077,14 +2077,16 @@ CREATE TABLE public.tr_usuarios (
     apellido text DEFAULT false,
     id_pregunta integer,
     respuesta_secreta text,
-    organo_usuario text
+    organo_usuario text,
+    curp character varying,
+    rfc character varying
 );
 
 
 ALTER TABLE public.tr_usuarios OWNER TO postgres;
 
 --
--- TOC entry 322 (class 1259 OID 17696)
+-- TOC entry 302 (class 1259 OID 22431)
 -- Name: tr_usuarios_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -2099,7 +2101,7 @@ ALTER TABLE public.tr_usuarios ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY 
 
 
 --
--- TOC entry 4931 (class 2604 OID 17697)
+-- TOC entry 4931 (class 2604 OID 22432)
 -- Name: email_verificacion id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2107,7 +2109,7 @@ ALTER TABLE ONLY public.email_verificacion ALTER COLUMN id SET DEFAULT nextval('
 
 
 --
--- TOC entry 4933 (class 2604 OID 17698)
+-- TOC entry 4933 (class 2604 OID 22433)
 -- Name: tc_actor id_tipo_actor; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2115,7 +2117,7 @@ ALTER TABLE ONLY public.tc_actor ALTER COLUMN id_tipo_actor SET DEFAULT nextval(
 
 
 --
--- TOC entry 4934 (class 2604 OID 17699)
+-- TOC entry 4934 (class 2604 OID 22434)
 -- Name: tc_asunto id_tipo_asunto; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2123,7 +2125,7 @@ ALTER TABLE ONLY public.tc_asunto ALTER COLUMN id_tipo_asunto SET DEFAULT nextva
 
 
 --
--- TOC entry 4935 (class 2604 OID 17700)
+-- TOC entry 4935 (class 2604 OID 22435)
 -- Name: tc_causas_impedim_demanda id_causas_imp_dem; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2131,7 +2133,7 @@ ALTER TABLE ONLY public.tc_causas_impedim_demanda ALTER COLUMN id_causas_imp_dem
 
 
 --
--- TOC entry 4936 (class 2604 OID 17701)
+-- TOC entry 4936 (class 2604 OID 22436)
 -- Name: tc_circunscripcion id_circunscripcion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2139,7 +2141,7 @@ ALTER TABLE ONLY public.tc_circunscripcion ALTER COLUMN id_circunscripcion SET D
 
 
 --
--- TOC entry 4937 (class 2604 OID 17702)
+-- TOC entry 4937 (class 2604 OID 22437)
 -- Name: tc_concepto_reclamado id_concepto_reclam; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2147,7 +2149,7 @@ ALTER TABLE ONLY public.tc_concepto_reclamado ALTER COLUMN id_concepto_reclam SE
 
 
 --
--- TOC entry 4938 (class 2604 OID 17703)
+-- TOC entry 4938 (class 2604 OID 22438)
 -- Name: tc_contrato id_tipo_contrato; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2155,7 +2157,7 @@ ALTER TABLE ONLY public.tc_contrato ALTER COLUMN id_tipo_contrato SET DEFAULT ne
 
 
 --
--- TOC entry 4939 (class 2604 OID 17704)
+-- TOC entry 4939 (class 2604 OID 22439)
 -- Name: tc_defensa id_defensa; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2163,7 +2165,7 @@ ALTER TABLE ONLY public.tc_defensa ALTER COLUMN id_defensa SET DEFAULT nextval('
 
 
 --
--- TOC entry 4940 (class 2604 OID 17705)
+-- TOC entry 4940 (class 2604 OID 22440)
 -- Name: tc_demandado id_tipo_demandado; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2171,7 +2173,7 @@ ALTER TABLE ONLY public.tc_demandado ALTER COLUMN id_tipo_demandado SET DEFAULT 
 
 
 --
--- TOC entry 4941 (class 2604 OID 17706)
+-- TOC entry 4941 (class 2604 OID 22441)
 -- Name: tc_estatus_demanda id_estatus_demanda; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2179,7 +2181,7 @@ ALTER TABLE ONLY public.tc_estatus_demanda ALTER COLUMN id_estatus_demanda SET D
 
 
 --
--- TOC entry 4942 (class 2604 OID 17707)
+-- TOC entry 4942 (class 2604 OID 22442)
 -- Name: tc_estatus_expediente id_estatus_expediente; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2187,7 +2189,7 @@ ALTER TABLE ONLY public.tc_estatus_expediente ALTER COLUMN id_estatus_expediente
 
 
 --
--- TOC entry 4943 (class 2604 OID 17708)
+-- TOC entry 4943 (class 2604 OID 22443)
 -- Name: tc_fase_conclusion_ejecu id_fase_concl_ejec; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2195,7 +2197,7 @@ ALTER TABLE ONLY public.tc_fase_conclusion_ejecu ALTER COLUMN id_fase_concl_ejec
 
 
 --
--- TOC entry 4944 (class 2604 OID 17709)
+-- TOC entry 4944 (class 2604 OID 22444)
 -- Name: tc_fase_solucion_exp id_fase_solucion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2203,7 +2205,7 @@ ALTER TABLE ONLY public.tc_fase_solucion_exp ALTER COLUMN id_fase_solucion SET D
 
 
 --
--- TOC entry 4945 (class 2604 OID 17710)
+-- TOC entry 4945 (class 2604 OID 22445)
 -- Name: tc_forma_solucion id_forma_solucion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2211,7 +2213,7 @@ ALTER TABLE ONLY public.tc_forma_solucion ALTER COLUMN id_forma_solucion SET DEF
 
 
 --
--- TOC entry 4946 (class 2604 OID 17711)
+-- TOC entry 4946 (class 2604 OID 22446)
 -- Name: tc_huelga_existencia id_huelga_exist; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2219,7 +2221,7 @@ ALTER TABLE ONLY public.tc_huelga_existencia ALTER COLUMN id_huelga_exist SET DE
 
 
 --
--- TOC entry 4947 (class 2604 OID 17712)
+-- TOC entry 4947 (class 2604 OID 22447)
 -- Name: tc_huelga_licitud id_huelga_licitud; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2227,7 +2229,7 @@ ALTER TABLE ONLY public.tc_huelga_licitud ALTER COLUMN id_huelga_licitud SET DEF
 
 
 --
--- TOC entry 4948 (class 2604 OID 17713)
+-- TOC entry 4948 (class 2604 OID 22448)
 -- Name: tc_incidente id_tipo_incidente_; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2235,7 +2237,7 @@ ALTER TABLE ONLY public.tc_incidente ALTER COLUMN id_tipo_incidente_ SET DEFAULT
 
 
 --
--- TOC entry 4949 (class 2604 OID 17714)
+-- TOC entry 4949 (class 2604 OID 22449)
 -- Name: tc_incompetencia id_tipo_incompetencia; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2243,7 +2245,7 @@ ALTER TABLE ONLY public.tc_incompetencia ALTER COLUMN id_tipo_incompetencia SET 
 
 
 --
--- TOC entry 4950 (class 2604 OID 17715)
+-- TOC entry 4950 (class 2604 OID 22450)
 -- Name: tc_jornada id_jornada; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2251,7 +2253,7 @@ ALTER TABLE ONLY public.tc_jornada ALTER COLUMN id_jornada SET DEFAULT nextval('
 
 
 --
--- TOC entry 4951 (class 2604 OID 17716)
+-- TOC entry 4951 (class 2604 OID 22451)
 -- Name: tc_jurisdiccion id_jurisdiccion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2259,7 +2261,7 @@ ALTER TABLE ONLY public.tc_jurisdiccion ALTER COLUMN id_jurisdiccion SET DEFAULT
 
 
 --
--- TOC entry 4952 (class 2604 OID 17717)
+-- TOC entry 4952 (class 2604 OID 22452)
 -- Name: tc_motivo_conflicto id_motivo_conflicto; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2267,7 +2269,7 @@ ALTER TABLE ONLY public.tc_motivo_conflicto ALTER COLUMN id_motivo_conflicto SET
 
 
 --
--- TOC entry 4953 (class 2604 OID 17718)
+-- TOC entry 4953 (class 2604 OID 22453)
 -- Name: tc_motivo_conflicto_circunst id_circuns_mot_conf; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2275,7 +2277,7 @@ ALTER TABLE ONLY public.tc_motivo_conflicto_circunst ALTER COLUMN id_circuns_mot
 
 
 --
--- TOC entry 4954 (class 2604 OID 17719)
+-- TOC entry 4954 (class 2604 OID 22454)
 -- Name: tc_motivo_huelga id_huelga_motivo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2283,7 +2285,7 @@ ALTER TABLE ONLY public.tc_motivo_huelga ALTER COLUMN id_huelga_motivo SET DEFAU
 
 
 --
--- TOC entry 4955 (class 2604 OID 17720)
+-- TOC entry 4955 (class 2604 OID 22455)
 -- Name: tc_motivo_solic_prom id_motivo_sol_promo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2291,7 +2293,7 @@ ALTER TABLE ONLY public.tc_motivo_solic_prom ALTER COLUMN id_motivo_sol_promo SE
 
 
 --
--- TOC entry 4956 (class 2604 OID 17721)
+-- TOC entry 4956 (class 2604 OID 22456)
 -- Name: tc_nat_conflicto id_nat_conflicto; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2299,7 +2301,7 @@ ALTER TABLE ONLY public.tc_nat_conflicto ALTER COLUMN id_nat_conflicto SET DEFAU
 
 
 --
--- TOC entry 4957 (class 2604 OID 17722)
+-- TOC entry 4957 (class 2604 OID 22457)
 -- Name: tc_ocupacion id_ocupacion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2307,7 +2309,7 @@ ALTER TABLE ONLY public.tc_ocupacion ALTER COLUMN id_ocupacion SET DEFAULT nextv
 
 
 --
--- TOC entry 4958 (class 2604 OID 17723)
+-- TOC entry 4958 (class 2604 OID 22458)
 -- Name: tc_org_obr id_org_obr; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2315,7 +2317,7 @@ ALTER TABLE ONLY public.tc_org_obr ALTER COLUMN id_org_obr SET DEFAULT nextval('
 
 
 --
--- TOC entry 4959 (class 2604 OID 17724)
+-- TOC entry 4959 (class 2604 OID 22459)
 -- Name: tc_patron id_tipo_patron; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2323,7 +2325,7 @@ ALTER TABLE ONLY public.tc_patron ALTER COLUMN id_tipo_patron SET DEFAULT nextva
 
 
 --
--- TOC entry 4960 (class 2604 OID 17725)
+-- TOC entry 4960 (class 2604 OID 22460)
 -- Name: tc_prestacion id_prestacion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2331,7 +2333,7 @@ ALTER TABLE ONLY public.tc_prestacion ALTER COLUMN id_prestacion SET DEFAULT nex
 
 
 --
--- TOC entry 4961 (class 2604 OID 17726)
+-- TOC entry 4961 (class 2604 OID 22461)
 -- Name: tc_procedimiento id_tipo_procedimiento; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2339,7 +2341,7 @@ ALTER TABLE ONLY public.tc_procedimiento ALTER COLUMN id_tipo_procedimiento SET 
 
 
 --
--- TOC entry 4962 (class 2604 OID 17727)
+-- TOC entry 4962 (class 2604 OID 22462)
 -- Name: tc_promovente id_promovente; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2347,7 +2349,7 @@ ALTER TABLE ONLY public.tc_promovente ALTER COLUMN id_promovente SET DEFAULT nex
 
 
 --
--- TOC entry 4963 (class 2604 OID 17728)
+-- TOC entry 4963 (class 2604 OID 22463)
 -- Name: tc_sector_sbstor id_sector_sbstor; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2355,7 +2357,7 @@ ALTER TABLE ONLY public.tc_sector_sbstor ALTER COLUMN id_sector_sbstor SET DEFAU
 
 
 --
--- TOC entry 4964 (class 2604 OID 17729)
+-- TOC entry 4964 (class 2604 OID 22464)
 -- Name: tc_sentencia id_tipo_sentencia; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2363,7 +2365,7 @@ ALTER TABLE ONLY public.tc_sentencia ALTER COLUMN id_tipo_sentencia SET DEFAULT 
 
 
 --
--- TOC entry 4965 (class 2604 OID 17730)
+-- TOC entry 4965 (class 2604 OID 22465)
 -- Name: tc_sentencia_efecto id_efecto_sentencia; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2371,7 +2373,7 @@ ALTER TABLE ONLY public.tc_sentencia_efecto ALTER COLUMN id_efecto_sentencia SET
 
 
 --
--- TOC entry 4966 (class 2604 OID 17731)
+-- TOC entry 4966 (class 2604 OID 22466)
 -- Name: tc_sexo id_sexo; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2379,7 +2381,7 @@ ALTER TABLE ONLY public.tc_sexo ALTER COLUMN id_sexo SET DEFAULT nextval('public
 
 
 --
--- TOC entry 4967 (class 2604 OID 17732)
+-- TOC entry 4967 (class 2604 OID 22467)
 -- Name: tc_sindicato id_tipo_sindicato; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2387,7 +2389,7 @@ ALTER TABLE ONLY public.tc_sindicato ALTER COLUMN id_tipo_sindicato SET DEFAULT 
 
 
 --
--- TOC entry 4968 (class 2604 OID 17733)
+-- TOC entry 4968 (class 2604 OID 22468)
 -- Name: tc_susp_temp id_tipo_suspension; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2395,7 +2397,7 @@ ALTER TABLE ONLY public.tc_susp_temp ALTER COLUMN id_tipo_suspension SET DEFAULT
 
 
 --
--- TOC entry 4969 (class 2604 OID 17734)
+-- TOC entry 4969 (class 2604 OID 22469)
 -- Name: tc_term_colectiva id_tipo_terminacion; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2403,7 +2405,7 @@ ALTER TABLE ONLY public.tc_term_colectiva ALTER COLUMN id_tipo_terminacion SET D
 
 
 --
--- TOC entry 4970 (class 2604 OID 17735)
+-- TOC entry 4970 (class 2604 OID 22470)
 -- Name: tc_tipo_audiencia id_tipo_audiencia; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2411,7 +2413,7 @@ ALTER TABLE ONLY public.tc_tipo_audiencia ALTER COLUMN id_tipo_audiencia SET DEF
 
 
 --
--- TOC entry 4971 (class 2604 OID 17736)
+-- TOC entry 4971 (class 2604 OID 22471)
 -- Name: tc_violacion_dh id_tipo_viol_dh; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2419,7 +2421,7 @@ ALTER TABLE ONLY public.tc_violacion_dh ALTER COLUMN id_tipo_viol_dh SET DEFAULT
 
 
 --
--- TOC entry 4972 (class 2604 OID 17737)
+-- TOC entry 4974 (class 2604 OID 22550)
 -- Name: tr_expediente id_expediente; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2427,7 +2429,7 @@ ALTER TABLE ONLY public.tr_expediente ALTER COLUMN id_expediente SET DEFAULT nex
 
 
 --
--- TOC entry 4973 (class 2604 OID 17738)
+-- TOC entry 4975 (class 2604 OID 22551)
 -- Name: tr_general id_general; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -2435,7 +2437,7 @@ ALTER TABLE ONLY public.tr_general ALTER COLUMN id_general SET DEFAULT nextval('
 
 
 --
--- TOC entry 5303 (class 0 OID 17358)
+-- TOC entry 5309 (class 0 OID 22093)
 -- Dependencies: 217
 -- Data for Name: email_verificacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2443,7 +2445,7 @@ ALTER TABLE ONLY public.tr_general ALTER COLUMN id_general SET DEFAULT nextval('
 
 
 --
--- TOC entry 5305 (class 0 OID 17363)
+-- TOC entry 5311 (class 0 OID 22098)
 -- Dependencies: 219
 -- Data for Name: tc_actor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2459,7 +2461,7 @@ INSERT INTO public.tc_actor VALUES (7, 'Otro');
 
 
 --
--- TOC entry 5307 (class 0 OID 17369)
+-- TOC entry 5313 (class 0 OID 22104)
 -- Dependencies: 221
 -- Data for Name: tc_asunto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2470,7 +2472,7 @@ INSERT INTO public.tc_asunto VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5309 (class 0 OID 17375)
+-- TOC entry 5315 (class 0 OID 22110)
 -- Dependencies: 223
 -- Data for Name: tc_causas_impedim_demanda; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2482,7 +2484,7 @@ INSERT INTO public.tc_causas_impedim_demanda VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5311 (class 0 OID 17381)
+-- TOC entry 5317 (class 0 OID 22116)
 -- Dependencies: 225
 -- Data for Name: tc_circunscripcion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2498,7 +2500,7 @@ INSERT INTO public.tc_circunscripcion VALUES (7, 'NNNNNN');
 
 
 --
--- TOC entry 5313 (class 0 OID 17387)
+-- TOC entry 5319 (class 0 OID 22122)
 -- Dependencies: 227
 -- Data for Name: tc_concepto_reclamado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2529,7 +2531,7 @@ INSERT INTO public.tc_concepto_reclamado VALUES (26, '');
 
 
 --
--- TOC entry 5315 (class 0 OID 17393)
+-- TOC entry 5321 (class 0 OID 22128)
 -- Dependencies: 229
 -- Data for Name: tc_contrato; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2540,7 +2542,7 @@ INSERT INTO public.tc_contrato VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5317 (class 0 OID 17399)
+-- TOC entry 5323 (class 0 OID 22134)
 -- Dependencies: 231
 -- Data for Name: tc_defensa; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2554,7 +2556,7 @@ INSERT INTO public.tc_defensa VALUES (0, ' ');
 
 
 --
--- TOC entry 5319 (class 0 OID 17405)
+-- TOC entry 5325 (class 0 OID 22140)
 -- Dependencies: 233
 -- Data for Name: tc_demandado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2568,7 +2570,7 @@ INSERT INTO public.tc_demandado VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5321 (class 0 OID 17411)
+-- TOC entry 5327 (class 0 OID 22146)
 -- Dependencies: 235
 -- Data for Name: tc_entidad_mpio; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5113,7 +5115,7 @@ INSERT INTO public.tc_entidad_mpio VALUES ('2367', '30', 'Veracruz de Ignacio de
 
 
 --
--- TOC entry 5322 (class 0 OID 17416)
+-- TOC entry 5328 (class 0 OID 22151)
 -- Dependencies: 236
 -- Data for Name: tc_estatus_demanda; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5126,7 +5128,7 @@ INSERT INTO public.tc_estatus_demanda VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5324 (class 0 OID 17422)
+-- TOC entry 5330 (class 0 OID 22157)
 -- Dependencies: 238
 -- Data for Name: tc_estatus_expediente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5137,7 +5139,7 @@ INSERT INTO public.tc_estatus_expediente VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5326 (class 0 OID 17428)
+-- TOC entry 5332 (class 0 OID 22163)
 -- Dependencies: 240
 -- Data for Name: tc_fase_conclusion_ejecu; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5148,7 +5150,7 @@ INSERT INTO public.tc_fase_conclusion_ejecu VALUES (-1, 'No identificado ');
 
 
 --
--- TOC entry 5328 (class 0 OID 17434)
+-- TOC entry 5334 (class 0 OID 22169)
 -- Dependencies: 242
 -- Data for Name: tc_fase_solucion_exp; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5166,7 +5168,7 @@ INSERT INTO public.tc_fase_solucion_exp VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5330 (class 0 OID 17440)
+-- TOC entry 5336 (class 0 OID 22175)
 -- Dependencies: 244
 -- Data for Name: tc_forma_solucion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5184,7 +5186,7 @@ INSERT INTO public.tc_forma_solucion VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5332 (class 0 OID 17446)
+-- TOC entry 5338 (class 0 OID 22181)
 -- Dependencies: 246
 -- Data for Name: tc_huelga_existencia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5195,7 +5197,7 @@ INSERT INTO public.tc_huelga_existencia VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5334 (class 0 OID 17452)
+-- TOC entry 5340 (class 0 OID 22187)
 -- Dependencies: 248
 -- Data for Name: tc_huelga_licitud; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5206,7 +5208,7 @@ INSERT INTO public.tc_huelga_licitud VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5336 (class 0 OID 17458)
+-- TOC entry 5342 (class 0 OID 22193)
 -- Dependencies: 250
 -- Data for Name: tc_incidente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5217,7 +5219,7 @@ INSERT INTO public.tc_incidente VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5338 (class 0 OID 17464)
+-- TOC entry 5344 (class 0 OID 22199)
 -- Dependencies: 252
 -- Data for Name: tc_incompetencia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5230,7 +5232,7 @@ INSERT INTO public.tc_incompetencia VALUES (2, 'Por ser competencia de otra juri
 
 
 --
--- TOC entry 5340 (class 0 OID 17470)
+-- TOC entry 5346 (class 0 OID 22205)
 -- Dependencies: 254
 -- Data for Name: tc_jornada; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5242,7 +5244,7 @@ INSERT INTO public.tc_jornada VALUES (-1, 'No Identificado');
 
 
 --
--- TOC entry 5342 (class 0 OID 17476)
+-- TOC entry 5348 (class 0 OID 22211)
 -- Dependencies: 256
 -- Data for Name: tc_jurisdiccion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5253,7 +5255,7 @@ INSERT INTO public.tc_jurisdiccion VALUES (3, 'En más de una división territor
 
 
 --
--- TOC entry 5344 (class 0 OID 17482)
+-- TOC entry 5350 (class 0 OID 22217)
 -- Dependencies: 258
 -- Data for Name: tc_motivo_conflicto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5302,35 +5304,10 @@ INSERT INTO public.tc_motivo_conflicto VALUES (39, 'Suspensión temporal de las 
 INSERT INTO public.tc_motivo_conflicto VALUES (40, 'Terminación colectiva de las relaciones colectivas de trabajo');
 INSERT INTO public.tc_motivo_conflicto VALUES (41, 'Otro motivo del conflicto colectivo de naturaleza económica (especifique)');
 INSERT INTO public.tc_motivo_conflicto VALUES (-1, 'No identificado');
-INSERT INTO public.tc_motivo_conflicto VALUES (47, 'DIECINUEVE');
-INSERT INTO public.tc_motivo_conflicto VALUES (48, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (49, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (50, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (51, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (52, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (53, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (54, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (55, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (56, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (57, 'PAGODEBONOSEMESTRAL');
-INSERT INTO public.tc_motivo_conflicto VALUES (58, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (59, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (60, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (61, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (62, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (63, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (64, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (65, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (66, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (67, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (68, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (69, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (70, '');
-INSERT INTO public.tc_motivo_conflicto VALUES (71, '');
 
 
 --
--- TOC entry 5345 (class 0 OID 17487)
+-- TOC entry 5351 (class 0 OID 22222)
 -- Dependencies: 259
 -- Data for Name: tc_motivo_conflicto_circunst; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5351,23 +5328,10 @@ INSERT INTO public.tc_motivo_conflicto_circunst VALUES (13, 'Trabajo infantil');
 INSERT INTO public.tc_motivo_conflicto_circunst VALUES (14, 'Hostigamiento');
 INSERT INTO public.tc_motivo_conflicto_circunst VALUES (-1, 'No identificado');
 INSERT INTO public.tc_motivo_conflicto_circunst VALUES (15, 'Acoso sexual');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (20, 'DIECINUEVE');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (21, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (22, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (23, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (24, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (25, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (26, 'PORCONDICIONDESALUD');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (27, 'SALUD');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (28, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (29, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (30, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (31, '');
-INSERT INTO public.tc_motivo_conflicto_circunst VALUES (32, '');
 
 
 --
--- TOC entry 5348 (class 0 OID 17494)
+-- TOC entry 5354 (class 0 OID 22229)
 -- Dependencies: 262
 -- Data for Name: tc_motivo_huelga; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5384,7 +5348,7 @@ INSERT INTO public.tc_motivo_huelga VALUES (-1, 'No Identificado');
 
 
 --
--- TOC entry 5350 (class 0 OID 17500)
+-- TOC entry 5356 (class 0 OID 22235)
 -- Dependencies: 264
 -- Data for Name: tc_motivo_solic_prom; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5412,7 +5376,7 @@ INSERT INTO public.tc_motivo_solic_prom VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5352 (class 0 OID 17506)
+-- TOC entry 5358 (class 0 OID 22241)
 -- Dependencies: 266
 -- Data for Name: tc_nat_conflicto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5423,7 +5387,7 @@ INSERT INTO public.tc_nat_conflicto VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5354 (class 0 OID 17512)
+-- TOC entry 5360 (class 0 OID 22247)
 -- Dependencies: 268
 -- Data for Name: tc_ocupacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5923,7 +5887,7 @@ INSERT INTO public.tc_ocupacion VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5356 (class 0 OID 17518)
+-- TOC entry 5362 (class 0 OID 22253)
 -- Dependencies: 270
 -- Data for Name: tc_org_obr; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5940,7 +5904,7 @@ INSERT INTO public.tc_org_obr VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5358 (class 0 OID 17524)
+-- TOC entry 5364 (class 0 OID 22259)
 -- Dependencies: 272
 -- Data for Name: tc_patron; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5951,7 +5915,7 @@ INSERT INTO public.tc_patron VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5360 (class 0 OID 17530)
+-- TOC entry 5366 (class 0 OID 22265)
 -- Dependencies: 274
 -- Data for Name: tc_pregunta_recuperacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5959,7 +5923,7 @@ INSERT INTO public.tc_patron VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5361 (class 0 OID 17535)
+-- TOC entry 5367 (class 0 OID 22270)
 -- Dependencies: 275
 -- Data for Name: tc_prestacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -5970,23 +5934,10 @@ INSERT INTO public.tc_prestacion VALUES (3, 'Prima vacacional');
 INSERT INTO public.tc_prestacion VALUES (4, 'Prima de antigüedad');
 INSERT INTO public.tc_prestacion VALUES (5, 'Otro tipo de prestaciones (especifique)');
 INSERT INTO public.tc_prestacion VALUES (-1, 'No identificado');
-INSERT INTO public.tc_prestacion VALUES (8, 'DIECINUEVE');
-INSERT INTO public.tc_prestacion VALUES (9, '');
-INSERT INTO public.tc_prestacion VALUES (10, '');
-INSERT INTO public.tc_prestacion VALUES (11, '');
-INSERT INTO public.tc_prestacion VALUES (12, '');
-INSERT INTO public.tc_prestacion VALUES (13, '');
-INSERT INTO public.tc_prestacion VALUES (14, 'BONODEPUNTUALIDADBONOSEMESTRALDESPENSA');
-INSERT INTO public.tc_prestacion VALUES (15, 'BONODEPUNTUALIDAD');
-INSERT INTO public.tc_prestacion VALUES (16, '');
-INSERT INTO public.tc_prestacion VALUES (17, '');
-INSERT INTO public.tc_prestacion VALUES (18, '');
-INSERT INTO public.tc_prestacion VALUES (19, '');
-INSERT INTO public.tc_prestacion VALUES (20, '');
 
 
 --
--- TOC entry 5363 (class 0 OID 17541)
+-- TOC entry 5369 (class 0 OID 22276)
 -- Dependencies: 277
 -- Data for Name: tc_procedimiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6004,7 +5955,7 @@ INSERT INTO public.tc_procedimiento VALUES (9, 'Ejecución');
 
 
 --
--- TOC entry 5365 (class 0 OID 17547)
+-- TOC entry 5371 (class 0 OID 22282)
 -- Dependencies: 279
 -- Data for Name: tc_promovente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6018,7 +5969,7 @@ INSERT INTO public.tc_promovente VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5367 (class 0 OID 17553)
+-- TOC entry 5373 (class 0 OID 22288)
 -- Dependencies: 281
 -- Data for Name: tc_respuesta_simple; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6030,17 +5981,17 @@ INSERT INTO public.tc_respuesta_simple VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5368 (class 0 OID 17558)
+-- TOC entry 5374 (class 0 OID 22293)
 -- Dependencies: 282
 -- Data for Name: tc_roles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.tc_roles VALUES (1, 'capturista');
+INSERT INTO public.tc_roles VALUES (1, 'Capturista');
 INSERT INTO public.tc_roles VALUES (2, 'Administrador');
 
 
 --
--- TOC entry 5369 (class 0 OID 17563)
+-- TOC entry 5375 (class 0 OID 22298)
 -- Dependencies: 283
 -- Data for Name: tc_sector_sbstor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6163,7 +6114,7 @@ INSERT INTO public.tc_sector_sbstor VALUES (-1, 'No identificado', 'No identific
 
 
 --
--- TOC entry 5371 (class 0 OID 17569)
+-- TOC entry 5377 (class 0 OID 22304)
 -- Dependencies: 285
 -- Data for Name: tc_sentencia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6179,7 +6130,7 @@ INSERT INTO public.tc_sentencia VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5372 (class 0 OID 17574)
+-- TOC entry 5378 (class 0 OID 22309)
 -- Dependencies: 286
 -- Data for Name: tc_sentencia_efecto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6198,7 +6149,7 @@ INSERT INTO public.tc_sentencia_efecto VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5375 (class 0 OID 17581)
+-- TOC entry 5381 (class 0 OID 22316)
 -- Dependencies: 289
 -- Data for Name: tc_sexo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6209,7 +6160,7 @@ INSERT INTO public.tc_sexo VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5377 (class 0 OID 17587)
+-- TOC entry 5383 (class 0 OID 22322)
 -- Dependencies: 291
 -- Data for Name: tc_sindicato; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6224,7 +6175,7 @@ INSERT INTO public.tc_sindicato VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5379 (class 0 OID 17593)
+-- TOC entry 5385 (class 0 OID 22328)
 -- Dependencies: 293
 -- Data for Name: tc_susp_temp; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6240,7 +6191,7 @@ INSERT INTO public.tc_susp_temp VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5381 (class 0 OID 17599)
+-- TOC entry 5387 (class 0 OID 22334)
 -- Dependencies: 295
 -- Data for Name: tc_term_colectiva; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6253,7 +6204,7 @@ INSERT INTO public.tc_term_colectiva VALUES (-1, 'No identificado');
 
 
 --
--- TOC entry 5383 (class 0 OID 17605)
+-- TOC entry 5389 (class 0 OID 22340)
 -- Dependencies: 297
 -- Data for Name: tc_tipo_audiencia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6269,7 +6220,7 @@ INSERT INTO public.tc_tipo_audiencia VALUES (-1, 'No identificada');
 
 
 --
--- TOC entry 5385 (class 0 OID 17611)
+-- TOC entry 5391 (class 0 OID 22346)
 -- Dependencies: 299
 -- Data for Name: tc_violacion_dh; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -6279,21 +6230,165 @@ INSERT INTO public.tc_violacion_dh VALUES (2, 'Libertad sindical');
 INSERT INTO public.tc_violacion_dh VALUES (3, 'Derecho a la negociación colectiva');
 INSERT INTO public.tc_violacion_dh VALUES (4, 'Otro tipo de violaciones a derechos fundamentales en materia colectiva (especifique)');
 INSERT INTO public.tc_violacion_dh VALUES (-1, 'No identificado');
-INSERT INTO public.tc_violacion_dh VALUES (5, '');
-INSERT INTO public.tc_violacion_dh VALUES (6, '');
-INSERT INTO public.tc_violacion_dh VALUES (7, '');
 
 
-
-
-
-
-
+--
+-- TOC entry 5395 (class 0 OID 22478)
+-- Dependencies: 303
+-- Data for Name: tr_actor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
 
 
 
 --
--- TOC entry 5456 (class 0 OID 0)
+-- TOC entry 5396 (class 0 OID 22483)
+-- Dependencies: 304
+-- Data for Name: tr_audiencia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5397 (class 0 OID 22488)
+-- Dependencies: 305
+-- Data for Name: tr_demandado; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5398 (class 0 OID 22493)
+-- Dependencies: 306
+-- Data for Name: tr_exp_actor; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5399 (class 0 OID 22498)
+-- Dependencies: 307
+-- Data for Name: tr_exp_circunst; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5400 (class 0 OID 22501)
+-- Dependencies: 308
+-- Data for Name: tr_exp_concepto_reclam; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5401 (class 0 OID 22504)
+-- Dependencies: 309
+-- Data for Name: tr_exp_efectos_sentencia; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5402 (class 0 OID 22507)
+-- Dependencies: 310
+-- Data for Name: tr_exp_motivo_conf; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5403 (class 0 OID 22510)
+-- Dependencies: 311
+-- Data for Name: tr_exp_motivo_huelga; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5404 (class 0 OID 22513)
+-- Dependencies: 312
+-- Data for Name: tr_exp_motivo_solic; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5405 (class 0 OID 22516)
+-- Dependencies: 313
+-- Data for Name: tr_exp_prestacion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5406 (class 0 OID 22519)
+-- Dependencies: 314
+-- Data for Name: tr_exp_suspension; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5407 (class 0 OID 22522)
+-- Dependencies: 315
+-- Data for Name: tr_exp_terminacion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5408 (class 0 OID 22525)
+-- Dependencies: 316
+-- Data for Name: tr_exp_violacion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5409 (class 0 OID 22528)
+-- Dependencies: 317
+-- Data for Name: tr_exped_demandado; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5410 (class 0 OID 22533)
+-- Dependencies: 318
+-- Data for Name: tr_expediente; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5412 (class 0 OID 22539)
+-- Dependencies: 320
+-- Data for Name: tr_general; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5414 (class 0 OID 22545)
+-- Dependencies: 322
+-- Data for Name: tr_organoj; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 5393 (class 0 OID 22424)
+-- Dependencies: 301
+-- Data for Name: tr_usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (1, 'LOEO8901039RA', '$2a$10$t3S/7LbqJ9zeW5Btq8Zwj.5PIJXjKml1G929kBvwyvrI5KNsTI8.q', 2, '09-07-2025 20:08:42', 'user@correo.com', 'ADMINISTRADOR', 'SISTEMA', NULL, NULL, '', 'LOEO890103HHGZSC08', 'LOEO8901039RA');
+INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (28, 'MALE9001138BV', '$2a$10$dBoao4fP.2r9nS6KfJyTE.ZlL5CVVTxHTiK.AJBh71n9smAFRb.4y', 1, '24-07-2025 10:31:24', '', 'RAUL', 'JUAREZ RUIZ', NULL, NULL, 'Juzgado Laboral de Primera Instancia del Vigesimo Primer Distrito judicial', '', 'MALE9001138BV');
+INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (30, 'MALE9001130LL', '$2a$10$5Ctmh.g78OxlhlXZu7W/AOJftUAI7pejsdaKaPLbubNY1AS9ASoZW', 1, '24-07-2025 15:33:04', 'hjshs@dfdgfd', 'RAUL', 'PEREZ', NULL, NULL, 'JUZGADO EN MATERIA LABORAL DEL DISTRITO JUDICIAL DE VERACRUZ CON SEDE EN MEDELLÍN DE BRAV', '', 'MALE9001130LL');
+
+
+--
+-- TOC entry 5462 (class 0 OID 0)
 -- Dependencies: 218
 -- Name: email_verificacion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6302,7 +6397,7 @@ SELECT pg_catalog.setval('public.email_verificacion_id_seq', 1, false);
 
 
 --
--- TOC entry 5457 (class 0 OID 0)
+-- TOC entry 5463 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: tc_actor_id_tipo_actor_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6311,7 +6406,7 @@ SELECT pg_catalog.setval('public.tc_actor_id_tipo_actor_seq', 1, false);
 
 
 --
--- TOC entry 5458 (class 0 OID 0)
+-- TOC entry 5464 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: tc_asunto_id_tipo_asunto_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6320,7 +6415,7 @@ SELECT pg_catalog.setval('public.tc_asunto_id_tipo_asunto_seq', 1, false);
 
 
 --
--- TOC entry 5459 (class 0 OID 0)
+-- TOC entry 5465 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: tc_causas_impedim_demanda_id_causas_imp_dem_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6329,7 +6424,7 @@ SELECT pg_catalog.setval('public.tc_causas_impedim_demanda_id_causas_imp_dem_seq
 
 
 --
--- TOC entry 5460 (class 0 OID 0)
+-- TOC entry 5466 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: tc_circunscripcion_id_circunscripcion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6338,7 +6433,7 @@ SELECT pg_catalog.setval('public.tc_circunscripcion_id_circunscripcion_seq', 1, 
 
 
 --
--- TOC entry 5461 (class 0 OID 0)
+-- TOC entry 5467 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: tc_concepto_reclamado_id_concepto_reclam_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6347,7 +6442,7 @@ SELECT pg_catalog.setval('public.tc_concepto_reclamado_id_concepto_reclam_seq', 
 
 
 --
--- TOC entry 5462 (class 0 OID 0)
+-- TOC entry 5468 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: tc_contrato_id_tipo_contrato_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6356,7 +6451,7 @@ SELECT pg_catalog.setval('public.tc_contrato_id_tipo_contrato_seq', 1, false);
 
 
 --
--- TOC entry 5463 (class 0 OID 0)
+-- TOC entry 5469 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: tc_defensa_id_defensa_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6365,7 +6460,7 @@ SELECT pg_catalog.setval('public.tc_defensa_id_defensa_seq', 1, false);
 
 
 --
--- TOC entry 5464 (class 0 OID 0)
+-- TOC entry 5470 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: tc_demandado_id_tipo_demandado_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6374,7 +6469,7 @@ SELECT pg_catalog.setval('public.tc_demandado_id_tipo_demandado_seq', 1, false);
 
 
 --
--- TOC entry 5465 (class 0 OID 0)
+-- TOC entry 5471 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: tc_estatus_demanda_id_estatus_demanda_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6383,7 +6478,7 @@ SELECT pg_catalog.setval('public.tc_estatus_demanda_id_estatus_demanda_seq', 1, 
 
 
 --
--- TOC entry 5466 (class 0 OID 0)
+-- TOC entry 5472 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: tc_estatus_expediente_id_estatus_expediente_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6392,7 +6487,7 @@ SELECT pg_catalog.setval('public.tc_estatus_expediente_id_estatus_expediente_seq
 
 
 --
--- TOC entry 5467 (class 0 OID 0)
+-- TOC entry 5473 (class 0 OID 0)
 -- Dependencies: 241
 -- Name: tc_fase_conclusion_ejecu_id_fase_concl_ejec_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6401,7 +6496,7 @@ SELECT pg_catalog.setval('public.tc_fase_conclusion_ejecu_id_fase_concl_ejec_seq
 
 
 --
--- TOC entry 5468 (class 0 OID 0)
+-- TOC entry 5474 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: tc_fase_solucion_exp_id_fase_solucion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6410,7 +6505,7 @@ SELECT pg_catalog.setval('public.tc_fase_solucion_exp_id_fase_solucion_seq', 1, 
 
 
 --
--- TOC entry 5469 (class 0 OID 0)
+-- TOC entry 5475 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: tc_forma_solucion_id_forma_solucion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6419,7 +6514,7 @@ SELECT pg_catalog.setval('public.tc_forma_solucion_id_forma_solucion_seq', 1, fa
 
 
 --
--- TOC entry 5470 (class 0 OID 0)
+-- TOC entry 5476 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: tc_huelga_existencia_id_huelga_exist_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6428,7 +6523,7 @@ SELECT pg_catalog.setval('public.tc_huelga_existencia_id_huelga_exist_seq', 1, f
 
 
 --
--- TOC entry 5471 (class 0 OID 0)
+-- TOC entry 5477 (class 0 OID 0)
 -- Dependencies: 249
 -- Name: tc_huelga_licitud_id_huelga_licitud_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6437,7 +6532,7 @@ SELECT pg_catalog.setval('public.tc_huelga_licitud_id_huelga_licitud_seq', 1, fa
 
 
 --
--- TOC entry 5472 (class 0 OID 0)
+-- TOC entry 5478 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: tc_incidente_id_tipo_incidente__seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6446,7 +6541,7 @@ SELECT pg_catalog.setval('public.tc_incidente_id_tipo_incidente__seq', 1, false)
 
 
 --
--- TOC entry 5473 (class 0 OID 0)
+-- TOC entry 5479 (class 0 OID 0)
 -- Dependencies: 253
 -- Name: tc_incompetencia_id_tipo_incompetencia_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6455,7 +6550,7 @@ SELECT pg_catalog.setval('public.tc_incompetencia_id_tipo_incompetencia_seq', 1,
 
 
 --
--- TOC entry 5474 (class 0 OID 0)
+-- TOC entry 5480 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: tc_jornada_id_jornada_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6464,7 +6559,7 @@ SELECT pg_catalog.setval('public.tc_jornada_id_jornada_seq', 1, false);
 
 
 --
--- TOC entry 5475 (class 0 OID 0)
+-- TOC entry 5481 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: tc_jurisdiccion_id_jurisdiccion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6473,7 +6568,7 @@ SELECT pg_catalog.setval('public.tc_jurisdiccion_id_jurisdiccion_seq', 1, false)
 
 
 --
--- TOC entry 5476 (class 0 OID 0)
+-- TOC entry 5482 (class 0 OID 0)
 -- Dependencies: 260
 -- Name: tc_motivo_conflicto_circunst_id_circuns_mot_conf_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6482,7 +6577,7 @@ SELECT pg_catalog.setval('public.tc_motivo_conflicto_circunst_id_circuns_mot_con
 
 
 --
--- TOC entry 5477 (class 0 OID 0)
+-- TOC entry 5483 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: tc_motivo_conflicto_id_motivo_conflicto_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6491,7 +6586,7 @@ SELECT pg_catalog.setval('public.tc_motivo_conflicto_id_motivo_conflicto_seq', 1
 
 
 --
--- TOC entry 5478 (class 0 OID 0)
+-- TOC entry 5484 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: tc_motivo_huelga_id_huelga_motivo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6500,7 +6595,7 @@ SELECT pg_catalog.setval('public.tc_motivo_huelga_id_huelga_motivo_seq', 1, fals
 
 
 --
--- TOC entry 5479 (class 0 OID 0)
+-- TOC entry 5485 (class 0 OID 0)
 -- Dependencies: 265
 -- Name: tc_motivo_solic_prom_id_motivo_sol_promo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6509,7 +6604,7 @@ SELECT pg_catalog.setval('public.tc_motivo_solic_prom_id_motivo_sol_promo_seq', 
 
 
 --
--- TOC entry 5480 (class 0 OID 0)
+-- TOC entry 5486 (class 0 OID 0)
 -- Dependencies: 267
 -- Name: tc_nat_conflicto_id_nat_conflicto_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6518,7 +6613,7 @@ SELECT pg_catalog.setval('public.tc_nat_conflicto_id_nat_conflicto_seq', 1, fals
 
 
 --
--- TOC entry 5481 (class 0 OID 0)
+-- TOC entry 5487 (class 0 OID 0)
 -- Dependencies: 269
 -- Name: tc_ocupacion_id_ocupacion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6527,7 +6622,7 @@ SELECT pg_catalog.setval('public.tc_ocupacion_id_ocupacion_seq', 1, false);
 
 
 --
--- TOC entry 5482 (class 0 OID 0)
+-- TOC entry 5488 (class 0 OID 0)
 -- Dependencies: 271
 -- Name: tc_org_obr_id_org_obr_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6536,7 +6631,7 @@ SELECT pg_catalog.setval('public.tc_org_obr_id_org_obr_seq', 1, false);
 
 
 --
--- TOC entry 5483 (class 0 OID 0)
+-- TOC entry 5489 (class 0 OID 0)
 -- Dependencies: 273
 -- Name: tc_patron_id_tipo_patron_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6545,7 +6640,7 @@ SELECT pg_catalog.setval('public.tc_patron_id_tipo_patron_seq', 1, false);
 
 
 --
--- TOC entry 5484 (class 0 OID 0)
+-- TOC entry 5490 (class 0 OID 0)
 -- Dependencies: 276
 -- Name: tc_prestacion_id_prestacion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6554,7 +6649,7 @@ SELECT pg_catalog.setval('public.tc_prestacion_id_prestacion_seq', 1, false);
 
 
 --
--- TOC entry 5485 (class 0 OID 0)
+-- TOC entry 5491 (class 0 OID 0)
 -- Dependencies: 278
 -- Name: tc_procedimiento_id_tipo_procedimiento_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6563,7 +6658,7 @@ SELECT pg_catalog.setval('public.tc_procedimiento_id_tipo_procedimiento_seq', 1,
 
 
 --
--- TOC entry 5486 (class 0 OID 0)
+-- TOC entry 5492 (class 0 OID 0)
 -- Dependencies: 280
 -- Name: tc_promovente_id_promovente_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6572,7 +6667,7 @@ SELECT pg_catalog.setval('public.tc_promovente_id_promovente_seq', 1, false);
 
 
 --
--- TOC entry 5487 (class 0 OID 0)
+-- TOC entry 5493 (class 0 OID 0)
 -- Dependencies: 284
 -- Name: tc_sector_sbstor_id_sector_sbstor_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6581,7 +6676,7 @@ SELECT pg_catalog.setval('public.tc_sector_sbstor_id_sector_sbstor_seq', 1, fals
 
 
 --
--- TOC entry 5488 (class 0 OID 0)
+-- TOC entry 5494 (class 0 OID 0)
 -- Dependencies: 287
 -- Name: tc_sentencia_efecto_id_efecto_sentencia_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6590,7 +6685,7 @@ SELECT pg_catalog.setval('public.tc_sentencia_efecto_id_efecto_sentencia_seq', 1
 
 
 --
--- TOC entry 5489 (class 0 OID 0)
+-- TOC entry 5495 (class 0 OID 0)
 -- Dependencies: 288
 -- Name: tc_sentencia_id_tipo_sentencia_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6599,7 +6694,7 @@ SELECT pg_catalog.setval('public.tc_sentencia_id_tipo_sentencia_seq', 1, false);
 
 
 --
--- TOC entry 5490 (class 0 OID 0)
+-- TOC entry 5496 (class 0 OID 0)
 -- Dependencies: 290
 -- Name: tc_sexo_id_sexo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6608,7 +6703,7 @@ SELECT pg_catalog.setval('public.tc_sexo_id_sexo_seq', 1, false);
 
 
 --
--- TOC entry 5491 (class 0 OID 0)
+-- TOC entry 5497 (class 0 OID 0)
 -- Dependencies: 292
 -- Name: tc_sindicato_id_tipo_sindicato_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6617,7 +6712,7 @@ SELECT pg_catalog.setval('public.tc_sindicato_id_tipo_sindicato_seq', 1, false);
 
 
 --
--- TOC entry 5492 (class 0 OID 0)
+-- TOC entry 5498 (class 0 OID 0)
 -- Dependencies: 294
 -- Name: tc_susp_temp_id_tipo_suspension_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6626,7 +6721,7 @@ SELECT pg_catalog.setval('public.tc_susp_temp_id_tipo_suspension_seq', 1, false)
 
 
 --
--- TOC entry 5493 (class 0 OID 0)
+-- TOC entry 5499 (class 0 OID 0)
 -- Dependencies: 296
 -- Name: tc_term_colectiva_id_tipo_terminacion_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6635,7 +6730,7 @@ SELECT pg_catalog.setval('public.tc_term_colectiva_id_tipo_terminacion_seq', 1, 
 
 
 --
--- TOC entry 5494 (class 0 OID 0)
+-- TOC entry 5500 (class 0 OID 0)
 -- Dependencies: 298
 -- Name: tc_tipo_audiencia_id_tipo_audiencia_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6644,7 +6739,7 @@ SELECT pg_catalog.setval('public.tc_tipo_audiencia_id_tipo_audiencia_seq', 1, fa
 
 
 --
--- TOC entry 5495 (class 0 OID 0)
+-- TOC entry 5501 (class 0 OID 0)
 -- Dependencies: 300
 -- Name: tc_violacion_dh_id_tipo_viol_dh_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -6653,8 +6748,8 @@ SELECT pg_catalog.setval('public.tc_violacion_dh_id_tipo_viol_dh_seq', 1, false)
 
 
 --
--- TOC entry 5496 (class 0 OID 0)
--- Dependencies: 317
+-- TOC entry 5502 (class 0 OID 0)
+-- Dependencies: 319
 -- Name: tr_expediente_id_expediente_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -6662,8 +6757,8 @@ SELECT pg_catalog.setval('public.tr_expediente_id_expediente_seq', 1, false);
 
 
 --
--- TOC entry 5497 (class 0 OID 0)
--- Dependencies: 319
+-- TOC entry 5503 (class 0 OID 0)
+-- Dependencies: 321
 -- Name: tr_general_id_general_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -6671,15 +6766,1140 @@ SELECT pg_catalog.setval('public.tr_general_id_general_seq', 1, false);
 
 
 --
--- TOC entry 5498 (class 0 OID 0)
--- Dependencies: 322
+-- TOC entry 5504 (class 0 OID 0)
+-- Dependencies: 302
 -- Name: tr_usuarios_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.tr_usuarios_id_seq', 2, true);
+SELECT pg_catalog.setval('public.tr_usuarios_id_seq', 30, true);
 
 
--- Completed on 2025-05-28 10:26:35
+--
+-- TOC entry 4977 (class 2606 OID 22566)
+-- Name: email_verificacion email_verificacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.email_verificacion
+    ADD CONSTRAINT email_verificacion_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 5073 (class 2606 OID 22676)
+-- Name: tr_exp_actor pk_tr_exp_actor; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_actor
+    ADD CONSTRAINT pk_tr_exp_actor PRIMARY KEY (actores_id, id_expediente);
+
+
+--
+-- TOC entry 5075 (class 2606 OID 22678)
+-- Name: tr_exp_circunst pk_tr_exp_circunst; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_circunst
+    ADD CONSTRAINT pk_tr_exp_circunst PRIMARY KEY (id_circuns_mot_conf, id_expediente);
+
+
+--
+-- TOC entry 5077 (class 2606 OID 22680)
+-- Name: tr_exp_concepto_reclam pk_tr_exp_concepto_reclam; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_concepto_reclam
+    ADD CONSTRAINT pk_tr_exp_concepto_reclam PRIMARY KEY (id_concepto_reclam, id_expediente);
+
+
+--
+-- TOC entry 5079 (class 2606 OID 22682)
+-- Name: tr_exp_efectos_sentencia pk_tr_exp_efectos_sentencia; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_efectos_sentencia
+    ADD CONSTRAINT pk_tr_exp_efectos_sentencia PRIMARY KEY (id_efecto_sentencia, id_expediente);
+
+
+--
+-- TOC entry 5081 (class 2606 OID 22684)
+-- Name: tr_exp_motivo_conf pk_tr_exp_motivo_conf; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_conf
+    ADD CONSTRAINT pk_tr_exp_motivo_conf PRIMARY KEY (id_motivo_conflicto, id_expediente);
+
+
+--
+-- TOC entry 5083 (class 2606 OID 22686)
+-- Name: tr_exp_motivo_huelga pk_tr_exp_motivo_huelga; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_huelga
+    ADD CONSTRAINT pk_tr_exp_motivo_huelga PRIMARY KEY (id_huelga_motivo, id_expediente);
+
+
+--
+-- TOC entry 5085 (class 2606 OID 22688)
+-- Name: tr_exp_motivo_solic pk_tr_exp_motivo_solic; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_solic
+    ADD CONSTRAINT pk_tr_exp_motivo_solic PRIMARY KEY (id_motivo_sol_promo, id_expediente);
+
+
+--
+-- TOC entry 5087 (class 2606 OID 22690)
+-- Name: tr_exp_prestacion pk_tr_exp_prestacion; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_prestacion
+    ADD CONSTRAINT pk_tr_exp_prestacion PRIMARY KEY (id_prestacion, id_expediente);
+
+
+--
+-- TOC entry 5089 (class 2606 OID 22692)
+-- Name: tr_exp_suspension pk_tr_exp_suspension; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_suspension
+    ADD CONSTRAINT pk_tr_exp_suspension PRIMARY KEY (id_tipo_suspension, id_expediente);
+
+
+--
+-- TOC entry 5091 (class 2606 OID 22694)
+-- Name: tr_exp_terminacion pk_tr_exp_terminacion; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_terminacion
+    ADD CONSTRAINT pk_tr_exp_terminacion PRIMARY KEY (id_tipo_terminacion, id_expediente);
+
+
+--
+-- TOC entry 5093 (class 2606 OID 22696)
+-- Name: tr_exp_violacion pk_tr_exp_violacion; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_violacion
+    ADD CONSTRAINT pk_tr_exp_violacion PRIMARY KEY (id_tipo_viol_dh, id_expediente);
+
+
+--
+-- TOC entry 5095 (class 2606 OID 22698)
+-- Name: tr_exped_demandado pk_tr_exped_demandado; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exped_demandado
+    ADD CONSTRAINT pk_tr_exped_demandado PRIMARY KEY (id_demandado, id_expediente);
+
+
+--
+-- TOC entry 4979 (class 2606 OID 22568)
+-- Name: tc_actor tc_actor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_actor
+    ADD CONSTRAINT tc_actor_pkey PRIMARY KEY (id_tipo_actor);
+
+
+--
+-- TOC entry 4981 (class 2606 OID 22570)
+-- Name: tc_asunto tc_asunto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_asunto
+    ADD CONSTRAINT tc_asunto_pkey PRIMARY KEY (id_tipo_asunto);
+
+
+--
+-- TOC entry 4983 (class 2606 OID 22572)
+-- Name: tc_causas_impedim_demanda tc_causas_impedim_demanda_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_causas_impedim_demanda
+    ADD CONSTRAINT tc_causas_impedim_demanda_pkey PRIMARY KEY (id_causas_imp_dem);
+
+
+--
+-- TOC entry 4985 (class 2606 OID 22574)
+-- Name: tc_circunscripcion tc_circunscripcion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_circunscripcion
+    ADD CONSTRAINT tc_circunscripcion_pkey PRIMARY KEY (id_circunscripcion);
+
+
+--
+-- TOC entry 4987 (class 2606 OID 22576)
+-- Name: tc_concepto_reclamado tc_concepto_reclamado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_concepto_reclamado
+    ADD CONSTRAINT tc_concepto_reclamado_pkey PRIMARY KEY (id_concepto_reclam);
+
+
+--
+-- TOC entry 4989 (class 2606 OID 22578)
+-- Name: tc_contrato tc_contrato_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_contrato
+    ADD CONSTRAINT tc_contrato_pkey PRIMARY KEY (id_tipo_contrato);
+
+
+--
+-- TOC entry 4991 (class 2606 OID 22580)
+-- Name: tc_defensa tc_defensa_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_defensa
+    ADD CONSTRAINT tc_defensa_pkey PRIMARY KEY (id_defensa);
+
+
+--
+-- TOC entry 4993 (class 2606 OID 22582)
+-- Name: tc_demandado tc_demandado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_demandado
+    ADD CONSTRAINT tc_demandado_pkey PRIMARY KEY (id_tipo_demandado);
+
+
+--
+-- TOC entry 4995 (class 2606 OID 22584)
+-- Name: tc_entidad_mpio tc_entidad_mpio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_entidad_mpio
+    ADD CONSTRAINT tc_entidad_mpio_pkey PRIMARY KEY (id_ent_mpio);
+
+
+--
+-- TOC entry 4997 (class 2606 OID 22586)
+-- Name: tc_estatus_demanda tc_estatus_demanda_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_estatus_demanda
+    ADD CONSTRAINT tc_estatus_demanda_pkey PRIMARY KEY (id_estatus_demanda);
+
+
+--
+-- TOC entry 4999 (class 2606 OID 22588)
+-- Name: tc_estatus_expediente tc_estatus_expediente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_estatus_expediente
+    ADD CONSTRAINT tc_estatus_expediente_pkey PRIMARY KEY (id_estatus_expediente);
+
+
+--
+-- TOC entry 5001 (class 2606 OID 22590)
+-- Name: tc_fase_conclusion_ejecu tc_fase_conclusion_ejecu_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_fase_conclusion_ejecu
+    ADD CONSTRAINT tc_fase_conclusion_ejecu_pkey PRIMARY KEY (id_fase_concl_ejec);
+
+
+--
+-- TOC entry 5003 (class 2606 OID 22592)
+-- Name: tc_fase_solucion_exp tc_fase_solucion_exp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_fase_solucion_exp
+    ADD CONSTRAINT tc_fase_solucion_exp_pkey PRIMARY KEY (id_fase_solucion);
+
+
+--
+-- TOC entry 5005 (class 2606 OID 22594)
+-- Name: tc_forma_solucion tc_forma_solucion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_forma_solucion
+    ADD CONSTRAINT tc_forma_solucion_pkey PRIMARY KEY (id_forma_solucion);
+
+
+--
+-- TOC entry 5007 (class 2606 OID 22596)
+-- Name: tc_huelga_existencia tc_huelga_existencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_huelga_existencia
+    ADD CONSTRAINT tc_huelga_existencia_pkey PRIMARY KEY (id_huelga_exist);
+
+
+--
+-- TOC entry 5009 (class 2606 OID 22598)
+-- Name: tc_huelga_licitud tc_huelga_licitud_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_huelga_licitud
+    ADD CONSTRAINT tc_huelga_licitud_pkey PRIMARY KEY (id_huelga_licitud);
+
+
+--
+-- TOC entry 5011 (class 2606 OID 22600)
+-- Name: tc_incidente tc_incidente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_incidente
+    ADD CONSTRAINT tc_incidente_pkey PRIMARY KEY (id_tipo_incidente_);
+
+
+--
+-- TOC entry 5013 (class 2606 OID 22602)
+-- Name: tc_incompetencia tc_incompetencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_incompetencia
+    ADD CONSTRAINT tc_incompetencia_pkey PRIMARY KEY (id_tipo_incompetencia);
+
+
+--
+-- TOC entry 5015 (class 2606 OID 22604)
+-- Name: tc_jornada tc_jornada_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_jornada
+    ADD CONSTRAINT tc_jornada_pkey PRIMARY KEY (id_jornada);
+
+
+--
+-- TOC entry 5017 (class 2606 OID 22606)
+-- Name: tc_jurisdiccion tc_jurisdiccion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_jurisdiccion
+    ADD CONSTRAINT tc_jurisdiccion_pkey PRIMARY KEY (id_jurisdiccion);
+
+
+--
+-- TOC entry 5021 (class 2606 OID 22610)
+-- Name: tc_motivo_conflicto_circunst tc_motivo_conflicto_circunst_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_motivo_conflicto_circunst
+    ADD CONSTRAINT tc_motivo_conflicto_circunst_pkey PRIMARY KEY (id_circuns_mot_conf);
+
+
+--
+-- TOC entry 5019 (class 2606 OID 22608)
+-- Name: tc_motivo_conflicto tc_motivo_conflicto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_motivo_conflicto
+    ADD CONSTRAINT tc_motivo_conflicto_pkey PRIMARY KEY (id_motivo_conflicto);
+
+
+--
+-- TOC entry 5023 (class 2606 OID 22612)
+-- Name: tc_motivo_huelga tc_motivo_huelga_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_motivo_huelga
+    ADD CONSTRAINT tc_motivo_huelga_pkey PRIMARY KEY (id_huelga_motivo);
+
+
+--
+-- TOC entry 5025 (class 2606 OID 22614)
+-- Name: tc_motivo_solic_prom tc_motivo_solic_prom_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_motivo_solic_prom
+    ADD CONSTRAINT tc_motivo_solic_prom_pkey PRIMARY KEY (id_motivo_sol_promo);
+
+
+--
+-- TOC entry 5027 (class 2606 OID 22616)
+-- Name: tc_nat_conflicto tc_nat_conflicto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_nat_conflicto
+    ADD CONSTRAINT tc_nat_conflicto_pkey PRIMARY KEY (id_nat_conflicto);
+
+
+--
+-- TOC entry 5029 (class 2606 OID 22618)
+-- Name: tc_ocupacion tc_ocupacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_ocupacion
+    ADD CONSTRAINT tc_ocupacion_pkey PRIMARY KEY (id_ocupacion);
+
+
+--
+-- TOC entry 5031 (class 2606 OID 22620)
+-- Name: tc_org_obr tc_org_obr_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_org_obr
+    ADD CONSTRAINT tc_org_obr_pkey PRIMARY KEY (id_org_obr);
+
+
+--
+-- TOC entry 5033 (class 2606 OID 22622)
+-- Name: tc_patron tc_patron_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_patron
+    ADD CONSTRAINT tc_patron_pkey PRIMARY KEY (id_tipo_patron);
+
+
+--
+-- TOC entry 5035 (class 2606 OID 22624)
+-- Name: tc_pregunta_recuperacion tc_pregunta_recuperacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_pregunta_recuperacion
+    ADD CONSTRAINT tc_pregunta_recuperacion_pkey PRIMARY KEY (id_pregunta);
+
+
+--
+-- TOC entry 5037 (class 2606 OID 22626)
+-- Name: tc_prestacion tc_prestacion_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_prestacion
+    ADD CONSTRAINT tc_prestacion_pkey PRIMARY KEY (id_prestacion);
+
+
+--
+-- TOC entry 5039 (class 2606 OID 22628)
+-- Name: tc_procedimiento tc_procedimiento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_procedimiento
+    ADD CONSTRAINT tc_procedimiento_pkey PRIMARY KEY (id_tipo_procedimiento);
+
+
+--
+-- TOC entry 5041 (class 2606 OID 22630)
+-- Name: tc_promovente tc_promovente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_promovente
+    ADD CONSTRAINT tc_promovente_pkey PRIMARY KEY (id_promovente);
+
+
+--
+-- TOC entry 5043 (class 2606 OID 22632)
+-- Name: tc_respuesta_simple tc_respuesta_simple_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_respuesta_simple
+    ADD CONSTRAINT tc_respuesta_simple_pkey PRIMARY KEY (id_respuesta);
+
+
+--
+-- TOC entry 5045 (class 2606 OID 22634)
+-- Name: tc_roles tc_roles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_roles
+    ADD CONSTRAINT tc_roles_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 5047 (class 2606 OID 22636)
+-- Name: tc_sector_sbstor tc_sector_sbstor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_sector_sbstor
+    ADD CONSTRAINT tc_sector_sbstor_pkey PRIMARY KEY (id_sector_sbstor);
+
+
+--
+-- TOC entry 5051 (class 2606 OID 22640)
+-- Name: tc_sentencia_efecto tc_sentencia_efecto_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_sentencia_efecto
+    ADD CONSTRAINT tc_sentencia_efecto_pkey PRIMARY KEY (id_efecto_sentencia);
+
+
+--
+-- TOC entry 5049 (class 2606 OID 22638)
+-- Name: tc_sentencia tc_sentencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_sentencia
+    ADD CONSTRAINT tc_sentencia_pkey PRIMARY KEY (id_tipo_sentencia);
+
+
+--
+-- TOC entry 5053 (class 2606 OID 22642)
+-- Name: tc_sexo tc_sexo_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_sexo
+    ADD CONSTRAINT tc_sexo_pkey PRIMARY KEY (id_sexo);
+
+
+--
+-- TOC entry 5055 (class 2606 OID 22644)
+-- Name: tc_sindicato tc_sindicato_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_sindicato
+    ADD CONSTRAINT tc_sindicato_pkey PRIMARY KEY (id_tipo_sindicato);
+
+
+--
+-- TOC entry 5057 (class 2606 OID 22646)
+-- Name: tc_susp_temp tc_susp_temp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_susp_temp
+    ADD CONSTRAINT tc_susp_temp_pkey PRIMARY KEY (id_tipo_suspension);
+
+
+--
+-- TOC entry 5059 (class 2606 OID 22648)
+-- Name: tc_term_colectiva tc_term_colectiva_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_term_colectiva
+    ADD CONSTRAINT tc_term_colectiva_pkey PRIMARY KEY (id_tipo_terminacion);
+
+
+--
+-- TOC entry 5061 (class 2606 OID 22650)
+-- Name: tc_tipo_audiencia tc_tipo_audiencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_tipo_audiencia
+    ADD CONSTRAINT tc_tipo_audiencia_pkey PRIMARY KEY (id_tipo_audiencia);
+
+
+--
+-- TOC entry 5063 (class 2606 OID 22652)
+-- Name: tc_violacion_dh tc_violacion_dh_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tc_violacion_dh
+    ADD CONSTRAINT tc_violacion_dh_pkey PRIMARY KEY (id_tipo_viol_dh);
+
+
+--
+-- TOC entry 5067 (class 2606 OID 22654)
+-- Name: tr_actor tr_actor_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT tr_actor_pkey PRIMARY KEY (id_actor);
+
+
+--
+-- TOC entry 5069 (class 2606 OID 22656)
+-- Name: tr_audiencia tr_audiencia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_audiencia
+    ADD CONSTRAINT tr_audiencia_pkey PRIMARY KEY (id_audiencia);
+
+
+--
+-- TOC entry 5071 (class 2606 OID 22658)
+-- Name: tr_demandado tr_demandado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_demandado
+    ADD CONSTRAINT tr_demandado_pkey PRIMARY KEY (id_demandado);
+
+
+--
+-- TOC entry 5097 (class 2606 OID 22664)
+-- Name: tr_expediente tr_expediente_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT tr_expediente_pkey PRIMARY KEY (id_expediente);
+
+
+--
+-- TOC entry 5099 (class 2606 OID 22666)
+-- Name: tr_general tr_general_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_general
+    ADD CONSTRAINT tr_general_pkey PRIMARY KEY (id_general);
+
+
+--
+-- TOC entry 5101 (class 2606 OID 22668)
+-- Name: tr_organoj tr_organoj_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_organoj
+    ADD CONSTRAINT tr_organoj_pkey PRIMARY KEY (id_organoj);
+
+
+--
+-- TOC entry 5065 (class 2606 OID 22670)
+-- Name: tr_usuarios tr_usuarios_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_usuarios
+    ADD CONSTRAINT tr_usuarios_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 5102 (class 2606 OID 22699)
+-- Name: tr_actor actor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT actor FOREIGN KEY (id_tipo_actor) REFERENCES public.tc_actor(id_tipo_actor) NOT VALID;
+
+
+--
+-- TOC entry 5118 (class 2606 OID 23009)
+-- Name: tr_exp_actor actor1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_actor
+    ADD CONSTRAINT actor1 FOREIGN KEY (actores_id) REFERENCES public.tr_actor(id_actor) NOT VALID;
+
+
+--
+-- TOC entry 5119 (class 2606 OID 23014)
+-- Name: tr_exp_actor actor2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_actor
+    ADD CONSTRAINT actor2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5141 (class 2606 OID 22794)
+-- Name: tr_expediente asunto; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT asunto FOREIGN KEY (id_tipo_asunto) REFERENCES public.tc_asunto(id_tipo_asunto) NOT VALID;
+
+
+--
+-- TOC entry 5111 (class 2606 OID 22744)
+-- Name: tr_audiencia audiencia; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_audiencia
+    ADD CONSTRAINT audiencia FOREIGN KEY (id_tipo_audiencia) REFERENCES public.tc_tipo_audiencia(id_tipo_audiencia) NOT VALID;
+
+
+--
+-- TOC entry 5142 (class 2606 OID 22834)
+-- Name: tr_expediente causas; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT causas FOREIGN KEY (id_causa_imp_adm_demanda) REFERENCES public.tc_causas_impedim_demanda(id_causas_imp_dem) NOT VALID;
+
+
+--
+-- TOC entry 5120 (class 2606 OID 22904)
+-- Name: tr_exp_circunst cir1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_circunst
+    ADD CONSTRAINT cir1 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5121 (class 2606 OID 22899)
+-- Name: tr_exp_circunst cir2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_circunst
+    ADD CONSTRAINT cir2 FOREIGN KEY (id_circuns_mot_conf) REFERENCES public.tc_motivo_conflicto_circunst(id_circuns_mot_conf) NOT VALID;
+
+
+--
+-- TOC entry 5161 (class 2606 OID 22884)
+-- Name: tr_organoj circunscripcion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_organoj
+    ADD CONSTRAINT circunscripcion FOREIGN KEY (id_circunscripcion) REFERENCES public.tc_circunscripcion(id_circunscripcion) NOT VALID;
+
+
+--
+-- TOC entry 5122 (class 2606 OID 22909)
+-- Name: tr_exp_concepto_reclam concepto1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_concepto_reclam
+    ADD CONSTRAINT concepto1 FOREIGN KEY (id_concepto_reclam) REFERENCES public.tc_concepto_reclamado(id_concepto_reclam) NOT VALID;
+
+
+--
+-- TOC entry 5123 (class 2606 OID 22914)
+-- Name: tr_exp_concepto_reclam concepto2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_concepto_reclam
+    ADD CONSTRAINT concepto2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5126 (class 2606 OID 22934)
+-- Name: tr_exp_motivo_conf conflicto; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_conf
+    ADD CONSTRAINT conflicto FOREIGN KEY (id_motivo_conflicto) REFERENCES public.tc_motivo_conflicto(id_motivo_conflicto) NOT VALID;
+
+
+--
+-- TOC entry 5127 (class 2606 OID 22939)
+-- Name: tr_exp_motivo_conf conflicto2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_conf
+    ADD CONSTRAINT conflicto2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5143 (class 2606 OID 22804)
+-- Name: tr_expediente contrato; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT contrato FOREIGN KEY (id_tipo_contrato) REFERENCES public.tc_contrato(id_tipo_contrato) NOT VALID;
+
+
+--
+-- TOC entry 5103 (class 2606 OID 22704)
+-- Name: tr_actor defensa; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT defensa FOREIGN KEY (id_defensa) REFERENCES public.tc_defensa(id_defensa) NOT VALID;
+
+
+--
+-- TOC entry 5113 (class 2606 OID 22754)
+-- Name: tr_demandado demandado; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_demandado
+    ADD CONSTRAINT demandado FOREIGN KEY (id_tipo_demandado) REFERENCES public.tc_demandado(id_tipo_demandado) NOT VALID;
+
+
+--
+-- TOC entry 5124 (class 2606 OID 22919)
+-- Name: tr_exp_efectos_sentencia efectos1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_efectos_sentencia
+    ADD CONSTRAINT efectos1 FOREIGN KEY (id_efecto_sentencia) REFERENCES public.tc_sentencia_efecto(id_efecto_sentencia) NOT VALID;
+
+
+--
+-- TOC entry 5125 (class 2606 OID 22924)
+-- Name: tr_exp_efectos_sentencia efectos2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_efectos_sentencia
+    ADD CONSTRAINT efectos2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5104 (class 2606 OID 22739)
+-- Name: tr_actor entidadmunicipio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT entidadmunicipio FOREIGN KEY (id_ent_mpio) REFERENCES public.tc_entidad_mpio(id_ent_mpio) NOT VALID;
+
+
+--
+-- TOC entry 5114 (class 2606 OID 22774)
+-- Name: tr_demandado entidadmunicipio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_demandado
+    ADD CONSTRAINT entidadmunicipio FOREIGN KEY (id_ent_mpio) REFERENCES public.tc_entidad_mpio(id_ent_mpio) NOT VALID;
+
+
+--
+-- TOC entry 5144 (class 2606 OID 22814)
+-- Name: tr_expediente entidadmunicipio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT entidadmunicipio FOREIGN KEY (id_ent_mpio) REFERENCES public.tc_entidad_mpio(id_ent_mpio) NOT VALID;
+
+
+--
+-- TOC entry 5162 (class 2606 OID 22879)
+-- Name: tr_organoj entidadmunicipio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_organoj
+    ADD CONSTRAINT entidadmunicipio FOREIGN KEY (id_ent_mpio) REFERENCES public.tc_entidad_mpio(id_ent_mpio) NOT VALID;
+
+
+--
+-- TOC entry 5145 (class 2606 OID 22829)
+-- Name: tr_expediente estatusdemanda; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT estatusdemanda FOREIGN KEY (id_estatus_demanda) REFERENCES public.tc_estatus_demanda(id_estatus_demanda) NOT VALID;
+
+
+--
+-- TOC entry 5146 (class 2606 OID 22849)
+-- Name: tr_expediente estatusexpediente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT estatusexpediente FOREIGN KEY (id_estatus_exped) REFERENCES public.tc_estatus_expediente(id_estatus_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5147 (class 2606 OID 22844)
+-- Name: tr_expediente existencia; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT existencia FOREIGN KEY (id_huelga_existencia) REFERENCES public.tc_huelga_existencia(id_huelga_exist) NOT VALID;
+
+
+--
+-- TOC entry 5112 (class 2606 OID 22749)
+-- Name: tr_audiencia expediente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_audiencia
+    ADD CONSTRAINT expediente FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5148 (class 2606 OID 22779)
+-- Name: tr_expediente expediente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT expediente FOREIGN KEY (id_tipo_expediente) REFERENCES public.tc_procedimiento(id_tipo_procedimiento) NOT VALID;
+
+
+--
+-- TOC entry 5149 (class 2606 OID 22859)
+-- Name: tr_expediente faseconclusion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT faseconclusion FOREIGN KEY (id_fase_concl_ejec) REFERENCES public.tc_fase_conclusion_ejecu(id_fase_concl_ejec) NOT VALID;
+
+
+--
+-- TOC entry 5150 (class 2606 OID 22854)
+-- Name: tr_expediente fasesolucion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT fasesolucion FOREIGN KEY (id_fase_sol_exped) REFERENCES public.tc_fase_solucion_exp(id_fase_solucion) NOT VALID;
+
+
+--
+-- TOC entry 5151 (class 2606 OID 22864)
+-- Name: tr_expediente formasolucion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT formasolucion FOREIGN KEY (id_forma_solucion) REFERENCES public.tc_forma_solucion(id_forma_solucion) NOT VALID;
+
+
+--
+-- TOC entry 5128 (class 2606 OID 22944)
+-- Name: tr_exp_motivo_huelga huelga; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_huelga
+    ADD CONSTRAINT huelga FOREIGN KEY (id_huelga_motivo) REFERENCES public.tc_motivo_huelga(id_huelga_motivo) NOT VALID;
+
+
+--
+-- TOC entry 5129 (class 2606 OID 22949)
+-- Name: tr_exp_motivo_huelga huelga2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_huelga
+    ADD CONSTRAINT huelga2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5152 (class 2606 OID 22789)
+-- Name: tr_expediente incidente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT incidente FOREIGN KEY (id_tipo_incidente) REFERENCES public.tc_incidente(id_tipo_incidente_) NOT VALID;
+
+
+--
+-- TOC entry 5153 (class 2606 OID 22819)
+-- Name: tr_expediente incompetencia; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT incompetencia FOREIGN KEY (id_tipo_incompetencia) REFERENCES public.tc_incompetencia(id_tipo_incompetencia) NOT VALID;
+
+
+--
+-- TOC entry 5105 (class 2606 OID 22719)
+-- Name: tr_actor jornada; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT jornada FOREIGN KEY (id_jornada) REFERENCES public.tc_jornada(id_jornada) NOT VALID;
+
+
+--
+-- TOC entry 5163 (class 2606 OID 22889)
+-- Name: tr_organoj jurisdiccion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_organoj
+    ADD CONSTRAINT jurisdiccion FOREIGN KEY (id_jurisdiccion) REFERENCES public.tc_jurisdiccion(id_jurisdiccion) NOT VALID;
+
+
+--
+-- TOC entry 5154 (class 2606 OID 22839)
+-- Name: tr_expediente licitud; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT licitud FOREIGN KEY (id_huelga_licitud) REFERENCES public.tc_huelga_licitud(id_huelga_licitud) NOT VALID;
+
+
+--
+-- TOC entry 5155 (class 2606 OID 22799)
+-- Name: tr_expediente naturaleza; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT naturaleza FOREIGN KEY (id_nat_conflicto) REFERENCES public.tc_nat_conflicto(id_nat_conflicto) NOT VALID;
+
+
+--
+-- TOC entry 5106 (class 2606 OID 22714)
+-- Name: tr_actor ocupacion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT ocupacion FOREIGN KEY (id_ocupacion) REFERENCES public.tc_ocupacion(id_ocupacion) NOT VALID;
+
+
+--
+-- TOC entry 5107 (class 2606 OID 22729)
+-- Name: tr_actor organizacion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT organizacion FOREIGN KEY (id_org_obr) REFERENCES public.tc_org_obr(id_org_obr) NOT VALID;
+
+
+--
+-- TOC entry 5115 (class 2606 OID 22764)
+-- Name: tr_demandado organizacion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_demandado
+    ADD CONSTRAINT organizacion FOREIGN KEY (id_org_obr) REFERENCES public.tc_org_obr(id_org_obr) NOT VALID;
+
+
+--
+-- TOC entry 5156 (class 2606 OID 22784)
+-- Name: tr_expediente organo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT organo FOREIGN KEY (id_organoj) REFERENCES public.tr_organoj(id_organoj) NOT VALID;
+
+
+--
+-- TOC entry 5160 (class 2606 OID 22874)
+-- Name: tr_general organo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_general
+    ADD CONSTRAINT organo FOREIGN KEY (id_organoj) REFERENCES public.tr_organoj(id_organoj) NOT VALID;
+
+
+--
+-- TOC entry 5108 (class 2606 OID 22734)
+-- Name: tr_actor patron; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT patron FOREIGN KEY (id_tipo_patron) REFERENCES public.tc_patron(id_tipo_patron) NOT VALID;
+
+
+--
+-- TOC entry 5116 (class 2606 OID 22769)
+-- Name: tr_demandado patron; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_demandado
+    ADD CONSTRAINT patron FOREIGN KEY (id_tipo_patron) REFERENCES public.tc_patron(id_tipo_patron) NOT VALID;
+
+
+--
+-- TOC entry 5132 (class 2606 OID 22964)
+-- Name: tr_exp_prestacion prestacion; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_prestacion
+    ADD CONSTRAINT prestacion FOREIGN KEY (id_prestacion) REFERENCES public.tc_prestacion(id_prestacion) NOT VALID;
+
+
+--
+-- TOC entry 5133 (class 2606 OID 22969)
+-- Name: tr_exp_prestacion prestacion2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_prestacion
+    ADD CONSTRAINT prestacion2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5157 (class 2606 OID 22824)
+-- Name: tr_expediente promovente; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT promovente FOREIGN KEY (id_promovente) REFERENCES public.tc_promovente(id_promovente) NOT VALID;
+
+
+--
+-- TOC entry 5158 (class 2606 OID 22809)
+-- Name: tr_expediente sectorsubsector; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT sectorsubsector FOREIGN KEY (id_sector_sbtor) REFERENCES public.tc_sector_sbstor(id_sector_sbstor) NOT VALID;
+
+
+--
+-- TOC entry 5159 (class 2606 OID 22869)
+-- Name: tr_expediente sentencia; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_expediente
+    ADD CONSTRAINT sentencia FOREIGN KEY (id_tipo_sentencia) REFERENCES public.tc_sentencia(id_tipo_sentencia) NOT VALID;
+
+
+--
+-- TOC entry 5109 (class 2606 OID 22709)
+-- Name: tr_actor sexo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT sexo FOREIGN KEY (id_sexo) REFERENCES public.tc_sexo(id_sexo) NOT VALID;
+
+
+--
+-- TOC entry 5110 (class 2606 OID 22724)
+-- Name: tr_actor sindicato; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_actor
+    ADD CONSTRAINT sindicato FOREIGN KEY (id_tipo_sindicato) REFERENCES public.tc_sindicato(id_tipo_sindicato) NOT VALID;
+
+
+--
+-- TOC entry 5117 (class 2606 OID 22759)
+-- Name: tr_demandado sindicato; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_demandado
+    ADD CONSTRAINT sindicato FOREIGN KEY (id_tipo_sindicato) REFERENCES public.tc_sindicato(id_tipo_sindicato) NOT VALID;
+
+
+--
+-- TOC entry 5130 (class 2606 OID 22954)
+-- Name: tr_exp_motivo_solic solic1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_solic
+    ADD CONSTRAINT solic1 FOREIGN KEY (id_motivo_sol_promo) REFERENCES public.tc_motivo_solic_prom(id_motivo_sol_promo) NOT VALID;
+
+
+--
+-- TOC entry 5131 (class 2606 OID 22959)
+-- Name: tr_exp_motivo_solic solic2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_motivo_solic
+    ADD CONSTRAINT solic2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5134 (class 2606 OID 22979)
+-- Name: tr_exp_suspension suspencion2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_suspension
+    ADD CONSTRAINT suspencion2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5135 (class 2606 OID 22974)
+-- Name: tr_exp_suspension suspoension1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_suspension
+    ADD CONSTRAINT suspoension1 FOREIGN KEY (id_tipo_suspension) REFERENCES public.tc_susp_temp(id_tipo_suspension) NOT VALID;
+
+
+--
+-- TOC entry 5136 (class 2606 OID 22989)
+-- Name: tr_exp_terminacion term1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_terminacion
+    ADD CONSTRAINT term1 FOREIGN KEY (id_tipo_terminacion) REFERENCES public.tc_term_colectiva(id_tipo_terminacion) NOT VALID;
+
+
+--
+-- TOC entry 5137 (class 2606 OID 22994)
+-- Name: tr_exp_terminacion term2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_terminacion
+    ADD CONSTRAINT term2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+--
+-- TOC entry 5140 (class 2606 OID 23019)
+-- Name: tr_exped_demandado tr_exped_demandado_id_demandado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exped_demandado
+    ADD CONSTRAINT tr_exped_demandado_id_demandado_fkey FOREIGN KEY (id_demandado) REFERENCES public.tr_demandado(id_demandado) NOT VALID;
+
+
+--
+-- TOC entry 5138 (class 2606 OID 22999)
+-- Name: tr_exp_violacion viol1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_violacion
+    ADD CONSTRAINT viol1 FOREIGN KEY (id_tipo_viol_dh) REFERENCES public.tc_violacion_dh(id_tipo_viol_dh) NOT VALID;
+
+
+--
+-- TOC entry 5139 (class 2606 OID 23004)
+-- Name: tr_exp_violacion viol2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.tr_exp_violacion
+    ADD CONSTRAINT viol2 FOREIGN KEY (id_expediente) REFERENCES public.tr_expediente(id_expediente) NOT VALID;
+
+
+-- Completed on 2025-07-25 15:09:38
 
 --
 -- PostgreSQL database dump complete
