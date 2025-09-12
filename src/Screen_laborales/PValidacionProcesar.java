@@ -440,7 +440,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                    Valores();
                    try{
                        carga.setVisible(true);
-                       File sqlVirgen = new File("src/sql/Base_virgen_2_27022025 1.sql");
+                       File sqlVirgen = new File("src/sql/base_inicial_ralabe_v3.00 1.sql");
                        File sqlVirgenTemporal  = new File("src/sql/Base_virgen_2_27022025 1_temporal.sql");
                        Files.copy(sqlVirgen.toPath(), sqlVirgenTemporal.toPath(), StandardCopyOption.REPLACE_EXISTING);
                        if(!cveEntidad.equals("")  && !periodo.equals("")){
@@ -605,7 +605,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                    Valores();
                    try{
                        carga.setVisible(true);
-                       File sqlVirgen = new File("src/sql/Base_virgen_2_27022025 1.sql");
+                       File sqlVirgen = new File("src/sql/base_inicial_ralabe_v3.00 1.sql");
                        File sqlVirgenTemporal  = new File("src/sql/Base_virgen_2_27022025 1_temporal.sql");
                        Files.copy(sqlVirgen.toPath(), sqlVirgenTemporal.toPath(), StandardCopyOption.REPLACE_EXISTING);
                        if(!clavOrgano.equals("")  && !periodo.equals("")){
@@ -774,7 +774,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                    Valores();
                    try{
                        carga.setVisible(true);
-                       File sqlVirgen = new File("src/sql/Base_virgen_2_27022025 1.sql");
+                       File sqlVirgen = new File("src/sql/base_inicial_ralabe_v3.00 1.sql");
                        File sqlVirgenTemporal  = new File("src/sql/Base_virgen_2_27022025 1_temporal.sql");
                        Files.copy(sqlVirgen.toPath(), sqlVirgenTemporal.toPath(), StandardCopyOption.REPLACE_EXISTING);
                        if(!clavOrgano.equals("")){
