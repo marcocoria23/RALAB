@@ -619,6 +619,44 @@ public ArrayList Estatus_Demanda_NoIdentificada(){
  }
 
 
+/* EN PROCESO O PREVENCION */
+
+ //Favor de verificar el campo Estatus_demanda, ya que la Fecha de Apertura del Expediente (FECHA_APERTURA_EXPEDIENTE) excede el plazo máximo permitido de 60 días (2 meses).
+public ArrayList Estatus_Demanda_EnPrevenProceso(){
+      conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT \n" +
+"    CLAVE_ORGANO,\n" +
+"    EXPEDIENTE_CLAVE,\n" +
+"    FECHA_APERTURA_EXPEDIENTE,\n" +
+"    DECODE(ESTATUS_DEMANDA, '5', 'En trámite o prevención') AS ESTATUS_DEMANDA,\n" +
+"    REPLACE(COMENTARIOS, ',', '') AS COMENTARIOS,\n" +
+"    PERIODO\n" +
+"FROM V3_TR_ORDINARIOJL  \n" +
+"WHERE ESTATUS_DEMANDA = 5\n" +
+"  AND FECHA_APERTURA_EXPEDIENTE < ADD_MONTHS(SYSDATE, -2)\n" +
+"  AND (\n" +
+"        (SUBSTR(CLAVE_ORGANO, 0, 2) = '"+PValidacion.clave_entidad+"' \n" +
+"         AND PERIODO = '"+PValidacion.periodo+"')\n" +
+"        OR (CLAVE_ORGANO = '"+PValidacion.clave_organo+"' AND PERIODO = '"+PValidacion.periodo+"')\n" +
+"        )"; 
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("EXPEDIENTE_CLAVE"),
+                  resul.getString("ESTATUS_DEMANDA")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(V3Ordinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
 
 
 //ESTATUS DEL EXPEDIENTE = EN PROCESO DE RESOLUCION APARTIR DE FORMA_SOLUCIONFE NO DEBE DE CONTESTARSE
