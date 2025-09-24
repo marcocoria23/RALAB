@@ -1,4 +1,3 @@
---
 -- PostgreSQL database dump
 --
 
@@ -2496,9 +2495,6 @@ INSERT INTO public.tc_circunscripcion VALUES (2, 'Distrito judicial');
 INSERT INTO public.tc_circunscripcion VALUES (3, 'Partido judicial');
 INSERT INTO public.tc_circunscripcion VALUES (4, 'Otra circunscripción (especifique)');
 INSERT INTO public.tc_circunscripcion VALUES (-1, 'No identificado');
-INSERT INTO public.tc_circunscripcion VALUES (5, 'CIRV');
-INSERT INTO public.tc_circunscripcion VALUES (6, 'HRTHRTH');
-INSERT INTO public.tc_circunscripcion VALUES (7, 'NNNNNN');
 
 
 --
@@ -2513,23 +2509,10 @@ INSERT INTO public.tc_concepto_reclamado VALUES (3, 'Reinstalación');
 INSERT INTO public.tc_concepto_reclamado VALUES (4, 'Salario retenido');
 INSERT INTO public.tc_concepto_reclamado VALUES (5, 'Aumento de salario');
 INSERT INTO public.tc_concepto_reclamado VALUES (6, 'Derecho de ascenso');
-INSERT INTO public.tc_concepto_reclamado VALUES (7, 'Derecho de preferencia ');
+INSERT INTO public.tc_concepto_reclamado VALUES (7, 'Derecho de preferencia');
 INSERT INTO public.tc_concepto_reclamado VALUES (8, 'Derecho de antigüedad');
 INSERT INTO public.tc_concepto_reclamado VALUES (9, 'Otro concepto reclamado (especifique)');
 INSERT INTO public.tc_concepto_reclamado VALUES (-1, 'No identificado');
-INSERT INTO public.tc_concepto_reclamado VALUES (14, 'DIECINUEVE');
-INSERT INTO public.tc_concepto_reclamado VALUES (15, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (16, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (17, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (18, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (19, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (20, 'DISMINUCIONSALARIAL');
-INSERT INTO public.tc_concepto_reclamado VALUES (21, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (22, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (23, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (24, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (25, '');
-INSERT INTO public.tc_concepto_reclamado VALUES (26, '');
 
 
 --
@@ -5148,7 +5131,7 @@ INSERT INTO public.tc_estatus_expediente VALUES (-1, 'No identificado');
 
 INSERT INTO public.tc_fase_conclusion_ejecu VALUES (1, 'Requerimiento de pago y embargo');
 INSERT INTO public.tc_fase_conclusion_ejecu VALUES (2, 'Remate');
-INSERT INTO public.tc_fase_conclusion_ejecu VALUES (-1, 'No identificado ');
+INSERT INTO public.tc_fase_conclusion_ejecu VALUES (-1, 'No identificado');
 
 
 --
@@ -5273,22 +5256,23 @@ INSERT INTO public.tc_motivo_conflicto VALUES (8, 'Otro motivo del conflicto
 (especifique)
 ');
 INSERT INTO public.tc_motivo_conflicto VALUES (9, 'Jornada inhumana por lo notoriamente excesiva, dada la índole del trabajo');
-INSERT INTO public.tc_motivo_conflicto VALUES (10, 'Contrato de trabajo para  la prestación de los servicios de trabajadores mexicanos fuera de la República ');
+INSERT INTO public.tc_motivo_conflicto VALUES (10, 'Contrato de trabajo para la prestación de los servicios de trabajadores mexicanos fuera de la República');
+                                                    
 INSERT INTO public.tc_motivo_conflicto VALUES (11, 'Habitación en arrendamiento al trabajador');
 INSERT INTO public.tc_motivo_conflicto VALUES (12, 'Ejercitar acciones individuales y colectivas que deriven de la obligación de capacitación o adiestramiento');
 INSERT INTO public.tc_motivo_conflicto VALUES (13, 'Determinación de la antigüedad de los trabajadores de planta y/o suplentes');
 INSERT INTO public.tc_motivo_conflicto VALUES (14, 'Derecho de prima de antigüedad de trabajadores de planta');
-INSERT INTO public.tc_motivo_conflicto VALUES (15, 'Obligación especial patronal de repatriar o trasladar al lugar convenido a los trabajadores ');
+INSERT INTO public.tc_motivo_conflicto VALUES (15, 'Obligación especial patronal de repatriar o trasladar al lugar convenido a los trabajadores');
 INSERT INTO public.tc_motivo_conflicto VALUES (16, 'Designación de beneficiarios del trabajador fallecido con independencia de la causa de deceso');
-INSERT INTO public.tc_motivo_conflicto VALUES (17, 'Designación de beneficiarios del trabajador desaparecido por un acto delincuencial  ');
+INSERT INTO public.tc_motivo_conflicto VALUES (17, 'Designación de beneficiarios del trabajador desaparecido por un acto delincuencial');
 INSERT INTO public.tc_motivo_conflicto VALUES (18, 'Terminación de la relación laboral por perdida por apresamiento o siniestro del buque');
-INSERT INTO public.tc_motivo_conflicto VALUES (19, 'Convenio de trabajos encaminados a la recuperación de los restos del buque o de la carga ');
-INSERT INTO public.tc_motivo_conflicto VALUES (20, 'Obligación especial patronal del pago a los tripulantes por gastos de traslados o  repatriación al lugar de contratación  ');
-INSERT INTO public.tc_motivo_conflicto VALUES (21, 'Determinación de indemnización por riesgos de trabajo ');
-INSERT INTO public.tc_motivo_conflicto VALUES (22, 'Pago de indemnización en los casos de muerte o desaparición derivada de actos delincuenciales o por riesgo de trabajo ');
+INSERT INTO public.tc_motivo_conflicto VALUES (19, 'Convenio de trabajos encaminados a la recuperación de los restos del buque o de la carga');
+INSERT INTO public.tc_motivo_conflicto VALUES (20, 'Obligación especial patronal del pago a los tripulantes por gastos de traslados o  repatriación al lugar de contratación');
+INSERT INTO public.tc_motivo_conflicto VALUES (21, 'Determinación de indemnización por riesgos de trabajo');
+INSERT INTO public.tc_motivo_conflicto VALUES (22, 'Pago de indemnización en los casos de muerte o desaparición derivada de actos delincuenciales o por riesgo de trabajo');
 INSERT INTO public.tc_motivo_conflicto VALUES (23, 'Desacuerdo de la designación de los médicos de la empresa');
 INSERT INTO public.tc_motivo_conflicto VALUES (24, 'Cobro de prestaciones que no excedan el importe de 3 meses de salarios');
-INSERT INTO public.tc_motivo_conflicto VALUES (25, 'Conflicto en materia de seguridad social  ');
+INSERT INTO public.tc_motivo_conflicto VALUES (25, 'Conflicto en materia de seguridad social');
 INSERT INTO public.tc_motivo_conflicto VALUES (26, 'Otro motivo del conflicto (especifique)');
 INSERT INTO public.tc_motivo_conflicto VALUES (27, 'Declaración de la pérdida de la mayoría de los trabajadores');
 INSERT INTO public.tc_motivo_conflicto VALUES (28, 'Suspensión temporal de las relaciones de trabajo');
@@ -5304,7 +5288,7 @@ INSERT INTO public.tc_motivo_conflicto VALUES (37, 'Modificación de condiciones
 INSERT INTO public.tc_motivo_conflicto VALUES (38, 'Implantación de nuevas condiciones de trabajo');
 INSERT INTO public.tc_motivo_conflicto VALUES (39, 'Suspensión temporal de las relaciones colectivas de trabajo');
 INSERT INTO public.tc_motivo_conflicto VALUES (40, 'Terminación colectiva de las relaciones colectivas de trabajo');
-INSERT INTO public.tc_motivo_conflicto VALUES (41, 'Otro motivo del conflicto colectivo de naturaleza económica (especifique)');
+INSERT INTO public.tc_motivo_conflicto VALUES (41, 'Otro motivo del conflicto colectivo de naturaleza económica (especifique)');                                                    
 INSERT INTO public.tc_motivo_conflicto VALUES (-1, 'No identificado');
 
 
@@ -6384,7 +6368,7 @@ INSERT INTO public.tc_violacion_dh VALUES (-1, 'No identificado');
 -- Data for Name: tr_usuarios; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (1, 'XAXX010101000', '$2a$10$Dj8K899YX22Qm6KA5z7FUOaZpZvUeygQDP.08Ij3XX9uqZU9zcWCK', 2, '29-08-2025 10:13:19', '', 'ADMINISTRADOR', 'ADMIN', NULL, NULL, '', '', 'XAXX010101000','3.00','3.00' );
+INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (1, 'XAXX010101000', '$2a$10$Dj8K899YX22Qm6KA5z7FUOaZpZvUeygQDP.08Ij3XX9uqZU9zcWCK', 2, '18-09-2025 12:00:00', '', 'ADMINISTRADOR', 'ADMIN', NULL, NULL, '', '', 'XAXX010101000','4.0.0','4.0.0' );
 
 
 --
