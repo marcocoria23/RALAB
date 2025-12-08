@@ -7,6 +7,7 @@ import LeerQuery.QueryRalabDes;
 import LeerQuery.beans.TMP_TR_ACTOR;
 import LeerQuery.beans.TMP_TR_AUDIENCIA;
 import LeerQuery.beans.TMP_TR_DEMANDADO;
+import LeerQuery.beans.TMP_TR_ESPECIFIQUE;
 import LeerQuery.beans.TMP_TR_EXPEDIENTES;
 import LeerQuery.beans.TMP_TR_EXP_ACTOR;
 import LeerQuery.beans.TMP_TR_EXP_CIRCUNST;
@@ -427,6 +428,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
         TMP_TR_EXP_MOTIVO_SOLIC   tmp_tr_exp_motivo_solic = new TMP_TR_EXP_MOTIVO_SOLIC();
         TMP_TR_EXP_ACTOR    tmp_tr_exp_actor  = new TMP_TR_EXP_ACTOR();
         TMP_TR_EXP_DEMANDADO   tmp_tr_exp_demandado = new TMP_TR_EXP_DEMANDADO();
+        TMP_TR_ESPECIFIQUE   tmp_tr_especifique = new TMP_TR_ESPECIFIQUE();
         procesando carga= new procesando();
         QueryRalabDes queryRalabDes  = new  QueryRalabDes();
         PConPerProcesar per = new PConPerProcesar();
@@ -519,6 +521,10 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                          ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado(cveEntidad, periodo , "");
                          if( !listaRegistrosExpDemandado.isEmpty() )
                          tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaRegistrosExpDemandado);
+                          //TR_ESPECIFIQUE
+                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique(cveEntidad, periodo , "");
+                         if( !listaRegistrosEspecifique.isEmpty() )
+                         tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                          queryRalabDes.merge_id_expediente(cveEntidad, "", periodo);
                          queryRalabDes.enable_tr_exp_pk_ralalb();   
                          int registrosObservaciones =  queryRalabDes.consultarRalabObservaciones(cveEntidad, "", periodo);
@@ -542,6 +548,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                                     queryLaboral.DBO_Tr_Exp_Motivo_Solic_Insert(cveEntidad, "" , periodo , sqlVirgenTemporal);
                                     queryLaboral.DBO_Tr_Exp_Actor_Inserts(cveEntidad, "" , periodo , sqlVirgenTemporal);
                                     queryLaboral.DBO_Tr_Exp_Demandado_Inserts(cveEntidad, "" , periodo , sqlVirgenTemporal);
+                                    queryLaboral.DBO_Tr_Especifique_Inserts(cveEntidad, "" , periodo , sqlVirgenTemporal);
                                     JFileChooser fileChooser = new JFileChooser();
                                     fileChooser.setDialogTitle("Guardar archivo de texto");
                                     String nombreArchivo = "MIG-DEFAULT LIBERADO.sql";
@@ -683,6 +690,9 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                          ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado("", periodo , clavOrgano);
                          if( !listaRegistrosExpDemandado.isEmpty() )
                          tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaRegistrosExpDemandado);
+                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique("", periodo , clavOrgano);
+                         if( !listaRegistrosEspecifique.isEmpty() )
+                         tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                             queryRalabDes.merge_id_expediente(null,  clavOrgano , periodo);
                          queryRalabDes.enable_tr_exp_pk_ralalb();   
                          int registrosObservaciones =  queryRalabDes.consultarRalabObservaciones("",  clavOrgano, periodo);
@@ -706,6 +716,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                              queryLaboral.DBO_Tr_Exp_Motivo_Solic_Insert("", clavOrgano , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Exp_Actor_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Exp_Demandado_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
+                             queryLaboral.DBO_Tr_Especifique_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
                              JFileChooser fileChooser = new JFileChooser();
                              fileChooser.setDialogTitle("Guardar archivo de texto");
                              String nombreArchivo = "MIG-DEFAULT LIBERADO.sql";
@@ -851,6 +862,10 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                          ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado("", "" , filtro );
                          if( !listaRegistrosExpDemandado.isEmpty() )
                          tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaRegistrosExpDemandado);
+                          //TR_ESPECIFIQUE
+                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique("", "" , filtro );
+                         if( !listaRegistrosEspecifique.isEmpty() )
+                         tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                          for(String clave : clavOrgano){
                               queryRalabDes.merge_id_expediente(null,  clave , null);
                          }
@@ -875,6 +890,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                              queryLaboral.DBO_Tr_Exp_Motivo_Solic_Insert("", filtro , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Exp_Actor_Inserts("", filtro , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Exp_Demandado_Inserts("", filtro , periodo , sqlVirgenTemporal);
+                             queryLaboral.DBO_Tr_Especifique_Inserts("", filtro , periodo , sqlVirgenTemporal);
                              JFileChooser fileChooser = new JFileChooser();
                              fileChooser.setDialogTitle("Guardar archivo de texto");
                              String nombreArchivo = "MIG-DEFAULT LIBERADO.sql";

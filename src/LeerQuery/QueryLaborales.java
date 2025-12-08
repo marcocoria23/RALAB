@@ -7556,7 +7556,784 @@ public class QueryLaborales {
         }
     }                 
            
-        
+
+              public ArrayList<ArrayList<String>> DBO_Tr_Especifique(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+        conexion = conexion.Conectar();
+        arrayList = new ArrayList<>();
+        String sql = "SELECT \n" +
+"\n" +
+"ID_REGISTRO.NEXTVAL AS ID_REGISTRO,\n" +
+"NEMONICO_CATALOGO,\n" +
+"ESPECIFIQUE,\n" +
+"ID_OTRO_ESPECIFIQUE,\n" +
+"CLAVE_EXPEDIENTE,\n" +
+"PROCEDIMIENTO,\n" +
+"ORGANO,\n" +
+"ID_ACT_DEM_AUD,\n" +
+"PERIODO\n" +
+"\n" +
+"FROM (\n" +
+"\n" +
+"/* V3_TR_CONTROL_EXPEDIENTEJL */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_CIRCUNSCRIPCION'          AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_CIRCUNS              AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  NULL                          AS CLAVE_EXPEDIENTE,\n" +
+"  'ORGANO'                      AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_CONTROL_EXPEDIENTEJL\n" +
+"WHERE CIRCUNS_ORG_JUR = 4\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_AUDIENCIASJL */\n" +
+"SELECT\n" +
+"  NULL                                                        AS ID_REGISTRO,\n" +
+"  'TC_AUDIENCIA'                                               AS NEMONICO_CATALOGO,\n" +
+"  ESP_OTRO_AUDIENCIA                                           AS ESPECIFIQUE,\n" +
+"  3                                                            AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE                                             AS CLAVE_EXPEDIENTE,\n" +
+"  'Audiencias'                                                 AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                                                 AS ORGANO,\n" +
+"  ID_AUDIENCIA                                                 AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_AUDIENCIASJL\n" +
+"WHERE COALESCE(\n" +
+"        POSTGRES_TIPO_AUDIENCIA(ORDINARIO_TA),\n" +
+"        POSTGRES_TIPO_AUDIENCIA(ESPECIAL_INDIVI_TA),\n" +
+"        POSTGRES_TIPO_AUDIENCIA(ESPECIAL_COLECT_TA),\n" +
+"        POSTGRES_TIPO_AUDIENCIA(HUELGA_TA),\n" +
+"        POSTGRES_TIPO_AUDIENCIA(COL_NATU_ECONOMICA_TA)\n" +
+"      ) = 3\n" +
+"  AND TIPO_PROCED <> 9\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_ORDINARIOJL - OTRO_ESP_CONFLICTO (TC_MOTIVO_CONFLICTO) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_CONFLICTO            AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Ordinario'                   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_ORDINARIOJL\n" +
+"WHERE OTRO_MOTIV_CONFLICTO = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_ORDINARIOJL - OTRO_ESP_DISCRIMI (TC_MOTIVO_CONFLICTO_CIRCUNST) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_MOTIVO_CONFLICTO_CIRCUNST' AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_DISCRIMI             AS ESPECIFIQUE,\n" +
+"  10                            AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Ordinario'                   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_ORDINARIOJL\n" +
+"WHERE OTRO_DISCRIMINACION = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_ORDINARIOJL - OTRO_ESP_RECLAMADO (TC_CONCEPTO_RECLAMADO) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_CONCEPTO_RECLAMADO'       AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_RECLAMADO            AS ESPECIFIQUE,\n" +
+"  9                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Ordinario'                   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_ORDINARIOJL\n" +
+"WHERE OTRO_CONCEPTO = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_ORDINARIOJL - OTRO_ESP_PRESTAC (TC_PRESTACION) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_PRESTACION'               AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_PRESTAC              AS ESPECIFIQUE,\n" +
+"  5                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Ordinario'                   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_ORDINARIOJL\n" +
+"WHERE OTRO_TIPO_PREST = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_ORDINARIOJL - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_INCOMP               AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Ordinario'                   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_ORDINARIOJL\n" +
+"WHERE TIPO_INCOMPETENCIA = 4\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_ORDINARIOJL - FORMA_SOLUCION (COALESCE of three) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
+"  COALESCE(OTRO_ESP_SOLUCIONFE, OTRO_ESP_SOLUCIONAP, OTRO_ESP_SOLUCIONAJ) AS ESPECIFIQUE,\n" +
+"  9                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Ordinario'                   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_ORDINARIOJL\n" +
+"WHERE COALESCE(\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONFE', FORMA_SOLUCIONFE),\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONAP', FORMA_SOLUCIONAP),\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONAJ', FORMA_SOLUCIONAJ)\n" +
+"      ) = 9\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_INDIVIDUALJL - OTRO_ESP_CONF (TC_MOTIVO_CONFLICTO) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_CONF                 AS ESPECIFIQUE,\n" +
+"  26                            AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Especial individual'         AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE OTRO_CONF = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_INDIVIDUALJL - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_INCOMP               AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Especial individual'         AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE TIPO_INCOMPETENCIA = 4\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_INDIVIDUALJL - FORMA_SOLUCION (coalesce 4 cols) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
+"  COALESCE(OTRO_ESP_SOLUCION_AD, OTRO_ESP_SOLUCION_TA, OTRO_ESP_SOLUCION_AP, OTRO_ESP_SOLUCION_AJ) AS ESPECIFIQUE,\n" +
+"  9                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Especial individual'         AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE COALESCE(\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AD', FORMA_SOLUCION_AD),\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_TA', FORMA_SOLUCION_TA),\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AP', FORMA_SOLUCION_AP),\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AJ', FORMA_SOLUCION_AJ)\n" +
+"      ) = 9\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECTIVOJL - OTRO_ESP_CONFLICTO (TC_MOTIVO_CONFLICTO) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_CONFLICTO            AS ESPECIFIQUE,\n" +
+"  36                            AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECTIVOJL\n" +
+"WHERE OTRO_CONFLICTO = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECTIVOJL - OTRO_ESP_COLECTIVA (TC_VIOLACION_DH) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_VIOLACION_DH'             AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_COLECTIVA            AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECTIVOJL\n" +
+"WHERE OTRO_COLECTIVA = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECTIVOJL - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_INCOMP               AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECTIVOJL\n" +
+"WHERE TIPO_INCOMPETENCIA = 4\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECTIVOJL - FORMA_SOLUCION (coalesce AD, AJ) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
+"  COALESCE(OTRO_ESP_SOLUCION_AD, OTRO_ESP_SOLUCION_AJ) AS ESPECIFIQUE,\n" +
+"  9                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECTIVOJL\n" +
+"WHERE COALESCE(\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AD', FORMA_SOLUCION_AD),\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AJ', FORMA_SOLUCION_AJ)\n" +
+"      ) = 9\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_HUELGAJL - ESPECIFIQUE_MOTIVO (TC_MOTIVO_HUELGA) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_MOTIVO_HUELGA'            AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_MOTIVO             AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Huelga'                      AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_HUELGAJL\n" +
+"WHERE OTRO_MOTIVO = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_HUELGAJL - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_INCOMP             AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Huelga'                      AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_HUELGAJL\n" +
+"WHERE TIPO_INCOMPETENCIA = 4\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_HUELGAJL - FORMA_SOLUCION (COALESCE of two) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
+"  COALESCE(ESPECIFI_FORMA_EMPLAZ, ESPECIFI_FORMA_HUELGA) AS ESPECIFIQUE,\n" +
+"  9                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Huelga'                      AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_HUELGAJL\n" +
+"WHERE COALESCE(\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_EMPLAZ', FORMA_SOLUCION_EMPLAZ),\n" +
+"        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_HUELGA', FORMA_SOLUCION_HUELGA)\n" +
+"      ) = 9\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECT_ECONOMJL - ESPECIFIQUE_ECONOM (TC_MOTIVO_CONFLICTO) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_ECONOM             AS ESPECIFIQUE,\n" +
+"  41                            AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECT_ECONOMJL\n" +
+"WHERE OTRO_MOTIVO_ECONOM = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECT_ECONOMJL - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_INCOMP             AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECT_ECONOMJL\n" +
+"WHERE TIPO_INCOMPETENCIA = 4\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECT_ECONOMJL - POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION',...) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_FORMA              AS ESPECIFIQUE,\n" +
+"  9                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECT_ECONOMJL\n" +
+"WHERE POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION', FORMA_SOLUCION) = 9\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_COLECT_ECONOMJL - ESPECIFIQUE_TIPO (TC_SENTENCIA_EFECTO) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_SENTENCIA_EFECTO'         AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_TIPO               AS ESPECIFIQUE,\n" +
+"  9                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_COLECT_ECONOMJL\n" +
+"WHERE OTRO_TIPO = 1\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PARAPROCESALJL - ESPECIFIQUE_MOTIVO (TC_MOTIVO_SOLIC_PROM) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_MOTIVO_SOLIC_PROM'        AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_MOTIVO             AS ESPECIFIQUE,\n" +
+"  19                            AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Paraprocesal o voluntario'   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PARAPROCESALJL\n" +
+"WHERE MOTIVO_SOLICITUD = 12\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PARAPROCESALJL - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_INCOMP             AS ESPECIFIQUE,\n" +
+"  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Paraprocesal o voluntario'   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PARAPROCESALJL\n" +
+"WHERE TIPO_INCOMPETENCIA = 4\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PARAPROCESALJL - ESPECIFIQUE_PROMOVENTE (TC_PROMOVENTE) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_PROMOVENTE'               AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE_PROMOVENTE         AS ESPECIFIQUE,\n" +
+"  5                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Paraprocesal o voluntario'   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PARAPROCESALJL\n" +
+"WHERE PROMOVENTE = 5\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PREF_CREDITOJL - ESPECIFIQUE (TC_PROMOVENTE) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_PROMOVENTE'               AS NEMONICO_CATALOGO,\n" +
+"  ESPECIFIQUE                     AS ESPECIFIQUE,\n" +
+"  5                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Preferencia de crédito'      AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  NULL                          AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PREF_CREDITOJL\n" +
+"WHERE PROMOVENTE = 5\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_ORDINARIOJL - OTRO_ESP_SINDICATO (TC_SINDICATO) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_SINDICATO            AS ESPECIFIQUE,\n" +
+"  6                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor ordinario'             AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+"WHERE TIPO_SINDICATO = 6\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_ORDINARIOJL - OTRO_ESP_OBRERA (TC_ORG_OBR) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_OBRERA               AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor ordinario'             AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+"WHERE NOMBRE_ORG_OBRERA = 8\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_COLECTIVOJL - TC_SINDICATO (Actor colectivo) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_SINDICATO            AS ESPECIFIQUE,\n" +
+"  6                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor colectivo'             AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  TO_NUMBER(ID_ACTOR)           AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_COLECTIVOJL\n" +
+"WHERE TIPO_SINDICATO = 6\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_COLECTIVOJL - TC_ORG_OBR (Actor colectivo) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_OBRERA               AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor colectivo'             AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  TO_NUMBER(ID_ACTOR)                      AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_COLECTIVOJL\n" +
+"WHERE NOMBRE_ORG_OBRERA = 8\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_HUELGAJL - TC_SINDICATO (Actor huelga) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_SINDICATO            AS ESPECIFIQUE,\n" +
+"  6                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor huelga'                AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  TO_NUMBER(ID_ACTOR)           AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_HUELGAJL\n" +
+"WHERE TIPO_SINDICATO = 6\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_HUELGAJL - TC_ORG_OBR (Actor huelga) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_OBRERA               AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor huelga'                AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  TO_NUMBER(ID_ACTOR)           AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_HUELGAJL\n" +
+"WHERE NOMBRE_ORG_OBRERA = 8\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_COLECT_ECONOMJL - TC_SINDICATO (Actor colectivo económico) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_SINDICATO            AS ESPECIFIQUE,\n" +
+"  6                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor colectivo económico'   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_COLECT_ECONOMJL\n" +
+"WHERE TIPO_SINDICATO = 6\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_ACT_COLECT_ECONOMJL - TC_ORG_OBR (Actor colectivo económico) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_OBRERA               AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Actor colectivo económico'   AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_ACT_COLECT_ECONOMJL\n" +
+"WHERE NOMBRE_ORG_OBRERA = 8\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_DEM_COLECTIVOJL - TC_SINDICATO (Demandado colectivo) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_SINDICATO_DEM        AS ESPECIFIQUE,\n" +
+"  6                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Demandado colectivo'         AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+"WHERE TIPO_SINDICATO_DEM = 6\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_DEM_COLECTIVOJL - TC_ORG_OBR (Demandado colectivo) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_OBRERA_DEM           AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Demandado colectivo'         AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+"WHERE NOMBRE_ORG_OBRERA_DEM = 8\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_DEM_COLECT_ECONOMJL - TC_SINDICATO (Demandado colectivo económico) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_SINDICATO_DEM        AS ESPECIFIQUE,\n" +
+"  6                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Demandado colectivo económico' AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_DEM_COLECT_ECONOMJL\n" +
+"WHERE TIPO_SINDICATO_DEM = 6\n" +
+"\n" +
+"UNION ALL\n" +
+"\n" +
+"/* V3_TR_PART_DEM_COLECT_ECONOMJL - TC_ORG_OBR (Demandado colectivo económico) */\n" +
+"SELECT\n" +
+"  NULL                          AS ID_REGISTRO,\n" +
+"  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
+"  OTRO_ESP_OBRERA_DEM           AS ESPECIFIQUE,\n" +
+"  8                             AS ID_OTRO_ESPECIFIQUE,\n" +
+"  EXPEDIENTE_CLAVE              AS CLAVE_EXPEDIENTE,\n" +
+"  'Demandado colectivo económico' AS PROCEDIMIENTO,\n" +
+"  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
+"  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
+"  PERIODO\n" +
+"FROM V3_TR_PART_DEM_COLECT_ECONOMJL\n" +
+"WHERE NOMBRE_ORG_OBRERA_DEM = 8\n" +
+");";
+            try {
+            Statement stmt = conexion.getConexion().createStatement();
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+            consultaFiltro.append("  WHERE  ");
+            if(!cveEntidad.equals("") &&  cveOrgano == "" && !periodo.equals("") ){
+                consultaFiltro.append(" ORGANO  like  " ); 
+                consultaFiltro.append("'" + cveEntidad + "%' and " ); 
+                consultaFiltro.append("periodo = '" + periodo  + "' ;" ); 
+            }
+              if(!cveOrgano.equals("") &&  cveEntidad == "" && !periodo.equals("") ){
+                   consultaFiltro.append(" ORGANO =  " ); 
+                   consultaFiltro.append("'" + cveOrgano  + "' and " ); 
+                   consultaFiltro.append("periodo = '" + periodo  + "' ;" ); 
+            }
+              
+            if(!cveOrgano.equals("") &&  cveEntidad == "" && periodo.equals("") ){
+                 //      consultaFiltro.append(" CLAVE_ORGANO =  " ); 
+                       consultaFiltro.append(" organo  IN (" ); 
+                       consultaFiltro.append( cveOrgano + ")" ); 
+                  
+            }
+            resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            System.out.println(consultaFiltro.toString().replace(";", ""));
+                    while (resul.next()) {
+                        ArrayList<String> fila = new ArrayList<>();
+                        fila.add(resul.getString(1)); // Añadir la primera columna
+                        fila.add(resul.getString(2)); // Añadir la segunda columna
+                        fila.add(resul.getString(3)); // Añadir la tercera columna
+                        fila.add(resul.getString(4)); // Añadir la cuarta columna
+                        fila.add(resul.getString(5)); // Añadir la quinta columna
+                        fila.add(resul.getString(6)); // Añadir la sexta columna
+                        fila.add(resul.getString(7)); // Añadir la septima columna
+                        fila.add(resul.getString(8)); // Añadir la octava columna
+                        fila.add(resul.getString(9)); // Añadir la novena columna
+                        arrayList.add(fila); // Agregar la fila a la lista principal
+                    }
+                    
+            } catch (SQLException ex) {
+                Logger.getLogger(QueryLaborales.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error al leer la tabla Tr_Especifique" + ex);
+
+            } finally {
+                try {
+                    if (resul != null) {
+                        resul.close();
+                    }
+                    conexion.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+      
+        return arrayList;
+    }
+       
+       
+         public void DBO_Tr_Especifique_Inserts(String cveEntidad , String cveOrgano , String periodo , File sqlVirgen ) throws SQLException, IOException {
+                FileWriter file = new FileWriter(sqlVirgen, true);
+                  conexionDes = conexionDes.Conectar();
+                    String sql = "SELECT \n" +
+"\n" +
+"ID_REGISTRO,\n" +
+"NEMONICO_CATALOGO,\n" +
+"ESPECIFIQUE,\n" +
+"ID_OTRO_ESPECIFIQUE,\n" +
+"CLAVE_EXPEDIENTE,\n" +
+"PROCEDIMIENTO,\n" +
+"ORGANO,\n" +
+"ID_ACT_DEM_AUD\n" +
+"\n" +
+"FROM TR_ESPECIFIQUE; "; 
+          ResultSet rs = null;
+          Statement stmt  = null;
+        try{
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+            consultaFiltro.append("   where  ");
+            if(!cveEntidad.equals("") &&  cveOrgano == ""  && !periodo.equals("") ){
+                  consultaFiltro.append(" ORGANO  like  " ); 
+                  consultaFiltro.append("'" + cveEntidad + "%' and " ); 
+                  consultaFiltro.append("periodo = '" + periodo  + "'  ;" ); 
+             }
+             if(!cveOrgano.equals("") &&  cveEntidad == ""  && !periodo.equals("") ){
+                   consultaFiltro.append(" ORGANO =  " ); 
+                   consultaFiltro.append("'" + cveOrgano  + "' and " ); 
+                   consultaFiltro.append("periodo = '" + periodo  + "'  ;" ); 
+            }
+            if(!cveOrgano.equals("") &&  cveEntidad == "" && periodo.equals("") ){
+                 //      consultaFiltro.append(" CLAVE_ORGANO =  " ); 
+                       consultaFiltro.append(" organo  IN (" ); 
+                       consultaFiltro.append( cveOrgano + ")" ); 
+                  
+            } 
+             stmt = conexionDes.getConexion().createStatement();
+             rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+                ResultSetMetaData metaData = rs.getMetaData();
+                int columnas = metaData.getColumnCount();
+                file.write("-- Datos exportados de " + "TR_ESPECIFIQUE" + "\n");
+                while (rs.next()) {
+                    StringBuilder insertQuery = new StringBuilder("INSERT INTO " + "public.TR_ESPECIFIQUE" + " (");
+                    // Agregar nombres de columnas
+                    for (int i = 1; i <= columnas; i++) {
+                        insertQuery.append(metaData.getColumnName(i));
+                        if (i < columnas) insertQuery.append(", ");
+                    }
+                    insertQuery.append("  ) VALUES (");
+                    for (int i = 1; i <= columnas; i++) {
+                        String valor = rs.getString(i);
+                        insertQuery.append(valor == null ? "NULL" : "'" + valor.replace("'", "''") + "'"); // Manejo de NULL y comillas
+                        if (i < columnas) insertQuery.append(", ");
+                    }
+                    insertQuery.append(" );\n");
+                    file.write(insertQuery.toString());
+                }
+              file.close();
+          
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        finally {
+             try {
+                    if (rs != null) {
+                        rs.close();
+                    }
+                    conexionDes.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+    }
           
         
         
