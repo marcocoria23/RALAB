@@ -1357,8 +1357,8 @@ public class QueryLaborales {
 "    COLONIA AS colonia,\n" +
 "    CP AS CP,\n" +
 "    POSTGRES_ID_ENT_MPIO(MUNICIPIO_CLAVE_EMPR) AS ID_ENT_MPIO,\n" +
-"    LATITUD_EMPR AS latitud,\n" +
-"    LONGITUD_EMPR AS longitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LATITUD_EMPR) AS latitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LONGITUD_EMPR) AS longitud,\n" +
 "    comentarios,\n" +
 "    PERIODO,\n" +
 "    -- Columna auxiliar\n" +
@@ -1413,8 +1413,8 @@ public class QueryLaborales {
 "    COLONIA AS colonia,\n" +
 "    CP AS CP, \n" +
 "    POSTGRES_ID_ENT_MPIO(MUNICIPIO_CLAVE_EMPR) AS ID_ENT_MPIO,\n" +
-"    LATITUD_EMPR AS latitud,\n" +
-"    LONGITUD_EMPR AS longitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LATITUD_EMPR) AS latitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LONGITUD_EMPR) AS longitud,\n" +
 "    comentarios,\n" +
 "    PERIODO,\n" +
 "    -- Columna auxiliar\n" +
@@ -1480,8 +1480,8 @@ public class QueryLaborales {
 "    COLONIA AS colonia,\n" +
 "    CP AS CP,\n" +
 "    POSTGRES_ID_ENT_MPIO(MUNICIPIO_CLAVE_EMPR) AS ID_ENT_MPIO,\n" +
-"    LATITUD_EMPR AS latitud,\n" +
-"    LONGITUD_EMPR AS longitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LATITUD_EMPR) AS latitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LONGITUD_EMPR) AS longitud,\n" +
 "    comentarios,\n" +
 "    PERIODO,\n" +
 "    -- Columna auxiliar\n" +
@@ -1536,8 +1536,8 @@ public class QueryLaborales {
 "    COLONIA AS colonia,\n" +
 "    CP AS CP,\n" +
 "    POSTGRES_ID_ENT_MPIO(MUNICIPIO_CLAVE_EMPR) AS ID_ENT_MPIO,\n" +
-"    LATITUD_EMPR AS latitud,\n" +
-"    LONGITUD_EMPR AS longitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LATITUD_EMPR) AS latitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LONGITUD_EMPR) AS longitud,\n" +
 "    comentarios,\n" +
 "    PERIODO,\n" +
 "    -- Columna auxiliar\n" +
@@ -1604,8 +1604,8 @@ public class QueryLaborales {
 "    COLONIA AS colonia,\n" +
 "    CP AS CP,\n" +
 "    POSTGRES_ID_ENT_MPIO(MUNICIPIO_CLAVE_EMPR) AS ID_ENT_MPIO,\n" +
-"    LATITUD_EMPR AS latitud,\n" +
-"    LONGITUD_EMPR AS longitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LATITUD_EMPR) AS latitud,\n" +
+"    POSTGRES_MAP_COORDENADA(LONGITUD_EMPR) AS longitud,\n" +
 "    comentarios,\n" +
 "    PERIODO,\n" +
 "    -- Columna auxiliar\n" +
@@ -2012,8 +2012,8 @@ public class QueryLaborales {
             "    SEDE AS sede_organoj,  -- Columna en blanco\n" +
             "    POSTGRES_ID_ENT_MPIO(MUNICIPIO_CLAVE) AS id_ent_mpio,  -- \n" +
             "    COLONIA_NOMBRE AS colonia,  -- Columna en blanco\n" +
-            "    LATITUD_ORG AS latitud,  -- Columna en blanco\n" +
-            "    LONGITUD_ORG AS longitud,\n" +
+            "    POSTGRES_MAP_COORDENADA(LATITUD_ORG) AS latitud,  -- Columna en blanco\n" +
+            "    POSTGRES_MAP_COORDENADA(LONGITUD_ORG) AS longitud,\n" +
             "    POSTGRES_NI9(CIRCUNS_ORG_JUR) AS id_circunscripcion,\n" +
             "    POSTGRES_JURISDICCION(JURISDICCION) AS id_jurisdiccion,\n" +
             "    HORARIO  AS hr_atencion,\n" +
@@ -2640,8 +2640,8 @@ public class QueryLaborales {
             "    COLONIA AS colonia,\n" +
             "    CP AS CP,\n" +
             "    POSTGRES_id_ent_mpio(MUNICIPIO_CLAVE_EMPR) AS ID_ENT_MPIO,\n" +
-            "    LATITUD_EMPR AS latitud,\n" +
-            "    LONGITUD_EMPR AS longitud,\n" +
+            "    POSTGRES_MAP_COORDENADA(LATITUD_EMPR) AS latitud,\n" +
+            "    POSTGRES_MAP_COORDENADA(LONGITUD_EMPR) AS longitud,\n" +
             "    COMENTARIOS AS comentarios,\n" +
             "    PERIODO,\n" +
             "    'CO:' || \n" +
@@ -2782,8 +2782,8 @@ public class QueryLaborales {
             "    COLONIA AS colonia,\n" +
             "    CP AS CP,\n" +
             "    POSTGRES_id_ent_mpio(MUNICIPIO_CLAVE_EMPR) AS ID_ENT_MPIO, --> Ajuste para concatenar las claves\n" +
-            "    LATITUD_EMPR AS latitud,\n" +
-            "    LONGITUD_EMPR AS longitud,\n" +
+            "    POSTGRES_MAP_COORDENADA(LATITUD_EMPR) AS latitud,\n" +
+            "    POSTGRES_MAP_COORDENADA(LONGITUD_EMPR) AS longitud,\n" +
             "    COMENTARIOS AS comentarios,\n" +
             "    PERIODO,\n" +
             "    'CO:' || \n" +
