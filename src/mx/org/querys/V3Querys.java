@@ -70,9 +70,9 @@ public ArrayList PeriodoNEstatus(){
      public ArrayList Clave_organoNE(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select unique(CLAVE_ORGANO)asCLAVE_ORGANO from V3_TR_CONTROL_EXPEDIENTEJL\n" +
+      sql="select unique(CLAVE_ORGANO)as CLAVE_ORGANO from V3_TR_CONTROL_EXPEDIENTEJL\n" +
            "UNION\n" +
-           "select unique(CLAVE_ORGANO)CLAVE_ORGANO from V3_TMP_CONTROL_EXPEDIENTEJL ORDER BY 1";
+           "select unique(CLAVE_ORGANO) as CLAVE_ORGANO from V3_TMP_CONTROL_EXPEDIENTEJL ORDER BY 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
