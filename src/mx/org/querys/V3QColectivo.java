@@ -113,6 +113,35 @@ public ArrayList Año_Expe_ColectivoNE(){
     return Array;
  }
 
+    // La Fecha de apertura del expediente (FECHA_APERTURA_EXPEDIENTE) no debe ser menor al primero de enero del 2020.
+    public ArrayList ColectivoFechaAperturaMenor2020() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT \n" +
+"    CLAVE_ORGANO,\n" +
+"    EXPEDIENTE_CLAVE,\n" +
+"    TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY')FECHA_APERTURA_EXPEDIENTE\n" +
+"FROM V3_TR_COLECTIVOJL\n" +
+"WHERE FECHA_APERTURA_EXPEDIENTE < DATE '2020-01-01'\n" +
+"  AND MOD(EXTRACT(YEAR FROM FECHA_APERTURA_EXPEDIENTE), 100) <> 99\n" +
+"and  ((substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "'  and periodo='" + PValidacion.periodo + "' ) or  (clave_organo='" + PValidacion.clave_organo + "'  and periodo='" + PValidacion.periodo + "' ))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FECHA_APERTURA_EXPEDIENTE")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+
 public ArrayList FECHA_APERTURA_EXPEDIENTE_FUT(){
       conexion.Conectar();
       Array = new ArrayList();

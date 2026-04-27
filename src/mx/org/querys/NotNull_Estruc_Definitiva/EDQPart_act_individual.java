@@ -23,12 +23,12 @@ public class EDQPart_act_individual {
     String sql;
     ArrayList<String[]> Array;
     ResultSet resul;
-
+/*
     //Query de validacion para saber si Actor y Demandado no se encuntra desagregados.
     public ArrayList ExpeNDesglose() {
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT ID_ORGANOJ, PERIODO, CLAVE_EXPEDIENTE, CANT_ACTORES, CANT_DEMANDADOS, ID_TIPO_EXPEDIENTE\n"
+        sql = "SELECT ID_ORGANOJ, PERIODO, CLAVE_EXPEDIENTE, PREG_INCOMPETENCIA, ID_ESTATUS_DEMANDA, CANT_ACTORES, CANT_DEMANDADOS, ID_TIPO_EXPEDIENTE\n"
                 + "FROM (\n"
                 + "SELECT * FROM(\n"
                 + "SELECT *\n"
@@ -50,7 +50,11 @@ public class EDQPart_act_individual {
         resul = conexion.consultar(sql);
         System.out.println(sql);
         try {
+            System.out.println("Antes de ejecutar query");
+            resul = conexion.consultar(sql);
+            System.out.println("Después de ejecutar query");
             while (resul.next()) {
+                System.out.println("Entró al while");
                 Array.add(new String[]{
                     resul.getString("ID_ORGANOJ"),
                     resul.getString("CLAVE_EXPEDIENTE"),
@@ -66,6 +70,101 @@ public class EDQPart_act_individual {
         }
         return Array;
     }
+*/
+    
+    // Query de validacion para saber si Actor y Demandado no se encuentran desagregados.
+    public ArrayList<String[]> ExpeNDesglose() {
+
+        System.out.println("1. Conectando...");
+        conexion.Conectar();
+
+        ArrayList<String[]> Array = new ArrayList<>();
+
+        sql = "SELECT 	\n" +
+"	    ID_EXPEDIENTE,	\n" +
+"	    ID_ORGANOJ, 	\n" +
+"	    CLAVE_EXPEDIENTE, 	\n" +
+"	    DECODE(PREG_INCOMPETENCIA, 2, 'NO') AS PREG_INCOMPETENCIA, 	\n" +
+"	    DECODE(ID_ESTATUS_DEMANDA, 1, 'ADMITIDA') AS ID_ESTATUS_DEMANDA,  	\n" +
+"	    CANT_ACTORES, 	\n" +
+"	    CANT_DEMANDADOS 	\n" +
+"	FROM ( 	\n" +
+"	    SELECT * 	\n" +
+"	    FROM TR_EXPEDIENTE  	\n" +
+"	    WHERE  	\n" +
+"	        (SUBSTR(ID_ORGANOJ, 0, 2) = '"+PValidacion.clave_entidad+"'  	\n" +
+"	        AND PERIODO = '"+PValidacion.periodo+"'  	\n" +
+"	        AND PREG_INCOMPETENCIA = 2  	\n" +
+"	        AND ID_ESTATUS_DEMANDA = 1	\n" +
+"	        AND ID_TIPO_EXPEDIENTE = 2)  	\n" +
+"	        OR  	\n" +
+"	        (ID_ORGANOJ = '"+PValidacion.clave_organo+"'  	\n" +
+"	        AND PERIODO = '"+PValidacion.periodo+"'  	\n" +
+"	        AND PREG_INCOMPETENCIA = 2  	\n" +
+"	        AND ID_ESTATUS_DEMANDA = 1	\n" +
+"	        AND ID_TIPO_EXPEDIENTE = 2) 	\n" +
+"	) 	\n" +
+"	WHERE CANT_ACTORES > 0  	\n" +
+"	AND CLAVE_EXPEDIENTE NOT IN ( 	\n" +
+"	    SELECT DISTINCT EXP.CLAVE_EXPEDIENTE  	\n" +
+"	    FROM TR_ACTOR A  	\n" +
+"	    JOIN TR_EXP_ACTOR EA  	\n" +
+"	        ON A.ID_ACTOR = EA.ACTORES_ID	\n" +
+"	        AND A.ID_ORGANOJ = EA.ID_ORGANOJ  	\n" +
+"	        AND A.PERIODO = EA.PERIODO  	\n" +
+"	    JOIN TR_EXPEDIENTE EXP  	\n" +
+"	        ON EA.ID_EXPEDIENTE = EXP.ID_EXPEDIENTE  	\n" +
+"	        AND EA.ID_ORGANOJ = EXP.ID_ORGANOJ  	\n" +
+"	        AND EA.PERIODO = EXP.PERIODO  	\n" +
+"	    WHERE  	\n" +
+"	        (SUBSTR(A.ID_ORGANOJ, 0, 2) = '"+PValidacion.clave_entidad+"'  	\n" +
+"	        AND A.PERIODO = '"+PValidacion.periodo+"'	\n" +
+"	        AND EXP.ID_TIPO_EXPEDIENTE = 2)  	\n" +
+"	        OR  	\n" +
+"	        (A.ID_ORGANOJ = '"+PValidacion.clave_organo+"'  	\n" +
+"	        AND A.PERIODO = '"+PValidacion.periodo+"'	\n" +
+"	        AND EXP.ID_TIPO_EXPEDIENTE = 2)  	\n" +
+"	)";
+
+        System.out.println("2. Query:");
+        System.out.println(sql);
+
+        try {
+            System.out.println("3. Ejecutando query...");
+
+            long inicio = System.currentTimeMillis();
+
+            resul = conexion.consultar(sql);
+
+            long fin = System.currentTimeMillis();
+            System.out.println("4. Query ejecutada en: " + (fin - inicio) + " ms");
+
+            System.out.println("5. Leyendo resultados...");
+
+            while (resul.next()) {
+                System.out.println("6. Entró al while");
+
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("PREG_INCOMPETENCIA"),
+                    resul.getString("ID_ESTATUS_DEMANDA"),
+                    resul.getString("CANT_ACTORES"),
+                    resul.getString("CANT_DEMANDADOS")
+                });
+            }
+
+            System.out.println("7. Terminó while");
+
+            conexion.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EDQPart_act_individual.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Array;
+    }
+
 // QUEDA PENDIENTE
 //Query de validacion para saber si Cuando el expediente es incompetencia = SI, Cantidad de Actores y Cantidad de demandados es No aplica por ende no se debe de desglosar actores ni demandados.
 
