@@ -24,6 +24,7 @@ public class BeanTR_AUDIENCIA extends Bean implements SQLData {
     private String COMENTARIOS;
     private String PERIODO;
     private String ID_UNIQUE;
+    private String ID_UNIQUE_ESP;
     
     
     public String GetID_AUDIENCIA() {
@@ -105,6 +106,15 @@ public class BeanTR_AUDIENCIA extends Bean implements SQLData {
     public void SetID_UNIQUE(String ID_UNIQUE) {
         this.ID_UNIQUE = ID_UNIQUE;
     }
+
+    public String getID_UNIQUE_ESP() {
+        return ID_UNIQUE_ESP;
+    }
+
+    public void setID_UNIQUE_ESP(String ID_UNIQUE_ESP) {
+        this.ID_UNIQUE_ESP = ID_UNIQUE_ESP;
+    }
+    
     
     @Override
     public Object[] getLlave() {
@@ -150,7 +160,8 @@ public class BeanTR_AUDIENCIA extends Bean implements SQLData {
             GetID_EXPEDIENTE(),
             GetCOMENTARIOS(),
             GetPERIODO(),
-            GetID_UNIQUE()
+            GetID_UNIQUE(),
+            getID_UNIQUE_ESP()
         };
         return array;
     }

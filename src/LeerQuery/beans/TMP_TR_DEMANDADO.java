@@ -65,6 +65,7 @@ public class TMP_TR_DEMANDADO {
             c.SetCOMENTARIOS(filaActual.get(24));
             c.SetPERIODO(filaActual.get(25));
             c.SetID_UNIQUE(filaActual.get(26));
+            c.setID_UNIQUE_ESP(filaActual.get(27));
 
                 }
                 ad.add(c);

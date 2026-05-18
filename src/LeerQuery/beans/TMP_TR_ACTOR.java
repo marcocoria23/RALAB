@@ -33,7 +33,7 @@ public class TMP_TR_ACTOR {
             for (int i = 0; i < fila.size(); i++) {
                 BeanTR_ACTOR c = new BeanTR_ACTOR();
                 ArrayList<String> filaActual = fila.get(i);
-                for (int j = 0; j < 33; j++) {
+                for (int j = 0; j < 34; j++) {
                     c.SetID_ACTOR(filaActual.get(0));
                     c.SetID_ORGANOJ(filaActual.get(1));
                     c.SetID_TIPO_ACTOR(filaActual.get(2));
@@ -67,6 +67,7 @@ public class TMP_TR_ACTOR {
                     c.SetCOMENTARIOS(filaActual.get(30));
                     c.SetPERIODO(filaActual.get(31));
                     c.SetID_UNIQUE(filaActual.get(32));
+                    c.setID_UNIQUE_ESP(filaActual.get(33));
                 }
                 ad.add(c);
                 CFilas++;

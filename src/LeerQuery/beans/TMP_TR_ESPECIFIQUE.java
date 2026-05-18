@@ -37,7 +37,7 @@ public class TMP_TR_ESPECIFIQUE {
             for (int i = 0; i < fila.size(); i++) {
                 BeanTR_ESPECIFIQUE c = new BeanTR_ESPECIFIQUE();
                 ArrayList<String> filaActual = fila.get(i);
-                for (int j = 0; j < 9; j++) {
+                for (int j = 0; j < 10; j++) {
                     c.SetID_REGISTRO(filaActual.get(0));
                     c.SetNEMONICO_CATALOGO(filaActual.get(1));
                     c.SetESPECIFIQUE(filaActual.get(2));
@@ -47,6 +47,7 @@ public class TMP_TR_ESPECIFIQUE {
                     c.SetORGANO(filaActual.get(6));
                     c.SetID_ACT_DEM_AUD(filaActual.get(7));
                     c.SetPERIODO(filaActual.get(8));
+                    c.setID_UNIQUE_ESP(filaActual.get(9));
                 }
                 ad.add(c);
                 CFilas++;

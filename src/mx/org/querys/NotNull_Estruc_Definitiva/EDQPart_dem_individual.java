@@ -155,12 +155,12 @@ public class EDQPart_dem_individual {
                 + "WHERE ID_ESTATUS_DEMANDA IN ('Desechada','Archivo','No se dio trámite al escrito de demanda')\n"
                 + "AND ID_TIPO_EXPEDIENTE = 2  ";
         resul = conexion.consultar(sql);
-        //System.out.println(sql);     
+        System.out.println(sql);     
         try {
             while (resul.next()) {
                 Array.add(new String[]{
                     resul.getString("ID_ORGANOJ"),
-                    resul.getString("EXPEDIENTE_CLAVE_INDIVIDUAL"),
+                    resul.getString("CLAVE_EXPEDIENTE_INDIVIDUAL"),
                     resul.getString("ID_ESTATUS_DEMANDA")
                 });
             }

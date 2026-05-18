@@ -36,7 +36,6 @@ public class EDHuelga {
                 + "AND periodo = '" + PValidacion.periodo + "')\n"
                 + "OR (ID_ORGANOJ ='" + PValidacion.clave_organo + "'\n"
                 + "AND periodo = '" + PValidacion.periodo + "'))";
-        System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
@@ -187,7 +186,7 @@ public class EDHuelga {
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT * FROM (       \n"
-                + "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, PERIODO, ID_TIPO_EXPEDIENTE, ID_ESTATUS_EXPED\n"
+                + "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, PERIODO, ID_TIPO_EXPEDIENTE, ID_ESTATUS_EXPED,COMENTARIOS\n"
                 + "FROM TR_EXPEDIENTE\n"
                 + "WHERE ID_TIPO_EXPEDIENTE = 4\n"
                 + "AND ID_ESTATUS_EXPED = '-1')\n"
@@ -203,8 +202,7 @@ public class EDHuelga {
                     resul.getString("ID_ORGANOJ"),
                     resul.getString("CLAVE_EXPEDIENTE"),
                     resul.getString("ID_ESTATUS_EXPED"),
-                    resul.getString("COMENTARIOS"),
-                    resul.getString("PERIODO")
+                    resul.getString("COMENTARIOS")
                 });
             }
             conexion.close();

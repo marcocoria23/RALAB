@@ -28,9 +28,17 @@ public class QueryLaborales {
     String sql = "";
     ArrayList<ArrayList<String>> arrayList;
       
-    public ArrayList<ArrayList<String>> DBO_Tr_Expedientes(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+    public ArrayList<ArrayList<String>> DBO_Tr_Expedientes(String cveEntidad , String periodo , String cveOrgano,String BDProductos) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+        String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "SELECT \n" +
 "   ID_EXPEDIENTE.NEXTVAL AS id_expediente,\n" +
 "    id_tipo_expediente,\n" +
@@ -212,7 +220,7 @@ public class QueryLaborales {
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||1 AS   ID_UNIQUE\n" +
 "\n" +
 "FROM \n" +
-"    V3_TR_ORDINARIOJL -- V3_TR_HUELGAJL, V3_TR_INDIVIDUALJL\n" +
+"    "+CON1+"TR_ORDINARIO"+CON2+" \n" +
 "\n" +
 "-- Filtros para extraer solo la información de los órganos jurisdiccionales especificados\n" +
 " -- WHERE CLAVE_ORGANO LIKE '060021' AND PERIODO LIKE 'DIC/24'\n" +
@@ -321,7 +329,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||2    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_INDIVIDUALJL\n" +
+"    "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "    \n" +
 "UNION ALL\n" +
 "\n" +
@@ -426,7 +434,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||3    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_COLECTIVOJL    \n" +
+"    "+CON1+"TR_COLECTIVO"+CON2+"    \n" +
 "    \n" +
 "UNION ALL\n" +
 "\n" +
@@ -517,7 +525,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||4    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_HUELGAJL\n" +
+"    "+CON1+"TR_HUELGA"+CON2+"\n" +
 "    \n" +
 "    \n" +
 "UNION ALL\n" +
@@ -619,7 +627,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||5    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_COLECT_ECONOMJL\n" +
+"    "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "    \n" +
 "    \n" +
 "UNION ALL\n" +
@@ -653,8 +661,8 @@ public class QueryLaborales {
 "    NULL AS preg_fecha_celebr_audiencia,\n" +
 "    NULL AS fecha_audiencia,  \n" +
 "    NULL AS motivo_conf_colectivo,  \n" +
-"    NULL AS preg_incompetencia,\n" +
-"    NULL AS id_tipo_incompetencia,\n" +
+"    POSTGRES_TC_RESPUESTA_SIMPLE(INCOMPETENCIA) AS preg_incompetencia,\n" +
+"    CASE WHEN TIPO_INCOMPETENCIA = 9 THEN -1 ELSE TIPO_INCOMPETENCIA END AS id_tipo_incompetencia,\n" +
 "    NULL AS fecha_pliego_peticion,  \n" +
 "    NULL AS fecha_present_demanda,\n" +
 "    FECHA_PRESENTA_SOLI AS fecha_present_promo,  \n" +
@@ -710,7 +718,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||6    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_PARAPROCESALJL\n" +
+"    "+CON1+"TR_PARAPROCESAL"+CON2+"\n" +
 "    \n" +
 "    \n" +
 "UNION ALL\n" +
@@ -803,7 +811,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||7    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_TERCERIASJL\n" +
+"    "+CON1+"TR_TERCERIAS"+CON2+"\n" +
 "    \n" +
 "UNION ALL\n" +
 "\n" +
@@ -899,7 +907,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||8    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_PREF_CREDITOJL\n" +
+"    "+CON1+"TR_PREF_CREDITO"+CON2+"\n" +
 "    \n" +
 "    \n" +
 "    \n" +
@@ -997,7 +1005,7 @@ public class QueryLaborales {
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||9    ID_UNIQUE\n" +
 "FROM \n" +
-"    V3_TR_EJECUCIONJL);";
+"    "+CON1+"TR_EJECUCION"+CON2+");";
             try {
 
         Statement stmt = conexion.getConexion().createStatement();
@@ -1282,9 +1290,17 @@ public class QueryLaborales {
        } 
        
        
-     public ArrayList<ArrayList<String>> DBO_Tr_Demandado(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+     public ArrayList<ArrayList<String>> DBO_Tr_Demandado(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
          arrayList = new ArrayList<>();
+              String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "SELECT \n" +
 "    ID_DEMANDADO.NEXTVAL AS ID_DEMANDADO,\n" +
 "    ID_ORGANOJ,\n" +
@@ -1313,7 +1329,7 @@ public class QueryLaborales {
 "    comentarios,\n" +
 "    PERIODO,\n" +
 "    -- Columna auxiliar\n" +
-"    ID_UNIQUE\n" +
+"    ID_UNIQUE,ID_UNIQUE_ESP\n" +
 "    \n" +
 "    FROM(\n" +
 "\n" +
@@ -1365,9 +1381,9 @@ public class QueryLaborales {
 "    'CO:'||CASE WHEN LENGTH(CLAVE_ORGANO) < 7 \n" +
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO \n" +
-"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||1    ID_UNIQUE\n" +
+"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||1    ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_ORDINARIO' AS ID_UNIQUE_ESP\n" +
 "\n" +
-"FROM V3_TR_PART_DEM_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_PART_DEM_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL\n" +
@@ -1421,8 +1437,8 @@ public class QueryLaborales {
 "    'CO:'||CASE WHEN LENGTH(CLAVE_ORGANO) < 7 \n" +
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO \n" +
-"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||2    ID_UNIQUE\n" +
-"FROM V3_TR_PART_DEM_INDIVIDUALJL\n" +
+"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||2    ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_INDIVIDUAL' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_DEM_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL\n" +
@@ -1488,9 +1504,9 @@ public class QueryLaborales {
 "    'CO:'||CASE WHEN LENGTH(CLAVE_ORGANO) < 7 \n" +
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO \n" +
-"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||3   ID_UNIQUE\n" +
+"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||3   ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_COLECTIVO' AS ID_UNIQUE_ESP\n" +
 "    \n" +
-"FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_PART_DEM_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL\n" +
@@ -1544,9 +1560,9 @@ public class QueryLaborales {
 "    'CO:'||CASE WHEN LENGTH(CLAVE_ORGANO) < 7 \n" +
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO \n" +
-"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||4    ID_UNIQUE\n" +
+"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||4    ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_HUELGA' AS ID_UNIQUE_ESP\n" +
 "    \n" +
-"FROM V3_TR_PART_DEM_HUELGAJL\n" +
+"FROM "+CON1+"TR_PART_DEM_HUELGA"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL\n" +
@@ -1612,9 +1628,9 @@ public class QueryLaborales {
 "    'CO:'||CASE WHEN LENGTH(CLAVE_ORGANO) < 7 \n" +
 "        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1)\n" +
 "        ELSE CLAVE_ORGANO \n" +
-"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||5    ID_UNIQUE\n" +
+"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||5    ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_COLECT_ECONOM' AS ID_UNIQUE_ESP\n" +
 "    \n" +
-"FROM V3_TR_PART_DEM_COLECT_ECONOMJL\n" +
+"FROM "+CON1+"TR_PART_DEM_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "); ";
             try {
@@ -1671,6 +1687,7 @@ public class QueryLaborales {
                     fila.add(resul.getString(25)); // Añadir la veinticincoava columna
                     fila.add(resul.getString(26)); // Añadir la veinticincoava columna
                     fila.add(resul.getString(27)); // Añadir la veinticincoava columna
+                    fila.add(resul.getString(28)); // Añadir la veinticincoava columna
                     arrayList.add(fila); // Agregar la fila a la lista principal
                 }
             } catch (SQLException ex) {
@@ -1790,9 +1807,17 @@ public class QueryLaborales {
         }
     } 
     
-     public ArrayList<ArrayList<String>> DBO_Tr_Audiencias(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+     public ArrayList<ArrayList<String>> DBO_Tr_Audiencias(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
          arrayList = new ArrayList<>();
+              String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
             String sql = "SELECT \n" +
 "\n" +
 "ID_AUDIENCIA.NEXTVAL AS id_audiencia,\n" +
@@ -1813,7 +1838,7 @@ public class QueryLaborales {
 "\n" +
 "PERIODO,\n" +
 "\n" +
-"ID_UNIQUE FROM ( SELECT \n" +
+"ID_UNIQUE,ID_UNIQUE_ESP FROM ( SELECT \n" +
 "\n" +
 "    -- Campos actuales que serán utilizados para el nuevo esquema\n" +
 "\n" +
@@ -1855,12 +1880,14 @@ public class QueryLaborales {
 "\n" +
 "        ELSE CLAVE_ORGANO \n" +
 "\n" +
-"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||TIPO_PROCED    ID_UNIQUE\n" +
+"    END||'-EXP:'||EXPEDIENTE_CLAVE||'-PE:'||PERIODO||'-'||'TP:'||TIPO_PROCED    ID_UNIQUE,"
+                    + " 'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_AUD:'||ID_AUDIENCIA||','||'TP:'||TIPO_PROCED AS ID_UNIQUE_ESP \n" +
 "\n" +
 "FROM \n" +
 "\n" +
-"    V3_TR_AUDIENCIASJL  WHERE TIPO_PROCED<>9) ;\n" +
+"    "+CON1+"TR_AUDIENCIAS"+CON2+"  WHERE TIPO_PROCED<>9) ;\n" +
 "  ";
+            
             try {
             Statement stmt = conexion.getConexion().createStatement();
             StringBuilder consultaFiltro = new StringBuilder();
@@ -1885,7 +1912,9 @@ public class QueryLaborales {
                        consultaFiltro.append( cveOrgano + ")" ); 
                   
             }
+             System.out.println("SQL TR_AUDIENCIAS:"+consultaFiltro);
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+           
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -1897,7 +1926,8 @@ public class QueryLaborales {
                         fila.add(resul.getString(7)); // Añadir la séptima columna
                         fila.add(resul.getString(8)); // Añadir la octava columna
                         fila.add(resul.getString(9)); // Añadir la novena columna
-                        fila.add(resul.getString(10)); // Añadir la décima columna                 
+                        fila.add(resul.getString(10)); // Añadir la décima columna   
+                        fila.add(resul.getString(11)); // Añadir la décima columna   
                         arrayList.add(fila); // Agregar la fila a la lista principal
                     }
             } catch (SQLException ex) {
@@ -1998,9 +2028,17 @@ public class QueryLaborales {
     } 
      
      
-       public ArrayList<ArrayList<String>> DBO_Tr_OrganoJ(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+       public ArrayList<ArrayList<String>> DBO_Tr_OrganoJ(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
          arrayList = new ArrayList<>();
+              String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
             String sql = "SELECT *FROM ( SELECT \n" +
             "    -- Campos actuales que serán utilizados para el nuevo esquema\n" +
             "    CASE \n" +
@@ -2020,7 +2058,8 @@ public class QueryLaborales {
             "    PERIODO AS periodo,\n" +
                  " 'I' AS estatus \n"   +
             "FROM \n" +
-            "    V3_TR_CONTROL_EXPEDIENTEJL ) ; ";
+            "    "+CON1+"TR_CONTROL_EXPEDIENTE"+CON2+" ) ; ";
+            System.out.println(sql);
             try {
             Statement stmt = conexion.getConexion().createStatement();
             StringBuilder consultaFiltro = new StringBuilder();
@@ -2168,8 +2207,16 @@ public class QueryLaborales {
     } 
          
          
-      public ArrayList<ArrayList<String>> DBO_Tr_General(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+      public ArrayList<ArrayList<String>> DBO_Tr_General(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
          arrayList = new ArrayList<>();
                 String sql = "SELECT    ID_GENERAL.NEXTVAL  AS id_general,\n" +
 "ID_ORGANOJ ,\n" +
@@ -2220,7 +2267,7 @@ public class QueryLaborales {
         "    EJECUCION AS total_ejecucion,  -- Columna en blanco\n" +
         "    PERIODO AS periodo\n" +
         "FROM \n" +
-        "    V3_TR_CONTROL_EXPEDIENTEJL ) ; ";
+        "    "+CON1+"TR_CONTROL_EXPEDIENTE"+CON2+" ) ; ";
             try {
             Statement stmt = conexion.getConexion().createStatement();
             StringBuilder consultaFiltro = new StringBuilder();
@@ -2383,9 +2430,17 @@ public class QueryLaborales {
         
         
     
-    public ArrayList<ArrayList<String>> DBO_Tr_Actor(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+    public ArrayList<ArrayList<String>> DBO_Tr_Actor(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
            String sql = "SELECT \n" +
             "    ID_ACTOR.NEXTVAL ID_ACTOR,\n" +
             "    ID_ORGANOJ,\n" +
@@ -2419,7 +2474,8 @@ public class QueryLaborales {
             "    POSTGRES_NI9(longitud)longitud,\n" +
             "    comentarios,\n" +
             "    PERIODO,\n" +
-            "    ID_UNIQUE\n" +
+            "    ID_UNIQUE,\n" +
+            "    ID_UNIQUE_ESP\n" +
             "    \n" +
             "FROM (\n" +
             "-- TR_ACTOR_ORDINARIO\n" +
@@ -2501,10 +2557,10 @@ public class QueryLaborales {
             "            ELSE CLAVE_ORGANO \n" +
             "        END\n" +
             "    ) \n" +
-            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
+            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_ORDINARIO' AS ID_UNIQUE_ESP\n" +
             "    \n" +
             "\n" +
-            "FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_PART_ACT_ORDINARIO"+CON2+"\n" +
             "\n" +
             "UNION ALL\n" +
             "\n" +
@@ -2579,9 +2635,9 @@ public class QueryLaborales {
             "            ELSE CLAVE_ORGANO \n" +
             "        END\n" +
             "    ) \n" +
-            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
+            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_INDIVIDUAL' AS ID_UNIQUE_ESP\n" +
             "\n" +
-            "FROM V3_TR_PART_ACT_INDIVIDUALJL\n" +
+            "FROM "+CON1+"TR_PART_ACT_INDIVIDUAL"+CON2+"\n" +
             "\n" +
             "UNION ALL\n" +
             "\n" +
@@ -2652,9 +2708,9 @@ public class QueryLaborales {
             "            ELSE CLAVE_ORGANO \n" +
             "        END\n" +
             "    ) \n" +
-            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
+            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_COLECTIVO' AS ID_UNIQUE_ESP\n" +
             "\n" +
-            "FROM V3_TR_PART_ACT_COLECTIVOJL\n" +
+            "FROM "+CON1+"TR_PART_ACT_COLECTIVO"+CON2+"\n" +
             "\n" +
             "UNION ALL\n" +
             "\n" +
@@ -2721,9 +2777,9 @@ public class QueryLaborales {
             "            ELSE CLAVE_ORGANO \n" +
             "        END\n" +
             "    ) \n" +
-            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
+            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_HUELGA' AS ID_UNIQUE_ESP\n" +
             "\n" +
-            "FROM V3_TR_PART_ACT_HUELGAJL\n" +
+            "FROM "+CON1+"TR_PART_ACT_HUELGA"+CON2+"\n" +
             "\n" +
             "UNION ALL\n" +
             "\n" +
@@ -2794,9 +2850,9 @@ public class QueryLaborales {
             "            ELSE CLAVE_ORGANO \n" +
             "        END\n" +
             "    ) \n" +
-            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
+            "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_COLECT_ECONOM' AS ID_UNIQUE_ESP\n" +
             "\n" +
-            "FROM V3_TR_PART_ACT_COLECT_ECONOMJL\n" +
+            "FROM "+CON1+"TR_PART_ACT_COLECT_ECONOM"+CON2+"\n" +
             ");";
         Statement stmt = conexion.getConexion().createStatement();
             StringBuilder consultaFiltro = new StringBuilder();
@@ -2856,6 +2912,7 @@ public class QueryLaborales {
                     fila.add(resul.getString(31)); // Añadir la veinticincoava columna
                     fila.add(resul.getString(32)); // Añadir la veinticincoava columna
                     fila.add(resul.getString(33)); // Añadir la veinticincoava columna
+                    fila.add(resul.getString(34)); // Añadir la veinticincoava columna
                     arrayList.add(fila); // Agregar la fila a la lista principal
                 }
             } 
@@ -2984,9 +3041,17 @@ public class QueryLaborales {
      }
      
      
-      public ArrayList<ArrayList<String>> DBO_Tr_exp_motivo_conf(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+      public ArrayList<ArrayList<String>> DBO_Tr_exp_motivo_conf(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
          arrayList = new ArrayList<>();
+              String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
                 String sql = 
 "SELECT \n" +
 " ID_MOTIVO_CONFLICTO,\n" +
@@ -3032,7 +3097,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL \n" +
@@ -3057,7 +3122,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3083,7 +3148,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3109,7 +3174,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3135,7 +3200,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3161,7 +3226,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3187,7 +3252,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3213,7 +3278,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3239,7 +3304,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3266,7 +3331,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3293,7 +3358,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3319,7 +3384,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3346,7 +3411,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3372,7 +3437,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3398,7 +3463,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3424,7 +3489,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3450,7 +3515,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3476,7 +3541,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3504,7 +3569,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3530,7 +3595,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3556,7 +3621,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3582,7 +3647,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3609,7 +3674,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3636,7 +3701,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3663,7 +3728,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3689,7 +3754,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:2' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3715,7 +3780,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3741,7 +3806,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3767,7 +3832,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3793,7 +3858,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3819,7 +3884,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3845,7 +3910,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3871,7 +3936,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3897,7 +3962,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3923,7 +3988,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3949,7 +4014,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -3975,7 +4040,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -4001,7 +4066,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -4027,7 +4092,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -4053,7 +4118,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -4079,7 +4144,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 " ) \n" +
 ") \n" +
@@ -4204,9 +4269,17 @@ public class QueryLaborales {
         }
     } 
         
-    public ArrayList<ArrayList<String>> DBO_Tr_Exp_Circunst(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+    public ArrayList<ArrayList<String>> DBO_Tr_Exp_Circunst(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = " --TR_EXP_CIRCUNST\n" +
             "SELECT \n" +
             " ID_CIRCUNS_MOT_CONF,\n" +
@@ -4253,7 +4326,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "UNION ALL\n" +
@@ -4278,7 +4351,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "UNION ALL\n" +
@@ -4303,7 +4376,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4329,7 +4402,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4355,7 +4428,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4381,7 +4454,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4407,7 +4480,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "UNION ALL\n" +
@@ -4432,7 +4505,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4458,7 +4531,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4484,7 +4557,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4510,7 +4583,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4536,7 +4609,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4562,7 +4635,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4588,7 +4661,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             "\n" +
             "\n" +
             "\n" +
@@ -4614,7 +4687,7 @@ public class QueryLaborales {
             "    ) \n" +
             "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
             "\n" +
-            "FROM V3_TR_ORDINARIOJL\n" +
+            "FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
             " ) \n" +
             ") \n" +
             ") ";
@@ -4640,6 +4713,7 @@ public class QueryLaborales {
                        consultaFiltro.append( cveOrgano + ") AND ID_CIRCUNS_MOT_CONF IS NOT NULL ; " ); 
                   
             }
+                System.out.println("queryyyyyyyyyyyyyy"+consultaFiltro);
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
@@ -4743,9 +4817,17 @@ public class QueryLaborales {
     } 
     
     
-      public ArrayList<ArrayList<String>> DBO_Tr_Exp_Concepto_Reclam(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+      public ArrayList<ArrayList<String>> DBO_Tr_Exp_Concepto_Reclam(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = " --TR_EXP_CONCEPTO_RECLAM\n" +
 "SELECT \n" +
 " ID_CONCEPTO_RECLAM,\n" +
@@ -4789,7 +4871,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+ 
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4813,7 +4895,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" " +
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4837,7 +4919,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4861,7 +4943,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4885,7 +4967,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4909,7 +4991,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4933,7 +5015,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4957,7 +5039,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -4981,7 +5063,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+" "+
 " ) \n" +
 ") \n" +
 ");";
@@ -5112,9 +5194,17 @@ public class QueryLaborales {
     } 
         
         
-       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Prestacion(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Prestacion(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "--TR_EXP_PRESTACION\n" +
 "SELECT \n" +
 " ID_PRESTACION,\n" +
@@ -5159,7 +5249,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL\n" +
@@ -5184,7 +5274,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL\n" +
@@ -5209,7 +5299,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -5235,7 +5325,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 "\n" +
 "\n" +
@@ -5261,7 +5351,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:1' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "\n" +
 " ) \n" +
 ") \n" +
@@ -5393,9 +5483,17 @@ public class QueryLaborales {
     } 
          
          
-       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Motivo_Huelga(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Motivo_Huelga(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "-----------------------------------------------------------------------------------------------------\n" +
 "-- TR_EXP_MOTIVO_HUELGA\n" +
 "-----------------------------------------------------------------------------------------------------\n" +
@@ -5443,7 +5541,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 "\n" +
 "UNION ALL \n" +
@@ -5468,7 +5566,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -5493,7 +5591,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -5517,7 +5615,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -5541,7 +5639,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -5565,7 +5663,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -5589,7 +5687,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
@@ -5613,7 +5711,7 @@ public class QueryLaborales {
 "    ) \n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:4' AS ID_UNIQUE\n" +
 "\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "\n" +
 " ) \n" +
 ") \n" +
@@ -5750,9 +5848,17 @@ public class QueryLaborales {
     } 
     
 
-     public ArrayList<ArrayList<String>> DBO_Tr_Exp_Suspension(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+     public ArrayList<ArrayList<String>> DBO_Tr_Exp_Suspension(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "-----------------------------------------------------------------------------------------------------\n" +
 "-- TR_EXP_SUSPENSION\n" +
 "-----------------------------------------------------------------------------------------------------\n" +
@@ -5801,7 +5907,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "  UNION ALL \n" +
@@ -5827,7 +5933,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -5853,7 +5959,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -5878,7 +5984,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -5903,7 +6009,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -5928,7 +6034,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -5953,7 +6059,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "  ) \n" +
 ") \n" +
 ");";
@@ -6090,9 +6196,17 @@ public class QueryLaborales {
     } 
          
          
-    public ArrayList<ArrayList<String>> DBO_Tr_Exp_Terminacion(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+    public ArrayList<ArrayList<String>> DBO_Tr_Exp_Terminacion(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "-----------------------------------------------------------------------------------------------------\n" +
 "--TR_EXP_TERMINACION \n" +
 "-----------------------------------------------------------------------------------------------------\n" +
@@ -6138,7 +6252,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "  UNION ALL \n" +
@@ -6163,7 +6277,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -6188,7 +6302,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -6212,7 +6326,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 " ) \n" +
 ") \n" +
 ");";
@@ -6345,9 +6459,17 @@ public class QueryLaborales {
     } 
          
          
-       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Violacion(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Violacion(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "-----------------------------------------------------------------------------------------------------\n" +
 "-- TR_EXP_VIOLACION \n" +
 "-----------------------------------------------------------------------------------------------------\n" +
@@ -6395,7 +6517,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "\n" +
 "  UNION ALL \n" +
@@ -6420,7 +6542,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -6445,7 +6567,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -6468,7 +6590,7 @@ public class QueryLaborales {
 "          END\n" +
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:3' AS ID_UNIQUE\n" +
-"  FROM V3_TR_COLECTIVOJL\n" +
+"  FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 " ) \n" +
 ") \n" +
 ");";
@@ -6604,9 +6726,17 @@ public class QueryLaborales {
         }
     } 
                      
-      public ArrayList<ArrayList<String>> DBO_Tr_Exp_Efecto_Sentencia(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+      public ArrayList<ArrayList<String>> DBO_Tr_Exp_Efecto_Sentencia(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "---TR_EXP_EFECTO_SENTENCIA\n" +
 "SELECT \n" +
 " ID_EFECTO_SENTENCIA,\n" +
@@ -6649,7 +6779,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "\n" +
 "  UNION ALL \n" +
@@ -6674,7 +6804,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -6699,7 +6829,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -6723,7 +6853,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "    UNION ALL\n" +
 "\n" +
@@ -6747,7 +6877,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "    UNION ALL\n" +
 "\n" +
@@ -6771,7 +6901,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "    UNION ALL\n" +
 "\n" +
@@ -6795,7 +6925,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "    UNION ALL\n" +
 "\n" +
@@ -6819,7 +6949,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 "  UNION ALL\n" +
 "\n" +
@@ -6843,7 +6973,7 @@ public class QueryLaborales {
 "      ) \n" +
 "      || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:5' AS ID_UNIQUE\n" +
 "\n" +
-"  FROM V3_TR_COLECT_ECONOMJL\n" +
+"  FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "\n" +
 " ) \n" +
 ") \n" +
@@ -6976,9 +7106,17 @@ public class QueryLaborales {
     } 
                      
                 
-       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Motivo_Solic(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+       public ArrayList<ArrayList<String>> DBO_Tr_Exp_Motivo_Solic(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "--TR_EXP_MOTIVO_SOLIC\n" +
 "\n" +
 "SELECT \n" +
@@ -7040,7 +7178,7 @@ public class QueryLaborales {
 "\n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:6' AS ID_UNIQUE\n" +
 " \n" +
-"FROM V3_TR_PARAPROCESALJL\n" +
+"FROM "+CON1+"TR_PARAPROCESAL"+CON2+"\n" +
 " \n" +
 " \n" +
 "UNION ALL\n" +
@@ -7081,7 +7219,7 @@ public class QueryLaborales {
 "\n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:8' AS ID_UNIQUE\n" +
 " \n" +
-"FROM V3_TR_PREF_CREDITOJL\n" +
+"FROM "+CON1+"TR_PREF_CREDITO"+CON2+"\n" +
 " \n" +
 " \n" +
 "UNION ALL\n" +
@@ -7122,7 +7260,7 @@ public class QueryLaborales {
 "\n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:8' AS ID_UNIQUE\n" +
 " \n" +
-"FROM V3_TR_PREF_CREDITOJL\n" +
+"FROM "+CON1+"TR_PREF_CREDITO"+CON2+"\n" +
 " \n" +
 " \n" +
 "UNION ALL\n" +
@@ -7163,7 +7301,7 @@ public class QueryLaborales {
 "\n" +
 "    || '-EXP:' || EXPEDIENTE_CLAVE || '-PE:' || PERIODO || '-TP:9' AS ID_UNIQUE\n" +
 " \n" +
-"FROM V3_TR_EJECUCIONJL\n" +
+"FROM "+CON1+"TR_EJECUCION"+CON2+"\n" +
 " \n" +
 " \n" +
 "  ) \n" +
@@ -7297,9 +7435,17 @@ public class QueryLaborales {
                 
          
          
-           public ArrayList<ArrayList<String>> DBO_Tr_Exp_Actor(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+           public ArrayList<ArrayList<String>> DBO_Tr_Exp_Actor(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = " SELECT *FROM ( SELECT act.ID_ACTOR,exp.id_organoj,exp.id_expediente,exp.periodo,act.ID_UNIQUE\n" +
 "FROM TR_EXPEDIENTE@DESARROLLO2 exp\n" +
 "JOIN TR_ACTOR@DESARROLLO2 act \n" +
@@ -7428,9 +7574,17 @@ public class QueryLaborales {
            
          
          
-              public ArrayList<ArrayList<String>> DBO_Tr_Exp_Demandado(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+              public ArrayList<ArrayList<String>> DBO_Tr_Exp_Demandado(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1="V3_";
+            CON2="JL";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = " --llenar tabla TR_EXP_DEMANDADO\n" +
 " SELECT * FROM ( SELECT dem.id_demandado,exp.id_organoj,exp.id_expediente,exp.periodo,dem.ID_UNIQUE\n" +
 "FROM TR_EXPEDIENTE@DESARROLLO2.INEGI.GOB.MX exp\n" +
@@ -7557,9 +7711,17 @@ public class QueryLaborales {
     }                 
            
 
-              public ArrayList<ArrayList<String>> DBO_Tr_Especifique(String cveEntidad , String periodo , String cveOrgano ) throws SQLException {
+              public ArrayList<ArrayList<String>> DBO_Tr_Especifique(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();
         arrayList = new ArrayList<>();
+             String CON1="",CON2="";
+        if (BDProductos.equals("")){
+            CON1=""+CON1+"";
+            CON2=""+CON2+"";
+        }else{
+            CON1="";
+            CON2="";
+        }
         String sql = "SELECT \n" +
 "\n" +
 "ID_REGISTRO.NEXTVAL AS ID_REGISTRO,\n" +
@@ -7570,38 +7732,39 @@ public class QueryLaborales {
 "PROCEDIMIENTO,\n" +
 "ORGANO,\n" +
 "ID_ACT_DEM_AUD,\n" +
-"PERIODO\n" +
+"PERIODO,\n" +
+"ID_UNIQUE_ESP\n" +  
 "\n" +
 "FROM (\n" +
 "\n" +
-"/* V3_TR_CONTROL_EXPEDIENTEJL */\n" +
+"/* TR_CONTROL_EXPEDIENTE */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_CIRCUNSCRIPCION'          AS NEMONICO_CATALOGO,\n" +
 "  OTRO_ESP_CIRCUNS              AS ESPECIFIQUE,\n" +
 "  4                             AS ID_OTRO_ESPECIFIQUE,\n" +
 "  NULL                          AS CLAVE_EXPEDIENTE,\n" +
-"  'ORGANO'                      AS PROCEDIMIENTO,\n" +
+"  'Organo'                      AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_CONTROL_EXPEDIENTEJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_CONTROL_EXPEDIENTE"+CON2+"\n" +
 "WHERE CIRCUNS_ORG_JUR = 4\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_AUDIENCIASJL */\n" +
+"/* TR_AUDIENCIAS */\n" +
 "SELECT\n" +
-"  NULL                                                        AS ID_REGISTRO,\n" +
-"  'TC_AUDIENCIA'                                               AS NEMONICO_CATALOGO,\n" +
+"  NULL                                                         AS ID_REGISTRO,\n" +
+"  'TC_TIPO_AUDIENCIA'                                          AS NEMONICO_CATALOGO,\n" +
 "  ESP_OTRO_AUDIENCIA                                           AS ESPECIFIQUE,\n" +
 "  3                                                            AS ID_OTRO_ESPECIFIQUE,\n" +
 "  EXPEDIENTE_CLAVE                                             AS CLAVE_EXPEDIENTE,\n" +
 "  'Audiencias'                                                 AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                                                 AS ORGANO,\n" +
 "  ID_AUDIENCIA                                                 AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_AUDIENCIASJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_AUD:'||ID_AUDIENCIA||','||'TP:'||TIPO_PROCED AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_AUDIENCIAS"+CON2+"\n" +
 "WHERE COALESCE(\n" +
 "        POSTGRES_TIPO_AUDIENCIA(ORDINARIO_TA),\n" +
 "        POSTGRES_TIPO_AUDIENCIA(ESPECIAL_INDIVI_TA),\n" +
@@ -7613,7 +7776,7 @@ public class QueryLaborales {
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_ORDINARIOJL - OTRO_ESP_CONFLICTO (TC_MOTIVO_CONFLICTO) */\n" +
+"/* "+CON1+"TR_ORDINARIO"+CON2+" - OTRO_ESP_CONFLICTO (TC_MOTIVO_CONFLICTO) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
@@ -7623,13 +7786,13 @@ public class QueryLaborales {
 "  'Ordinario'                   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "WHERE OTRO_MOTIV_CONFLICTO = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_ORDINARIOJL - OTRO_ESP_DISCRIMI (TC_MOTIVO_CONFLICTO_CIRCUNST) */\n" +
+"/* "+CON1+"TR_ORDINARIO"+CON2+" - OTRO_ESP_DISCRIMI (TC_MOTIVO_CONFLICTO_CIRCUNST) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_MOTIVO_CONFLICTO_CIRCUNST' AS NEMONICO_CATALOGO,\n" +
@@ -7639,13 +7802,13 @@ public class QueryLaborales {
 "  'Ordinario'                   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "WHERE OTRO_DISCRIMINACION = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_ORDINARIOJL - OTRO_ESP_RECLAMADO (TC_CONCEPTO_RECLAMADO) */\n" +
+"/* "+CON1+"TR_ORDINARIO"+CON2+" - OTRO_ESP_RECLAMADO (TC_CONCEPTO_RECLAMADO) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_CONCEPTO_RECLAMADO'       AS NEMONICO_CATALOGO,\n" +
@@ -7655,13 +7818,13 @@ public class QueryLaborales {
 "  'Ordinario'                   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "WHERE OTRO_CONCEPTO = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_ORDINARIOJL - OTRO_ESP_PRESTAC (TC_PRESTACION) */\n" +
+"/* "+CON1+"TR_ORDINARIO"+CON2+" - OTRO_ESP_PRESTAC (TC_PRESTACION) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_PRESTACION'               AS NEMONICO_CATALOGO,\n" +
@@ -7671,13 +7834,13 @@ public class QueryLaborales {
 "  'Ordinario'                   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "WHERE OTRO_TIPO_PREST = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_ORDINARIOJL - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
+"/* "+CON1+"TR_ORDINARIO"+CON2+" - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
@@ -7687,13 +7850,13 @@ public class QueryLaborales {
 "  'Ordinario'                   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "WHERE TIPO_INCOMPETENCIA = 4\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_ORDINARIOJL - FORMA_SOLUCION (COALESCE of three) */\n" +
+"/* "+CON1+"TR_ORDINARIO"+CON2+" - FORMA_SOLUCION (COALESCE of three) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
@@ -7703,8 +7866,8 @@ public class QueryLaborales {
 "  'Ordinario'                   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_ORDINARIOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_ORDINARIO"+CON2+"\n" +
 "WHERE COALESCE(\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONFE', FORMA_SOLUCIONFE),\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONAP', FORMA_SOLUCIONAP),\n" +
@@ -7713,7 +7876,7 @@ public class QueryLaborales {
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_INDIVIDUALJL - OTRO_ESP_CONF (TC_MOTIVO_CONFLICTO) */\n" +
+"/* "+CON1+"TR_INDIVIDUAL"+CON2+" - OTRO_ESP_CONF (TC_MOTIVO_CONFLICTO) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
@@ -7723,13 +7886,13 @@ public class QueryLaborales {
 "  'Especial individual'         AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "WHERE OTRO_CONF = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_INDIVIDUALJL - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
+"/* "+CON1+"TR_INDIVIDUAL"+CON2+" - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
@@ -7739,13 +7902,13 @@ public class QueryLaborales {
 "  'Especial individual'         AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "WHERE TIPO_INCOMPETENCIA = 4\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_INDIVIDUALJL - FORMA_SOLUCION (coalesce 4 cols) */\n" +
+"/* "+CON1+"TR_INDIVIDUAL"+CON2+" - FORMA_SOLUCION (coalesce 4 cols) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
@@ -7755,8 +7918,8 @@ public class QueryLaborales {
 "  'Especial individual'         AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_INDIVIDUAL"+CON2+"\n" +
 "WHERE COALESCE(\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AD', FORMA_SOLUCION_AD),\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_TA', FORMA_SOLUCION_TA),\n" +
@@ -7766,7 +7929,7 @@ public class QueryLaborales {
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECTIVOJL - OTRO_ESP_CONFLICTO (TC_MOTIVO_CONFLICTO) */\n" +
+"/* "+CON1+"TR_COLECTIVO"+CON2+" - OTRO_ESP_CONFLICTO (TC_MOTIVO_CONFLICTO) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
@@ -7776,13 +7939,13 @@ public class QueryLaborales {
 "  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "WHERE OTRO_CONFLICTO = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECTIVOJL - OTRO_ESP_COLECTIVA (TC_VIOLACION_DH) */\n" +
+"/* "+CON1+"TR_COLECTIVO"+CON2+" - OTRO_ESP_COLECTIVA (TC_VIOLACION_DH) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_VIOLACION_DH'             AS NEMONICO_CATALOGO,\n" +
@@ -7792,13 +7955,13 @@ public class QueryLaborales {
 "  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "WHERE OTRO_COLECTIVA = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECTIVOJL - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
+"/* "+CON1+"TR_COLECTIVO"+CON2+" - OTRO_ESP_INCOMP (TC_INCOMPETENCIA) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
@@ -7808,13 +7971,13 @@ public class QueryLaborales {
 "  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "WHERE TIPO_INCOMPETENCIA = 4\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECTIVOJL - FORMA_SOLUCION (coalesce AD, AJ) */\n" +
+"/* "+CON1+"TR_COLECTIVO"+CON2+" - FORMA_SOLUCION (coalesce AD, AJ) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
@@ -7824,8 +7987,8 @@ public class QueryLaborales {
 "  'Especial colectivo'          AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECTIVOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECTIVO"+CON2+"\n" +
 "WHERE COALESCE(\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AD', FORMA_SOLUCION_AD),\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AJ', FORMA_SOLUCION_AJ)\n" +
@@ -7833,7 +7996,7 @@ public class QueryLaborales {
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_HUELGAJL - ESPECIFIQUE_MOTIVO (TC_MOTIVO_HUELGA) */\n" +
+"/* "+CON1+"TR_HUELGA"+CON2+" - ESPECIFIQUE_MOTIVO (TC_MOTIVO_HUELGA) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_MOTIVO_HUELGA'            AS NEMONICO_CATALOGO,\n" +
@@ -7843,13 +8006,13 @@ public class QueryLaborales {
 "  'Huelga'                      AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "WHERE OTRO_MOTIVO = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_HUELGAJL - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
+"/* "+CON1+"TR_HUELGA"+CON2+" - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
@@ -7859,13 +8022,13 @@ public class QueryLaborales {
 "  'Huelga'                      AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "WHERE TIPO_INCOMPETENCIA = 4\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_HUELGAJL - FORMA_SOLUCION (COALESCE of two) */\n" +
+"/* "+CON1+"TR_HUELGA"+CON2+" - FORMA_SOLUCION (COALESCE of two) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
@@ -7875,8 +8038,8 @@ public class QueryLaborales {
 "  'Huelga'                      AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_HUELGAJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_HUELGA"+CON2+"\n" +
 "WHERE COALESCE(\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_EMPLAZ', FORMA_SOLUCION_EMPLAZ),\n" +
 "        POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_HUELGA', FORMA_SOLUCION_HUELGA)\n" +
@@ -7884,7 +8047,7 @@ public class QueryLaborales {
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECT_ECONOMJL - ESPECIFIQUE_ECONOM (TC_MOTIVO_CONFLICTO) */\n" +
+"/* "+CON1+"TR_COLECT_ECONOM"+CON2+" - ESPECIFIQUE_ECONOM (TC_MOTIVO_CONFLICTO) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_MOTIVO_CONFLICTO'         AS NEMONICO_CATALOGO,\n" +
@@ -7894,13 +8057,13 @@ public class QueryLaborales {
 "  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "WHERE OTRO_MOTIVO_ECONOM = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECT_ECONOMJL - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
+"/* "+CON1+"TR_COLECT_ECONOM"+CON2+" - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
@@ -7910,13 +8073,13 @@ public class QueryLaborales {
 "  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "WHERE TIPO_INCOMPETENCIA = 4\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECT_ECONOMJL - POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION',...) */\n" +
+"/* "+CON1+"TR_COLECT_ECONOM"+CON2+" - POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION',...) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_FORMA_SOLUCION'           AS NEMONICO_CATALOGO,\n" +
@@ -7926,13 +8089,13 @@ public class QueryLaborales {
 "  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "WHERE POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION', FORMA_SOLUCION) = 9\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_COLECT_ECONOMJL - ESPECIFIQUE_TIPO (TC_SENTENCIA_EFECTO) */\n" +
+"/* "+CON1+"TR_COLECT_ECONOM"+CON2+" - ESPECIFIQUE_TIPO (TC_SENTENCIA_EFECTO) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_SENTENCIA_EFECTO'         AS NEMONICO_CATALOGO,\n" +
@@ -7942,13 +8105,13 @@ public class QueryLaborales {
 "  'Colectivo de naturaleza económica' AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_COLECT_ECONOMJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_COLECT_ECONOM"+CON2+"\n" +
 "WHERE OTRO_TIPO = 1\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PARAPROCESALJL - ESPECIFIQUE_MOTIVO (TC_MOTIVO_SOLIC_PROM) */\n" +
+"/* "+CON1+"TR_PARAPROCESAL"+CON2+" - ESPECIFIQUE_MOTIVO (TC_MOTIVO_SOLIC_PROM) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_MOTIVO_SOLIC_PROM'        AS NEMONICO_CATALOGO,\n" +
@@ -7958,13 +8121,13 @@ public class QueryLaborales {
 "  'Paraprocesal o voluntario'   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PARAPROCESALJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PARAPROCESAL"+CON2+"\n" +
 "WHERE MOTIVO_SOLICITUD = 12\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PARAPROCESALJL - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
+"/* "+CON1+"TR_PARAPROCESAL"+CON2+" - ESPECIFIQUE_INCOMP (TC_INCOMPETENCIA) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_INCOMPETENCIA'            AS NEMONICO_CATALOGO,\n" +
@@ -7974,13 +8137,13 @@ public class QueryLaborales {
 "  'Paraprocesal o voluntario'   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PARAPROCESALJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PARAPROCESAL"+CON2+"\n" +
 "WHERE TIPO_INCOMPETENCIA = 4\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PARAPROCESALJL - ESPECIFIQUE_PROMOVENTE (TC_PROMOVENTE) */\n" +
+"/* "+CON1+"TR_PARAPROCESAL"+CON2+" - ESPECIFIQUE_PROMOVENTE (TC_PROMOVENTE) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_PROMOVENTE'               AS NEMONICO_CATALOGO,\n" +
@@ -7990,13 +8153,13 @@ public class QueryLaborales {
 "  'Paraprocesal o voluntario'   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PARAPROCESALJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PARAPROCESAL"+CON2+"\n" +
 "WHERE PROMOVENTE = 5\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PREF_CREDITOJL - ESPECIFIQUE (TC_PROMOVENTE) */\n" +
+"/* "+CON1+"TR_PREF_CREDITO"+CON2+" - ESPECIFIQUE (TC_PROMOVENTE) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_PROMOVENTE'               AS NEMONICO_CATALOGO,\n" +
@@ -8006,13 +8169,13 @@ public class QueryLaborales {
 "  'Preferencia de crédito'      AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  NULL                          AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PREF_CREDITOJL\n" +
+"  PERIODO,NULL AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PREF_CREDITO"+CON2+"\n" +
 "WHERE PROMOVENTE = 5\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_ORDINARIOJL - OTRO_ESP_SINDICATO (TC_SINDICATO) */\n" +
+"/* "+CON1+"TR_PART_ACT_ORDINARIO"+CON2+" - OTRO_ESP_SINDICATO (TC_SINDICATO) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
@@ -8022,13 +8185,13 @@ public class QueryLaborales {
 "  'Actor ordinario'             AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_ORDINARIO' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_ORDINARIO"+CON2+"\n" +
 "WHERE TIPO_SINDICATO = 6\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_ORDINARIOJL - OTRO_ESP_OBRERA (TC_ORG_OBR) */\n" +
+"/* "+CON1+"TR_PART_ACT_ORDINARIO"+CON2+" - OTRO_ESP_OBRERA (TC_ORG_OBR) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
@@ -8038,13 +8201,13 @@ public class QueryLaborales {
 "  'Actor ordinario'             AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_ORDINARIO' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_ORDINARIO"+CON2+"\n" +
 "WHERE NOMBRE_ORG_OBRERA = 8\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_COLECTIVOJL - TC_SINDICATO (Actor colectivo) */\n" +
+"/* "+CON1+"TR_PART_ACT_COLECTIVO"+CON2+" - TC_SINDICATO (Actor colectivo) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
@@ -8054,13 +8217,13 @@ public class QueryLaborales {
 "  'Actor colectivo'             AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  TO_NUMBER(ID_ACTOR)           AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_COLECTIVOJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_COLECTIVO' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_COLECTIVO"+CON2+"\n" +
 "WHERE TIPO_SINDICATO = 6\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_COLECTIVOJL - TC_ORG_OBR (Actor colectivo) */\n" +
+"/* "+CON1+"TR_PART_ACT_COLECTIVO"+CON2+" - TC_ORG_OBR (Actor colectivo) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
@@ -8070,13 +8233,13 @@ public class QueryLaborales {
 "  'Actor colectivo'             AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  TO_NUMBER(ID_ACTOR)                      AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_COLECTIVOJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_COLECTIVO' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_COLECTIVO"+CON2+"\n" +
 "WHERE NOMBRE_ORG_OBRERA = 8\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_HUELGAJL - TC_SINDICATO (Actor huelga) */\n" +
+"/* "+CON1+"TR_PART_ACT_HUELGA"+CON2+" - TC_SINDICATO (Actor huelga) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
@@ -8086,13 +8249,13 @@ public class QueryLaborales {
 "  'Actor huelga'                AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  TO_NUMBER(ID_ACTOR)           AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_HUELGAJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_HUELGA' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_HUELGA"+CON2+"\n" +
 "WHERE TIPO_SINDICATO = 6\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_HUELGAJL - TC_ORG_OBR (Actor huelga) */\n" +
+"/* "+CON1+"TR_PART_ACT_HUELGA"+CON2+" - TC_ORG_OBR (Actor huelga) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
@@ -8102,13 +8265,13 @@ public class QueryLaborales {
 "  'Actor huelga'                AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  TO_NUMBER(ID_ACTOR)           AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_HUELGAJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_HUELGA' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_HUELGA"+CON2+"\n" +
 "WHERE NOMBRE_ORG_OBRERA = 8\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_COLECT_ECONOMJL - TC_SINDICATO (Actor colectivo económico) */\n" +
+"/* "+CON1+"TR_PART_ACT_COLECT_ECONOM"+CON2+" - TC_SINDICATO (Actor colectivo económico) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
@@ -8118,13 +8281,13 @@ public class QueryLaborales {
 "  'Actor colectivo económico'   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_COLECT_ECONOMJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_COLECT_ECONOM' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_COLECT_ECONOM"+CON2+"\n" +
 "WHERE TIPO_SINDICATO = 6\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_ACT_COLECT_ECONOMJL - TC_ORG_OBR (Actor colectivo económico) */\n" +
+"/* "+CON1+"TR_PART_ACT_COLECT_ECONOM"+CON2+" - TC_ORG_OBR (Actor colectivo económico) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
@@ -8134,13 +8297,13 @@ public class QueryLaborales {
 "  'Actor colectivo económico'   AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_ACTOR                      AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_ACT_COLECT_ECONOMJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_ACT:'||ID_ACTOR||','||'TP:'||'ACT_COLECT_ECONOM' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_ACT_COLECT_ECONOM"+CON2+"\n" +
 "WHERE NOMBRE_ORG_OBRERA = 8\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_DEM_COLECTIVOJL - TC_SINDICATO (Demandado colectivo) */\n" +
+"/* "+CON1+"TR_PART_DEM_COLECTIVO"+CON2+" - TC_SINDICATO (Demandado colectivo) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
@@ -8150,13 +8313,13 @@ public class QueryLaborales {
 "  'Demandado colectivo'         AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_COLECTIVO' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_DEM_COLECTIVO"+CON2+"\n" +
 "WHERE TIPO_SINDICATO_DEM = 6\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_DEM_COLECTIVOJL - TC_ORG_OBR (Demandado colectivo) */\n" +
+"/* "+CON1+"TR_PART_DEM_COLECTIVO"+CON2+" - TC_ORG_OBR (Demandado colectivo) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
@@ -8166,13 +8329,13 @@ public class QueryLaborales {
 "  'Demandado colectivo'         AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_COLECT_ECONOM' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_DEM_COLECTIVO"+CON2+"\n" +
 "WHERE NOMBRE_ORG_OBRERA_DEM = 8\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_DEM_COLECT_ECONOMJL - TC_SINDICATO (Demandado colectivo económico) */\n" +
+"/* "+CON1+"TR_PART_DEM_COLECT_ECONOM"+CON2+" - TC_SINDICATO (Demandado colectivo económico) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_SINDICATO'                AS NEMONICO_CATALOGO,\n" +
@@ -8182,13 +8345,13 @@ public class QueryLaborales {
 "  'Demandado colectivo económico' AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_DEM_COLECT_ECONOMJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_COLECT_ECONOM' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_DEM_COLECT_ECONOM"+CON2+"\n" +
 "WHERE TIPO_SINDICATO_DEM = 6\n" +
 "\n" +
 "UNION ALL\n" +
 "\n" +
-"/* V3_TR_PART_DEM_COLECT_ECONOMJL - TC_ORG_OBR (Demandado colectivo económico) */\n" +
+"/* "+CON1+"TR_PART_DEM_COLECT_ECONOM"+CON2+" - TC_ORG_OBR (Demandado colectivo económico) */\n" +
 "SELECT\n" +
 "  NULL                          AS ID_REGISTRO,\n" +
 "  'TC_ORG_OBR'                  AS NEMONICO_CATALOGO,\n" +
@@ -8198,8 +8361,8 @@ public class QueryLaborales {
 "  'Demandado colectivo económico' AS PROCEDIMIENTO,\n" +
 "  POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO)                  AS ORGANO,\n" +
 "  ID_DEMANDADO                  AS ID_ACT_DEM_AUD,\n" +
-"  PERIODO\n" +
-"FROM V3_TR_PART_DEM_COLECT_ECONOMJL\n" +
+"  PERIODO,'CO:'||POSTGRES_CLAVE_ORGANO_7_DIGITOS(CLAVE_ORGANO) ||','||'EXP:'||EXPEDIENTE_CLAVE||','||'PE:'||PERIODO||','||'ID_DEM:'||ID_DEMANDADO||','||'TP:'||'DEM_COLECT_ECONOM' AS ID_UNIQUE_ESP\n" +
+"FROM "+CON1+"TR_PART_DEM_COLECT_ECONOM"+CON2+"\n" +
 "WHERE NOMBRE_ORG_OBRERA_DEM = 8\n" +
 ");";
             try {
@@ -8237,6 +8400,7 @@ public class QueryLaborales {
                         fila.add(resul.getString(7)); // Añadir la septima columna
                         fila.add(resul.getString(8)); // Añadir la octava columna
                         fila.add(resul.getString(9)); // Añadir la novena columna
+                        fila.add(resul.getString(10)); // Añadir la novena columna
                         arrayList.add(fila); // Agregar la fila a la lista principal
                     }
                     

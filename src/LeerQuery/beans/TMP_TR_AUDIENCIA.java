@@ -33,7 +33,7 @@ public class TMP_TR_AUDIENCIA {
             for (int i = 0; i < fila.size(); i++) {
                 BeanTR_AUDIENCIA c = new BeanTR_AUDIENCIA();
                 ArrayList<String> filaActual = fila.get(i);
-                for (int j = 0; j < 10; j++) {
+                for (int j = 0; j < 11; j++) {
                     c.SetID_AUDIENCIA(filaActual.get(0));
                     c.SetID_ORGANOJ(filaActual.get(1));
                     c.SetFECHA_CELEBRACION(filaActual.get(2));
@@ -44,6 +44,7 @@ public class TMP_TR_AUDIENCIA {
                     c.SetCOMENTARIOS(filaActual.get(7));
                     c.SetPERIODO(filaActual.get(8));
                     c.SetID_UNIQUE(filaActual.get(9));
+                    c.setID_UNIQUE_ESP(filaActual.get(10));
                 }
                 ad.add(c);
                 CFilas++;

@@ -24,6 +24,59 @@ public class EDQHuelga {
     ArrayList<String[]> Array;
     ResultSet resul;
 
+    //Query de validacion donde la fecha de apertura no debe de ser No identificada
+    public ArrayList FECHA_APERTURA_NI() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, FECHA_APERTURA_EXPED,COMENTARIOS,PERIODO\n" +
+"FROM TR_EXPEDIENTE\n" +
+"WHERE FECHA_APERTURA_EXPED='09/09/1899' AND ID_TIPO_EXPEDIENTE=4\n" +
+" and ((SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (ID_ORGANOJ='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("FECHA_APERTURA_EXPED"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EDQOrdinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }   
+    
+   //Query de validacion donde la fecha de apertura no debe de ser No identificada
+    public ArrayList FECHA_ACTO_PROCESAL_NI() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT ID_ORGANOJ, CLAVE_EXPEDIENTE, FECHA_ULT_ACT_PROC,COMENTARIOS,PERIODO\n" +
+"FROM TR_EXPEDIENTE\n" +
+"WHERE FECHA_ULT_ACT_PROC='09/09/1899' AND ID_TIPO_EXPEDIENTE=4\n" +
+" and ((SUBSTR(ID_ORGANOJ,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (ID_ORGANOJ='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("ID_ORGANOJ"),
+                    resul.getString("CLAVE_EXPEDIENTE"),
+                    resul.getString("FECHA_ULT_ACT_PROC"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(EDQOrdinario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }    
+    
+
     public ArrayList FECHA_APERTURA_EXPEDIENTE_FUT() {
         conexion.Conectar();
         Array = new ArrayList();

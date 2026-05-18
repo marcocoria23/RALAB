@@ -59,8 +59,8 @@ public class BeanTR_EXP_ACTOR extends Bean implements SQLData {
     public void SetID_UNIQUE(String ID_UNIQUE) {
         this.ID_UNIQUE = ID_UNIQUE;
     }
-    
-    
+
+
     
    
 

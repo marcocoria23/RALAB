@@ -17,6 +17,7 @@ import Screen_laborales.PValidacion;
  *
  * @author ANTONIO.CORIA
  */
+
 public class V3QIndividual {
 
     OracleConexionNE conexion = new OracleConexionNE();
@@ -24,6 +25,57 @@ public class V3QIndividual {
     ArrayList<String[]> Array;
     ResultSet resul;
 
+    
+     //Query de validacion donde la fecha de apertura no debe de ser No identificada
+    public ArrayList FECHA_APERTURA_NI() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, FECHA_APERTURA_EXPEDIENTE,COMENTARIOS\n" +
+"FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE FECHA_APERTURA_EXPEDIENTE='09/09/1899'\n" +
+" and ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (clave_organo='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FECHA_APERTURA_EXPEDIENTE"),
+                resul.getString("COMENTARIOS")});
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+     //Query de validacion donde la fecha ultimo acto procesal  no debe de ser No identificada
+    public ArrayList FECHA_ACTO_PROCESAL_NI() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, FECHA_ACTO_PROCESAL,COMENTARIOS\n" +
+"FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE FECHA_ACTO_PROCESAL='09/09/1899'\n" +
+" and ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (clave_organo='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                   resul.getString("COMENTARIOS")});
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    
     //Query de validacion donde el  año de la fecha de apertura sea diferente al año de la clave del expediente dependiendo del año judicial del estado de Campeche.
     public ArrayList Año_JudicialCampeche() {
         conexion.Conectar();

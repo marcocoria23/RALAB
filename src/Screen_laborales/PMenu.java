@@ -196,7 +196,7 @@ public class PMenu extends javax.swing.JFrame {
         jMenu1.add(jMenuItem8);
 
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/Sin título.png"))); // NOI18N
-        jMenuItem9.setText("Procesar consultas");
+        jMenuItem9.setText("Generar Postgres .sql");
         jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jMenuItem9MousePressed(evt);
@@ -210,7 +210,7 @@ public class PMenu extends javax.swing.JFrame {
         jMenu1.add(jMenuItem9);
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/insert to bd.png"))); // NOI18N
-        jMenuItem10.setText("Consultar PostgreSQL");
+        jMenuItem10.setText("Insertar Postgre .sql");
         jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jMenuItem10MousePressed(evt);
@@ -332,7 +332,7 @@ public class PMenu extends javax.swing.JFrame {
 
     private void jMenuItem9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MousePressed
         // TODO add your handling code here:
-      PValidacionProcesar Val = new PValidacionProcesar();
+      PValidacionProcesarPstgreSQL Val = new PValidacionProcesarPstgreSQL();
        Val.setVisible(true);
       this.setVisible(false);
         

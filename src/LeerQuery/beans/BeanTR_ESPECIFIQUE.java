@@ -29,6 +29,7 @@ public class BeanTR_ESPECIFIQUE extends Bean implements SQLData  {
         private String ORGANO;
         private String ID_ACT_DEM_AUD;
         private String PERIODO;
+        private String ID_UNIQUE_ESP;
         
         
      public String GetID_REGISTRO() {
@@ -102,6 +103,16 @@ public class BeanTR_ESPECIFIQUE extends Bean implements SQLData  {
     public void SetPERIODO(String PERIODO) {
         this.PERIODO = PERIODO;
     }
+
+    public String getID_UNIQUE_ESP() {
+        return ID_UNIQUE_ESP;
+    }
+
+    public void setID_UNIQUE_ESP(String ID_UNIQUE_ESP) {
+        this.ID_UNIQUE_ESP = ID_UNIQUE_ESP;
+    }
+
+   
     
     @Override
     public Object[] getLlave() {
@@ -146,7 +157,8 @@ public class BeanTR_ESPECIFIQUE extends Bean implements SQLData  {
             GetPROCEDIMIENTO(),
             GetORGANO(),
             GetID_ACT_DEM_AUD(),
-            GetPERIODO()
+            GetPERIODO(),
+            getID_UNIQUE_ESP()
                 
 
         };

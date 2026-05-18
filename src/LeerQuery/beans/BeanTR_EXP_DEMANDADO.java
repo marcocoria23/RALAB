@@ -62,8 +62,8 @@ public class BeanTR_EXP_DEMANDADO  extends Bean implements SQLData  {
     public void SetID_UNIQUE(String ID_UNIQUE) {
         this.ID_UNIQUE = ID_UNIQUE;
     }
-    
-    
+
+
      @Override
     public Object[] getLlave() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

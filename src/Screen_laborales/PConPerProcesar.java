@@ -91,8 +91,12 @@ public class PConPerProcesar extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     
       
-     if(PValidacionProcesar.clave_entidad != null ){
-        ArrayPeriodo=queryRalabProd.periodoEntidad();
+     if(PValidacionProcesarPstgreSQL.clave_entidad != null ){
+        if (PValidacionProcesarPstgreSQL.BDProductos !=null){
+         ArrayPeriodo=queryRalabProd.periodoEntidadBDPRODUCTOS();
+        }else{
+         ArrayPeriodo=queryRalabProd.periodoEntidad();
+        }
         DefaultTableModel TablaPeriodo = (DefaultTableModel) Tperiodo.getModel();     
         Object[] fila = new Object[ArrayPeriodo.size()];      
         for(int j=0; j<ArrayPeriodo.size(); j++){
@@ -104,8 +108,13 @@ public class PConPerProcesar extends javax.swing.JFrame {
         }  
       
       }
-      if(PValidacionProcesar.clave_organo != null ){
-        ArrayPeriodo=queryRalabProd.periodoClaveOrgano();
+      if(PValidacionProcesarPstgreSQL.clave_organo != null ){
+           if (PValidacionProcesarPstgreSQL.BDProductos !=null){
+                ArrayPeriodo=queryRalabProd.periodoClaveOrganoBDPRODUCTOS();
+           }else{
+                ArrayPeriodo=queryRalabProd.periodoClaveOrgano();
+           }
+       
         DefaultTableModel TablaPeriodo = (DefaultTableModel) Tperiodo.getModel();     
         Object[] fila = new Object[ArrayPeriodo.size()];      
         for(int j=0; j<ArrayPeriodo.size(); j++){

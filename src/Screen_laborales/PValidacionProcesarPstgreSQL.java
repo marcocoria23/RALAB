@@ -36,12 +36,12 @@ import javax.swing.JOptionPane;
 
 
 /* @author ALEJANDRO.CASTILLO */
-public class PValidacionProcesar extends javax.swing.JFrame {
+public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
 
-   public static String clave_entidad="", periodo = "", clave_organo;//variables publicas
+   public static String clave_entidad="", periodo = "", clave_organo,BDProductos="";//variables publicas
    private  boolean generarArchivo = false;   
 
-    public PValidacionProcesar() {
+    public PValidacionProcesarPstgreSQL() {
         initComponents();
         this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
@@ -57,6 +57,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
         jLabel4.setVisible(false);
         Textoperiodo1.setVisible(false);
         jButton2.setVisible(false);
+        Rclave_organo1.setVisible(false);
     }
 
 
@@ -91,6 +92,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         Textoperiodo1 = new javax.swing.JTextField();
         seleccionar = new javax.swing.JCheckBox();
+        RProductos = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Lable = new javax.swing.JLabel();
@@ -239,6 +241,8 @@ public class PValidacionProcesar extends javax.swing.JFrame {
 
         seleccionar.setLabel("Generar el archivo SQL");
 
+        RProductos.setText("BD Productos");
+
         javax.swing.GroupLayout PAgrupamientoLayout = new javax.swing.GroupLayout(PAgrupamiento);
         PAgrupamiento.setLayout(PAgrupamientoLayout);
         PAgrupamientoLayout.setHorizontalGroup(
@@ -246,46 +250,50 @@ public class PValidacionProcesar extends javax.swing.JFrame {
             .addGroup(PAgrupamientoLayout.createSequentialGroup()
                 .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(Jentidad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(74, 74, 74)
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(Jentidad)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(EtiquetaOrg)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ClaveOrgano, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1))
+                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                .addComponent(Jorgano)
+                                .addGap(2, 2, 2)
+                                .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Rclave_organo1))))
+                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(RProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Rclave_entidad)
                                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
                                         .addGap(111, 111, 111)
                                         .addComponent(Rclave_organo)))
-                                .addGap(18, 18, 18)
-                                .addComponent(Rclave_organo1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(seleccionar))
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(EtiquetaOrg)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ClaveOrgano, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(571, 571, 571)
-                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addGap(52, 52, 52)
-                                .addComponent(Jorgano)
-                                .addGap(2, 2, 2)
-                                .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                                .addGap(571, 571, 571)
+                                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 64, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         PAgrupamientoLayout.setVerticalGroup(
             PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,32 +302,34 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                 .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Rclave_entidad)
                     .addComponent(Rclave_organo)
-                    .addComponent(Rclave_organo1)
-                    .addComponent(seleccionar))
+                    .addComponent(seleccionar)
+                    .addComponent(RProductos))
+                .addGap(25, 25, 25)
+                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Jentidad)
+                    .addComponent(EtiquetaOrg)
+                    .addComponent(ClaveOrgano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Jentidad)
-                            .addComponent(EtiquetaOrg)
-                            .addComponent(ClaveOrgano, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)
+                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Jorgano)
+                                    .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Jorgano)
-                            .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(124, Short.MAX_VALUE))
+                        .addGap(54, 54, 54)
+                        .addComponent(Rclave_organo1)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         seleccionar.getAccessibleContext().setAccessibleName("");
@@ -345,7 +355,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 746, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -368,9 +378,9 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                         .addComponent(Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(PAgrupamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(221, 221, 221))
+                .addGap(215, 215, 215))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -448,81 +458,81 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                        if(!cveEntidad.equals("")  && !periodo.equals("")){
                          queryRalabDes.eliminarRegistros(cveEntidad, "", periodo);
                          // ---- 1.- TR_ORGANOJ
-                         ArrayList<ArrayList<String>> listaRegistrosOrganoJ  =  queryLaboral.DBO_Tr_OrganoJ(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosOrganoJ  =  queryLaboral.DBO_Tr_OrganoJ(cveEntidad, periodo , "",BDProductos);
                          if(!listaRegistrosOrganoJ.isEmpty())
                          tmp_tr_organoj.TMP_TR_ORGANOJ(listaRegistrosOrganoJ);
                          //-----  2.-  TR_EXPEDIENTE
-                         ArrayList<ArrayList<String>> listaRegistrosExpe  =  queryLaboral.DBO_Tr_Expedientes(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosExpe  =  queryLaboral.DBO_Tr_Expedientes(cveEntidad, periodo , "",BDProductos);
                          if(!listaRegistrosExpe.isEmpty())
                          tmp_tr_expedientes.TMP_TR_EXPEDIENTES(listaRegistrosExpe );
                          //TR_DEMANDADO
-                         ArrayList<ArrayList<String>> listaRegistrosDema  =  queryLaboral.DBO_Tr_Demandado(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosDema  =  queryLaboral.DBO_Tr_Demandado(cveEntidad, periodo , "",BDProductos);
                          if(!listaRegistrosDema.isEmpty())
                          tmp_tr_demandado.TMP_TR_DEMANDADO(listaRegistrosDema); 
                          // TR_AUDIENCIA
-                         ArrayList<ArrayList<String>> listaRegistrosAudiencia  =  queryLaboral.DBO_Tr_Audiencias(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosAudiencia  =  queryLaboral.DBO_Tr_Audiencias(cveEntidad, periodo , "",BDProductos);
                          if(!listaRegistrosAudiencia.isEmpty())
                          tmp_tr_audiencia.TMP_TR_AUDIENCIA(listaRegistrosAudiencia);
                          //----TR_GENERAL
-                         ArrayList<ArrayList<String>> listaRegistrosGeneral  =  queryLaboral.DBO_Tr_General(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosGeneral  =  queryLaboral.DBO_Tr_General(cveEntidad, periodo , "",BDProductos);
                          if(!listaRegistrosGeneral.isEmpty() )
                          tmp_tr_general.TMP_TR_GENERAL(listaRegistrosGeneral);
                          // ---TR_ACTOR 
-                         ArrayList<ArrayList<String>> listaRegistrosActor  =  queryLaboral.DBO_Tr_Actor(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosActor  =  queryLaboral.DBO_Tr_Actor(cveEntidad, periodo , "",BDProductos);
                          if(!listaRegistrosActor.isEmpty())
                          tmp_tr_actor.TMP_TR_ACTOR(listaRegistrosActor);
                          // correr el proceso ENABLE 
                          // tabla Tr_Exp_Motivo_Conf
                          queryRalabDes.disable_tr_exp_pk_ralalb();
-                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoConf =  queryLaboral.DBO_Tr_exp_motivo_conf(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoConf =  queryLaboral.DBO_Tr_exp_motivo_conf(cveEntidad, periodo , "",BDProductos);
                          if(!listaRegistrosExpMotivoConf.isEmpty())
                          tmp_tr_exp_motivo_conf.TMP_TR_EXP_MOTIVO_CONF(listaRegistrosExpMotivoConf);
                          //TR_EXP_CIRCUNST
-                         ArrayList<ArrayList<String>> listaRegistrosExpCircunst =  queryLaboral.DBO_Tr_Exp_Circunst(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosExpCircunst =  queryLaboral.DBO_Tr_Exp_Circunst(cveEntidad, periodo , "",BDProductos);
                          if( !listaRegistrosExpCircunst.isEmpty() )
                          tmp_tr_exp_circunts.TMP_TR_EXP_CIRCUNST(listaRegistrosExpCircunst);
                          //TR_EXP_CONCEPTO_RECLAM
-                         ArrayList<ArrayList<String>> listaRegistrosExpConceptoReclam =  queryLaboral.DBO_Tr_Exp_Concepto_Reclam(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosExpConceptoReclam =  queryLaboral.DBO_Tr_Exp_Concepto_Reclam(cveEntidad, periodo , "",BDProductos);
                          if( !listaRegistrosExpConceptoReclam.isEmpty())
                          tmp_tr_exp_concepto_reclam.TMP_TR_EXP_CONCEPTO_RECLAM(listaRegistrosExpConceptoReclam);
                          //TR_EXP_PRESTACION
-                         ArrayList<ArrayList<String>> listaRegistrosExpPrestacion =  queryLaboral.DBO_Tr_Exp_Prestacion(cveEntidad, periodo , "");//--
+                         ArrayList<ArrayList<String>> listaRegistrosExpPrestacion =  queryLaboral.DBO_Tr_Exp_Prestacion(cveEntidad, periodo , "",BDProductos);//--
                          if( ! listaRegistrosExpPrestacion.isEmpty())
                          tmp_tr_exp_prestacion.TMP_TR_EXP_PRESTACION(listaRegistrosExpPrestacion);
                         //TR_EXP_MOTIVO_HUELGA
-                        ArrayList<ArrayList<String>> listaRegistrosExpMotivoHuelga =  queryLaboral.DBO_Tr_Exp_Motivo_Huelga(cveEntidad, periodo , "");
+                        ArrayList<ArrayList<String>> listaRegistrosExpMotivoHuelga =  queryLaboral.DBO_Tr_Exp_Motivo_Huelga(cveEntidad, periodo , "",BDProductos);
                         if( ! listaRegistrosExpMotivoHuelga.isEmpty() )
                         tmp_tr_exp_motivo_huelga.TMP_TR_EXP_MOTIVO_HUELGA(listaRegistrosExpMotivoHuelga);
                         //TR_EXP_SUSPENSION
-                        ArrayList<ArrayList<String>> listaRegistrosExpSuspension =  queryLaboral.DBO_Tr_Exp_Suspension(cveEntidad, periodo , "");
+                        ArrayList<ArrayList<String>> listaRegistrosExpSuspension =  queryLaboral.DBO_Tr_Exp_Suspension(cveEntidad, periodo , "",BDProductos);
                         if( ! listaRegistrosExpSuspension.isEmpty() )
                         tmp_tr_exp_suspension.TMP_TR_EXP_SUSPENSION(listaRegistrosExpSuspension);
                          //TR_EXP_TERMINACION 
-                        ArrayList<ArrayList<String>> listaRegistrosExpTerminacion =  queryLaboral.DBO_Tr_Exp_Terminacion(cveEntidad, periodo , "");
+                        ArrayList<ArrayList<String>> listaRegistrosExpTerminacion =  queryLaboral.DBO_Tr_Exp_Terminacion(cveEntidad, periodo , "",BDProductos);
                         if( !listaRegistrosExpTerminacion.isEmpty() )
                         tmp_tr_exp_terminacion.TMP_TR_EXP_TERMINACION(listaRegistrosExpTerminacion);
                          //TR_EXP_VIOLACION   
-                        ArrayList<ArrayList<String>> listaRegistrosExpViolacion =  queryLaboral.DBO_Tr_Exp_Violacion(cveEntidad, periodo , "");
+                        ArrayList<ArrayList<String>> listaRegistrosExpViolacion =  queryLaboral.DBO_Tr_Exp_Violacion(cveEntidad, periodo , "",BDProductos);
                         if( !listaRegistrosExpViolacion.isEmpty() )
                         tmp_tr_exp_violacion.TMP_TR_EXP_VIOLACION(listaRegistrosExpViolacion);
                         // TR_EXP_EFECTO_SENTENCIA
-                        ArrayList<ArrayList<String>> listaRegistrosExpEfectoSentencia =  queryLaboral.DBO_Tr_Exp_Efecto_Sentencia(cveEntidad, periodo , "");
+                        ArrayList<ArrayList<String>> listaRegistrosExpEfectoSentencia =  queryLaboral.DBO_Tr_Exp_Efecto_Sentencia(cveEntidad, periodo , "",BDProductos);
                         if( !listaRegistrosExpEfectoSentencia.isEmpty() )
                         tmp_tr_exp_efecto_sentencia.TMP_TR_EXP_EFECTO_SENTENCIA(listaRegistrosExpEfectoSentencia);
                         //--TR_EXP_MOTIVO_SOLIC
-                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoSolic =  queryLaboral.DBO_Tr_Exp_Motivo_Solic(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoSolic =  queryLaboral.DBO_Tr_Exp_Motivo_Solic(cveEntidad, periodo , "",BDProductos);
                         if( !listaRegistrosExpMotivoSolic.isEmpty()  )
                          tmp_tr_exp_motivo_solic.TMP_TR_EXP_MOTIVO_SOLIC(listaRegistrosExpMotivoSolic);
                          //TR_EXP_ACTOR
-                           ArrayList<ArrayList<String>> listaRegistrosExpActor =  queryLaboral.DBO_Tr_Exp_Actor(cveEntidad, periodo , "");
+                           ArrayList<ArrayList<String>> listaRegistrosExpActor =  queryLaboral.DBO_Tr_Exp_Actor(cveEntidad, periodo , "",BDProductos);
                          if( !listaRegistrosExpActor.isEmpty() )
                            tmp_tr_exp_actor.TMP_TR_EXP_ACTOR(listaRegistrosExpActor);
                           //TR_EXP_DEMANDADO
-                         ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado(cveEntidad, periodo , "",BDProductos);
                          if( !listaRegistrosExpDemandado.isEmpty() )
                          tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaRegistrosExpDemandado);
                           //TR_ESPECIFIQUE
-                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique(cveEntidad, periodo , "");
+                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique(cveEntidad, periodo , "",BDProductos);
                          if( !listaRegistrosEspecifique.isEmpty() )
                          tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                          queryRalabDes.merge_id_expediente(cveEntidad, "", periodo);
@@ -618,79 +628,80 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                        if(!clavOrgano.equals("")  && !periodo.equals("")){
                          queryRalabDes.eliminarRegistros("", clavOrgano , periodo);
                          // ---- 1.- TR_ORGANOJ
-                         ArrayList<ArrayList<String>> listaRegistrosOrganoJ  =  queryLaboral.DBO_Tr_OrganoJ("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosOrganoJ  =  queryLaboral.DBO_Tr_OrganoJ("", periodo , clavOrgano,BDProductos );
                          if(!listaRegistrosOrganoJ.isEmpty())
                          tmp_tr_organoj.TMP_TR_ORGANOJ(listaRegistrosOrganoJ);
                          //-----  2.-  TR_EXPEDIENTE
-                         ArrayList<ArrayList<String>> listaRegistrosExpe  =  queryLaboral.DBO_Tr_Expedientes("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosExpe  =  queryLaboral.DBO_Tr_Expedientes("", periodo , clavOrgano,BDProductos );
                          if(!listaRegistrosExpe.isEmpty())
                          tmp_tr_expedientes.TMP_TR_EXPEDIENTES(listaRegistrosExpe );
                          //TR_DEMANDADO
-                         ArrayList<ArrayList<String>> listaRegistrosDema  =  queryLaboral.DBO_Tr_Demandado("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosDema  =  queryLaboral.DBO_Tr_Demandado("", periodo , clavOrgano,BDProductos );
                          if(!listaRegistrosDema.isEmpty())
                          tmp_tr_demandado.TMP_TR_DEMANDADO(listaRegistrosDema); 
                          // TR_AUDIENCIA
-                         ArrayList<ArrayList<String>> listaRegistrosAudiencia  =  queryLaboral.DBO_Tr_Audiencias("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosAudiencia  =  queryLaboral.DBO_Tr_Audiencias("", periodo , clavOrgano,BDProductos );
                          if(!listaRegistrosAudiencia.isEmpty())
                          tmp_tr_audiencia.TMP_TR_AUDIENCIA(listaRegistrosAudiencia);
                          //----TR_GENERAL
-                         ArrayList<ArrayList<String>> listaRegistrosGeneral  =  queryLaboral.DBO_Tr_General("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosGeneral  =  queryLaboral.DBO_Tr_General("", periodo , clavOrgano,BDProductos );
                          if(!listaRegistrosGeneral.isEmpty() )
                          tmp_tr_general.TMP_TR_GENERAL(listaRegistrosGeneral);
                          // ---TR_ACTOR 
-                         ArrayList<ArrayList<String>> listaRegistrosActor  =  queryLaboral.DBO_Tr_Actor("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosActor  =  queryLaboral.DBO_Tr_Actor("", periodo , clavOrgano,BDProductos );
                          if(!listaRegistrosActor.isEmpty())
                          tmp_tr_actor.TMP_TR_ACTOR(listaRegistrosActor);
                          // tabla Tr_Exp_Motivo_Conf
                          queryRalabDes.disable_tr_exp_pk_ralalb();       // correr el proceso ENABLE 
-                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoConf =  queryLaboral.DBO_Tr_exp_motivo_conf("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoConf =  queryLaboral.DBO_Tr_exp_motivo_conf("", periodo , clavOrgano,BDProductos );
                          if(!listaRegistrosExpMotivoConf.isEmpty())
                          tmp_tr_exp_motivo_conf.TMP_TR_EXP_MOTIVO_CONF(listaRegistrosExpMotivoConf);
                          //TR_EXP_CIRCUNST
-                         ArrayList<ArrayList<String>> listaRegistrosExpCircunst =  queryLaboral.DBO_Tr_Exp_Circunst("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosExpCircunst =  queryLaboral.DBO_Tr_Exp_Circunst("", periodo , clavOrgano,BDProductos );
                          if( !listaRegistrosExpCircunst.isEmpty() )
                          tmp_tr_exp_circunts.TMP_TR_EXP_CIRCUNST(listaRegistrosExpCircunst);
                          //TR_EXP_CONCEPTO_RECLAM
-                         ArrayList<ArrayList<String>> listaRegistrosExpConceptoReclam =  queryLaboral.DBO_Tr_Exp_Concepto_Reclam("", periodo , clavOrgano );
+                         ArrayList<ArrayList<String>> listaRegistrosExpConceptoReclam =  queryLaboral.DBO_Tr_Exp_Concepto_Reclam("", periodo , clavOrgano,BDProductos );
                          if( !listaRegistrosExpConceptoReclam.isEmpty())
                          tmp_tr_exp_concepto_reclam.TMP_TR_EXP_CONCEPTO_RECLAM(listaRegistrosExpConceptoReclam);
                          //TR_EXP_PRESTACION
-                         ArrayList<ArrayList<String>> listaRegistrosExpPrestacion =  queryLaboral.DBO_Tr_Exp_Prestacion("", periodo , clavOrgano);
+                         ArrayList<ArrayList<String>> listaRegistrosExpPrestacion =  queryLaboral.DBO_Tr_Exp_Prestacion("", periodo , clavOrgano,BDProductos);
                          if( ! listaRegistrosExpPrestacion.isEmpty())
                          tmp_tr_exp_prestacion.TMP_TR_EXP_PRESTACION(listaRegistrosExpPrestacion);
                         //TR_EXP_MOTIVO_HUELGA
-                        ArrayList<ArrayList<String>> listaRegistrosExpMotivoHuelga =  queryLaboral.DBO_Tr_Exp_Motivo_Huelga("", periodo , clavOrgano );
+                        ArrayList<ArrayList<String>> listaRegistrosExpMotivoHuelga =  queryLaboral.DBO_Tr_Exp_Motivo_Huelga("", periodo , clavOrgano,BDProductos );
                         if( ! listaRegistrosExpMotivoHuelga.isEmpty() )
                         tmp_tr_exp_motivo_huelga.TMP_TR_EXP_MOTIVO_HUELGA(listaRegistrosExpMotivoHuelga);
                         //TR_EXP_SUSPENSION
-                        ArrayList<ArrayList<String>> listaRegistrosExpSuspension =  queryLaboral.DBO_Tr_Exp_Suspension("", periodo , clavOrgano );
+                        ArrayList<ArrayList<String>> listaRegistrosExpSuspension =  queryLaboral.DBO_Tr_Exp_Suspension("", periodo , clavOrgano,BDProductos );
                         if( ! listaRegistrosExpSuspension.isEmpty() )
                         tmp_tr_exp_suspension.TMP_TR_EXP_SUSPENSION(listaRegistrosExpSuspension);
                          //TR_EXP_TERMINACION 
-                        ArrayList<ArrayList<String>> listaRegistrosExpTerminacion =  queryLaboral.DBO_Tr_Exp_Terminacion("", periodo , clavOrgano );
+                        ArrayList<ArrayList<String>> listaRegistrosExpTerminacion =  queryLaboral.DBO_Tr_Exp_Terminacion("", periodo , clavOrgano,BDProductos );
                         if( !listaRegistrosExpTerminacion.isEmpty() )
                         tmp_tr_exp_terminacion.TMP_TR_EXP_TERMINACION(listaRegistrosExpTerminacion);
                          //TR_EXP_VIOLACION   
-                        ArrayList<ArrayList<String>> listaRegistrosExpViolacion =  queryLaboral.DBO_Tr_Exp_Violacion("", periodo , clavOrgano);
+                        ArrayList<ArrayList<String>> listaRegistrosExpViolacion =  queryLaboral.DBO_Tr_Exp_Violacion("", periodo , clavOrgano,BDProductos);
                         if( !listaRegistrosExpViolacion.isEmpty() )
                         tmp_tr_exp_violacion.TMP_TR_EXP_VIOLACION(listaRegistrosExpViolacion);
                         // TR_EXP_EFECTO_SENTENCIA
-                        ArrayList<ArrayList<String>> listaRegistrosExpEfectoSentencia =  queryLaboral.DBO_Tr_Exp_Efecto_Sentencia("", periodo , clavOrgano);
+                        ArrayList<ArrayList<String>> listaRegistrosExpEfectoSentencia =  queryLaboral.DBO_Tr_Exp_Efecto_Sentencia("", periodo , clavOrgano,BDProductos);
                         if( !listaRegistrosExpEfectoSentencia.isEmpty() )
                         tmp_tr_exp_efecto_sentencia.TMP_TR_EXP_EFECTO_SENTENCIA(listaRegistrosExpEfectoSentencia);
                         //--TR_EXP_MOTIVO_SOLIC
-                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoSolic =  queryLaboral.DBO_Tr_Exp_Motivo_Solic("", periodo , clavOrgano);
+                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoSolic =  queryLaboral.DBO_Tr_Exp_Motivo_Solic("", periodo , clavOrgano,BDProductos);
                         if( !listaRegistrosExpMotivoSolic.isEmpty()  )
                          tmp_tr_exp_motivo_solic.TMP_TR_EXP_MOTIVO_SOLIC(listaRegistrosExpMotivoSolic);
                          //TR_EXP_ACTOR
-                           ArrayList<ArrayList<String>> listaRegistrosExpActor =  queryLaboral.DBO_Tr_Exp_Actor("", periodo , clavOrgano);
+                           ArrayList<ArrayList<String>> listaRegistrosExpActor =  queryLaboral.DBO_Tr_Exp_Actor("", periodo , clavOrgano,BDProductos);
                          if( !listaRegistrosExpActor.isEmpty() )
                            tmp_tr_exp_actor.TMP_TR_EXP_ACTOR(listaRegistrosExpActor);
                           //TR_EXP_DEMANDADO
-                         ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado("", periodo , clavOrgano);
+                         ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado("", periodo , clavOrgano,BDProductos);
                          if( !listaRegistrosExpDemandado.isEmpty() )
                          tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaRegistrosExpDemandado);
-                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique("", periodo , clavOrgano);
+                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique("", periodo , clavOrgano,BDProductos);
+                         //TR_ESPECIFIQUE
                          if( !listaRegistrosEspecifique.isEmpty() )
                          tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                             queryRalabDes.merge_id_expediente(null,  clavOrgano , periodo);
@@ -724,9 +735,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                                  nombreArchivo = "MIG-" + Centidad.getSelectedItem().toString() + " LIBERADO.sql";
                              } else if (Rclave_organo.isSelected()) {
                                  nombreArchivo = "MIG-" + CorganoJur.getSelectedItem().toString() + " LIBERADO.sql";
-                             } else if (Rclave_organo1.isSelected()) {
-                                 nombreArchivo = "MIG-" + ClaveOrgano.getText() + " LIBERADO.sql";
-                             }
+                             } 
                              fileChooser.setSelectedFile(new File(nombreArchivo));
                              int seleccionUsuario = fileChooser.showSaveDialog(null);
                              if (seleccionUsuario == JFileChooser.APPROVE_OPTION) {
@@ -790,80 +799,80 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                        Files.copy(sqlVirgen.toPath(), sqlVirgenTemporal.toPath(), StandardCopyOption.REPLACE_EXISTING);
                        if(!clavOrgano.equals("")){
                          // ---- 1.- TR_ORGANOJ
-                         ArrayList<ArrayList<String>> listaRegistrosOrganoJ  =  queryLaboral.DBO_Tr_OrganoJ("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosOrganoJ  =  queryLaboral.DBO_Tr_OrganoJ("", "" , filtro,BDProductos );
                          if(!listaRegistrosOrganoJ.isEmpty())
                          tmp_tr_organoj.TMP_TR_ORGANOJ(listaRegistrosOrganoJ);
                          //-----  2.-  TR_EXPEDIENTE
-                         ArrayList<ArrayList<String>> listaRegistrosExpe  =  queryLaboral.DBO_Tr_Expedientes("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosExpe  =  queryLaboral.DBO_Tr_Expedientes("", "" , filtro,BDProductos );
                          if(!listaRegistrosExpe.isEmpty())
                          tmp_tr_expedientes.TMP_TR_EXPEDIENTES(listaRegistrosExpe );
                          //TR_DEMANDADO
-                         ArrayList<ArrayList<String>> listaRegistrosDema  =  queryLaboral.DBO_Tr_Demandado("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosDema  =  queryLaboral.DBO_Tr_Demandado("", "" , filtro,BDProductos );
                          if(!listaRegistrosDema.isEmpty())
                          tmp_tr_demandado.TMP_TR_DEMANDADO(listaRegistrosDema); 
                          // TR_AUDIENCIA
-                         ArrayList<ArrayList<String>> listaRegistrosAudiencia  =  queryLaboral.DBO_Tr_Audiencias("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosAudiencia  =  queryLaboral.DBO_Tr_Audiencias("", "" , filtro,BDProductos );
                          if(!listaRegistrosAudiencia.isEmpty())
                          tmp_tr_audiencia.TMP_TR_AUDIENCIA(listaRegistrosAudiencia);
                          //----TR_GENERAL
-                         ArrayList<ArrayList<String>> listaRegistrosGeneral  =  queryLaboral.DBO_Tr_General("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosGeneral  =  queryLaboral.DBO_Tr_General("", "" , filtro,BDProductos );
                          if(!listaRegistrosGeneral.isEmpty() )
                          tmp_tr_general.TMP_TR_GENERAL(listaRegistrosGeneral);
                          // ---TR_ACTOR 
-                         ArrayList<ArrayList<String>> listaRegistrosActor  =  queryLaboral.DBO_Tr_Actor("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosActor  =  queryLaboral.DBO_Tr_Actor("", "" , filtro,BDProductos );
                          if(!listaRegistrosActor.isEmpty())
                          tmp_tr_actor.TMP_TR_ACTOR(listaRegistrosActor);
                          // tabla Tr_Exp_Motivo_Conf
                          queryRalabDes.disable_tr_exp_pk_ralalb();   // correr el proceso ENABLE 
-                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoConf =  queryLaboral.DBO_Tr_exp_motivo_conf("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoConf =  queryLaboral.DBO_Tr_exp_motivo_conf("", "" , filtro ,BDProductos);
                          if(!listaRegistrosExpMotivoConf.isEmpty())
                          tmp_tr_exp_motivo_conf.TMP_TR_EXP_MOTIVO_CONF(listaRegistrosExpMotivoConf);
                          //TR_EXP_CIRCUNST
-                         ArrayList<ArrayList<String>> listaRegistrosExpCircunst =  queryLaboral.DBO_Tr_Exp_Circunst("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosExpCircunst =  queryLaboral.DBO_Tr_Exp_Circunst("", "" , filtro ,BDProductos);
                          if( !listaRegistrosExpCircunst.isEmpty() )
                          tmp_tr_exp_circunts.TMP_TR_EXP_CIRCUNST(listaRegistrosExpCircunst);
                          //TR_EXP_CONCEPTO_RECLAM
-                         ArrayList<ArrayList<String>> listaRegistrosExpConceptoReclam =  queryLaboral.DBO_Tr_Exp_Concepto_Reclam("",  "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosExpConceptoReclam =  queryLaboral.DBO_Tr_Exp_Concepto_Reclam("",  "" , filtro ,BDProductos);
                          if( !listaRegistrosExpConceptoReclam.isEmpty())
                          tmp_tr_exp_concepto_reclam.TMP_TR_EXP_CONCEPTO_RECLAM(listaRegistrosExpConceptoReclam);
                          //TR_EXP_PRESTACION
-                         ArrayList<ArrayList<String>> listaRegistrosExpPrestacion =  queryLaboral.DBO_Tr_Exp_Prestacion("", "" , filtro);
+                         ArrayList<ArrayList<String>> listaRegistrosExpPrestacion =  queryLaboral.DBO_Tr_Exp_Prestacion("", "" , filtro,BDProductos);
                          if( ! listaRegistrosExpPrestacion.isEmpty())
                          tmp_tr_exp_prestacion.TMP_TR_EXP_PRESTACION(listaRegistrosExpPrestacion);
                         //TR_EXP_MOTIVO_HUELGA
-                        ArrayList<ArrayList<String>> listaRegistrosExpMotivoHuelga =  queryLaboral.DBO_Tr_Exp_Motivo_Huelga("", "" , filtro );
+                        ArrayList<ArrayList<String>> listaRegistrosExpMotivoHuelga =  queryLaboral.DBO_Tr_Exp_Motivo_Huelga("", "" , filtro,BDProductos );
                         if( ! listaRegistrosExpMotivoHuelga.isEmpty() )
                         tmp_tr_exp_motivo_huelga.TMP_TR_EXP_MOTIVO_HUELGA(listaRegistrosExpMotivoHuelga);
                         //TR_EXP_SUSPENSION
-                        ArrayList<ArrayList<String>> listaRegistrosExpSuspension =  queryLaboral.DBO_Tr_Exp_Suspension("", "" , filtro );
+                        ArrayList<ArrayList<String>> listaRegistrosExpSuspension =  queryLaboral.DBO_Tr_Exp_Suspension("", "" , filtro,BDProductos );
                         if( ! listaRegistrosExpSuspension.isEmpty() )
                         tmp_tr_exp_suspension.TMP_TR_EXP_SUSPENSION(listaRegistrosExpSuspension);
                          //TR_EXP_TERMINACION 
-                        ArrayList<ArrayList<String>> listaRegistrosExpTerminacion =  queryLaboral.DBO_Tr_Exp_Terminacion("", "" , filtro );
+                        ArrayList<ArrayList<String>> listaRegistrosExpTerminacion =  queryLaboral.DBO_Tr_Exp_Terminacion("", "" , filtro,BDProductos );
                         if( !listaRegistrosExpTerminacion.isEmpty() )
                         tmp_tr_exp_terminacion.TMP_TR_EXP_TERMINACION(listaRegistrosExpTerminacion);
                          //TR_EXP_VIOLACION   
-                        ArrayList<ArrayList<String>> listaRegistrosExpViolacion =  queryLaboral.DBO_Tr_Exp_Violacion("", "" , filtro);
+                        ArrayList<ArrayList<String>> listaRegistrosExpViolacion =  queryLaboral.DBO_Tr_Exp_Violacion("", "" , filtro,BDProductos);
                         if( !listaRegistrosExpViolacion.isEmpty() )
                         tmp_tr_exp_violacion.TMP_TR_EXP_VIOLACION(listaRegistrosExpViolacion);
                         // TR_EXP_EFECTO_SENTENCIA
-                        ArrayList<ArrayList<String>> listaRegistrosExpEfectoSentencia =  queryLaboral.DBO_Tr_Exp_Efecto_Sentencia("", "" , filtro);
+                        ArrayList<ArrayList<String>> listaRegistrosExpEfectoSentencia =  queryLaboral.DBO_Tr_Exp_Efecto_Sentencia("", "" , filtro,BDProductos);
                         if( !listaRegistrosExpEfectoSentencia.isEmpty() )
                         tmp_tr_exp_efecto_sentencia.TMP_TR_EXP_EFECTO_SENTENCIA(listaRegistrosExpEfectoSentencia);
                         //--TR_EXP_MOTIVO_SOLIC
-                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoSolic =  queryLaboral.DBO_Tr_Exp_Motivo_Solic("", "" , filtro);
+                         ArrayList<ArrayList<String>> listaRegistrosExpMotivoSolic =  queryLaboral.DBO_Tr_Exp_Motivo_Solic("", "" , filtro,BDProductos);
                         if( !listaRegistrosExpMotivoSolic.isEmpty()  )
                          tmp_tr_exp_motivo_solic.TMP_TR_EXP_MOTIVO_SOLIC(listaRegistrosExpMotivoSolic);
                          //TR_EXP_ACTOR
-                           ArrayList<ArrayList<String>> listaRegistrosExpActor =  queryLaboral.DBO_Tr_Exp_Actor("", "" , filtro);
+                           ArrayList<ArrayList<String>> listaRegistrosExpActor =  queryLaboral.DBO_Tr_Exp_Actor("", "" , filtro,BDProductos);
                          if( !listaRegistrosExpActor.isEmpty() )
                            tmp_tr_exp_actor.TMP_TR_EXP_ACTOR(listaRegistrosExpActor);
                           //TR_EXP_DEMANDADO
-                         ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosExpDemandado =  queryLaboral.DBO_Tr_Exp_Demandado("", "" , filtro,BDProductos );
                          if( !listaRegistrosExpDemandado.isEmpty() )
                          tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaRegistrosExpDemandado);
                           //TR_ESPECIFIQUE
-                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique("", "" , filtro );
+                         ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique("", "" , filtro,BDProductos );
                          if( !listaRegistrosEspecifique.isEmpty() )
                          tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                          for(String clave : clavOrgano){
@@ -898,8 +907,6 @@ public class PValidacionProcesar extends javax.swing.JFrame {
                                  nombreArchivo = "MIG-" + Centidad.getSelectedItem().toString() + " LIBERADO.sql";
                              } else if (Rclave_organo.isSelected()) {
                                  nombreArchivo = "MIG-" + CorganoJur.getSelectedItem().toString() + " LIBERADO.sql";
-                             } else if (Rclave_organo1.isSelected()) {
-                                 nombreArchivo = "MIG-" + ClaveOrgano.getText() + " LIBERADO.sql";
                              }
                              fileChooser.setSelectedFile(new File(nombreArchivo));
                              int seleccionUsuario = fileChooser.showSaveDialog(null);
@@ -1051,25 +1058,6 @@ public class PValidacionProcesar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Rclave_organoActionPerformed
 
-    private void Rclave_organo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rclave_organo1ActionPerformed
-          if(Rclave_organo1.isSelected())
-        {
-            LEntidad.setVisible(false);
-            Jentidad.setVisible(false);
-            Centidad.setVisible(false);
-            Jorgano.setVisible(false);
-            CorganoJur.setVisible(false);
-            jButton1.setVisible(false);
-            EtiquetaOrg.setVisible(true);
-            ClaveOrgano.setVisible(true);
-            jButton1.setVisible(true);
-            jLabel4.setVisible(false);
-            Textoperiodo1.setVisible(false);
-            jButton2.setVisible(false);
-        }
-        
-    }//GEN-LAST:event_Rclave_organo1ActionPerformed
-
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Valores();
         PConPerProcesar per = new PConPerProcesar();
@@ -1109,6 +1097,25 @@ public class PValidacionProcesar extends javax.swing.JFrame {
          
     }//GEN-LAST:event_Textoperiodo1KeyPressed
 
+    private void Rclave_organo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rclave_organo1ActionPerformed
+        if(Rclave_organo1.isSelected())
+        {
+            LEntidad.setVisible(false);
+            Jentidad.setVisible(false);
+            Centidad.setVisible(false);
+            Jorgano.setVisible(false);
+            CorganoJur.setVisible(false);
+            jButton1.setVisible(false);
+            EtiquetaOrg.setVisible(true);
+            ClaveOrgano.setVisible(true);
+            jButton1.setVisible(true);
+            jLabel4.setVisible(false);
+            Textoperiodo1.setVisible(false);
+            jButton2.setVisible(false);
+        }
+
+    }//GEN-LAST:event_Rclave_organo1ActionPerformed
+
     //asignacion de valores publicos clave_entidad,clave_organo,periodo para ser usados en clases V1Validaciones,V2Validaciones,V3Validaciones
     public void Valores(){
         if(Rclave_entidad.isSelected()){
@@ -1116,6 +1123,11 @@ public class PValidacionProcesar extends javax.swing.JFrame {
         } 
         if(Rclave_organo.isSelected()){
             clave_organo =  (String)  CorganoJur.getSelectedItem();
+        }
+        if (RProductos.isSelected()){
+            BDProductos="BDPROD";
+        }else{
+            BDProductos="";
         }
     }
     
@@ -1126,7 +1138,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PValidacionProcesar().setVisible(true);
+                new PValidacionProcesarPstgreSQL().setVisible(true);
             }
         });
     }
@@ -1144,6 +1156,7 @@ public class PValidacionProcesar extends javax.swing.JFrame {
     private javax.swing.JLabel LEntidad;
     public static javax.swing.JLabel Lable;
     public javax.swing.JPanel PAgrupamiento;
+    private javax.swing.JRadioButton RProductos;
     private javax.swing.JRadioButton Rclave_entidad;
     private javax.swing.JRadioButton Rclave_organo;
     private javax.swing.JRadioButton Rclave_organo1;

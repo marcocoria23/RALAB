@@ -25,10 +25,6 @@ ArrayList<String[]> Array;
 ResultSet resul;
 
 
-
-
-
-
 ///--Tipo de asunto no debe de ser =9 No_identificado o Null.
 public ArrayList Tipo_Asunto(){
       conexion.Conectar();

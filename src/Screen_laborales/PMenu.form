@@ -220,7 +220,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Ico/Sin t&#xed;tulo.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Procesar consultas"/>
+                <Property name="text" type="java.lang.String" value="Generar Postgres .sql"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItem9MousePressed"/>
@@ -232,7 +232,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Ico/insert to bd.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Consultar PostgreSQL"/>
+                <Property name="text" type="java.lang.String" value="Insertar Postgre .sql"/>
               </Properties>
               <Events>
                 <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jMenuItem10MousePressed"/>
