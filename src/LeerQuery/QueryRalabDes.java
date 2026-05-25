@@ -2,12 +2,15 @@
 package LeerQuery;
 
 import Conexion.ConORACLEFactory;
+import Conexion.OracleConexionDesarrollo;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +21,10 @@ public class QueryRalabDes {
     
     public static boolean Error=false;
     
+     String sql;
+    ArrayList<String[]> Array;
+    ResultSet resul;   
+    OracleConexionDesarrollo conexion = new OracleConexionDesarrollo();
     
      public void merge_id_expediente(String entidad ,String cveOrgano , String periodo) throws SQLException{
         CallableStatement st;
@@ -202,5 +209,25 @@ public class QueryRalabDes {
       }
         return fila.size();
     }
+    
+      public ArrayList periodo(String Cve_entidad,String Cve_Organo){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT UNIQUE(PERIODO) AS PERIODO FROM TR_ORGANOJ WHERE (SUBSTR(ID_ORGANOJ,0,2)='"+Cve_entidad+"' OR ID_ORGANOJ='"+Cve_Organo+"')order by 1";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QueryRalabDes.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+    
     
 }

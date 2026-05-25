@@ -1,7 +1,7 @@
 package LeerQuery;
 
 import Conexion.OracleConexion;
-import Screen_laborales.PValidacionProcesarPstgreSQL;
+import Screen_laborales.PMapeoProcesarV3ToAct;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class QueryRalabProd {
     public ArrayList periodoEntidad(){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select unique(PERIODO)PERIODO from V3_TR_CONTROL_EXPEDIENTEJL where  substr(clave_organo,0,2)='"+PValidacionProcesarPstgreSQL.clave_entidad+"' order by 1";
+      sql="select unique(PERIODO)PERIODO from V3_TR_CONTROL_EXPEDIENTEJL where  substr(clave_organo,0,2)='"+PMapeoProcesarV3ToAct.clave_entidad+"' order by 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -37,10 +37,10 @@ public class QueryRalabProd {
     return Array;
  }
     
-     public ArrayList periodoEntidadBDPRODUCTOS(){
+     public ArrayList periodoEntidadBDPRODUCTOS(String Cve_entidad){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select unique(PERIODO)PERIODO from TR_CONTROL_EXPEDIENTE where  substr(clave_organo,0,2)='"+PValidacionProcesarPstgreSQL.clave_entidad+"' order by 1";
+      sql="select unique(PERIODO)PERIODO from TR_CONTROL_EXPEDIENTE where  substr(clave_organo,0,2)='"+Cve_entidad+"' order by 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -64,7 +64,7 @@ public class QueryRalabProd {
 "                        WHEN LENGTH(CLAVE_ORGANO) < 7  \n" +
 "                        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1) \n" +
 "                        ELSE CLAVE_ORGANO  \n" +
-"                    END AS clave_organo , periodo   from  V3_TR_CONTROL_EXPEDIENTEJL )  WHERE     clave_organo='"+PValidacionProcesarPstgreSQL.clave_organo+"' order by 1";
+"                    END AS clave_organo , periodo   from  V3_TR_CONTROL_EXPEDIENTEJL )  WHERE     clave_organo='"+PMapeoProcesarV3ToAct.clave_organo+"' order by 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -80,14 +80,14 @@ public class QueryRalabProd {
     return Array;
  }
     
-     public ArrayList periodoClaveOrganoBDPRODUCTOS(){
+     public ArrayList periodoClaveOrganoBDPRODUCTOS(String Cve_organo){
      conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT UNIQUE PERIODO FROM (  SELECT CASE  \n" +
 "                        WHEN LENGTH(CLAVE_ORGANO) < 7  \n" +
 "                        THEN SUBSTR(CLAVE_ORGANO, 1, LENGTH(CLAVE_ORGANO) - 1) || '0' || SUBSTR(CLAVE_ORGANO, -1, 1) \n" +
 "                        ELSE CLAVE_ORGANO  \n" +
-"                    END AS clave_organo , periodo   from  TR_CONTROL_EXPEDIENTE )  WHERE     clave_organo='"+PValidacionProcesarPstgreSQL.clave_organo+"' order by 1";
+"                    END AS clave_organo , periodo   from  TR_CONTROL_EXPEDIENTE )  WHERE     clave_organo='"+Cve_organo+"' order by 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {

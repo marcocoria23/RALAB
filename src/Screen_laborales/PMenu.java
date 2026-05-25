@@ -55,9 +55,9 @@ public class PMenu extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
+        jMenuItem11 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
 
         jMenu2.setText("File");
@@ -187,16 +187,8 @@ public class PMenu extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItem4);
 
-        jMenuItem8.setText("Cubos");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem8);
-
         jMenuItem9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/Sin título.png"))); // NOI18N
-        jMenuItem9.setText("Generar Postgres .sql");
+        jMenuItem9.setText("Procesar V3 To Act");
         jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jMenuItem9MousePressed(evt);
@@ -210,13 +202,22 @@ public class PMenu extends javax.swing.JFrame {
         jMenu1.add(jMenuItem9);
 
         jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/insert to bd.png"))); // NOI18N
-        jMenuItem10.setText("Insertar Postgre .sql");
+        jMenuItem10.setText("Procesar Postgre .sql");
         jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jMenuItem10MousePressed(evt);
             }
         });
         jMenu1.add(jMenuItem10);
+
+        jMenuItem11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/Insertar.png"))); // NOI18N
+        jMenuItem11.setText("Procesar Act To V3");
+        jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem11ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem11);
 
         jMenuBar1.add(jMenu1);
 
@@ -318,21 +319,13 @@ public class PMenu extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-        CubosInsert Cub= new CubosInsert();
-        Cub.setVisible(true);
-        
-        
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
-
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     private void jMenuItem9MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem9MousePressed
         // TODO add your handling code here:
-      PValidacionProcesarPstgreSQL Val = new PValidacionProcesarPstgreSQL();
+      PMapeoProcesarV3ToAct Val = new PMapeoProcesarV3ToAct();
        Val.setVisible(true);
       this.setVisible(false);
         
@@ -340,7 +333,7 @@ public class PMenu extends javax.swing.JFrame {
 
     private void jMenuItem10MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem10MousePressed
         // TODO add your handling code here:
-       PConexionPostgreSQL conexion = new PConexionPostgreSQL();
+       PMapeoProcesarPostgreSQL conexion = new PMapeoProcesarPostgreSQL();
        conexion.setVisible(true);
        this.setVisible(false); 
     }//GEN-LAST:event_jMenuItem10MousePressed
@@ -350,6 +343,13 @@ public class PMenu extends javax.swing.JFrame {
        
         // TODO add your handling code here:
     }//GEN-LAST:event_formWindowActivated
+
+    private void jMenuItem11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem11ActionPerformed
+        // TODO add your handling code here:
+        PMapeoProcesarActToV3 PMap=new PMapeoProcesarActToV3();
+        PMap.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,13 +411,13 @@ public class PMenu extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar6;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     // End of variables declaration//GEN-END:variables
 }

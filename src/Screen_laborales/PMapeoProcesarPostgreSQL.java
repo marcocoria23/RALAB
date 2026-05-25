@@ -1,8 +1,10 @@
 package Screen_laborales;
 
 import Conexion.ConexionPostgreSQL;
+import Desencriptador.RALABE.ExecuteDesencriptador;
 import LeerQuery.QueryPostgreSQL;
 import LeerQuery.QueryRalabDes;
+import LeerQuery.beans.Act.to.V3.V3_TR_CONTROL_EXPEDIENTEJL;
 import LeerQuery.beans.TMP_TR_ACTOR;
 import LeerQuery.beans.TMP_TR_AUDIENCIA;
 import LeerQuery.beans.TMP_TR_DEMANDADO;
@@ -22,6 +24,8 @@ import LeerQuery.beans.TMP_TR_EXP_VIOLACION;
 import LeerQuery.beans.TMP_TR_GENERAL;
 import LeerQuery.beans.TMP_TR_ORGANOJ;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -33,19 +37,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.SwingWorker;
 
 
 /*
  * @author ALEJANDRO.CASTILLO
  */
-public class PConexionPostgreSQL extends javax.swing.JFrame {
+public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
     
     public static String clave_entidad="";//variables publicas
      
-    public PConexionPostgreSQL() {
+    public PMapeoProcesarPostgreSQL() {
         initComponents();
         this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
+        jProgressBar1.setVisible(false);
+         
+       
     }
 
    
@@ -78,6 +86,8 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         CBD = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Lable = new javax.swing.JLabel();
@@ -135,8 +145,14 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
 
         jLabel4.setText("Periodo:");
 
+        Textoperiodo1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Textoperiodo1KeyReleased(evt);
+            }
+        });
+
         ProcesarPostgresql.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/insert to bd.png"))); // NOI18N
-        ProcesarPostgresql.setText("Procesar oracle");
+        ProcesarPostgresql.setText("Procesar oracle Act");
         ProcesarPostgresql.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProcesarPostgresqlActionPerformed(evt);
@@ -178,63 +194,85 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/Actualizacion.png"))); // NOI18N
+        jButton2.setText("Desencriptador .RALABE");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PAgrupamientoLayout = new javax.swing.GroupLayout(PAgrupamiento);
         PAgrupamiento.setLayout(PAgrupamientoLayout);
         PAgrupamientoLayout.setHorizontalGroup(
             PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                .addGap(194, 194, 194)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 398, Short.MAX_VALUE)
-                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
-            .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                .addGap(184, 184, 184)
-                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(EliminarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE)
+                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3)
+                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(usuario)
-                                    .addComponent(contrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)))
+                                .addGap(167, 167, 167)
+                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(usuario)
+                                            .addComponent(contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(CBD, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addGap(63, 63, 63)
+                                .addGap(6, 6, 6)
                                 .addComponent(ProcesarPostgresql))
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CBD, 0, 150, Short.MAX_VALUE)))
+                                .addComponent(EliminarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(ActualizarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 71, Short.MAX_VALUE)
+                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ActualizarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(83, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(41, 41, 41))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PAgrupamientoLayout.setVerticalGroup(
             PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel6))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(CBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(CBD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
@@ -243,17 +281,18 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(ActualizarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EliminarBD))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ProcesarPostgresql))
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(112, 112, 112)
-                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EliminarBD)
-                    .addComponent(ActualizarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(ProcesarPostgresql)
-                .addGap(38, 38, 38))
+                        .addGap(75, 75, 75)
+                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         ActualizarBD.getAccessibleContext().setAccessibleName("Procesar Script Postgresql");
@@ -267,7 +306,7 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 832, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,18 +318,17 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 1002, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(PAgrupamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 832, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Lable, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(418, 418, 418)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(PAgrupamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)))
+                .addGap(0, 3, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,8 +341,8 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PAgrupamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(227, 227, 227))
+                .addComponent(PAgrupamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         PAgrupamiento.getAccessibleContext().setAccessibleName("Procesar consultas\n");
@@ -314,8 +352,8 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -534,7 +572,7 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
         try {   
             ArrayBD=queryPostgreSQL.NombreBDPostgres(usuario.getText(),contrasenia.getText());
         } catch (SQLException ex) {
-            Logger.getLogger(PConexionPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PMapeoProcesarPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         CBD.removeAllItems();
          for (int i=0;i<ArrayBD.size();i++){
@@ -544,11 +582,46 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
          }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+         jProgressBar1.setVisible(true);
+    jProgressBar1.setIndeterminate(true); // barra animada
+    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+        @Override
+        protected Void doInBackground() throws Exception {
+
+            ExecuteDesencriptador EXE =
+                    new ExecuteDesencriptador();
+
+            EXE.ejecutarExeDesdeResources(
+                    "/Desencriptador/RALABE/encriptador_ralabe.exe",
+                    "encriptador_ralabe"
+            );
+
+            return null;
+        }
+
+        @Override
+        protected void done() {
+            jProgressBar1.setIndeterminate(false);
+            jProgressBar1.setVisible(false);
+        }
+    };
+    worker.execute();  
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void Textoperiodo1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Textoperiodo1KeyReleased
+        // TODO add your handling code here:
+          Textoperiodo1.setText(
+        Textoperiodo1.getText().toUpperCase()
+    );
+    }//GEN-LAST:event_Textoperiodo1KeyReleased
+
     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PConexionPostgreSQL().setVisible(true);
+                new PMapeoProcesarPostgreSQL().setVisible(true);
             }
         });
     }
@@ -570,6 +643,7 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JPasswordField contrasenia;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox jComboBox3;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
@@ -581,6 +655,7 @@ public class PConexionPostgreSQL extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     public javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;

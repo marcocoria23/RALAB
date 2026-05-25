@@ -91,11 +91,13 @@ public class PConPerProcesar extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
     
       
-     if(PValidacionProcesarPstgreSQL.clave_entidad != null ){
-        if (PValidacionProcesarPstgreSQL.BDProductos !=null){
-         ArrayPeriodo=queryRalabProd.periodoEntidadBDPRODUCTOS();
+     if(PMapeoProcesarV3ToAct.clave_entidad != null ){
+        if (!PMapeoProcesarV3ToAct.BDProductos.equals("")){
+         ArrayPeriodo=queryRalabProd.periodoEntidadBDPRODUCTOS(PMapeoProcesarV3ToAct.clave_entidad);
+            System.out.println("1");
         }else{
          ArrayPeriodo=queryRalabProd.periodoEntidad();
+            System.out.println("2");
         }
         DefaultTableModel TablaPeriodo = (DefaultTableModel) Tperiodo.getModel();     
         Object[] fila = new Object[ArrayPeriodo.size()];      
@@ -108,11 +110,13 @@ public class PConPerProcesar extends javax.swing.JFrame {
         }  
       
       }
-      if(PValidacionProcesarPstgreSQL.clave_organo != null ){
-           if (PValidacionProcesarPstgreSQL.BDProductos !=null){
-                ArrayPeriodo=queryRalabProd.periodoClaveOrganoBDPRODUCTOS();
+      if(PMapeoProcesarV3ToAct.clave_organo != null ){
+           if (!PMapeoProcesarV3ToAct.BDProductos.equals("")){
+                ArrayPeriodo=queryRalabProd.periodoClaveOrganoBDPRODUCTOS(PMapeoProcesarV3ToAct.clave_organo);
+                System.out.println("3");
            }else{
                 ArrayPeriodo=queryRalabProd.periodoClaveOrgano();
+                System.out.println("4");
            }
        
         DefaultTableModel TablaPeriodo = (DefaultTableModel) Tperiodo.getModel();     

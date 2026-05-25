@@ -36,12 +36,12 @@ import javax.swing.JOptionPane;
 
 
 /* @author ALEJANDRO.CASTILLO */
-public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
+public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
 
    public static String clave_entidad="", periodo = "", clave_organo,BDProductos="";//variables publicas
    private  boolean generarArchivo = false;   
 
-    public PValidacionProcesarPstgreSQL() {
+    public PMapeoProcesarV3ToAct() {
         initComponents();
         this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
@@ -149,7 +149,7 @@ public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         PAgrupamiento.setBackground(new java.awt.Color(255, 255, 255));
-        PAgrupamiento.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Procesar consultas"));
+        PAgrupamiento.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Procesar V3 To Act"));
 
         Rclave_organo.setBackground(new java.awt.Color(255, 255, 255));
         buttonGroup1.add(Rclave_organo);
@@ -242,6 +242,11 @@ public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
         seleccionar.setLabel("Generar el archivo SQL");
 
         RProductos.setText("BD Productos");
+        RProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RProductosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PAgrupamientoLayout = new javax.swing.GroupLayout(PAgrupamiento);
         PAgrupamiento.setLayout(PAgrupamientoLayout);
@@ -253,29 +258,32 @@ public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
                         .addGap(74, 74, 74)
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(Jentidad)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)
-                                .addComponent(EtiquetaOrg)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ClaveOrgano, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1))
-                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
                                 .addComponent(Jorgano)
                                 .addGap(2, 2, 2)
                                 .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jButton1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Rclave_organo1))))
+                                .addComponent(Rclave_organo1))
+                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(Jentidad)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(EtiquetaOrg)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ClaveOrgano, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
@@ -316,16 +324,15 @@ public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)
-                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Jorgano)
-                                    .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Jorgano)
+                            .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1)))
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(Rclave_organo1)))
@@ -380,7 +387,7 @@ public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PAgrupamiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(215, 215, 215))
+                .addGap(21, 21, 21))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1116,6 +1123,10 @@ public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Rclave_organo1ActionPerformed
 
+    private void RProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RProductosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RProductosActionPerformed
+
     //asignacion de valores publicos clave_entidad,clave_organo,periodo para ser usados en clases V1Validaciones,V2Validaciones,V3Validaciones
     public void Valores(){
         if(Rclave_entidad.isSelected()){
@@ -1138,7 +1149,7 @@ public class PValidacionProcesarPstgreSQL extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PValidacionProcesarPstgreSQL().setVisible(true);
+                new PMapeoProcesarV3ToAct().setVisible(true);
             }
         });
     }

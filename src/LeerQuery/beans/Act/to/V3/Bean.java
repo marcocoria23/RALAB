@@ -1,7 +1,6 @@
 package LeerQuery.beans.Act.to.V3;
-
 ;
-import Bean_Procedures.*;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
