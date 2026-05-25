@@ -594,7 +594,7 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                     new ExecuteDesencriptador();
 
             EXE.ejecutarExeDesdeResources(
-                    "/Desencriptador/RALABE/encriptador_ralabe.exe",
+                    "//Desencriptador/RALABE/encriptador_ralabe.exe",
                     "encriptador_ralabe"
             );
 
