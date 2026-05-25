@@ -604,7 +604,7 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
 
-                String rutaExe = System.getProperty("user.home")
+                String rutaExe = System.getProperty("user.home" )
                         + "\\Desktop\\encriptador_ralabe.exe";
 
                 File exe = new File(rutaExe);
