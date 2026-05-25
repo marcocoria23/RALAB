@@ -27,6 +27,8 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -44,19 +46,17 @@ import javax.swing.SwingWorker;
  * @author ALEJANDRO.CASTILLO
  */
 public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
-    
-    public static String clave_entidad="";//variables publicas
-     
+
+    public static String clave_entidad = "";//variables publicas
+
     public PMapeoProcesarPostgreSQL() {
         initComponents();
         this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
         jProgressBar1.setVisible(false);
-         
-       
+
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -366,195 +366,209 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       PMenu men = new PMenu();
-       men.setVisible(true);
-      
-        
+        PMenu men = new PMenu();
+        men.setVisible(true);
+
+
     }//GEN-LAST:event_formWindowClosing
-  
+
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here
-       
-        
+
+
     }//GEN-LAST:event_formWindowOpened
 
-    
-    
-    
+
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-       PConPer per= new PConPer();
-       per.setVisible(false); 
+        PConPer per = new PConPer();
+        per.setVisible(false);
     }//GEN-LAST:event_formWindowClosed
 
-    
+
     private void ProcesarPostgresqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesarPostgresqlActionPerformed
-       QueryPostgreSQL queryPostgreSQL   = new QueryPostgreSQL();
-       TMP_TR_ORGANOJ tmp_tr_organoj = new TMP_TR_ORGANOJ();
-       TMP_TR_EXPEDIENTES tmp_tr_expedientes = new TMP_TR_EXPEDIENTES();
-       TMP_TR_DEMANDADO tmp_tr_demandado = new TMP_TR_DEMANDADO();
-       TMP_TR_AUDIENCIA tmp_tr_audiencia = new TMP_TR_AUDIENCIA();
-       TMP_TR_GENERAL tmp_tr_general = new TMP_TR_GENERAL();
-       TMP_TR_ACTOR   tmp_tr_actor = new TMP_TR_ACTOR();
-        TMP_TR_EXP_MOTIVO_CONF   tmp_tr_exp_motivo_conf = new TMP_TR_EXP_MOTIVO_CONF();
-        TMP_TR_EXP_CIRCUNST   tmp_tr_exp_circunts = new TMP_TR_EXP_CIRCUNST();
-        TMP_TR_EXP_CONCEPTO_RECLAM   tmp_tr_exp_concepto_reclam = new TMP_TR_EXP_CONCEPTO_RECLAM();
-        TMP_TR_EXP_PRESTACION   tmp_tr_exp_prestacion = new TMP_TR_EXP_PRESTACION();
-        TMP_TR_EXP_MOTIVO_HUELGA   tmp_tr_exp_motivo_huelga = new TMP_TR_EXP_MOTIVO_HUELGA();
-        TMP_TR_EXP_SUSPENSION   tmp_tr_exp_suspension = new TMP_TR_EXP_SUSPENSION();
-        TMP_TR_EXP_TERMINACION   tmp_tr_exp_terminacion = new TMP_TR_EXP_TERMINACION();
-        TMP_TR_EXP_VIOLACION   tmp_tr_exp_violacion = new TMP_TR_EXP_VIOLACION();
-        TMP_TR_EXP_EFECTO_SENTENCIA   tmp_tr_exp_efecto_sentencia = new TMP_TR_EXP_EFECTO_SENTENCIA();
-        TMP_TR_EXP_MOTIVO_SOLIC   tmp_tr_exp_motivo_solic = new TMP_TR_EXP_MOTIVO_SOLIC();
-        TMP_TR_EXP_ACTOR    tmp_tr_exp_actor  = new TMP_TR_EXP_ACTOR();
-        TMP_TR_EXP_DEMANDADO   tmp_tr_exp_demandado = new TMP_TR_EXP_DEMANDADO();       
-        String periodo    = Textoperiodo1.getText();
-        procesando procesar= new procesando();
-        if(!periodo.equals("")){
-                new Thread(() -> {
-                    try{
-                        if(!periodo.equals("")){
-                           procesar.setVisible(true);
-                           String clavOrgano = queryPostgreSQL.clavesOrgano(usuario.getText(), contrasenia.getText(),CBD.getSelectedItem().toString());
-                           QueryRalabDes queryRalabDes  = new  QueryRalabDes();
-                           queryRalabDes.eliminarRegistrosPostgres(clavOrgano, periodo);
-                            //1.- TR_ORGANOJ
-                            ArrayList<ArrayList<String>> listaTrOrganoJ  = queryPostgreSQL.DBO_Tr_OrganoJ(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrOrganoJ.isEmpty())
-                                tmp_tr_organoj.TMP_TR_ORGANOJ(listaTrOrganoJ);
-                            //-----  2.-  TR_EXPEDIENTE
-                            ArrayList<ArrayList<String>> listaTrExpediente   = queryPostgreSQL.DBO_Tr_Expediente(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrExpediente.isEmpty())
-                               tmp_tr_expedientes.TMP_TR_EXPEDIENTES(listaTrExpediente);
-                            // 3.- TR_DEMANDADO
-                            ArrayList<ArrayList<String>> listaTrDemandado   = queryPostgreSQL.DBO_Tr_Demandado(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrDemandado.isEmpty())
-                               tmp_tr_demandado.TMP_TR_DEMANDADO(listaTrDemandado);
-                            // 4- TR_AUDIENCIA
-                            ArrayList<ArrayList<String>> listaTrAudiencia   = queryPostgreSQL.DBO_Tr_Audiencia(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrAudiencia.isEmpty())
-                               tmp_tr_audiencia.TMP_TR_AUDIENCIA(listaTrAudiencia);
-                            // 5.-TR_GENERAL
-                             ArrayList<ArrayList<String>> listaTrGeneral    = queryPostgreSQL.DBO_Tr_General(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrGeneral.isEmpty())
-                               tmp_tr_general.TMP_TR_GENERAL(listaTrGeneral);
-                            //6- TR_ACTOR
-                            ArrayList<ArrayList<String>> listaTrActor    = queryPostgreSQL.DBO_Tr_Actor(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                             if(!listaTrActor.isEmpty())
-                               tmp_tr_actor.TMP_TR_ACTOR(listaTrActor);
-                            //1.- Tr_Exp_Motivo_Conf  
-                            ArrayList<ArrayList<String>> listaTrExpMotivoConf  = queryPostgreSQL.DBO_Tr_Exp_Motivo_Conflicto(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                             if(!listaTrExpMotivoConf.isEmpty())
-                               tmp_tr_exp_motivo_conf.TMP_TR_EXP_MOTIVO_CONF(listaTrExpMotivoConf);
-                            //2.- TR_EXP_CIRCUNST
-                            ArrayList<ArrayList<String>> listaTrExpCircunst = queryPostgreSQL.DBO_Tr_Exp_Circunst(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                             if(!listaTrExpCircunst.isEmpty())
-                               tmp_tr_exp_circunts.TMP_TR_EXP_CIRCUNST(listaTrExpCircunst);
-                            //3.- TR_EXP_CONCEPTO_RECLAM
-                            ArrayList<ArrayList<String>> listaTrExpConceptoReclam = queryPostgreSQL.DBO_Tr_Exp_Concepto_Reclam(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrExpConceptoReclam.isEmpty())
-                             tmp_tr_exp_concepto_reclam.TMP_TR_EXP_CONCEPTO_RECLAM(listaTrExpConceptoReclam);
-                            //4.- TR_EXP_PRESTACION
-                            ArrayList<ArrayList<String>> listaTrExpPrestacion = queryPostgreSQL.DBO_Tr_Exp_Prestacion(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrExpPrestacion.isEmpty())
-                             tmp_tr_exp_prestacion.TMP_TR_EXP_PRESTACION(listaTrExpPrestacion);
-                              //5.- TR_EXP_MOTIVO_HUELGA
-                            ArrayList<ArrayList<String>> listaTrExpMotivoHuelga = queryPostgreSQL.DBO_Tr_Exp_Motivo_Huelga(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                         if(!listaTrExpMotivoHuelga.isEmpty())
-                             tmp_tr_exp_motivo_huelga.TMP_TR_EXP_MOTIVO_HUELGA(listaTrExpMotivoHuelga);
-                            //6.- TR_EXP_SUSPENSION 
-                             ArrayList<ArrayList<String>> listaTrExpSuspension = queryPostgreSQL.DBO_Tr_Exp_Suspension(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                           if(!listaTrExpSuspension.isEmpty())
-                             tmp_tr_exp_suspension.TMP_TR_EXP_SUSPENSION(listaTrExpSuspension);
-                            // 7.- TR_EXP_TERMINACION
-                             ArrayList<ArrayList<String>> listaTrExpTerminacion = queryPostgreSQL.DBO_Tr_Exp_Terminacion(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                             if(!listaTrExpTerminacion.isEmpty())
-                             tmp_tr_exp_terminacion.TMP_TR_EXP_TERMINACION(listaTrExpTerminacion);
-                          // 8.- TR_EXP_VIOLACION -  
-                             ArrayList<ArrayList<String>> listaTrExpViolacion = queryPostgreSQL.DBO_Tr_Exp_Violacion(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrExpViolacion.isEmpty())
-                             tmp_tr_exp_violacion.TMP_TR_EXP_VIOLACION(listaTrExpViolacion);
-                            //9.- TR_EXP_EFECTO_SENTENCIA - falta
-                            ArrayList<ArrayList<String>> listaTrEfectoSentencia = queryPostgreSQL.DBO_Tr_Exp_Efecto_Sentencia(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                          if(!listaTrEfectoSentencia.isEmpty())
-                             tmp_tr_exp_efecto_sentencia.TMP_TR_EXP_EFECTO_SENTENCIA(listaTrEfectoSentencia);
-                            //10--TR_EXP_MOTIVO_SOLIC
-                               ArrayList<ArrayList<String>> listaTrExpMotivoSolic = queryPostgreSQL.DBO_Tr_Exp_Motivo_Solic(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrExpMotivoSolic.isEmpty())
-                             tmp_tr_exp_motivo_solic.TMP_TR_EXP_MOTIVO_SOLIC(listaTrExpMotivoSolic);
-                               //11.- Tr_Exp_Actor
-                            ArrayList<ArrayList<String>> listaTrExpActor  = queryPostgreSQL.DBO_Tr_Exp_Actor(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                            if(!listaTrExpActor.isEmpty())
-                             tmp_tr_exp_actor.TMP_TR_EXP_ACTOR(listaTrExpActor);  
-                             //12.- TR_EXP_DEMANDADO
-                             ArrayList<ArrayList<String>> listaTrExpDemandado  = queryPostgreSQL.DBO_Tr_Exp_Demandado(usuario.getText(), contrasenia.getText(), periodo,CBD.getSelectedItem().toString());
-                             if(!listaTrExpDemandado.isEmpty())
-                             tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaTrExpDemandado);  
-                             int registrosObservaciones =  queryRalabDes.consultarRalabObservaciones("",  clavOrgano, periodo);
-                              if(registrosObservaciones==0){ // verificar si existen errores en la tabla de observaciones 
-                                  JOptionPane.showMessageDialog(null, "Se finalizo el proceso base datos PostgreSQL a Oracle "  , "Información", JOptionPane.INFORMATION_MESSAGE);
-                              }
-                              else
-                               JOptionPane.showMessageDialog(null, "Existen errores, se debe verificar en la tabla de observaciones"  , "Error", JOptionPane.ERROR_MESSAGE); 
-                            procesar.setVisible(false);  
+        QueryPostgreSQL queryPostgreSQL = new QueryPostgreSQL();
+        TMP_TR_ORGANOJ tmp_tr_organoj = new TMP_TR_ORGANOJ();
+        TMP_TR_EXPEDIENTES tmp_tr_expedientes = new TMP_TR_EXPEDIENTES();
+        TMP_TR_DEMANDADO tmp_tr_demandado = new TMP_TR_DEMANDADO();
+        TMP_TR_AUDIENCIA tmp_tr_audiencia = new TMP_TR_AUDIENCIA();
+        TMP_TR_GENERAL tmp_tr_general = new TMP_TR_GENERAL();
+        TMP_TR_ACTOR tmp_tr_actor = new TMP_TR_ACTOR();
+        TMP_TR_EXP_MOTIVO_CONF tmp_tr_exp_motivo_conf = new TMP_TR_EXP_MOTIVO_CONF();
+        TMP_TR_EXP_CIRCUNST tmp_tr_exp_circunts = new TMP_TR_EXP_CIRCUNST();
+        TMP_TR_EXP_CONCEPTO_RECLAM tmp_tr_exp_concepto_reclam = new TMP_TR_EXP_CONCEPTO_RECLAM();
+        TMP_TR_EXP_PRESTACION tmp_tr_exp_prestacion = new TMP_TR_EXP_PRESTACION();
+        TMP_TR_EXP_MOTIVO_HUELGA tmp_tr_exp_motivo_huelga = new TMP_TR_EXP_MOTIVO_HUELGA();
+        TMP_TR_EXP_SUSPENSION tmp_tr_exp_suspension = new TMP_TR_EXP_SUSPENSION();
+        TMP_TR_EXP_TERMINACION tmp_tr_exp_terminacion = new TMP_TR_EXP_TERMINACION();
+        TMP_TR_EXP_VIOLACION tmp_tr_exp_violacion = new TMP_TR_EXP_VIOLACION();
+        TMP_TR_EXP_EFECTO_SENTENCIA tmp_tr_exp_efecto_sentencia = new TMP_TR_EXP_EFECTO_SENTENCIA();
+        TMP_TR_EXP_MOTIVO_SOLIC tmp_tr_exp_motivo_solic = new TMP_TR_EXP_MOTIVO_SOLIC();
+        TMP_TR_EXP_ACTOR tmp_tr_exp_actor = new TMP_TR_EXP_ACTOR();
+        TMP_TR_EXP_DEMANDADO tmp_tr_exp_demandado = new TMP_TR_EXP_DEMANDADO();
+        String periodo = Textoperiodo1.getText();
+        procesando procesar = new procesando();
+        if (!periodo.equals("")) {
+            new Thread(() -> {
+                try {
+                    if (!periodo.equals("")) {
+                        procesar.setVisible(true);
+                        String clavOrgano = queryPostgreSQL.clavesOrgano(usuario.getText(), contrasenia.getText(), CBD.getSelectedItem().toString());
+                        QueryRalabDes queryRalabDes = new QueryRalabDes();
+                        queryRalabDes.eliminarRegistrosPostgres(clavOrgano, periodo);
+                        //1.- TR_ORGANOJ
+                        ArrayList<ArrayList<String>> listaTrOrganoJ = queryPostgreSQL.DBO_Tr_OrganoJ(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrOrganoJ.isEmpty()) {
+                            tmp_tr_organoj.TMP_TR_ORGANOJ(listaTrOrganoJ);
                         }
-                    } // try 
-                    catch(Exception ex){
-                        JOptionPane.showMessageDialog(null, "Error en el proceso favor de verificar." +    ex.getMessage());
+                        //-----  2.-  TR_EXPEDIENTE
+                        ArrayList<ArrayList<String>> listaTrExpediente = queryPostgreSQL.DBO_Tr_Expediente(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpediente.isEmpty()) {
+                            tmp_tr_expedientes.TMP_TR_EXPEDIENTES(listaTrExpediente);
+                        }
+                        // 3.- TR_DEMANDADO
+                        ArrayList<ArrayList<String>> listaTrDemandado = queryPostgreSQL.DBO_Tr_Demandado(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrDemandado.isEmpty()) {
+                            tmp_tr_demandado.TMP_TR_DEMANDADO(listaTrDemandado);
+                        }
+                        // 4- TR_AUDIENCIA
+                        ArrayList<ArrayList<String>> listaTrAudiencia = queryPostgreSQL.DBO_Tr_Audiencia(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrAudiencia.isEmpty()) {
+                            tmp_tr_audiencia.TMP_TR_AUDIENCIA(listaTrAudiencia);
+                        }
+                        // 5.-TR_GENERAL
+                        ArrayList<ArrayList<String>> listaTrGeneral = queryPostgreSQL.DBO_Tr_General(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrGeneral.isEmpty()) {
+                            tmp_tr_general.TMP_TR_GENERAL(listaTrGeneral);
+                        }
+                        //6- TR_ACTOR
+                        ArrayList<ArrayList<String>> listaTrActor = queryPostgreSQL.DBO_Tr_Actor(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrActor.isEmpty()) {
+                            tmp_tr_actor.TMP_TR_ACTOR(listaTrActor);
+                        }
+                        //1.- Tr_Exp_Motivo_Conf  
+                        ArrayList<ArrayList<String>> listaTrExpMotivoConf = queryPostgreSQL.DBO_Tr_Exp_Motivo_Conflicto(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpMotivoConf.isEmpty()) {
+                            tmp_tr_exp_motivo_conf.TMP_TR_EXP_MOTIVO_CONF(listaTrExpMotivoConf);
+                        }
+                        //2.- TR_EXP_CIRCUNST
+                        ArrayList<ArrayList<String>> listaTrExpCircunst = queryPostgreSQL.DBO_Tr_Exp_Circunst(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpCircunst.isEmpty()) {
+                            tmp_tr_exp_circunts.TMP_TR_EXP_CIRCUNST(listaTrExpCircunst);
+                        }
+                        //3.- TR_EXP_CONCEPTO_RECLAM
+                        ArrayList<ArrayList<String>> listaTrExpConceptoReclam = queryPostgreSQL.DBO_Tr_Exp_Concepto_Reclam(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpConceptoReclam.isEmpty()) {
+                            tmp_tr_exp_concepto_reclam.TMP_TR_EXP_CONCEPTO_RECLAM(listaTrExpConceptoReclam);
+                        }
+                        //4.- TR_EXP_PRESTACION
+                        ArrayList<ArrayList<String>> listaTrExpPrestacion = queryPostgreSQL.DBO_Tr_Exp_Prestacion(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpPrestacion.isEmpty()) {
+                            tmp_tr_exp_prestacion.TMP_TR_EXP_PRESTACION(listaTrExpPrestacion);
+                        }
+                        //5.- TR_EXP_MOTIVO_HUELGA
+                        ArrayList<ArrayList<String>> listaTrExpMotivoHuelga = queryPostgreSQL.DBO_Tr_Exp_Motivo_Huelga(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpMotivoHuelga.isEmpty()) {
+                            tmp_tr_exp_motivo_huelga.TMP_TR_EXP_MOTIVO_HUELGA(listaTrExpMotivoHuelga);
+                        }
+                        //6.- TR_EXP_SUSPENSION 
+                        ArrayList<ArrayList<String>> listaTrExpSuspension = queryPostgreSQL.DBO_Tr_Exp_Suspension(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpSuspension.isEmpty()) {
+                            tmp_tr_exp_suspension.TMP_TR_EXP_SUSPENSION(listaTrExpSuspension);
+                        }
+                        // 7.- TR_EXP_TERMINACION
+                        ArrayList<ArrayList<String>> listaTrExpTerminacion = queryPostgreSQL.DBO_Tr_Exp_Terminacion(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpTerminacion.isEmpty()) {
+                            tmp_tr_exp_terminacion.TMP_TR_EXP_TERMINACION(listaTrExpTerminacion);
+                        }
+                        // 8.- TR_EXP_VIOLACION -  
+                        ArrayList<ArrayList<String>> listaTrExpViolacion = queryPostgreSQL.DBO_Tr_Exp_Violacion(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpViolacion.isEmpty()) {
+                            tmp_tr_exp_violacion.TMP_TR_EXP_VIOLACION(listaTrExpViolacion);
+                        }
+                        //9.- TR_EXP_EFECTO_SENTENCIA - falta
+                        ArrayList<ArrayList<String>> listaTrEfectoSentencia = queryPostgreSQL.DBO_Tr_Exp_Efecto_Sentencia(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrEfectoSentencia.isEmpty()) {
+                            tmp_tr_exp_efecto_sentencia.TMP_TR_EXP_EFECTO_SENTENCIA(listaTrEfectoSentencia);
+                        }
+                        //10--TR_EXP_MOTIVO_SOLIC
+                        ArrayList<ArrayList<String>> listaTrExpMotivoSolic = queryPostgreSQL.DBO_Tr_Exp_Motivo_Solic(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpMotivoSolic.isEmpty()) {
+                            tmp_tr_exp_motivo_solic.TMP_TR_EXP_MOTIVO_SOLIC(listaTrExpMotivoSolic);
+                        }
+                        //11.- Tr_Exp_Actor
+                        ArrayList<ArrayList<String>> listaTrExpActor = queryPostgreSQL.DBO_Tr_Exp_Actor(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpActor.isEmpty()) {
+                            tmp_tr_exp_actor.TMP_TR_EXP_ACTOR(listaTrExpActor);
+                        }
+                        //12.- TR_EXP_DEMANDADO
+                        ArrayList<ArrayList<String>> listaTrExpDemandado = queryPostgreSQL.DBO_Tr_Exp_Demandado(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrExpDemandado.isEmpty()) {
+                            tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaTrExpDemandado);
+                        }
+                        int registrosObservaciones = queryRalabDes.consultarRalabObservaciones("", clavOrgano, periodo);
+                        if (registrosObservaciones == 0) { // verificar si existen errores en la tabla de observaciones 
+                            JOptionPane.showMessageDialog(null, "Se finalizo el proceso base datos PostgreSQL a Oracle ", "Información", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Existen errores, se debe verificar en la tabla de observaciones", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                         procesar.setVisible(false);
-                    } // catch 
-                }).start();
-            }
-        else{
+                    }
+                } // try 
+                catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "Error en el proceso favor de verificar." + ex.getMessage());
+                    procesar.setVisible(false);
+                } // catch 
+            }).start();
+        } else {
             JOptionPane.showMessageDialog(null, "Para procesar la información, se debe ingresar la entidad y el periodo, favor de verificar ", "Mensaje", JOptionPane.ERROR_MESSAGE);
             procesar.setVisible(false);
         }
     }//GEN-LAST:event_ProcesarPostgresqlActionPerformed
 
     private void EliminarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarBDActionPerformed
-       QueryPostgreSQL queryPostgreSql = new QueryPostgreSQL();
-        procesando procesar= new procesando();
+        QueryPostgreSQL queryPostgreSql = new QueryPostgreSQL();
+        procesando procesar = new procesando();
         new Thread(() -> {
-                    try{
-                        procesar.setVisible(true);
-                        queryPostgreSql.eliminarTablas(usuario.getText(), contrasenia.getText(),CBD.getSelectedItem().toString());
-                        JOptionPane.showMessageDialog(null, "Se eliminaron las tablas en la base de datos PostgreSQL local"  , "Información", JOptionPane.INFORMATION_MESSAGE);
-                        procesar.setVisible(false);
-                    } // try 
-                    catch(Exception ex){
-                        JOptionPane.showMessageDialog(null, "Error en el proceso favor de verificar." +    ex.getMessage());
-                        procesar.setVisible(false);
-                    } // catch 
-                }).start();
+            try {
+                procesar.setVisible(true);
+                queryPostgreSql.eliminarTablas(usuario.getText(), contrasenia.getText(), CBD.getSelectedItem().toString());
+                JOptionPane.showMessageDialog(null, "Se eliminaron las tablas en la base de datos PostgreSQL local", "Información", JOptionPane.INFORMATION_MESSAGE);
+                procesar.setVisible(false);
+            } // try 
+            catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error en el proceso favor de verificar." + ex.getMessage());
+                procesar.setVisible(false);
+            } // catch 
+        }).start();
     }//GEN-LAST:event_EliminarBDActionPerformed
 
     private void ActualizarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarBDActionPerformed
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar archivo SQL");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        ConexionPostgreSQL conexion  = new ConexionPostgreSQL(); 
+        ConexionPostgreSQL conexion = new ConexionPostgreSQL();
         fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos SQL", "sql"));
         procesando procesar = new procesando();
         int resultado = fileChooser.showOpenDialog(null);
         if (resultado == JFileChooser.APPROVE_OPTION) {
-            String scriptFile  = fileChooser.getSelectedFile().getAbsolutePath();
-           try  {
+            String scriptFile = fileChooser.getSelectedFile().getAbsolutePath();
+            try {
                 procesar.setVisible(true);
                 StringBuilder script = new StringBuilder();
-                BufferedReader br = new BufferedReader(new FileReader(scriptFile)); 
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        script.append(line).append("\n");
-                    }
-                    Statement stmt =  conexion.conectar(usuario.getText(), contrasenia.getText()).createStatement();
-                    stmt.execute(script.toString());
-                    JOptionPane.showMessageDialog(null, "Se generaron las tablas en la base de datos PostgreSQL local"  , "Información", JOptionPane.INFORMATION_MESSAGE);
-                    procesar.setVisible(false);
+                BufferedReader br = new BufferedReader(new FileReader(scriptFile));
+                String line;
+                while ((line = br.readLine()) != null) {
+                    script.append(line).append("\n");
+                }
+                Statement stmt = conexion.conectar(usuario.getText(), contrasenia.getText()).createStatement();
+                stmt.execute(script.toString());
+                JOptionPane.showMessageDialog(null, "Se generaron las tablas en la base de datos PostgreSQL local", "Información", JOptionPane.INFORMATION_MESSAGE);
+                procesar.setVisible(false);
             } catch (Exception e) {
                 System.err.println("Error de conexión a la base de datos: " + e.getMessage());
-               JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos:"  , "Información", JOptionPane.ERROR_MESSAGE);
-               procesar.setVisible(false);
-            }
-             finally {
+                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos:", "Información", JOptionPane.ERROR_MESSAGE);
+                procesar.setVisible(false);
+            } finally {
                 try {
                     conexion.close();
                 } catch (SQLException e) {
@@ -565,59 +579,62 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
     }//GEN-LAST:event_ActualizarBDActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-    QueryPostgreSQL queryPostgreSQL   = new QueryPostgreSQL();
-       ArrayList<ArrayList<String>> ArrayBD;
+
+        QueryPostgreSQL queryPostgreSQL = new QueryPostgreSQL();
+        ArrayList<ArrayList<String>> ArrayBD;
         ArrayBD = new ArrayList<>();
-        try {   
-            ArrayBD=queryPostgreSQL.NombreBDPostgres(usuario.getText(),contrasenia.getText());
+        try {
+            ArrayBD = queryPostgreSQL.NombreBDPostgres(usuario.getText(), contrasenia.getText());
         } catch (SQLException ex) {
             Logger.getLogger(PMapeoProcesarPostgreSQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         CBD.removeAllItems();
-         for (int i=0;i<ArrayBD.size();i++){
-          String[] datos = ArrayBD.get(i).toArray(new String[0]);
-         String Organo = Arrays.toString(datos).replace("[", "").replace("]", "");
-          CBD.addItem(Organo.replace("[","").replace("]",""));
-         }        // TODO add your handling code here:
+        for (int i = 0; i < ArrayBD.size(); i++) {
+            String[] datos = ArrayBD.get(i).toArray(new String[0]);
+            String Organo = Arrays.toString(datos).replace("[", "").replace("]", "");
+            CBD.addItem(Organo.replace("[", "").replace("]", ""));
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-         jProgressBar1.setVisible(true);
-    jProgressBar1.setIndeterminate(true); // barra animada
-    SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
-        @Override
-        protected Void doInBackground() throws Exception {
+        jProgressBar1.setVisible(true);
+        jProgressBar1.setIndeterminate(true);
 
-            ExecuteDesencriptador EXE =
-                    new ExecuteDesencriptador();
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
 
-            EXE.ejecutarExeDesdeResources(
-                    "//Desencriptador/RALABE/encriptador_ralabe.exe",
-                    "encriptador_ralabe"
-            );
+                String rutaExe = System.getProperty("user.home")
+                        + "\\Desktop\\encriptador_ralabe.exe";
 
-            return null;
-        }
+                File exe = new File(rutaExe);
 
-        @Override
-        protected void done() {
-            jProgressBar1.setIndeterminate(false);
-            jProgressBar1.setVisible(false);
-        }
-    };
-    worker.execute();  
+                if (!exe.exists()) {
+                    throw new FileNotFoundException("No se encontró el EXE en: " + rutaExe);
+                }
+
+                new ProcessBuilder(exe.getAbsolutePath()).start();
+
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                jProgressBar1.setIndeterminate(false);
+                jProgressBar1.setVisible(false);
+            }
+        };
+
+        worker.execute();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void Textoperiodo1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Textoperiodo1KeyReleased
         // TODO add your handling code here:
-          Textoperiodo1.setText(
-        Textoperiodo1.getText().toUpperCase()
-    );
+        Textoperiodo1.setText(
+                Textoperiodo1.getText().toUpperCase()
+        );
     }//GEN-LAST:event_Textoperiodo1KeyReleased
 
-    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -625,8 +642,6 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
             }
         });
     }
-    
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
