@@ -5,9 +5,34 @@
 package Screen_laborales;
 
 import Conexion.OracleConexion;
+import LeerQuery.QueryProcedureActToV3;
+import LeerQuery.beans.Act.to.V3.V3_TR_AUDIENCIASJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_COLECTIVOJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_COLECT_ECONOMJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_CONTROL_EXPEDIENTEJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_EJECUCION;
+import LeerQuery.beans.Act.to.V3.V3_TR_HUELGAJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_INDIVIDUAL;
+import LeerQuery.beans.Act.to.V3.V3_TR_ORDINARIOJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PARAPROCESALJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_ACT_COLECTIVOJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_ACT_COLECT_ECONOMJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_ACT_HUELGAJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_ACT_INDIVIDUALJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_ACT_ORDINARIOJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_COLECTIVO;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_COLECT_ECONOMJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_HUELGAJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_INDIVIDUALJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_ORDINARIO;
+import LeerQuery.beans.Act.to.V3.V3_TR_PREF_CREDITOJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_TERCERIASJL;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,6 +87,7 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
         LTabla = new javax.swing.JLabel();
+        BtnErrores = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -122,6 +148,8 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
         jButton1.setText("Procesar");
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
+        BtnErrores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/errorins.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,13 +160,6 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
                 .addGap(100, 100, 100))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(LPer)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,16 +172,28 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(Jorgano)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(78, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(LPer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(Jorgano)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BtnErrores)
+                .addGap(19, 19, 19))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,18 +207,23 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
                     .addComponent(Jentidad)
                     .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Jorgano)
-                    .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(LPer)
-                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Jorgano)
+                            .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(LPer)
+                                .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(BtnErrores)
+                        .addGap(21, 21, 21)))
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,9 +282,234 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
     }//GEN-LAST:event_CorganoJurActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            
-      new Thread(() -> {  
-        Valores();
+
+        V3_TR_CONTROL_EXPEDIENTEJL CE = new V3_TR_CONTROL_EXPEDIENTEJL();
+        V3_TR_AUDIENCIASJL AU = new V3_TR_AUDIENCIASJL();
+        V3_TR_ORDINARIOJL ORDI = new V3_TR_ORDINARIOJL();
+        V3_TR_PART_ACT_ORDINARIOJL PAORDI = new V3_TR_PART_ACT_ORDINARIOJL();
+        V3_TR_PART_DEM_ORDINARIO PDORDI = new V3_TR_PART_DEM_ORDINARIO();
+        V3_TR_INDIVIDUAL INDI = new V3_TR_INDIVIDUAL();
+        V3_TR_PART_ACT_INDIVIDUALJL PAINDI = new V3_TR_PART_ACT_INDIVIDUALJL();
+        V3_TR_PART_DEM_INDIVIDUALJL PDINDI = new V3_TR_PART_DEM_INDIVIDUALJL();
+        V3_TR_COLECTIVOJL COLE = new V3_TR_COLECTIVOJL();
+        V3_TR_PART_ACT_COLECTIVOJL PACOLE = new V3_TR_PART_ACT_COLECTIVOJL();
+        V3_TR_PART_DEM_COLECTIVO PDCOLE = new V3_TR_PART_DEM_COLECTIVO();
+        V3_TR_HUELGAJL HUE = new V3_TR_HUELGAJL();
+        V3_TR_PART_ACT_HUELGAJL PAHUE = new V3_TR_PART_ACT_HUELGAJL();
+        V3_TR_PART_DEM_HUELGAJL PDHUE = new V3_TR_PART_DEM_HUELGAJL();
+        V3_TR_COLECT_ECONOMJL COECO = new V3_TR_COLECT_ECONOMJL();
+        V3_TR_PART_ACT_COLECT_ECONOMJL PACOECO = new V3_TR_PART_ACT_COLECT_ECONOMJL();
+        V3_TR_PART_DEM_COLECT_ECONOMJL PDCOECO = new V3_TR_PART_DEM_COLECT_ECONOMJL();
+        V3_TR_TERCERIASJL TER = new V3_TR_TERCERIASJL();
+        V3_TR_PARAPROCESALJL PARAPRO = new V3_TR_PARAPROCESALJL();
+        V3_TR_PREF_CREDITOJL PREFCR = new V3_TR_PREF_CREDITOJL();
+        V3_TR_EJECUCION EJECU = new V3_TR_EJECUCION();
+      new Thread(() -> { 
+          try{
+              Valores();
+              jButton1.setEnabled(false);
+              LTabla.setVisible(true);
+              jProgressBar1.setVisible(true);
+              QueryProcedureActToV3 QPV3 = new QueryProcedureActToV3();
+              QPV3.elimina_v3(Cve_Entidad, Cve_ClaveOrgano, Periodo);
+              jProgressBar1.setValue(4);
+              jProgressBar1.setValue(8);
+              
+              LTabla.setText("Insertando... V3_TR_CONTROL_EXPEDIENTEJL");
+              jProgressBar1.setValue(12);
+              CE.V3_TR_CONTROL_EXPEDIENTEJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_AUDIENCIASJL");
+              jProgressBar1.setValue(16);
+              AU.V3_TR_AUDIENCIASJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_ORDINARIOJL");
+              jProgressBar1.setValue(20);
+              ORDI.V3_TR_ORDINARIOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_ORDINARIOJL");
+              jProgressBar1.setValue(24);
+              PAORDI.V3_TR_PART_ACT_ORDINARIOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_ORDINARIO");
+              jProgressBar1.setValue(28);
+              PDORDI.V3_TR_PART_DEM_ORDINARIO(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_INDIVIDUAL");
+              jProgressBar1.setValue(32);
+              INDI.V3_TR_INDIVIDUALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_INDIVIDUALJL");
+              jProgressBar1.setValue(36);
+              PAINDI.V3_TR_PART_ACT_INDIVIDUALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_INDIVIDUALJL");
+              jProgressBar1.setValue(40);
+              PDINDI.V3_TR_PART_DEM_INDIVIDUALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_COLECTIVOJL");
+              jProgressBar1.setValue(44);
+              COLE.V3_TR_COLECTIVOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_COLECTIVOJL");
+              jProgressBar1.setValue(48);
+              PACOLE.V3_TR_PART_ACT_COLECTIVOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_COLECTIVO");
+              jProgressBar1.setValue(52);
+              PDCOLE.V3_TR_PART_DEM_COLECTIVO(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_HUELGAJL");
+              jProgressBar1.setValue(56);
+              HUE.V3_TR_HUELGAJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_HUELGAJL");
+              jProgressBar1.setValue(60);
+              PAHUE.V3_TR_PART_ACT_HUELGAJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_HUELGAJL");
+              jProgressBar1.setValue(64);
+              PDHUE.V3_TR_PART_DEM_HUELGAJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_COLECT_ECONOMJL");
+              jProgressBar1.setValue(68);
+              COECO.V3_TR_COLECT_ECONOMJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_COLECT_ECONOMJL");
+              jProgressBar1.setValue(72);
+              PACOECO.V3_TR_PART_ACT_COLECT_ECONOMJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_COLECT_ECONOMJL");
+              jProgressBar1.setValue(76);
+              PDCOECO.V3_TR_PART_DEM_COLECT_ECONOMJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_TERCERIASJL");
+              jProgressBar1.setValue(80);
+              TER.V3_TR_TERCERIASJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PARAPROCESALJL");
+              jProgressBar1.setValue(85);
+              PARAPRO.V3_TR_PARAPROCESALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              LTabla.setText("Insertando... V3_TR_PREF_CREDITOJL");
+              jProgressBar1.setValue(90);
+              PREFCR.V3_TR_PREF_CREDITOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              QPV3.elimina_v3(Cve_Entidad, Cve_ClaveOrgano, Periodo);
+              jProgressBar1.setValue(4);
+              jProgressBar1.setValue(8);
+              
+              LTabla.setText("Insertando... V3_TR_CONTROL_EXPEDIENTEJL");
+              jProgressBar1.setValue(12);
+              CE.V3_TR_CONTROL_EXPEDIENTEJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_AUDIENCIASJL");
+              jProgressBar1.setValue(16);
+              AU.V3_TR_AUDIENCIASJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_ORDINARIOJL");
+              jProgressBar1.setValue(20);
+              ORDI.V3_TR_ORDINARIOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_ORDINARIOJL");
+              jProgressBar1.setValue(24);
+              PAORDI.V3_TR_PART_ACT_ORDINARIOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_ORDINARIO");
+              jProgressBar1.setValue(28);
+              PDORDI.V3_TR_PART_DEM_ORDINARIO(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_INDIVIDUAL");
+              jProgressBar1.setValue(32);
+              INDI.V3_TR_INDIVIDUALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_INDIVIDUALJL");
+              jProgressBar1.setValue(36);
+              PAINDI.V3_TR_PART_ACT_INDIVIDUALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_INDIVIDUALJL");
+              jProgressBar1.setValue(40);
+              PDINDI.V3_TR_PART_DEM_INDIVIDUALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_COLECTIVOJL");
+              jProgressBar1.setValue(44);
+              COLE.V3_TR_COLECTIVOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_COLECTIVOJL");
+              jProgressBar1.setValue(48);
+              PACOLE.V3_TR_PART_ACT_COLECTIVOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_COLECTIVO");
+              jProgressBar1.setValue(52);
+              PDCOLE.V3_TR_PART_DEM_COLECTIVO(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_HUELGAJL");
+              jProgressBar1.setValue(56);
+              HUE.V3_TR_HUELGAJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_HUELGAJL");
+              jProgressBar1.setValue(60);
+              PAHUE.V3_TR_PART_ACT_HUELGAJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_HUELGAJL");
+              jProgressBar1.setValue(64);
+              PDHUE.V3_TR_PART_DEM_HUELGAJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_COLECT_ECONOMJL");
+              jProgressBar1.setValue(68);
+              COECO.V3_TR_COLECT_ECONOMJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_ACT_COLECT_ECONOMJL");
+              jProgressBar1.setValue(72);
+              PACOECO.V3_TR_PART_ACT_COLECT_ECONOMJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PART_DEM_COLECT_ECONOMJL");
+              jProgressBar1.setValue(76);
+              PDCOECO.V3_TR_PART_DEM_COLECT_ECONOMJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_TERCERIASJL");
+              jProgressBar1.setValue(80);
+              TER.V3_TR_TERCERIASJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PARAPROCESALJL");
+              jProgressBar1.setValue(85);
+              PARAPRO.V3_TR_PARAPROCESALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_PREF_CREDITOJL");
+              jProgressBar1.setValue(90);
+              PREFCR.V3_TR_PREF_CREDITOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_EJECUCIONJL");
+              jProgressBar1.setValue(95);
+              EJECU.V3_TR_EJECUCIONJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
+              LTabla.setText("Insertando... V3_TR_EJECUCIONJL");
+              jProgressBar1.setValue(95);
+              EJECU.V3_TR_EJECUCIONJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              
+              jProgressBar1.setValue(100);
+              
+              String TotalErrores = QPV3.Total_Errores_Insert(Cve_Entidad, Cve_ClaveOrgano, Periodo);
+              if(Integer.parseInt(TotalErrores) > 0){
+                  JOptionPane.showMessageDialog(
+                          null, 
+                          "Presione el botón 'Ver errores' para consultar el detalle",
+                          "Mensaje",
+                          JOptionPane.WARNING_MESSAGE
+                  );
+                  BtnErrores.setVisible(true);
+              } else{
+                  JOptionPane.showMessageDialog(
+                          null, 
+                          "El proceso finalizó correctamente.",
+                          "Mensaje",
+                          JOptionPane.INFORMATION_MESSAGE
+                  );
+                  BtnErrores.setVisible(false);
+              }
+  
+          } catch (Exception ex) {
+                Logger.getLogger(PMapeoProcesarActToV3.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
             
             
             
@@ -386,6 +649,7 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnErrores;
     private javax.swing.JComboBox<String> Centidad;
     private javax.swing.JComboBox CorganoJur;
     private javax.swing.JLabel Jentidad;

@@ -1912,7 +1912,7 @@ public class QueryLaborales {
                        consultaFiltro.append( cveOrgano + ")" ); 
                   
             }
-             System.out.println("SQL TR_AUDIENCIAS:"+consultaFiltro);
+             //System.out.println("SQL TR_AUDIENCIAS:"+consultaFiltro);
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
            
                     while (resul.next()) {
@@ -2059,7 +2059,7 @@ public class QueryLaborales {
                  " 'I' AS estatus \n"   +
             "FROM \n" +
             "    "+CON1+"TR_CONTROL_EXPEDIENTE"+CON2+" ) ; ";
-            System.out.println(sql);
+            //System.out.println(sql);
             try {
             Statement stmt = conexion.getConexion().createStatement();
             StringBuilder consultaFiltro = new StringBuilder();
@@ -4713,7 +4713,7 @@ public class QueryLaborales {
                        consultaFiltro.append( cveOrgano + ") AND ID_CIRCUNS_MOT_CONF IS NOT NULL ; " ); 
                   
             }
-                System.out.println("queryyyyyyyyyyyyyy"+consultaFiltro);
+                //System.out.println("queryyyyyyyyyyyyyy"+consultaFiltro);
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
@@ -4822,7 +4822,7 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
+            CON1="V3_";
             CON2="JL";
         }else{
             CON1="";
@@ -5199,8 +5199,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -5488,8 +5488,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -5853,8 +5853,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -6201,8 +6201,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -6464,8 +6464,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -6731,8 +6731,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -7111,8 +7111,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -7716,8 +7716,8 @@ public class QueryLaborales {
         arrayList = new ArrayList<>();
              String CON1="",CON2="";
         if (BDProductos.equals("")){
-            CON1=""+CON1+"";
-            CON2=""+CON2+"";
+            CON1="V3_";
+            CON2="JL";
         }else{
             CON1="";
             CON2="";
@@ -8388,7 +8388,7 @@ public class QueryLaborales {
                   
             }
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
-            System.out.println(consultaFiltro.toString().replace(";", ""));
+            //System.out.println(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna

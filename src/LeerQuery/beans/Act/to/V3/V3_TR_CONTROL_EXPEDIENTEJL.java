@@ -6,6 +6,9 @@ package LeerQuery.beans.Act.to.V3;
 
 import Conexion.OracleDAOFactory;
 import LeerQuery.QuerysBdActToV3;
+import static Screen_laborales.PMapeoProcesarActToV3.Cve_ClaveOrgano;
+import static Screen_laborales.PMapeoProcesarActToV3.Cve_Entidad;
+import static Screen_laborales.PMapeoProcesarActToV3.Periodo;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -23,7 +26,7 @@ import oracle.sql.StructDescriptor;
  */
 public class V3_TR_CONTROL_EXPEDIENTEJL {
 
-    public void V3_TR_CONTROL_EXPEDIENTEJL() throws Exception {
+    public void V3_TR_CONTROL_EXPEDIENTEJL(String Cve_Entidad, String Periodo, String Cve_ClaveOrgano) throws Exception {
         QuerysBdActToV3 QControlExp = new QuerysBdActToV3();
         ARRAY array_to_pass;
         CallableStatement st;
@@ -35,7 +38,7 @@ public class V3_TR_CONTROL_EXPEDIENTEJL {
         try {
             con = OracleDAOFactory.creaConexion();
             ArrayList<BeanV3_TR_CONTROL_EXPEDIENTE> ad = new ArrayList<>();
-            ArrayList<ArrayList<String>> fila = QControlExp.DBO_TO_V3_TR_CONTROL_EXPEDIENTEJL("32", "DIC/25", "");
+            ArrayList<ArrayList<String>> fila = QControlExp.DBO_TO_V3_TR_CONTROL_EXPEDIENTEJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
             if (fila != null) {
                 for (int i = 0; i < fila.size(); i++) {
                     BeanV3_TR_CONTROL_EXPEDIENTE c = new BeanV3_TR_CONTROL_EXPEDIENTE();

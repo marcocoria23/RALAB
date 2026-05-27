@@ -23,7 +23,7 @@ import oracle.sql.StructDescriptor;
  */
 public class V3_TR_PART_ACT_HUELGAJL {
     
-    public void V3_TR_PART_ACT_HUELGAJL() throws Exception {
+    public void V3_TR_PART_ACT_HUELGAJL(String Cve_Entidad, String Periodo, String Cve_ClaveOrgano) throws Exception {
         QuerysBdActToV3 QControlExp = new QuerysBdActToV3();
         ARRAY array_to_pass;
         CallableStatement st;
@@ -35,7 +35,7 @@ public class V3_TR_PART_ACT_HUELGAJL {
         try {
             con = OracleDAOFactory.creaConexion();
             ArrayList<BeanV3_TR_PART_ACT_HUELGA> ad = new ArrayList<>();
-            ArrayList<ArrayList<String>> fila = QControlExp.V3_TR_PART_ACT_HUELGAJL("32", "DIC/25", "");
+            ArrayList<ArrayList<String>> fila = QControlExp.V3_TR_PART_ACT_HUELGAJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
             if (fila != null) {
                 for (int i = 0; i < fila.size(); i++) {
                     BeanV3_TR_PART_ACT_HUELGA c = new BeanV3_TR_PART_ACT_HUELGA();

@@ -228,6 +228,36 @@ public class QueryRalabDes {
         }
     return Array;
  }
+      
+      public void act_esp_procedure (String entidad ,String cveOrgano , String periodo) throws SQLException {
+         CallableStatement st;
+        Connection con = null;
+        con = ConORACLEFactory.creaConexion();
+        try {
+        // st = con.prepareCall("{call MERGE_ID_EXPEDIENTE()}");
+            st = con.prepareCall("{call ACT_ESP(?,?,?)}");
+            st.setString(1, entidad);
+            st.setString(2, cveOrgano);
+            st.setString(3, periodo ); 
+            st.execute();
+          }
+          catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e + "Favor de contactar al administrador");
+          } 
+        finally {
+            try {
+                if (con != null) {
+                    System.out.println("cierraaa");
+                    con.close();
+                    con = null;
+                }
+            } catch (SQLException ex) {
+                Error=true;
+                JOptionPane.showMessageDialog(null, "Error al eliminar info TR"+ex);
+                throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
+            }
+      }
+      }
     
     
 }

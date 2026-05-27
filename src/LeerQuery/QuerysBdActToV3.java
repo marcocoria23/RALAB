@@ -272,10 +272,11 @@ public class QuerysBdActToV3 {
                 + "    AND ETA.ID_ORGANOJ = B.CLAVE_ORGANO \n"
                 + "    AND ETA.PERIODO = B.PERIODO    \n"
                 + "    AND ETA.ID_ACT_DEM_AUD = B.ID_AUDIENCIA \n"
-                + "     WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''" + cveEntidad + "'' AND B.PERIODO=''" + periodo + "'' ) OR (B.CLAVE_ORGANO='" + cveOrgano + "' AND B.PERIODO=''" + periodo + "'' ) \n";
+                + "     WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='" + cveEntidad + "' AND B.PERIODO='" + periodo + "' ) OR (B.CLAVE_ORGANO='" + cveOrgano + "' AND B.PERIODO='" + periodo + "' ) \n";
 
         try {
             Statement stmt = conexionDes.getConexion().createStatement();
+            System.out.println(sql);
             resul = stmt.executeQuery(sql);
             while (resul.next()) {
                 ArrayList<String> fila = new ArrayList<>();
@@ -743,7 +744,7 @@ public class QuerysBdActToV3 {
     "ON ESFS.CLAVE_EXPEDIENTE = B.EXPEDIENTE_CLAVE \n" +
     "AND ESFS.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
     "AND ESFS.PERIODO = B.PERIODO \n" +
-    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"' AND B.PERIODO=''"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"') \n" ;
+    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"') \n" ;
     try {
             Statement stmt = conexionDes.getConexion().createStatement();
             resul = stmt.executeQuery(sql);
@@ -990,7 +991,7 @@ public ArrayList<ArrayList<String>> V3_TR_PART_ACT_ORDINARIOJL (String cveEntida
 "    AND ESO.ID_ORGANOJ = B.CLAVE_ORGANO\n" +
 "    AND ESO.PERIODO = B.PERIODO\n" +
 "    AND ESO.ID_ACT_DEM_AUD=B.ID_ACTOR\n" +
-    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"' AND B.PERIODO=''"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"')\n" ;
+    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"')\n" ;
     try {
             Statement stmt = conexionDes.getConexion().createStatement();
             resul = stmt.executeQuery(sql);
@@ -1111,7 +1112,7 @@ public ArrayList<ArrayList<String>> V3_TR_PART_DEM_ORDINARIOJL (String cveEntida
 "    B.COMENTARIOS, \n" +
 "    B.PERIODO \n" +
     "FROM BASE B \n" +
-     "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'') \n" ;
+     "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"') \n" ;
      
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
@@ -1603,7 +1604,7 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "                                                 AND esfs.id_organoj = b.clave_organo\n" +
                                                  "AND esfs.periodo = b.periodo\n" +
 
-     "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'')\n" ;
+     "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"')\n" ;
       try {
             Statement stmt = conexionDes.getConexion().createStatement();
             resul = stmt.executeQuery(sql);
@@ -2216,7 +2217,7 @@ public ArrayList<ArrayList<String>>  V3_TR_COLECTIVO (String cveEntidad , String
 "    ON EFS.CLAVE_EXPEDIENTE = B.EXPEDIENTE_CLAVE \n" +
 "    AND EFS.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
     "AND EFS.PERIODO = B.PERIODO    \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'')\n";
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"')\n";
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
@@ -2452,7 +2453,7 @@ public ArrayList<ArrayList<String>> V3_TR_PART_ACT_COLECTIVOJL (String cveEntida
 "    AND ESO.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
 "    AND ESO.PERIODO = B.PERIODO    \n" +
     "AND ESO.ID_ACT_DEM_AUD=B.ID_ACTOR \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'') \n" ;
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"') \n" ;
 try {
             Statement stmt = conexionDes.getConexion().createStatement();
             resul = stmt.executeQuery(sql);
@@ -2653,7 +2654,7 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_COLECTIVOJL (String cveEntid
 "    AND ESO.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
 "    AND ESO.PERIODO = B.PERIODO  \n" +
     "AND ESO.ID_ACT_DEM_AUD=B.DEMANDADO \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'') \n" ;
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"') \n" ;
 
 
                      try {
@@ -2935,7 +2936,7 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    ON ESFS.CLAVE_EXPEDIENTE = B.EXPEDIENTE_CLAVE \n" +
 "    AND ESFS.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
 "    AND ESFS.PERIODO = B.PERIODO \n" +
-    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'') \n" ;
+    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"') \n" ;
 
 
 
@@ -3129,7 +3130,7 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    AND ESO.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
 "    AND ESO.PERIODO = B.PERIODO   \n" +
     "AND ESO.ID_ACT_DEM_AUD = B.ID_ACTOR \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'')";
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"')";
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
@@ -3246,7 +3247,7 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    B.COMENTARIOS, \n" +
 "    B.PERIODO \n" +
 "    FROM BASE B \n" +
-    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'') \n" ;
+    "WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"') \n" ;
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
@@ -3582,7 +3583,7 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
     "ON ES.clave_expediente = B.EXPEDIENTE_CLAVE \n" +
     "AND ES.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
     "AND ES.PERIODO = B.PERIODO \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)=''"+cveEntidad+"'' AND B.PERIODO=''"+periodo+"'') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO=''"+periodo+"'') \n" ;
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2)='"+cveEntidad+"' AND B.PERIODO='"+periodo+"') OR (B.CLAVE_ORGANO='"+cveOrgano+"' AND B.PERIODO='"+periodo+"') \n" ;
 
 
 
@@ -3807,7 +3808,7 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    AND EO.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
 "    AND EO.PERIODO = B.PERIODO \n" +
     "AND EO.ID_ACT_DEM_AUD=B.ID_ACTOR \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = ''"+cveEntidad+"'' AND B.PERIODO = ''"+periodo+"'' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = ''"+periodo+"'') \n";
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = '"+cveEntidad+"' AND B.PERIODO = '"+periodo+"' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = '"+periodo+"') \n";
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
@@ -4005,7 +4006,7 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_COLECT_ECONOMJL (String cveE
 "    AND EO.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
 "    AND EO.PERIODO = B.PERIODO \n" +
     "AND EO.ID_ACT_DEM_AUD=B.ID_DEMANDADO \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = ''"+cveEntidad+"'' AND B.PERIODO = ''"+periodo+"'' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = ''"+periodo+"'') \n" ;
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = '"+cveEntidad+"' AND B.PERIODO = '"+periodo+"' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = '"+periodo+"') \n" ;
 
 
                      try {
@@ -4367,7 +4368,7 @@ public ArrayList<ArrayList<String>> V3_TR_EJECUCIONJL (String cveEntidad , Strin
 "LEFT JOIN MOTIVOS M  \n" +
 "    ON M.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
     "AND M.PERIODO = B.PERIODO \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = ''"+cveEntidad+"'' AND B.PERIODO = ''"+periodo+"'' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = ''"+periodo+"'' ) \n" ;
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = '"+cveEntidad+"' AND B.PERIODO = '"+periodo+"' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = '"+periodo+"' ) \n" ;
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
@@ -4496,7 +4497,7 @@ public ArrayList<ArrayList<String>> V3_TR_EJECUCIONJL (String cveEntidad , Strin
     "LEFT JOIN ESPECIFIQUE_MOTIVO EM ON EM.CLAVE_EXPEDIENTE = B.EXPEDIENTE_CLAVE \n" +
 "                                       AND EM.ID_ORGANOJ = B.CLAVE_ORGANO \n" +
                                        "AND EM.PERIODO = B.PERIODO \n" +
-"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = ''"+cveEntidad+"'' AND B.PERIODO = ''"+periodo+"'' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = ''"+periodo+"'' ) \n" ;
+"WHERE (SUBSTR(B.CLAVE_ORGANO,0,2) = '"+cveEntidad+"' AND B.PERIODO = '"+periodo+"' ) OR ( B.CLAVE_ORGANO = '"+cveOrgano+"' AND B.PERIODO = '"+periodo+"' ) \n" ;
 
 
                      try {

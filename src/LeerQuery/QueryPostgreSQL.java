@@ -70,7 +70,9 @@ public class QueryPostgreSQL {
                 "        EXECUTE 'DROP TABLE IF EXISTS public.' || r.tablename || ' CASCADE';\n" +
                 "    END LOOP;\n" +
                 "END $$;";
+               String sql2="DROP SEQUENCE IF EXISTS tr_especifique_id_registro_seq";
             stmt.execute(sql);
+            stmt.execute(sql2);
             System.out.println("Bloque PL/pgSQL ejecutado correctamente.");
         }
         catch(SQLException ex){

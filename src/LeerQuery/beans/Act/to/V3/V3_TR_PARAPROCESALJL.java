@@ -23,7 +23,7 @@ import oracle.sql.StructDescriptor;
  */
 public class V3_TR_PARAPROCESALJL {
 
-    public void V3_TR_PARAPROCESALJL() throws Exception {
+    public void V3_TR_PARAPROCESALJL(String Cve_Entidad, String Periodo, String Cve_ClaveOrgano) throws Exception {
         QuerysBdActToV3 QControlExp = new QuerysBdActToV3();
         ARRAY array_to_pass;
         CallableStatement st;
@@ -35,7 +35,7 @@ public class V3_TR_PARAPROCESALJL {
         try {
             con = OracleDAOFactory.creaConexion();
             ArrayList<BeanV3_TR_PARAPROCESAL> ad = new ArrayList<>();
-            ArrayList<ArrayList<String>> fila = QControlExp.V3_TR_PARAPROCESAL("32", "DIC/25", "");
+            ArrayList<ArrayList<String>> fila = QControlExp.V3_TR_PARAPROCESAL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
             if (fila != null) {
                 for (int i = 0; i < fila.size(); i++) {
                     BeanV3_TR_PARAPROCESAL c = new BeanV3_TR_PARAPROCESAL();

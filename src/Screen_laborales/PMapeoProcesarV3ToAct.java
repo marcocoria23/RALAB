@@ -544,6 +544,7 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                          tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                          queryRalabDes.merge_id_expediente(cveEntidad, "", periodo);
                          queryRalabDes.enable_tr_exp_pk_ralalb();   
+                         queryRalabDes.act_esp_procedure(cveEntidad, "", periodo);
                          int registrosObservaciones =  queryRalabDes.consultarRalabObservaciones(cveEntidad, "", periodo);
                           if(registrosObservaciones==0){
                             if(generarArchivo){ // entrar al generar el archivo    
@@ -712,7 +713,8 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                          if( !listaRegistrosEspecifique.isEmpty() )
                          tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
                             queryRalabDes.merge_id_expediente(null,  clavOrgano , periodo);
-                         queryRalabDes.enable_tr_exp_pk_ralalb();   
+                         queryRalabDes.enable_tr_exp_pk_ralalb(); 
+                         queryRalabDes.act_esp_procedure("", clavOrgano, periodo);
                          int registrosObservaciones =  queryRalabDes.consultarRalabObservaciones("",  clavOrgano, periodo);
                          if(registrosObservaciones==0){
                            if(generarArchivo){ // entrar al generar el archivo sql       
