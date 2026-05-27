@@ -131,7 +131,7 @@ public class QuerysBdActToV3 {
 
         try {
             Statement stmt = conexionDes.getConexion().createStatement();
-            System.out.println("ASqllll" + sql);
+            System.out.println("ASqllll " + sql);
             resul = stmt.executeQuery(sql);
 
             while (resul.next()) {
@@ -1751,7 +1751,7 @@ public ArrayList<ArrayList<String>> V3_TR_PART_ACT_INDIVITUAL (String cveEntidad
     "AND EXP.PERIODO = ORG.PERIODO \n" +
 " \n" +
 "WHERE EXP.ID_TIPO_EXPEDIENTE = 2 \n" +
-"AND  (SUBSTR(ORG.ID_ORGANOJ,0,2)=''"+cveEntidad+"'' AND EXP.PERIODO='"+periodo+"') OR (ORG.ID_ORGANOJ='"+cveOrgano+"'  AND EXP.PERIODO=''"+periodo+"'') \n" ;
+"AND  (SUBSTR(ORG.ID_ORGANOJ,0,2)='"+cveEntidad+"' AND EXP.PERIODO='"+periodo+"') OR (ORG.ID_ORGANOJ='"+cveOrgano+"'  AND EXP.PERIODO='"+periodo+"') \n" ;
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
@@ -1837,7 +1837,7 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_INDIVIDUAL (String cveEntida
 "    LEFT JOIN TC_ENTIDAD_MPIO TC_ENT_MPIO \n" +
     "ON TC_ENT_MPIO.ID_ENT_MPIO = EXP.ID_ENT_MPIO \n" +
 "WHERE EXP.ID_TIPO_EXPEDIENTE = 2 \n" +
-"AND  (SUBSTR(ORG.ID_ORGANOJ,0,2)=''"+cveEntidad+"'' AND EXP.PERIODO='"+periodo+"') OR (ORG.ID_ORGANOJ='"+cveOrgano+"'  AND EXP.PERIODO=''"+periodo+"'') \n" ;
+"AND  (SUBSTR(ORG.ID_ORGANOJ,0,2)='"+cveEntidad+"' AND EXP.PERIODO='"+periodo+"') OR (ORG.ID_ORGANOJ='"+cveOrgano+"'  AND EXP.PERIODO='"+periodo+"') \n" ;
   try {
             Statement stmt = conexionDes.getConexion().createStatement();
             resul = stmt.executeQuery(sql);
@@ -2122,8 +2122,9 @@ public ArrayList<ArrayList<String>>  V3_TR_COLECTIVO (String cveEntidad , String
 "    B.FECHA_APERTURA_EXPEDIENTE, \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_ASUNTO) AS TIPO_ASUNTO, \n" +
 "    CONVER_V3_NAT_CONFLICTO(B.NAT_CONFLICTO) AS NAT_CONFLICTO, \n" +
-"    CONVER_V3_SECTOR(B.SECTOR) AS SECTOR, \n" +
-"    CONVER_V3_SUBSECTOR(B.SECTOR,B.SUBSECTOR) AS SUBSECTOR, \n" +
+"    B.RAMA_INDUS_INVOLUCRAD, \n" +
+"    CONVER_V3_SECTOR(B.SECTOR) AS SECTOR_RAMA, \n" +
+"    CONVER_V3_SUBSECTOR(B.SECTOR,B.SUBSECTOR) AS SUBSECTOR_RAMA, \n" +
 "    B.ENTIDAD_CLAVE, \n" +
 "    B.ENTIDAD_NOMBRE, \n" +
 "    B.MUNICIPIO_CLAVE, \n" +
@@ -2293,6 +2294,7 @@ public ArrayList<ArrayList<String>>  V3_TR_COLECTIVO (String cveEntidad , String
                         fila.add(resul.getString(66));
                         fila.add(resul.getString(67));
                         fila.add(resul.getString(68));
+                        fila.add(resul.getString(69));
                         arrayList.add(fila); 
                     }
             } catch (SQLException ex) {
@@ -4199,10 +4201,10 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_COLECT_ECONOMJL (String cveE
 "    LEFT JOIN especifique_tipo_incompetencia etincom ON etincom.clave_expediente = b.expediente_clave AND etincom.id_organoj = b.clave_organo AND etincom.periodo = b.periodo \n" +
     "LEFT JOIN especifique_promoven esfs ON esfs.clave_expediente = b.expediente_clave AND esfs.id_organoj = b.clave_organo AND esfs.periodo = b.periodo \n" +
 "WHERE \n" +
-    "( substr(b.clave_organo, 0, 2) = ''"+cveEntidad+"'' \n" +
-      "AND b.periodo = ''"+periodo+"'' ) \n" +
+    "( substr(b.clave_organo, 0, 2) = '"+cveEntidad+"' \n" +
+      "AND b.periodo = '"+periodo+"' ) \n" +
     "OR ( b.clave_organo = '"+cveOrgano+"' \n" +
-         "AND b.periodo = ''"+periodo+"'') \n" ;
+         "AND b.periodo = '"+periodo+"') \n" ;
          try {
             Statement stmt = conexionDes.getConexion().createStatement();
             resul = stmt.executeQuery(sql);
@@ -4276,7 +4278,7 @@ public ArrayList<ArrayList<String>>  V3_TR_TERCERIASJL (String cveEntidad , Stri
 "    ON exp.id_organoj = org.id_organoj  \n" +
     "AND exp.periodo = org.periodo \n" +
 "WHERE exp.id_tipo_expediente = 7 \n" +
-"AND  (SUBSTR(exp.ID_ORGANOJ,0,2)=''"+cveEntidad+"'' AND exp.PERIODO='"+periodo+"') OR (exp.ID_ORGANOJ='"+cveOrgano+"' AND exp.PERIODO=''"+periodo+"'') \n" ;
+"AND  (SUBSTR(exp.ID_ORGANOJ,0,2)='"+cveEntidad+"' AND exp.PERIODO='"+periodo+"') OR (exp.ID_ORGANOJ='"+cveOrgano+"' AND exp.PERIODO='"+periodo+"') \n" ;
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();

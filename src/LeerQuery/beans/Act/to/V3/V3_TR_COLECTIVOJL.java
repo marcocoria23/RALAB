@@ -110,7 +110,6 @@ public class V3_TR_COLECTIVOJL {
                         c.SetMONTO_SOLUCION_AJ(filaActual.get(66));
                         c.SetCOMENTARIOS(filaActual.get(67));
                         c.SetPERIODO(filaActual.get(68));
-
                     }
                     ad.add(c);
                     CFilas++;

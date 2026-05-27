@@ -174,8 +174,8 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,90 +311,7 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
               LTabla.setVisible(true);
               jProgressBar1.setVisible(true);
               QueryProcedureActToV3 QPV3 = new QueryProcedureActToV3();
-              QPV3.elimina_v3(Cve_Entidad, Cve_ClaveOrgano, Periodo);
-              jProgressBar1.setValue(4);
-              jProgressBar1.setValue(8);
-              
-              LTabla.setText("Insertando... V3_TR_CONTROL_EXPEDIENTEJL");
-              jProgressBar1.setValue(12);
-              CE.V3_TR_CONTROL_EXPEDIENTEJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_AUDIENCIASJL");
-              jProgressBar1.setValue(16);
-              AU.V3_TR_AUDIENCIASJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_ORDINARIOJL");
-              jProgressBar1.setValue(20);
-              ORDI.V3_TR_ORDINARIOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_ACT_ORDINARIOJL");
-              jProgressBar1.setValue(24);
-              PAORDI.V3_TR_PART_ACT_ORDINARIOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_DEM_ORDINARIO");
-              jProgressBar1.setValue(28);
-              PDORDI.V3_TR_PART_DEM_ORDINARIO(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_INDIVIDUAL");
-              jProgressBar1.setValue(32);
-              INDI.V3_TR_INDIVIDUALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_ACT_INDIVIDUALJL");
-              jProgressBar1.setValue(36);
-              PAINDI.V3_TR_PART_ACT_INDIVIDUALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_DEM_INDIVIDUALJL");
-              jProgressBar1.setValue(40);
-              PDINDI.V3_TR_PART_DEM_INDIVIDUALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_COLECTIVOJL");
-              jProgressBar1.setValue(44);
-              COLE.V3_TR_COLECTIVOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_ACT_COLECTIVOJL");
-              jProgressBar1.setValue(48);
-              PACOLE.V3_TR_PART_ACT_COLECTIVOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_DEM_COLECTIVO");
-              jProgressBar1.setValue(52);
-              PDCOLE.V3_TR_PART_DEM_COLECTIVO(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_HUELGAJL");
-              jProgressBar1.setValue(56);
-              HUE.V3_TR_HUELGAJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_ACT_HUELGAJL");
-              jProgressBar1.setValue(60);
-              PAHUE.V3_TR_PART_ACT_HUELGAJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_DEM_HUELGAJL");
-              jProgressBar1.setValue(64);
-              PDHUE.V3_TR_PART_DEM_HUELGAJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_COLECT_ECONOMJL");
-              jProgressBar1.setValue(68);
-              COECO.V3_TR_COLECT_ECONOMJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_ACT_COLECT_ECONOMJL");
-              jProgressBar1.setValue(72);
-              PACOECO.V3_TR_PART_ACT_COLECT_ECONOMJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PART_DEM_COLECT_ECONOMJL");
-              jProgressBar1.setValue(76);
-              PDCOECO.V3_TR_PART_DEM_COLECT_ECONOMJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_TERCERIASJL");
-              jProgressBar1.setValue(80);
-              TER.V3_TR_TERCERIASJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PARAPROCESALJL");
-              jProgressBar1.setValue(85);
-              PARAPRO.V3_TR_PARAPROCESALJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              
-              LTabla.setText("Insertando... V3_TR_PREF_CREDITOJL");
-              jProgressBar1.setValue(90);
-              PREFCR.V3_TR_PREF_CREDITOJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
-              QPV3.elimina_v3(Cve_Entidad, Cve_ClaveOrgano, Periodo);
+              QPV3.elimina_v3(Cve_Entidad, Periodo, Cve_ClaveOrgano);
               jProgressBar1.setValue(4);
               jProgressBar1.setValue(8);
               
@@ -480,14 +397,11 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
               
               LTabla.setText("Insertando... V3_TR_EJECUCIONJL");
               jProgressBar1.setValue(95);
-              EJECU.V3_TR_EJECUCIONJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
-              LTabla.setText("Insertando... V3_TR_EJECUCIONJL");
-              jProgressBar1.setValue(95);
-              EJECU.V3_TR_EJECUCIONJL(Cve_Entidad,Cve_ClaveOrgano,Periodo);
+              EJECU.V3_TR_EJECUCIONJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
               
               jProgressBar1.setValue(100);
               
-              String TotalErrores = QPV3.Total_Errores_Insert(Cve_Entidad, Cve_ClaveOrgano, Periodo);
+              String TotalErrores = QPV3.Total_Errores_Insert(Cve_Entidad, Periodo, Cve_ClaveOrgano);
               if(Integer.parseInt(TotalErrores) > 0){
                   JOptionPane.showMessageDialog(
                           null, 

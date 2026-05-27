@@ -66,7 +66,7 @@ public class V3_TR_PARAPROCESALJL {
                     CFilas++;
                 }
                 if (CFilas > 0) {
-                    sd = StructDescriptor.createDescriptor("OBJ_V3_TR_AUDIENCIASJL", con);
+                    sd = StructDescriptor.createDescriptor("OBJ_V3_TR_PARAPROCESALJL", con);
                     structs = new STRUCT[ad.size()];
                     System.out.println("entro 1");
                     System.out.println("tamaño " + ad.size());
@@ -74,11 +74,11 @@ public class V3_TR_PARAPROCESALJL {
                         structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
                     }
                     System.out.println("entro 2");
-                    descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_V3_TR_AUDIENCIASJL", con);
+                    descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_V3_TR_PARAPROCESALJL", con);
                     System.out.println("entro 3");
                     array_to_pass = new ARRAY(descriptor, con, structs);
                     System.out.println("entro 4");
-                    st = con.prepareCall("{? = call(PKG_INTEGRADORV3.Audiencias(?))}");
+                    st = con.prepareCall("{? = call(PKG_INTEGRADORV3.Paraprocesal(?))}");
                     System.out.println("entro 5");
                     st.registerOutParameter(1, OracleTypes.INTEGER);
                     System.out.println("entro 6");

@@ -30,7 +30,7 @@ public class QueryProcedureActToV3 {
 
     OracleConexion conexion = new  OracleConexion();
 
-    public void elimina_v3(String Cve_Entidad, String Cve_ClaveOrgano, String Periodo) throws SQLException {
+    public void elimina_v3(String Cve_Entidad, String Periodo, String Cve_ClaveOrgano) throws SQLException {
         CallableStatement st;
         Connection con = null;
         con = OracleDAOFactory.creaConexion();
@@ -57,7 +57,7 @@ public class QueryProcedureActToV3 {
         }
     }
 
-    public String Total_Reg_insertadosTR(String Tabla, String entidad, String claveorgano, String periodo) {
+    public String Total_Reg_insertadosTR(String Tabla, String entidad, String periodo, String claveorgano) {
         conexion.Conectar();
         String TotalReg = "";
         sql = "SELECT COUNT(*) Total_Reg FROM " + Tabla + " WHERE CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "' "
@@ -75,7 +75,7 @@ public class QueryProcedureActToV3 {
         return TotalReg;
     }
 
-    public String Total_Reg_NITR(String Tabla, String entidad, String claveorgano, String periodo) {
+    public String Total_Reg_NITR(String Tabla, String entidad, String periodo, String claveorgano) {
         conexion.Conectar();
         String TotalReg = "";
         sql = "SELECT COUNT(*) Total_Reg FROM V3_ERRORES_INSERT_SQL_TO_V3 WHERE CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "' AND TABLA='" + Tabla + "'"
@@ -93,7 +93,7 @@ public class QueryProcedureActToV3 {
         return TotalReg;
     }
 
-    public ArrayList TErroresInserTRInicio(String claveorgano, String entidad, String periodo) {
+    public ArrayList TErroresInserTRInicio(String entidad, String periodo, String claveorgano) {
         conexion.Conectar();
         Array = new ArrayList();
 
@@ -125,7 +125,7 @@ public class QueryProcedureActToV3 {
         return Array;
     }
 
-    public String Total_Errores_Insert(String entidad, String claveorgano, String periodo) {
+    public String Total_Errores_Insert(String entidad, String periodo, String claveorgano) {
         conexion.Conectar();
         String TotalReg = "";
         sql = "SELECT COUNT(*) TOTAL_ERROR "
