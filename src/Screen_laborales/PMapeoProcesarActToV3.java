@@ -149,6 +149,7 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
         jButton1.addActionListener(this::jButton1ActionPerformed);
 
         BtnErrores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/errorins.png"))); // NOI18N
+        BtnErrores.addActionListener(this::BtnErroresActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -490,7 +491,6 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
             Centidad.addItem("09");
             Centidad.addItem("10");
             Centidad.addItem("11");
-            Centidad.addItem("11");
             Centidad.addItem("12");
             Centidad.addItem("13");
             Centidad.addItem("14");
@@ -521,6 +521,11 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
         Textoperiodo1.getText().toUpperCase()
     );
     }//GEN-LAST:event_Textoperiodo1KeyReleased
+
+    private void BtnErroresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnErroresActionPerformed
+        PErroresInsertActToV3 errores = new PErroresInsertActToV3();
+        errores.setVisible(true);
+    }//GEN-LAST:event_BtnErroresActionPerformed
 
     public void Valores(){     
         if (Rclave_entidad.isSelected()){

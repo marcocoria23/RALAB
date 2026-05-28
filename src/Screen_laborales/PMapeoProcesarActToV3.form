@@ -300,6 +300,9 @@
               <Image iconType="3" name="/Ico/errorins.png"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnErroresActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -5,7 +5,6 @@
 package LeerQuery;
 
 import Conexion.OracleConexion;
-import Conexion.OracleConexionDesarrollo;
 import Conexion.OracleDAOFactory;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -37,8 +36,8 @@ public class QueryProcedureActToV3 {
         try {
             st = con.prepareCall("{call ELIMINA_V3_TR(?,?,?)}");
             st.setString(1, Cve_Entidad);
-            st.setString(2, Cve_ClaveOrgano);
-            st.setString(3, Periodo);
+            st.setString(2, Periodo);
+            st.setString(3, Cve_ClaveOrgano);
             st.execute();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e + "Favor de contactar al administrador");

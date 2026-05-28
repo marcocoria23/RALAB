@@ -148,8 +148,8 @@ public class PErroresInsertActToV3 extends javax.swing.JFrame {
         TTRegNI = 0;
 
         for (String tabla : ArrayTablas) {
-            T_reg = QPActToV3.Total_Reg_insertadosTR(tabla, PMapeoProcesarActToV3.Cve_Entidad, PMapeoProcesarActToV3.Cve_ClaveOrgano, PMapeoProcesarActToV3.Periodo);
-            T_regNI = QPActToV3.Total_Reg_NITR(tabla, PMapeoProcesarActToV3.Cve_Entidad, PMapeoProcesarActToV3.Cve_ClaveOrgano, PMapeoProcesarActToV3.Periodo);
+            T_reg = QPActToV3.Total_Reg_insertadosTR(tabla, PMapeoProcesarActToV3.Cve_Entidad, PMapeoProcesarActToV3.Periodo, PMapeoProcesarActToV3.Cve_ClaveOrgano);
+            T_regNI = QPActToV3.Total_Reg_NITR(tabla, PMapeoProcesarActToV3.Cve_Entidad, PMapeoProcesarActToV3.Periodo, PMapeoProcesarActToV3.Cve_ClaveOrgano);
             TTRegNI += Integer.parseInt(T_regNI);
             texto += tabla + "\n\n"
                     + "   Reg_TR: " + T_reg
@@ -163,7 +163,7 @@ public class PErroresInsertActToV3 extends javax.swing.JFrame {
     public void DespliegaErroresInicio() {
         limpiarTabla();
         TextAreaInicio();
-        ArrayErroresInsInicio = QPActToV3.TErroresInserTRInicio(PMapeoProcesarActToV3.Cve_ClaveOrgano, PMapeoProcesarActToV3.Cve_Entidad, PMapeoProcesarActToV3.Periodo);
+        ArrayErroresInsInicio = QPActToV3.TErroresInserTRInicio(PMapeoProcesarActToV3.Cve_Entidad, PMapeoProcesarActToV3.Periodo, PMapeoProcesarActToV3.Cve_ClaveOrgano);
 
         if (TTRegNI > 0) {
             DefaultTableModel TablaError = (DefaultTableModel) jTable1.getModel();

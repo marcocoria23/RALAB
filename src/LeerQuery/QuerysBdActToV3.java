@@ -103,9 +103,9 @@ public class QuerysBdActToV3 {
                 + "    B.JUECES_LABORAL_MIX_HOM,\n"
                 + "    B.JUECES_LABORAL_MIX_MUJ,\n"
                 + "    B.HORARIO,\n"
-                + "    B.ENTIDAD_CLAVE,\n"
+                + "    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE) AS ENTIDAD_CLAVE,\n"
                 + "    B.ENTIDAD_NOMBRE,\n"
-                + "    B.MUNICIPIO_CLAVE,\n"
+                + "    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE,\n"
                 + "    B.MUNICIPIO_NOMBRE,\n"
                 + "    B.COLONIA_NOMBRE,\n"
                 + "    B.LATITUD_ORG,\n"
@@ -261,7 +261,7 @@ public class QuerysBdActToV3 {
                 + "        WHEN B.COL_NATU_ECONOMICA_TA = 3 THEN ETA.ESP_OTRO_AUDIENCIA \n"
                 + "        ELSE NULL \n"
                 + "    END AS ESP_OTRO_AUDIENCIA, \n"
-                + "    B.FECHA_AUDIEN_CELEBRADA, \n"
+                + "    TO_CHAR(B.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY'), \n"
                 + "    B.INICIO, \n"
                 + "    B.CONCLU, \n"
                 + "    B.COMENTARIOS, \n"
@@ -608,7 +608,7 @@ public class QuerysBdActToV3 {
     "B.NOMBRE_ORGANO_JURIS, \n" +
     "B.CLAVE_ORGANO, \n" +
     "B.EXPEDIENTE_CLAVE, \n" +
-    "B.FECHA_APERTURA_EXPEDIENTE, \n" +
+    "TO_CHAR(B.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_9(B.TIPO_ASUNTO) AS TIPO_ASUNTO, \n" +
     "CONVER_V3_NAT_CONFLICTO(B.NAT_CONFLICTO) AS NAT_CONFLICTO, \n" +
     "CONVER_V3_RESPUESTA_SIMPLE(B.CONTRATO_ESCRITO) AS CONTRATO_ESCRITO, \n" +
@@ -616,9 +616,9 @@ public class QuerysBdActToV3 {
     "B.RAMA_INDUS_INVOLUCRADA, \n" +
     "CONVER_V3_SECTOR(B.SECTOR) AS SECTOR, \n" +
    "CONVER_V3_SUBSECTOR(B.SECTOR,B.SUBSECTOR) AS SUBSECTOR, \n" +
-    "B.ENTIDAD_CLAVE, \n" +
+    "CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE) AS ENTIDAD_CLAVE, \n" +
     "B.ENTIDAD_NOMBRE, \n" +
-    "B.MUNICIPIO_CLAVE, \n" +
+    "CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE, \n" +
     "B.MUNICIPIO_NOMBRE, \n" +
     "CONVER_V3_RESPUESTA_SIMPLE(B.SUBCONTRATACION) AS SUBCONTRATACION, \n" +
     "M.DESPIDO, \n" +
@@ -667,7 +667,7 @@ public class QuerysBdActToV3 {
     "CONVER_V3_RESPUESTA_SIMPLE(B.PREG_INCOMPETENCIA)    AS INCOMPETENCIA, \n" +
     "CONVER_V3_GEN_NI_9(B.TIPO_INCOMPETENCIA) AS TIPO_INCOMPETENCIA, \n" +
     "ETINCOM.OTRO_ESP_INCOMPETENCIA, \n" +
-    "B.FECHA_PRES_DEMANDA, \n" +
+    "TO_CHAR(B.FECHA_PRES_DEMANDA,'DD/MM/YYYY'), \n" +
     "CONVER_V3_RESPUESTA_SIMPLE(B.CONSTANCIA_CONS_EXPEDIDA) AS CONSTANCIA_CONS_EXPEDIDA, \n" +
     "B.CONSTANCIA_CLAVE, \n" +
     "CONVER_V3_RESPUESTA_SIMPLE( B.ASUN_EXCEP_CONCILIACION) AS ASUN_EXCEP_CONCILIACION, \n" +
@@ -675,29 +675,29 @@ public class QuerysBdActToV3 {
      "CONVER_V3_RESPUESTA_SIMPLE(B.DESAHOGO_PREV_DEMANDA) AS DESAHOGO_PREV_DEMANDA, \n" +
      "CONVER_V3_GEN_NI_9(B.ESTATUS_DEMANDA) AS ESTATUS_DEMANDA, \n" +
     "CONVER_V3_GEN_NI_9(B.CAU_IMPI_ADMI_DEMANDA) AS CAU_IMPI_ADMI_DEMANDA, \n" +
-    "B.FECHA_ADMI_DEMANDA, \n" +
+    "TO_CHAR(B.FECHA_ADMI_DEMANDA,'DD/MM/YYYY'), \n" +
     "B.CANTIDAD_ACTORES, \n" +
     "B.CANTIDAD_DEMANDADOS, \n" +
     "CONVER_V3_RESPUESTA_SIMPLE(B.AUDIENCIA_PRELIM) AS AUDIENCIA_PRELIM, \n" +
-    "B.FECHA_AUDIENCIA_PRELIM, \n" +
+    "TO_CHAR(B.FECHA_AUDIENCIA_PRELIM,'DD/MM/YYYY'), \n" +
     "CONVER_V3_RESPUESTA_SIMPLE(B.AUDIENCIA_JUICIO) AS AUDIENCIA_JUICIO, \n" +
-    "B.FECHA_AUDIENCIA_JUICIO, \n" +
+    "TO_CHAR(B.FECHA_AUDIENCIA_JUICIO,'DD/MM/YYYY'), \n" +
     "CONVER_V3_ESTATUS_EXPEDIENTE(B.ESTATUS_EXPEDIENTE) AS ESTATUS_EXPEDIENTE, \n" +
-    "B.FECHA_ACTO_PROCESAL, \n" +
+    "TO_CHAR(B.FECHA_ACTO_PROCESAL,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_99(B.FASE_SOLI_EXPEDIENTE) AS FASE_SOLI_EXPEDIENTE, \n" +
     "CONVER_V3_FORMA_SOLUCION(B.FORMA_SOLUCIONFE) AS FORMA_SOLUCIONFE, \n" +
     "CASE WHEN B.FASE_SOLI_EXPEDIENTE=9 THEN ESFS.OTRO_ESP_FORMA_SOLUCION ELSE NULL END AS OTRO_ESP_SOLUCIONFE, \n" +
-    "B.FECHA_DICTO_RESOLUCIONFE, \n" +
+    "TO_CHAR(B.FECHA_DICTO_RESOLUCIONFE,'DD/MM/YYYY'), \n" +
     "B.MONTO_SOLUCIONFE, \n" +
      
     "CONVER_V3_FORMA_SOLUCION(B.FORMA_SOLUCIONAP) AS FORMA_SOLUCIONAP, \n" +
     "CASE WHEN B.FASE_SOLI_EXPEDIENTE=1 THEN ESFS.OTRO_ESP_FORMA_SOLUCION ELSE NULL END AS OTRO_ESP_SOLUCIONAP, \n" +
-    "B.FECHA_DICTO_RESOLUCIONAP, \n" +
+    "TO_CHAR(B.FECHA_DICTO_RESOLUCIONAP,'DD/MM/YYYY'), \n" +
     "B.MONTO_SOLUCIONAP, \n" +
      
     "CONVER_V3_FORMA_SOLUCION(B.FORMA_SOLUCIONAJ) AS FORMA_SOLUCIONAJ, \n" +
     "CASE WHEN B.FASE_SOLI_EXPEDIENTE=2 THEN ESFS.OTRO_ESP_FORMA_SOLUCION ELSE NULL END AS OTRO_ESP_SOLUCIONAJ, \n" +
-    "B.FECHA_DICTO_RESOLUCIONAJ, \n" +
+    "TO_CHAR(B.FECHA_DICTO_RESOLUCIONAJ,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_9(B.TIPO_SENTENCIAAJ)TIPO_SENTENCIAAJ, \n" +
     "B.MONTO_SOLUCIONAJ, \n" +
     "B.COMENTARIOS, \n" +
@@ -961,7 +961,7 @@ public ArrayList<ArrayList<String>> V3_TR_PART_ACT_ORDINARIOJL (String cveEntida
 "   CONVER_V3_GEN_NI_99(B.ACTOR) AS ACTOR,\n" +
    "CONVER_V3_GEN_NI_9(B.DEFENSA_ACT) AS DEFENSA_ACT,\n" +
 "    CONVER_V3_GEN_NI_9(B.SEXO) AS SEXO,\n" +
-"    B.EDAD,\n" +
+"    CONVER_V3_GEN_EDAD(B.EDAD) AS EDAD,\n" +
 "    CONVER_V3_GEN_NI_999(B.OCUPACION) AS OCUPACION,\n" +
 "    B.NSS,\n" +
 "    B.CURP,\n" +
@@ -1104,9 +1104,9 @@ public ArrayList<ArrayList<String>> V3_TR_PART_DEM_ORDINARIOJL (String cveEntida
 "    B.COLONIA              , \n" +
 "    B.CP       , \n" +
 "    B.ENTIDAD_NOMBRE_EMPR, \n" +
-"    B.ENTIDAD_CLAVE_EMPR, \n" +
+"    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE_EMPR) AS ENTIDAD_CLAVE_EMPR, \n" +
 "    B.MUNICIPIO_NOMBRE_EMPR, \n" +
-"    B.MUNICIPIO_CLAVE_EMPR, \n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE_EMPR) AS MUNICIPIO_CLAVE_EMPR, \n" + //
 "    B.LATITUD_EMPR ,  \n" +
 "    B.LONGITUD_EMPR,   \n" +
 "    B.COMENTARIOS, \n" +
@@ -1398,7 +1398,7 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    b.nombre_organo_juris,\n" +
 "    b.clave_organo,\n" +
 "    b.expediente_clave,\n" +
-    "b.fecha_apertura_expediente,\n" +
+    "TO_CHAR(b.fecha_apertura_expediente,'DD/MM/YYYY'),\n" +
      "CONVER_V3_GEN_NI_9(b.tipo_asunto) AS tipo_asunto,\n" +
 "    CONVER_V3_NAT_CONFLICTO(b.nat_conflicto) AS nat_conflicto,\n" +
 "    CONVER_V3_RESPUESTA_SIMPLE(b.contrato_escrito) AS contrato_escrito,\n" +
@@ -1406,9 +1406,9 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    b.rama_indus_involucrada,\n" +
 "    CONVER_V3_SECTOR(b.sector_rama) AS sector_rama,\n" +
 "    CONVER_V3_SUBSECTOR(b.sector_rama,b.subsector_rama) AS subsector_rama,\n" +
-"    b.entidad_clave,\n" +
+"    CONVER_V3_GEN_NI_99(b.entidad_clave) AS ENTIDAD_CLAVE,\n" +
 "    b.entidad_nombre,\n" +
-"    b.municipio_clave,\n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE,\n" +
 "    b.municipio_nombre,\n" +
 "    CONVER_V3_RESPUESTA_SIMPLE(b.subcontratacion) AS subcontratacion,\n" +
 "    m.indole_trabajo,\n" +
@@ -1434,7 +1434,7 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    CONVER_V3_RESPUESTA_SIMPLE(b.preg_incompetencia) AS preg_incompetencia,\n" +
 "    CONVER_V3_GEN_NI_9(b.tipo_incompetencia) AS tipo_incompetencia,   \n" +
 "    etincom.OTRO_ESP_INCOMP,\n" +
-"    b.fecha_pres_demanda,\n" +
+"    TO_CHAR(b.fecha_pres_demanda,'DD/MM/YYYY'),\n" +
 "    CONVER_V3_RESPUESTA_SIMPLE(b.constancia_cons_expedida) AS constancia_cons_expedida,\n" +
 "    b.constancia_clave,\n" +
 "    CONVER_V3_RESPUESTA_SIMPLE(b.asun_excep_conciliacion) AS asun_excep_conciliacion,\n" +
@@ -1442,17 +1442,17 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    CONVER_V3_RESPUESTA_SIMPLE(b.desahogo_prev_demanda) AS desahogo_prev_demanda,\n" +
 "    CONVER_V3_GEN_NI_9(b.estatus_demanda) AS estatus_demanda,\n" +
 "    CONVER_V3_GEN_NI_9(b.cau_impi_admi_demanda) AS cau_impi_admi_demanda,\n" +
-"    b.fecha_admi_demanda,\n" +
+"    TO_CHAR(b.fecha_admi_demanda,'DD/MM/YYYY'),\n" +
 "    b.cantidad_actores,\n" +
 "    b.cantidad_demandados,\n" +
 "    CONVER_V3_RESPUESTA_SIMPLE(b.tramitacion_depuracion) AS tramitacion_depuracion,\n" +
-"    b.fecha_depuracion,\n" +
+"    TO_CHAR(b.fecha_depuracion,'DD/MM/YYYY'),\n" +
 "    CONVER_V3_RESPUESTA_SIMPLE(b.audiencia_prelim) AS audiencia_prelim,\n" +
-"    b.fecha_audiencia_prelim,\n" +
+"    TO_CHAR(b.fecha_audiencia_prelim,'DD/MM/YYYY'),\n" +
 "    CONVER_V3_RESPUESTA_SIMPLE(b.audiencia_juicio) AS audiencia_juicio,\n" +
-"    b.fecha_audiencia_juicio,\n" +
+"    TO_CHAR(b.fecha_audiencia_juicio,'DD/MM/YYYY'),\n" +
 "    CONVER_V3_ESTATUS_EXPEDIENTE(b.estatus_expediente) AS estatus_expediente,\n" +
-"    b.fecha_acto_procesal,\n" +
+"    TO_CHAR(b.fecha_acto_procesal,'DD/MM/YYYY'),\n" +
 "    CONVER_V3_GEN_NI_99(b.fase_soli_expediente) AS fase_soli_expediente,\n" +
 "    \n" +
     "CASE\n" +
@@ -1474,7 +1474,7 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    \n" +
     "CASE\n" +
         "WHEN b.fase_soli_expediente = 3 THEN\n" +
-            "b.fecha_dicto_resolucion_ad\n" +
+            "TO_CHAR(b.fecha_dicto_resolucion_ad,'DD/MM/YYYY')\n" +
         "ELSE\n" +
             "NULL\n" +
 "    END AS fecha_dicto_resolucion_ad,\n" +
@@ -1508,7 +1508,7 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    \n" +
     "CASE\n" +
         "WHEN b.fase_soli_expediente = 4 THEN\n" +
-            "b.fecha_resolucion_ta\n" +
+            "TO_CHAR(b.fecha_resolucion_ta,'DD/MM/YYYY')\n" +
         "ELSE\n" +
             "NULL\n" +
 "    END AS fecha_resolucion_ta,\n" +
@@ -1542,7 +1542,7 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    \n" +
     "CASE\n" +
         "WHEN b.fase_soli_expediente = 1 THEN\n" +
-            "b.fecha_dicto_resolucion_ap\n" +
+            "TO_CHAR(b.fecha_dicto_resolucion_ap,'DD/MM/YYYY')\n" +
         "ELSE\n" +
             "NULL\n" +
 "    END AS fecha_dicto_resolucion_ap,\n" +
@@ -1571,7 +1571,7 @@ public ArrayList<ArrayList<String>>  V3_TR_INDIVIDUAL (String cveEntidad , Strin
 "    \n" +
     "CASE\n" +
         "WHEN b.fase_soli_expediente = 2 THEN\n" +
-            "b.fecha_dicto_resolucion_aj\n" +
+            "TO_CHAR(b.fecha_dicto_resolucion_aj,'DD/MM/YYYY')\n" +
         "ELSE\n" +
             "NULL\n" +
 "    END AS fecha_dicto_resolucion_aj,\n" +
@@ -1725,7 +1725,7 @@ public ArrayList<ArrayList<String>> V3_TR_PART_ACT_INDIVITUAL (String cveEntidad
 "    CONVER_V3_GEN_NI_99(ACT.ID_TIPO_ACTOR) AS ACTOR, \n" +
 "    CONVER_V3_GEN_NI_9(ACT.ID_DEFENSA) AS DEFENSA_ACT, \n" +
 "    CONVER_V3_GEN_NI_9(ACT.ID_SEXO) as sexo, \n" +
-"    act.edad, \n" +
+"    CONVER_V3_GEN_EDAD(act.edad) AS EDAD, \n" +
 "    CONVER_V3_GEN_NI_999(ACT.ID_OCUPACION) as ocupacion, \n" +
 "    act.NSS, \n" +
 "    ACT.CURP, \n" +
@@ -1815,9 +1815,9 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_INDIVIDUAL (String cveEntida
 "    DEM.COLONIA AS COLONIA, \n" +
 "    DEM.CP AS CP, \n" +
 "    DEM.ID_ENT_MPIO AS ENTIDAD_NOMBRE_EMPR, \n" +
-"    TC_ENT_MPIO.CLAVE_ENTIDAD AS ENTIDAD_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99(TC_ENT_MPIO.CLAVE_ENTIDAD) AS ENTIDAD_CLAVE, \n" +
 "    TC_ENT_MPIO.MUNICIPIO AS MUNICIPIO_NOMBRE, \n" +
-"    TC_ENT_MPIO.CLAVE_MUNICIPIO AS MUNICIPIO_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99999(TC_ENT_MPIO.CLAVE_MUNICIPIO) AS MUNICIPIO_CLAVE, \n" +
 "    DEM.LATITUD AS LATITUD_EMPR, \n" +
 "    DEM.LONGITUD AS LONGITUD_EMPR, \n" +
 "    DEM.COMENTARIOS, \n" +
@@ -2119,15 +2119,15 @@ public ArrayList<ArrayList<String>>  V3_TR_COLECTIVO (String cveEntidad , String
 "    B.NOMBRE_ORGANO_JURIS, \n" +
 "    B.CLAVE_ORGANO, \n" +
 "    B.EXPEDIENTE_CLAVE, \n" +
-"    B.FECHA_APERTURA_EXPEDIENTE, \n" +
+"    TO_CHAR(B.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_ASUNTO) AS TIPO_ASUNTO, \n" +
 "    CONVER_V3_NAT_CONFLICTO(B.NAT_CONFLICTO) AS NAT_CONFLICTO, \n" +
 "    B.RAMA_INDUS_INVOLUCRAD, \n" +
 "    CONVER_V3_SECTOR(B.SECTOR) AS SECTOR_RAMA, \n" +
 "    CONVER_V3_SUBSECTOR(B.SECTOR,B.SUBSECTOR) AS SUBSECTOR_RAMA, \n" +
-"    B.ENTIDAD_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE) AS ENTIDAD_CLAVE, \n" +
 "    B.ENTIDAD_NOMBRE, \n" +
-"    B.MUNICIPIO_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE, \n" +
 "    B.MUNICIPIO_NOMBRE, \n" +
 "    M.DECLARACION_PERDIDA_MAY, \n" +
 "    M.SUSPENSION_TMP, \n" +
@@ -2156,31 +2156,31 @@ public ArrayList<ArrayList<String>>  V3_TR_COLECTIVO (String cveEntidad , String
 "    CONVER_V3_GEN_NI_9(B.PREG_INCOMPETENCIA) AS PREG_INCOMPETENCIA, \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_INCOMPETENCIA) AS TIPO_INCOMPETENCIA, \n" +
 "    ETI.OTRO_ESP_INCOMP, \n" +
-"    B.FECHA_PRES_DEMANDA, \n" +
+"    TO_CHAR(B.FECHA_PRES_DEMANDA,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.CONSTANCIA_CONS_EXPEDIDA) AS CONSTANCIA_CONS_EXPEDIDA, \n" +
 "    B.CONSTANCIA_CLAVE, \n" +
 "    CONVER_V3_GEN_NI_9(B.ASUN_EXCEP_CONCILIACION) AS ASUN_EXCEP_CONCILIACION, \n" +
 "    CONVER_V3_GEN_NI_9(B.PREVE_DEMANDA) AS PREVE_DEMANDA, \n" +
 "    CONVER_V3_GEN_NI_9(B.DESAHOGO_PREV_DEMANDA) AS DESAHOGO_PREV_DEMANDA, \n" +
 "    CONVER_V3_GEN_NI_9(B.ESTATUS_DEMANDA) AS ESTATUS_DEMANDA, \n" +
-"    B.FECHA_ADMISION_DEMANDA, \n" +
+"    TO_CHAR(B.FECHA_ADMISION_DEMANDA,'DD/MM/YYYY'), \n" +
 "    B.CANTIDAD_ACTORES, \n" +
 "    B.CANTIDAD_DEMANDADOS, \n" +
 "    CONVER_V3_GEN_NI_9(B.TRAMITACION_DEPURACION) AS TRAMITACION_DEPURACION, \n" +
-"    B.FECHA_DEPURACION, \n" +
+"    TO_CHAR(B.FECHA_DEPURACION,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.AUDIENCIA_JUICIO) AS AUDIENCIA_JUICIO, \n" +
-"    B.FECHA_AUDIENCIA_JUICIO,  \n" +
+"    TO_CHAR(B.FECHA_AUDIENCIA_JUICIO,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.ESTATUS_EXPEDIENTE) AS ESTATUS_EXPEDIENTE, \n" +
-"    B.FECHA_ACTO_PROCESAL, \n" +
+"    TO_CHAR(B.FECHA_ACTO_PROCESAL,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_99(B.FASE_SOLI_EXPEDIENTE) AS FASE_SOLI_EXPEDIENTE, \n" +
 "    CONVER_V3_FORMA_SOLUCION(B.FORMA_SOLUCION_AD) AS FORMA_SOLUCION_AD, \n" +
 "    CASE WHEN B.FASE_SOLI_EXPEDIENTE = 3 THEN EFS.OTRO_ESP_FORMA_SOLUCION ELSE NULL END AS OTRO_ESP_SOLUCION_AD, \n" +
-"    B.FECHA_DICTO_RESOLUCION_AD, \n" +
+"    TO_CHAR(B.FECHA_DICTO_RESOLUCION_AD,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_SENTENCIA_AD) AS TIPO_SENTENCIA_AD, \n" +
 "    B.MONTO_SOLUCION_AD,  \n" +
 "    CONVER_V3_FORMA_SOLUCION(B.FORMA_SOLUCION_AJ) AS FORMA_SOLUCION_AJ, \n" +
 "    CASE WHEN B.FASE_SOLI_EXPEDIENTE = 2 THEN EFS.OTRO_ESP_FORMA_SOLUCION ELSE NULL END AS OTRO_ESP_SOLUCION_AJ, \n" +
-"    B.FECHA_RESOLUCION_AJ, \n" +
+"    TO_CHAR(B.FECHA_RESOLUCION_AJ,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_SENTENCIA_AJ) AS TIPO_SENTENCIA_AJ, \n" +
 "    B.MONTO_SOLUCIÓN_AJ, \n" +
 "    B.COMENTARIOS, \n" +
@@ -2437,9 +2437,9 @@ public ArrayList<ArrayList<String>> V3_TR_PART_ACT_COLECTIVOJL (String cveEntida
 "    B.COLONIA, \n" +
 "    B.CP, \n" +
 "    B.ENTIDAD_NOMBRE_EMPR, \n" +
-"    B.ENTIDAD_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE) AS ENTIDAD_CLAVE, \n" +
 "    B.MUNICIPIO_NOMBRE, \n" +
-"    B.MUNICIPIO_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE, \n" +
 "    B.LATITUD_EMPR, \n" +
 "    B.LONGITUD_EMPR, \n" +
 "    B.COMENTARIOS, \n" +
@@ -2638,9 +2638,9 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_COLECTIVOJL (String cveEntid
 "    B.COLONIA, \n" +
 "    B.CP, \n" +
 "    B.ENTIDAD_NOMBRE_EMPR, \n" +
-"    B.ENTIDAD_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE) AS ENTIDAD_CLAVE, \n" +
 "    B.MUNICIPIO_NOMBRE, \n" +
-"    B.MUNICIPIO_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE, \n" +
 "    B.LATITUD_EMPR, \n" +
 "    B.LONGITUD_EMPR, \n" +
 "    B.COMENTARIOS, \n" +
@@ -2870,14 +2870,14 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    B.NOMBRE_ORGANO_JURIS, \n" +
 "    B.CLAVE_ORGANO, \n" +
 "    B.EXPEDIENTE_CLAVE, \n" +
-"    B.FECHA_APERTURA_EXPEDIENTE, \n" +
+"    TO_CHAR(B.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_ASUNTO) AS TIPO_ASUNTO, \n" +
 "    B.RAMA_INDUS_INVOLUCRADA, \n" +
 "    CONVER_V3_SECTOR(B.SECTOR_RAMA) AS SECTOR_RAMA, \n" +
 "    CONVER_V3_SUBSECTOR(B.SECTOR_RAMA,B.SUBSECTOR_RAMA) AS SUBSECTOR_RAMA, \n" +
-"    B.ENTIDAD_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE) AS ENTIDAD_CLAVE, \n" +
 "    B.ENTIDAD_NOMBRE, \n" +
-"    B.MUNICIPIO_CLAVE, \n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE, \n" +
 "    B.MUNICIPIO_NOMBRE, \n" +
 "    M.FIRMA_CONTRATO, \n" +
 "    M.REVISION_CONTRATO, \n" +
@@ -2891,31 +2891,31 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    CONVER_V3_GEN_NI_9(B.PREG_INCOMPETENCIA) AS INCOMPETENCIA, \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_INCOMPETENCIA) AS TIPO_INCOMPETENCIA, \n" +
 "    ETINCOM.OTRO_ESP_INCOMPETENCIA, \n" +
-"    B.FECHA_PRESENTA_PETIC, \n" +
+"    TO_CHAR(B.FECHA_PRESENTA_PETIC,'DD/MM/YYYY'), \n" +
 "    B.CANTIDAD_ACTORES, \n" +
 "    B.CANTIDAD_DEMANDADOS, \n" +
 "    CONVER_V3_GEN_NI_9(B.EMPLAZAMIENTO_HUELGA) AS EMPLAZAMIENTO_HUELGA, \n" +
-"    B.FECHA_EMPLAZAMIENTO, \n" +
+"    TO_CHAR(B.FECHA_EMPLAZAMIENTO,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.PREHUELGA) AS PREHUELGA, \n" +
 "    CONVER_V3_GEN_NI_9(B.AUDIENCIA_CONCILIACION) AS AUDIENCIA_CONCILIACION, \n" +
-"    B.FECHA_AUDIENCIA, \n" +
+"    TO_CHAR(B.FECHA_AUDIENCIA,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.ESTALLAMIENTO_HUELGA) AS ESTALLAMIENTO_HUELGA, \n" +
 "    CONVER_V3_GEN_NI_9(B.DECLARA_LICITUD_HUELGA) AS DECLARA_LICITUD_HUELGA, \n" +
 "    CONVER_V3_GEN_NI_9(B.DECLARA_EXISTEN_HUELGA) AS DECLARA_EXISTEN_HUELGA, \n" +
 "    CONVER_V3_GEN_NI_9(B.ESTATUS_EXPEDIENTE) AS ESTATUS_EXPEDIENTE, \n" +
-"    B.FECHA_ACTO_PROCESAL, \n" +
+"    TO_CHAR(B.FECHA_ACTO_PROCESAL,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_99(B.FASE_SOLI_EXPEDIENTE) AS FASE_SOLI_EXPEDIENTE, \n" +
 "    CONVER_V3_GEN_NI_9(B.FORMA_SOLUCION_EMPLAZ) AS FORMA_SOLUCION_EMPLAZ, \n" +
 "    CASE WHEN B.FASE_SOLI_EXPEDIENTE=5 THEN ESFS.OTRO_ESP_FORMA_SOLUCION ELSE NULL END AS ESPECIFI_FORMA_EMPLAZ, \n" +
-"    B.FECHA_RESOLU_EMPLAZ, \n" +
+"    TO_CHAR(B.FECHA_RESOLU_EMPLAZ,'DD/MM/YYYY'), \n" +
 "    B.INCREMENTO_SOLICITADO, \n" +
 "    B.INCREMENTO_OTORGADO, \n" +
 "    CONVER_V3_GEN_NI_9(B.FORMA_SOLUCION_HUELGA) AS FORMA_SOLUCION_HUELGA, \n" +
 "    CASE WHEN B.FASE_SOLI_EXPEDIENTE=7 THEN ESFS.OTRO_ESP_FORMA_SOLUCION ELSE NULL END AS ESPECIFI_FORMA_HUELGA, \n" +
-"    B.FECHA_RESOLU_HUELGA, \n" +
+"    TO_CHAR(B.FECHA_RESOLU_HUELGA,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.TIPO_SENTENCIA) AS TIPO_SENTENCIA, \n" +
-"    B.FECHA_ESTALLAM_HUELGA, \n" +
-"    B.FECHA_LEVANT_HUELGA, \n" +
+"    TO_CHAR(B.FECHA_ESTALLAM_HUELGA,'DD/MM/YYYY'), \n" +
+"    TO_CHAR(B.FECHA_LEVANT_HUELGA,'DD/MM/YYYY'), \n" +
 "    B.DIAS_HUELGA, \n" +
 "    B.MONTO_ESTIPULADO, \n" +
 "    B.SALARIOS_CAIDOS, \n" +
@@ -3241,9 +3241,9 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    B.COLONIA              , \n" +
 "    B.CP       , \n" +
 "    B.ENTIDAD_NOMBRE_EMPR, \n" +
-"    B.ENTIDAD_CLAVE_EMPR, \n" +
+"    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE_EMPR) AS ENTIDAD_CLAVE_EMPR, \n" +
 "    B.MUNICIPIO_NOMBRE_EMPR, \n" +
-"    B.MUNICIPIO_CLAVE_EMPR, \n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE_EMPR) as MUNICIPIO_CLAVE_EMPR, \n" +
 "    B.LATITUD_EMPR ,  \n" +
 "    B.LONGITUD_EMPR,   \n" +
 "    B.COMENTARIOS, \n" +
@@ -3503,15 +3503,15 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
     "B.NOMBRE_ORGANO_JURIS, \n" +
     "B.CLAVE_ORGANO, \n" +
     "B.EXPEDIENTE_CLAVE, \n" +
-    "B.FECHA_APERTURA_EXPEDIENTE, \n" +
+    "TO_CHAR(B.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_9(B.TIPO_ASUNTO) AS TIPO_ASUNTO, \n" +
     "CONVER_V3_GEN_NI_9(B.NAT_CONFLICTO) AS NAT_CONFLICTO, \n" +
     "B.RAMA_INDUS_INVOLUCRADA, \n" +
     "CONVER_V3_SECTOR(B.SECTOR_RAMA) AS SECTOR_RAMA, \n" +
     "CONVER_V3_SUBSECTOR(B.SECTOR_RAMA,B.SUBSECTOR_RAMA) AS SUBSECTOR_RAMA, \n" +
-    "B.ENTIDAD_CLAVE, \n" +
+    "CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE) AS ENTIDAD_CLAVE, \n" +
     "B.ENTIDAD_NOMBRE, \n" +
-    "B.MUNICIPIO_CLAVE, \n" +
+    "CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE) as MUNICIPIO_CLAVE, \n" +
     "B.MUNICIPIO_NOMBRE, \n" +
     "M.MODIF_CONDICIONES, \n" +
     "M.NUEVAS_CONDICIONES, \n" +
@@ -3525,24 +3525,24 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
     "CONVER_V3_GEN_NI_9(B.INCOMPETENCIA) AS INCOMPETENCIA, \n" +
     "CONVER_V3_GEN_NI_9(B.TIPO_INCOMPETENCIA) AS TIPO_INCOMPETENCIA, \n" +
     "EI.ESPECIFIQUE_INCOMP, \n" +
-    "B.FECHA_PRES_DEMANDA, \n" +
+    "TO_CHAR(B.FECHA_PRES_DEMANDA,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_9(B.CONSTANCIA_CONS_EXPEDIDA) AS CONSTANCIA_CONS_EXPEDIDA, \n" +
     "B.CONSTANCIA_CLAVE, \n" +
     "CONVER_V3_GEN_NI_9(B.ASUN_EXCEP_CONCILIACION) AS ASUN_EXCEP_CONCILIACION, \n" +
     "CONVER_V3_GEN_NI_9(B.PREVE_DEMANDA) AS PREVE_DEMANDA, \n" +
     "CONVER_V3_GEN_NI_9(B.DESAHOGO_PREV_DEMANDA) AS DESAHOGO_PREV_DEMANDA, \n" +
     "CONVER_V3_GEN_NI_9(B.ESTATUS_DEMANDA) AS ESTATUS_DEMANDA, \n" +
-    "B.FECHA_ADMISION_DEMANDA, \n" +
+    "TO_CHAR(B.FECHA_ADMISION_DEMANDA,'DD/MM/YYYY'), \n" +
     "B.CANTIDAD_ACTORES, \n" +
     "B.CANTIDAD_DEMANDADOS, \n" +
     "CONVER_V3_GEN_NI_9(B.AUDIENCIA_ECONOM) AS AUDIENCIA_ECONOM, \n" +
-    "B.FECHA_AUDIENCIA_ECONOM, \n" +
+    "TO_CHAR(B.FECHA_AUDIENCIA_ECONOM,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_9(B.ESTATUS_EXPEDIENTE) AS ESTATUS_EXPEDIENTE, \n" +
-    "B.FECHA_ACTO_PROCESAL, \n" +
+    "TO_CHAR(B.FECHA_ACTO_PROCESAL,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_99(B.FASE_SOLI_EXPEDIENTE) AS FASE_SOLI_EXPEDIENTE, \n" +
     "CONVER_V3_FORMA_SOLUCION(B.FORMA_SOLUCION) AS FORMA_SOLUCION, \n" +
     "EFS.ESPECIFIQUE_FORMA, \n" +
-    "B.FECHA_RESOLUCION, \n" +
+    "TO_CHAR(B.FECHA_RESOLUCION,'DD/MM/YYYY'), \n" +
     "CONVER_V3_GEN_NI_9(B.TIPO_SENTENCIA) AS TIPO_SENTENCIA, \n" +
     "ES.AUMENTO_PERSONAL, \n" +
     "ES.DISMINUCION_PERSONAL, \n" +
@@ -3792,9 +3792,9 @@ public ArrayList<ArrayList<String>>  V3_TR_HUELGAJL (String cveEntidad , String 
 "    B.COLONIA, \n" +
 "    B.CP, \n" +
 "    B.ENTIDAD_NOMBRE_EMPR, \n" +
-"    B.ENTIDAD_CLAVE_EMPR, \n" +
+"    CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE_EMPR) AS ENTIDAD_CLAVE_EMPR, \n" +
 "    B.MUNICIPIO_NOMBRE_EMPR, \n" +
-"    B.MUNICIPIO_CLAVE_EMPR, \n" +
+"    CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE_EMPR) as MUNICIPIO_CLAVE_EMPR, \n" +
 "    B.LATITUD_EMPR, \n" +
 "    B.LONGITUD_EMPR, \n" +
 "    B.COMENTARIOS, \n" +
@@ -3990,9 +3990,9 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_COLECT_ECONOMJL (String cveE
 "        B.COLONIA, \n" +
 "        B.CP, \n" +
 "        B.ENTIDAD_NOMBRE_EMPR, \n" +
-"        B.ENTIDAD_CLAVE_EMPR, \n" +
+"        CONVER_V3_GEN_NI_99(B.ENTIDAD_CLAVE_EMPR) AS ENTIDAD_CLAVE_EMPR, \n" +
 "        B.MUNICIPIO_NOMBRE_EMPR, \n" +
-"        B.MUNICIPIO_CLAVE_EMPR, \n" +
+"        CONVER_V3_GEN_NI_99999(B.MUNICIPIO_CLAVE_EMPR) as MUNICIPIO_CLAVE_EMPR, \n" +
 "        B.LATITUD_EMPR, \n" +
 "        B.LONGITUD_EMPR, \n" +
 "        B.COMENTARIOS, \n" +
@@ -4177,7 +4177,7 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_COLECT_ECONOMJL (String cveE
 "    b.nombre_organo_juris, \n" +
 "    b.clave_organo, \n" +
 "    b.expediente_clave, \n" +
-"    b.fecha_apertura_expediente, \n" +
+"    TO_CHAR(b.fecha_apertura_expediente,'DD/MM/YYYY'), \n" +
 "    b.rama_indus_involucrada, \n" +
 "    CONVER_V3_SECTOR(b.sector_rama) AS sector_rama, \n" +
 "    CONVER_V3_SUBSECTOR(b.sector_rama,b.subsector_rama) AS subsector_rama, \n" +
@@ -4186,12 +4186,12 @@ public ArrayList<ArrayList<String>>  V3_TR_PART_DEM_COLECT_ECONOMJL (String cveE
 "    CONVER_V3_RESPUESTA_SIMPLE(b.INCOMPETENCIA) AS INCOMPETENCIA, \n" +
 "    CONVER_V3_GEN_NI_9(b.tipo_incompetencia) AS tipo_incompetencia, \n" +
 "    etincom.otro_esp_incomp, \n" +
-"    b.FECHA_PRESENTA_SOLI, \n" +
-"    b.FECHA_ADMISION_SOLI, \n" +
+"    TO_CHAR(b.FECHA_PRESENTA_SOLI,'DD/MM/YYYY'), \n" +
+"    TO_CHAR(b.FECHA_ADMISION_SOLI,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(b.promovente) AS promovente, \n" +
 "    esfs.ESPECIFIQUE_PROMOVENTE, \n" +
 "    CONVER_V3_GEN_NI_9(b.estatus_expediente) AS estatus_expediente, \n" +
-"    b.FECHA_CONCLUSION_EXPE, \n" +
+"    TO_CHAR(b.FECHA_CONCLUSION_EXPE,'DD/MM/YYYY'), \n" +
 "    b.comentarios, \n" +
     "b.periodo \n" +
 "FROM \n" +
@@ -4263,14 +4263,14 @@ public ArrayList<ArrayList<String>>  V3_TR_TERCERIASJL (String cveEntidad , Stri
 "    POSTGRES_CLAVE_ORGANO_7_DIGITOS_INV (ORG.ID_ORGANOJ) AS CLAVE_ORGANO, \n" +
 "    exp.clave_expediente            AS expediente_clave, \n" +
 "    exp.clave_cuaderno_incid        AS clave_incidental, \n" +
-"    exp.fecha_present_incidente     AS fecha_incidente, \n" +
-"    exp.fecha_apert_cuader_incid    AS fecha_apertura_incidental, \n" +
+"    TO_CHAR(exp.fecha_present_incidente,'DD/MM/YYYY')     AS fecha_incidente, \n" +
+"    TO_CHAR(exp.fecha_apert_cuader_incid,'DD/MM/YYYY')    AS fecha_apertura_incidental, \n" +
 "    CONVER_V3_GEN_NI_9(exp.id_tipo_incidente)           AS tipo_incidente, \n" +
 "    CONVER_V3_GEN_NI_9(exp.preg_fecha_celebr_audiencia) AS celebracion_audiencia, \n" +
-"    exp.fecha_audiencia, \n" +
+"    TO_CHAR(exp.fecha_audiencia,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(exp.id_estatus_exped)            AS estatus_expediente, \n" +
 "    CONVER_V3_SENTENCIA_INCIDENTAL(exp.id_tipo_sentencia)           AS sentencia_incidental, \n" +
-"    exp.fecha_dicto_solucion        AS fecha_resolucion, \n" +
+"    TO_CHAR(exp.fecha_dicto_solucion,'DD/MM/YYYY')        AS fecha_resolucion, \n" +
 "    exp.comentarios, \n" +
     "exp.periodo \n" +
 "FROM tr_expediente exp \n" +
@@ -4282,6 +4282,7 @@ public ArrayList<ArrayList<String>>  V3_TR_TERCERIASJL (String cveEntidad , Stri
 
                      try {
             Statement stmt = conexionDes.getConexion().createStatement();
+                         System.out.println(sql);
             resul = stmt.executeQuery(sql);
            
                     while (resul.next()) {
@@ -4358,12 +4359,12 @@ public ArrayList<ArrayList<String>> V3_TR_EJECUCIONJL (String cveEntidad , Strin
 "        b.NOMBRE_ORGANO_JURIS, \n" +
 "        b.CLAVE_ORGANO, \n" +
 "        b.EXPEDIENTE_CLAVE, \n" +
-"        b.FECHA_APERTURA_EXPEDIENTE, \n" +
+"        TO_CHAR(b.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY'), \n" +
 "        M.MOTIVO_SOLICITUD_EJ, \n" +
-"        b.FECHA_PRESENTACION, \n" +
+"        TO_CHAR(b.FECHA_PRESENTACION,'DD/MM/YYYY'), \n" +
 "        b.ESTATUS_EXPEDIENTE, \n" +
-"        b.FECHA_CONCLUSION_EXPE, \n" +
-"        b.FASE_CONCLUSION, \n" +
+"        TO_CHAR(b.FECHA_CONCLUSION_EXPE,'DD/MM/YYYY'), \n" +
+"        CONVER_V3_GEN_NI_9(b.FASE_CONCLUSION) AS FASE_CONCLUSION, \n" +
 "        b.COMENTARIOS, \n" +
         "b.PERIODO  \n" +
 "FROM BASE B \n" +
@@ -4421,12 +4422,12 @@ public ArrayList<ArrayList<String>> V3_TR_EJECUCIONJL (String cveEntidad , Strin
 "        ORG.NOMBRE_ORGANOJ        AS NOMBRE_ORGANO_JURIS, \n" +
 "        POSTGRES_CLAVE_ORGANO_7_DIGITOS_INV (ORG.ID_ORGANOJ) AS CLAVE_ORGANO, \n" +
 "        EXP.CLAVE_EXPEDIENTE      AS EXPEDIENTE_CLAVE, \n" +
-"        EXP.FECHA_APERTURA_EXPED  AS FECHA_APERTURA_EXPEDIENTE, \n" +
-"        EXP.FECHA_PRES_EJECU_SENT AS FECHA_PRESENTACION, \n" +
-"        EXP.FECHA_ADMISION_PROMO  AS FECHA_ADMISION_SOLI, \n" +
+"        TO_CHAR(EXP.FECHA_APERTURA_EXPED,'DD/MM/YYYY')  AS FECHA_APERTURA_EXPEDIENTE, \n" +
+"        TO_CHAR(EXP.FECHA_PRES_EJECU_SENT,'DD/MM/YYYY') AS FECHA_PRESENTACION, \n" +
+"        TO_CHAR(EXP.FECHA_ADMISION_PROMO,'DD/MM/YYYY')  AS FECHA_ADMISION_SOLI, \n" +
 "        EXP.ID_PROMOVENTE         AS PROMOVENTE, \n" +
 "        EXP.ID_ESTATUS_EXPED      AS ESTATUS_EXPEDIENTE, \n" +
-"        EXP.FECHA_DICTO_SOLUCION  AS FECHA_RESOLUCION, \n" +
+"        TO_CHAR(EXP.FECHA_DICTO_SOLUCION,'DD/MM/YYYY')  AS FECHA_RESOLUCION, \n" +
 "        ORG.PERIODO, \n" +
         "EXP.COMENTARIOS \n" +
     "FROM \n" +
@@ -4480,15 +4481,15 @@ public ArrayList<ArrayList<String>> V3_TR_EJECUCIONJL (String cveEntidad , Strin
 "    B.NOMBRE_ORGANO_JURIS, \n" +
 "    B.CLAVE_ORGANO, \n" +
 "    B.EXPEDIENTE_CLAVE, \n" +
-"    B.FECHA_APERTURA_EXPEDIENTE, \n" +
+"    TO_CHAR(B.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_MOTIVO_GEN(M.AVISO_ORGANO_JURIS) AS AVISO_ORGANO_JURIS, \n" +
 "    CONVER_V3_MOTIVO_GEN(M.AVISO_AUTORIDAD_ADMIN) AS AVISO_ORGANO_JURIS, \n" +
-"    B.FECHA_PRESENTACION, \n" +
-"    B.FECHA_ADMISION_SOLI, \n" +
+"    TO_CHAR(B.FECHA_PRESENTACION,'DD/MM/YYYY'), \n" +
+"    TO_CHAR(B.FECHA_ADMISION_SOLI,'DD/MM/YYYY'), \n" +
 "    CONVER_V3_GEN_NI_9(B.PROMOVENTE) AS PROMOVENTE, \n" +
 "    EM.ESPECIFIQUE, \n" +
 "    CONVER_V3_GEN_NI_9(B.ESTATUS_EXPEDIENTE) AS ESTATUS_EXPEDIENTE, \n" +
-"    B.FECHA_RESOLUCION, \n" +
+"    TO_CHAR(B.FECHA_RESOLUCION,'DD/MM/YYYY'), \n" +
 "    B.COMENTARIOS, \n" +
     "b.periodo \n" +
 "FROM \n" +
