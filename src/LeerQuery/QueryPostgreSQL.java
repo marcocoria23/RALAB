@@ -164,7 +164,7 @@ public class QueryPostgreSQL {
 "LONGITUD,\n" +
 "p.COMENTARIOS,\n" +
 "'"+ periodo +"' PERIODO,\n" +
-"null ID_UNIQUE\n" +
+"null ID_UNIQUE, null ID_UNIQUE_ESP\n" +
 "\n" +
 "from tr_actor  P \n" +
 "\n" +
@@ -209,6 +209,7 @@ public class QueryPostgreSQL {
                     fila.add(resul.getString(31)); // Añadir la primera columna
                     fila.add(resul.getString(32)); // Añadir la primera columna
                     fila.add(resul.getString(33)); // Añadir la primera columna
+                    fila.add(resul.getString(34)); // Añadir la primera columna
                     arrayList.add(fila); // Agregar la fila a la lista principal
                 }
             } 
@@ -327,7 +328,7 @@ public class QueryPostgreSQL {
         "p.ID_EXPEDIENTE,\n" +
         "p.COMENTARIOS,\n" +
         "'" + periodo  + "' as PERIODO,\n" +
-        "null ID_UNIQUE\n" +
+        "null ID_UNIQUE, null ID_UNIQUE_ESP\n" +
         "   \n" +
         "   from tr_audiencia P \n" +
         "   \n" +
@@ -350,6 +351,7 @@ public class QueryPostgreSQL {
                     fila.add(resul.getString(8)); // Añadir la octava columna
                     fila.add(resul.getString(9)); // Añadir la novena columna
                     fila.add(resul.getString(10)); // Añadir la décima columna
+                    fila.add(resul.getString(11)); // Añadir la décima columna
                     arrayList.add(fila); // Agregar la fila a la lista principal
                 }
             } 
@@ -404,7 +406,7 @@ public class QueryPostgreSQL {
 "    latitud ,\n" +
 "    longitud ,\n" +
 "    p.comentarios ,\n" +
-"    '" + periodo  + "'  as periodo , null ID_UNIQUE  \n" +
+"    '" + periodo  + "'  as periodo , null ID_UNIQUE, null ID_UNIQUE_ESP  \n" +
 "   \n" +
 "   from tr_demandado P \n" +
 "   INNER JOIN tr_exped_demandado S ON P.ID_DEMANDADO=S.ID_DEMANDADO\n" +
@@ -443,6 +445,7 @@ public class QueryPostgreSQL {
                     fila.add(resul.getString(25)); // Añadir la veinticincoava columna
                     fila.add(resul.getString(26)); // Añadir la veinticincoava columna
                     fila.add(resul.getString(27)); // Añadir la veinticincoava columna
+                    fila.add(resul.getString(28)); // Añadir la veinticincoava columna
                     arrayList.add(fila); // Agregar la fila a la lista principal
                 }
             } 
@@ -662,7 +665,7 @@ public class QueryPostgreSQL {
 "    id_circunscripcion ,\n" +
 "    id_jurisdiccion ,\n" +
 "    hr_atencion ,\n" +
-"   '" + periodo +"' as  periodo  from tr_organoj  ; ";
+"   '" + periodo +"' as  periodo, 'I' ESTATUS from tr_organoj  ; ";
             try {
         StringBuilder consultaFiltro = new StringBuilder();
         consultaFiltro.append(sql.replace(";", ""));
@@ -680,6 +683,7 @@ public class QueryPostgreSQL {
                     fila.add(resul.getString(9)); // Añadir la quinta columna
                     fila.add(resul.getString(10)); // Añadir la quinta columna
                     fila.add(resul.getString(11)); // Añadir la quinta columna
+                    fila.add(resul.getString(12)); // Añadir la quinta columna
                     arrayList.add(fila); // Agregar la fila a la lista principal
                 }
             } 
@@ -727,6 +731,48 @@ public class QueryPostgreSQL {
                 throw ex;
             } 
             
+            finally {
+                try {
+                    if (resul != null) {
+                        resul.close();
+                    }
+                    conexion.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        return arrayList;
+    }
+     
+    public ArrayList<ArrayList<String>> DBO_Tr_ESPECIFIQUE(String usuario , String contrasenia  , String periodo,String bd  ) throws SQLException {
+       Statement stmt =  conexion.conectar(usuario, contrasenia,bd).createStatement();
+       arrayList = new ArrayList<>();
+        String sql = " SELECT ID_REGISTRO,NEMONICO_CATALOGO,ESPECIFIQUE,ID_OTRO_ESPECIFIQUE,CLAVE_EXPEDIENTE,PROCEDIMIENTO,ORGANO,ID_ACT_DEM_AUD,  '" + periodo +"' PERIODO , NULL ID_UNIQUE_ESP\n" +
+                    "FROM  tr_especifique; ";
+            try {
+        StringBuilder consultaFiltro = new StringBuilder();
+        consultaFiltro.append(sql.replace(";", ""));
+        resul = stmt.executeQuery(consultaFiltro.toString());
+                while (resul.next()) {
+                    ArrayList<String> fila = new ArrayList<>();
+                    fila.add(resul.getString(1)); // Añadir la primera columna
+                    fila.add(resul.getString(2)); // Añadir la segunda columna
+                    fila.add(resul.getString(3)); // Añadir la tercera columna
+                    fila.add(resul.getString(4)); // Añadir la cuarta columna
+                    fila.add(resul.getString(5)); // Añadir la quinta columna
+                    fila.add(resul.getString(6));// Añadir la quinta columna
+                    fila.add(resul.getString(7));// Añadir la quinta columna
+                    fila.add(resul.getString(8));// Añadir la quinta columna
+                    fila.add(resul.getString(9));// Añadir la quinta columna
+                    fila.add(resul.getString(10));// Añadir la quinta columna
+                    arrayList.add(fila); // Agregar la fila a la lista principal
+                }
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(QueryLaborales.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error en la tabla TR_ESPECIFIQUE " + ex);
+                throw ex;
+            } 
             finally {
                 try {
                     if (resul != null) {

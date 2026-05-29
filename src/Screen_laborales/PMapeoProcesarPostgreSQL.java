@@ -8,6 +8,7 @@ import LeerQuery.beans.Act.to.V3.V3_TR_CONTROL_EXPEDIENTEJL;
 import LeerQuery.beans.TMP_TR_ACTOR;
 import LeerQuery.beans.TMP_TR_AUDIENCIA;
 import LeerQuery.beans.TMP_TR_DEMANDADO;
+import LeerQuery.beans.TMP_TR_ESPECIFIQUE;
 import LeerQuery.beans.TMP_TR_EXPEDIENTES;
 import LeerQuery.beans.TMP_TR_EXP_ACTOR;
 import LeerQuery.beans.TMP_TR_EXP_CIRCUNST;
@@ -24,13 +25,17 @@ import LeerQuery.beans.TMP_TR_EXP_VIOLACION;
 import LeerQuery.beans.TMP_TR_GENERAL;
 import LeerQuery.beans.TMP_TR_ORGANOJ;
 import java.awt.Color;
+import java.awt.FileDialog;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -405,6 +410,7 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
         TMP_TR_EXP_MOTIVO_SOLIC tmp_tr_exp_motivo_solic = new TMP_TR_EXP_MOTIVO_SOLIC();
         TMP_TR_EXP_ACTOR tmp_tr_exp_actor = new TMP_TR_EXP_ACTOR();
         TMP_TR_EXP_DEMANDADO tmp_tr_exp_demandado = new TMP_TR_EXP_DEMANDADO();
+        TMP_TR_ESPECIFIQUE tmp_tr_especifique =  new TMP_TR_ESPECIFIQUE();
         String periodo = Textoperiodo1.getText();
         procesando procesar = new procesando();
         if (!periodo.equals("")) {
@@ -505,6 +511,11 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                         if (!listaTrExpDemandado.isEmpty()) {
                             tmp_tr_exp_demandado.TMP_TR_EXP_DEMANDADO(listaTrExpDemandado);
                         }
+                        //19.- TR_ESPECIFIQUE
+                        ArrayList<ArrayList<String>> listaTrEspecifique = queryPostgreSQL.DBO_Tr_ESPECIFIQUE(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrEspecifique.isEmpty()) {
+                            tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaTrEspecifique);
+                        }     
                         int registrosObservaciones = queryRalabDes.consultarRalabObservaciones("", clavOrgano, periodo);
                         if (registrosObservaciones == 0) { // verificar si existen errores en la tabla de observaciones 
                             JOptionPane.showMessageDialog(null, "Se finalizo el proceso base datos PostgreSQL a Oracle ", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -543,32 +554,91 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarBDActionPerformed
 
     private void ActualizarBDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarBDActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Seleccionar archivo SQL");
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        ConexionPostgreSQL conexion = new ConexionPostgreSQL();
-        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Archivos SQL", "sql"));
-        procesando procesar = new procesando();
-        int resultado = fileChooser.showOpenDialog(null);
-        if (resultado == JFileChooser.APPROVE_OPTION) {
-            String scriptFile = fileChooser.getSelectedFile().getAbsolutePath();
+        FileDialog fileDialog = new FileDialog((java.awt.Frame) null,
+                "Seleccionar archivo SQL",
+                FileDialog.LOAD);
+
+        fileDialog.setFile("*.sql");
+        fileDialog.setVisible(true);
+
+        String directory = fileDialog.getDirectory();
+        String filename = fileDialog.getFile();
+
+        if (filename != null) {
+
+            String scriptFile = directory + filename;
+
+            ConexionPostgreSQL conexion = new ConexionPostgreSQL();
+            procesando procesar = new procesando();
+
+            Connection conn = null;
+            Statement stmt = null;
+
             try {
+
                 procesar.setVisible(true);
+
                 StringBuilder script = new StringBuilder();
-                BufferedReader br = new BufferedReader(new FileReader(scriptFile));
-                String line;
-                while ((line = br.readLine()) != null) {
-                    script.append(line).append("\n");
+
+                try (BufferedReader br = new BufferedReader(
+                        new InputStreamReader(
+                                new FileInputStream(scriptFile),
+                                java.nio.charset.StandardCharsets.UTF_8
+                        )
+                )) {
+
+                    String line;
+
+                    while ((line = br.readLine()) != null) {
+
+                        // Elimina BOM UTF-8
+                        if (script.length() == 0) {
+                            line = line.replace("\uFEFF", "");
+                        }
+
+                        script.append(line).append("\n");
+                    }
                 }
-                Statement stmt = conexion.conectar(usuario.getText(), contrasenia.getText()).createStatement();
+
+                conn = conexion.conectar(
+                        usuario.getText(),
+                        contrasenia.getText()
+                );
+
+                stmt = conn.createStatement();
+
                 stmt.execute(script.toString());
-                JOptionPane.showMessageDialog(null, "Se generaron las tablas en la base de datos PostgreSQL local", "Información", JOptionPane.INFORMATION_MESSAGE);
-                procesar.setVisible(false);
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Se generaron las tablas en PostgreSQL correctamente",
+                        "Información",
+                        JOptionPane.INFORMATION_MESSAGE
+                );
+
             } catch (Exception e) {
-                System.err.println("Error de conexión a la base de datos: " + e.getMessage());
-                JOptionPane.showMessageDialog(null, "Error de conexión a la base de datos:", "Información", JOptionPane.ERROR_MESSAGE);
-                procesar.setVisible(false);
+
+                e.printStackTrace();
+
+                JOptionPane.showMessageDialog(
+                        null,
+                        "Error al ejecutar el script SQL:\n" + e.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+
             } finally {
+
+                procesar.setVisible(false);
+
+                try {
+                    if (stmt != null) {
+                        stmt.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
                 try {
                     conexion.close();
                 } catch (SQLException e) {
@@ -576,6 +646,7 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                 }
             }
         }
+
     }//GEN-LAST:event_ActualizarBDActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
