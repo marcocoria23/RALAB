@@ -53,12 +53,14 @@ import javax.swing.SwingWorker;
 public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
 
     public static String clave_entidad = "";//variables publicas
+    public static String Periodo = "";
 
     public PMapeoProcesarPostgreSQL() {
         initComponents();
         this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
         jProgressBar1.setVisible(false);
+        BtnErroresInsert.setEnabled(false);
 
     }
 
@@ -93,6 +95,7 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jProgressBar1 = new javax.swing.JProgressBar();
+        BtnErroresInsert = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         Lable = new javax.swing.JLabel();
@@ -207,6 +210,13 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
             }
         });
 
+        BtnErroresInsert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/errorins.png"))); // NOI18N
+        BtnErroresInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnErroresInsertActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PAgrupamientoLayout = new javax.swing.GroupLayout(PAgrupamiento);
         PAgrupamiento.setLayout(PAgrupamientoLayout);
         PAgrupamientoLayout.setHorizontalGroup(
@@ -214,6 +224,12 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
             .addGroup(PAgrupamientoLayout.createSequentialGroup()
                 .addContainerGap(11, Short.MAX_VALUE)
                 .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                        .addGap(177, 177, 177)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(391, Short.MAX_VALUE))
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
                         .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PAgrupamientoLayout.createSequentialGroup()
@@ -239,15 +255,15 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                                 .addComponent(EliminarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(ActualizarBD, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 71, Short.MAX_VALUE)
-                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(177, 177, 177)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addGroup(PAgrupamientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PAgrupamientoLayout.createSequentialGroup()
+                                .addGap(0, 71, Short.MAX_VALUE)
+                                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(83, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(BtnErroresInsert)
+                                .addGap(39, 39, 39))))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PAgrupamientoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -294,7 +310,9 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(ProcesarPostgresql))
                     .addGroup(PAgrupamientoLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
+                        .addGap(40, 40, 40)
+                        .addComponent(BtnErroresInsert)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -391,6 +409,8 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
 
 
     private void ProcesarPostgresqlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesarPostgresqlActionPerformed
+        Periodo = Textoperiodo1.getText();
+        
         QueryPostgreSQL queryPostgreSQL = new QueryPostgreSQL();
         TMP_TR_ORGANOJ tmp_tr_organoj = new TMP_TR_ORGANOJ();
         TMP_TR_EXPEDIENTES tmp_tr_expedientes = new TMP_TR_EXPEDIENTES();
@@ -419,6 +439,8 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                     if (!periodo.equals("")) {
                         procesar.setVisible(true);
                         String clavOrgano = queryPostgreSQL.clavesOrgano(usuario.getText(), contrasenia.getText(), CBD.getSelectedItem().toString());
+                        clave_entidad = clavOrgano.split(",")[0].substring(0, 2);
+                        
                         QueryRalabDes queryRalabDes = new QueryRalabDes();
                         queryRalabDes.eliminarRegistrosPostgres(clavOrgano, periodo);
                         //1.- TR_ORGANOJ
@@ -523,6 +545,7 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Existen errores, se debe verificar en la tabla de observaciones", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                         procesar.setVisible(false);
+                        BtnErroresInsert.setEnabled(true);
                     }
                 } // try 
                 catch (Exception ex) {
@@ -706,6 +729,12 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
         );
     }//GEN-LAST:event_Textoperiodo1KeyReleased
 
+    private void BtnErroresInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnErroresInsertActionPerformed
+        PErroresInsertPostgreSQL errores = new PErroresInsertPostgreSQL();
+        errores.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_BtnErroresInsertActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -717,6 +746,7 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ActualizarBD;
+    private javax.swing.JButton BtnErroresInsert;
     private javax.swing.JComboBox<String> CBD;
     private javax.swing.JButton EliminarBD;
     private javax.swing.JLabel LEntidad;
