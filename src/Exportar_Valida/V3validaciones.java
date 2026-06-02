@@ -13277,7 +13277,7 @@ PValidacion validacion = new PValidacion();
         }
         
         
-               ArrayResult = Individual.FECHA_ACTO_PROCESAL_NI();
+              ArrayResult = Individual.FECHA_ACTO_PROCESAL_NI();
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + "Contador Datos: " + conDat);
             HSSFRow fila00 = hojaresumenval.createRow(2);//FILA

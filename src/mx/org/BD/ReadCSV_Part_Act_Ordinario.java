@@ -128,7 +128,7 @@ public class ReadCSV_Part_Act_Ordinario {
             int bytesRead = inputStream.read(bytes);
 
             if (bytesRead >= 3 && bytes[0] == (byte) 0xEF && bytes[1] == (byte) 0xBB && bytes[2] == (byte) 0xBF) {
-                System.out.println("El archivo parece estar en UTF-8.");
+               // System.out.println("El archivo parece estar en UTF-8.");
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(rutaArchivoCSV), StandardCharsets.UTF_8));
                         CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT)) {
                     int numeroColumnas = 0;
@@ -170,7 +170,7 @@ public class ReadCSV_Part_Act_Ordinario {
                             c.SetNO_IDENTIFICADO(record.get(23).toUpperCase());
                             c.SetCOMENTARIOS(record.get(24).toUpperCase());
                             c.SetPERIODO(Periodo);
-                            System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + record.get(15) + ":" + record.get(16) + ":" + record.get(17) + ":" + record.get(18) + ":" + record.get(19) + ":" + record.get(20) + ":" + record.get(21) + ":" + record.get(22) + ":" + record.get(23) + ":" + record.get(24) + ":" + record.get(25));
+                            //System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + record.get(15) + ":" + record.get(16) + ":" + record.get(17) + ":" + record.get(18) + ":" + record.get(19) + ":" + record.get(20) + ":" + record.get(21) + ":" + record.get(22) + ":" + record.get(23) + ":" + record.get(24) + ":" + record.get(25));
                             ad.add(c);
                             if (record.get(4).equals("2") || record.get(4).equals("5") || record.get(4).equals("6")) {
                                 JOptionPane.showMessageDialog(null, "Error en el campo Actor fuera de catalogo  Clave_organo:" + record.get(1) + " Expediente:" + record.get(2) + "Id_actor:" + record.get(3) + "  nota: campo Actor solo puede tener opcion 1,3,4,7 Y 99");
@@ -206,12 +206,12 @@ public class ReadCSV_Part_Act_Ordinario {
                                 st.execute();
                                 System.out.println("entro 9");
                                 cargar.setVisible(false);
-                                JOptionPane.showMessageDialog(null, "Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
+                               // JOptionPane.showMessageDialog(null, "Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
                             } else {
                                 cargar.setVisible(false);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros");
+                            //JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
@@ -225,7 +225,7 @@ public class ReadCSV_Part_Act_Ordinario {
                         descriptor = null;
                         if (con != null) {
                             System.out.println("cierraaa");
-                            JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!");
+                          //  JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!");
                             con.close();
                             con = null;
                         }

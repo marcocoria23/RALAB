@@ -145,7 +145,7 @@ public class ReadCSV_Audiencias {
                         
                         ArrayList<Audiencias> ad = new ArrayList<>();
                         for (CSVRecord record : csvParser) {
-                            System.out.println("llenado de csv");
+                            //System.out.println("llenado de csv");
                             TotalRegistros++;
                             Audiencias c = new Audiencias();
                             c.SetNOMBRE_ORGANO_JURIS(record.get(0).toUpperCase());
@@ -164,7 +164,7 @@ public class ReadCSV_Audiencias {
                             c.SetCONCLU(record.get(13).toUpperCase());
                             c.SetCOMENTARIOS(record.get(14).toUpperCase());
                             c.SetPERIODO(Periodo);
-                            System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + Periodo);
+                            //System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + Periodo);
                             ad.add(c);
                            if(record.get(3).equals("1") && !(record.get(5).equals("") || record.get(5).equals("1") || record.get(5).equals("2") || record.get(5).equals("6") || record.get(5).equals("9")) ){
                                
@@ -234,13 +234,13 @@ public class ReadCSV_Audiencias {
                         st.execute();
                         System.out.println("entro 9");
                         cargar.setVisible(false);
-                        JOptionPane.showMessageDialog(null, "Registros insertados V3_TMP_AUDIENCIASJL"
-                                + " Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
+                       /* JOptionPane.showMessageDialog(null, "Registros insertados V3_TMP_AUDIENCIASJL"
+                                + " Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);*/
                   }else{
                         cargar.setVisible(false);
                                   }  
                  }else{
-                 JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros-V3_TMP_AUDIENCIASJL");
+                // JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros-V3_TMP_AUDIENCIASJL");
                    }
                   } else {
                         JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
@@ -256,7 +256,7 @@ public class ReadCSV_Audiencias {
                         descriptor = null;
                         if (con != null) {
                             System.out.println("cierraaa");
-                            JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!-V3_TMP_AUDIENCIASJL");
+                           // JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!-V3_TMP_AUDIENCIASJL");
                             con.close();
                             con = null;
                         }

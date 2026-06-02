@@ -221,7 +221,7 @@ public class ReadCSV_Individual {
                             c.SetCOMENTARIOS(record.get(77).toUpperCase());
                             c.SetPERIODO(Periodo);
 
-                            System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + record.get(15) + ":" + record.get(16) + ":" + record.get(17) + ":" + record.get(18) + ":" + record.get(19) + ":" + record.get(20) + ":" + record.get(21) + ":" + record.get(22) + ":" + record.get(23) + ":" + record.get(24) + ":" + record.get(25) + ":" + record.get(26) + ":" + record.get(27) + ":" + record.get(28) + ":" + record.get(29) + ":" + record.get(30) + ":" + record.get(31) + ":" + record.get(32) + ":" + record.get(33) + ":" + record.get(34) + ":" + record.get(35) + ":" + record.get(36) + ":" + record.get(37) + ":" + record.get(38) + ":" + record.get(39) + ":" + record.get(40) + ":" + record.get(41) + ":" + record.get(42) + ":" + record.get(43) + ":" + record.get(44) + ":" + record.get(45) + ":" + record.get(46) + ":" + record.get(47) + ":" + record.get(48) + ":" + record.get(49) + ":" + record.get(50) + ":" + record.get(51) + ":" + record.get(52) + ":" + record.get(53) + ":" + record.get(54) + ":" + record.get(55) + ":" + record.get(56) + ":" + record.get(57) + ":" + record.get(58) + ":" + record.get(59) + ":" + record.get(60) + ":" + record.get(61) + ":" + record.get(62) + ":" + record.get(63) + ":" + record.get(64) + ":" + record.get(65) + ":" + record.get(66) + ":" + record.get(67) + ":" + record.get(68) + ":" + record.get(69) + ":" + record.get(70) + ":" + record.get(71) + ":" + record.get(72) + ":" + record.get(73) + ":" + record.get(74) + ":" + record.get(75) + ":" + record.get(76) + ":" + record.get(77) + ":" + Periodo );
+                            //System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + record.get(15) + ":" + record.get(16) + ":" + record.get(17) + ":" + record.get(18) + ":" + record.get(19) + ":" + record.get(20) + ":" + record.get(21) + ":" + record.get(22) + ":" + record.get(23) + ":" + record.get(24) + ":" + record.get(25) + ":" + record.get(26) + ":" + record.get(27) + ":" + record.get(28) + ":" + record.get(29) + ":" + record.get(30) + ":" + record.get(31) + ":" + record.get(32) + ":" + record.get(33) + ":" + record.get(34) + ":" + record.get(35) + ":" + record.get(36) + ":" + record.get(37) + ":" + record.get(38) + ":" + record.get(39) + ":" + record.get(40) + ":" + record.get(41) + ":" + record.get(42) + ":" + record.get(43) + ":" + record.get(44) + ":" + record.get(45) + ":" + record.get(46) + ":" + record.get(47) + ":" + record.get(48) + ":" + record.get(49) + ":" + record.get(50) + ":" + record.get(51) + ":" + record.get(52) + ":" + record.get(53) + ":" + record.get(54) + ":" + record.get(55) + ":" + record.get(56) + ":" + record.get(57) + ":" + record.get(58) + ":" + record.get(59) + ":" + record.get(60) + ":" + record.get(61) + ":" + record.get(62) + ":" + record.get(63) + ":" + record.get(64) + ":" + record.get(65) + ":" + record.get(66) + ":" + record.get(67) + ":" + record.get(68) + ":" + record.get(69) + ":" + record.get(70) + ":" + record.get(71) + ":" + record.get(72) + ":" + record.get(73) + ":" + record.get(74) + ":" + record.get(75) + ":" + record.get(76) + ":" + record.get(77) + ":" + Periodo );
                             ad.add(c);
                             if (record.get(68).equals("1")) {
                                 JOptionPane.showMessageDialog(null, "Error en el campo FORMA_SOLUCION_AP fuera de catalogo  Clave_organo:" + record.get(1) + " Expediente:" + record.get(2) + " nota: campo FORMA_SOLUCION_AP solo puede tener opcion 2,3,4,5 Y 9");
@@ -257,13 +257,13 @@ public class ReadCSV_Individual {
                                 st.execute();
                                 System.out.println("entro 9");
                                 cargar.setVisible(false);
-                                JOptionPane.showMessageDialog(null, "Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
+                                //JOptionPane.showMessageDialog(null, "Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
                             } else {
                                 System.out.println("Cierra insert pantalla" + Inserta);
                                 cargar.setVisible(false);
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros");
+                            //JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros");
                         }
                     } else {
                         JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
@@ -277,7 +277,7 @@ public class ReadCSV_Individual {
                         descriptor = null;
                         if (con != null) {
                             System.out.println("cierraaa");
-                            JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!");
+                            //JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!");
                             con.close();
                             con = null;
                         }

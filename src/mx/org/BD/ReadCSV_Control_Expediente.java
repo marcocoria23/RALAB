@@ -210,9 +210,9 @@ public static String impErro = "",RutaT="";
                         st.execute();
                         System.out.println("entro 9");
                         cargar.setVisible(false);
-                        JOptionPane.showMessageDialog(null, "Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
+                        //JOptionPane.showMessageDialog(null, "Favor de revisar ventana -*Errores de insert*- Total registros en .CSV:" + TotalRegistros);
                  }else{
-                        JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros");
+                        //JOptionPane.showMessageDialog(null, "Archivo .CSV sin Registros");
                  }   
                  } else {
                         JOptionPane.showMessageDialog(null, "El total de numero de columnas en el archivo .CSV no coincide con la bd Oracle");
@@ -226,7 +226,7 @@ public static String impErro = "",RutaT="";
                         descriptor = null;
                         if (con != null) {
                             System.out.println("cierraaa");
-                             JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!");
+                           //  JOptionPane.showMessageDialog(null, "CONEXION CERRADA!!");
                             con.close();
                             con = null;
                         }

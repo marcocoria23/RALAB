@@ -66,6 +66,7 @@ public class V3QIndividual {
                 Array.add(new String[]{
                     resul.getString("CLAVE_ORGANO"),
                     resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FECHA_ACTO_PROCESAL"),
                    resul.getString("COMENTARIOS")});
             }
             conexion.close();
