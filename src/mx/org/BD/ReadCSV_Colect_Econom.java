@@ -134,7 +134,7 @@ public static String impErro = "",RutaT="";
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    if (numeroColumnas == 56) {
+                    if (numeroColumnas == 55) {
                         System.out.println("+hellooou+" + numeroColumnas);
                         cargando cargar = new cargando();
                         

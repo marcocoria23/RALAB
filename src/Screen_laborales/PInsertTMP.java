@@ -62,6 +62,7 @@ public class PInsertTMP extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
         PanelI.setVisible(false);
+        jRadioButton1.setVisible(false);
         
         
     }

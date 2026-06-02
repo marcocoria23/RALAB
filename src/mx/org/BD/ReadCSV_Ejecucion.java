@@ -131,7 +131,7 @@ public class ReadCSV_Ejecucion {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    if (numeroColumnas == 11) {
+                    if (numeroColumnas == 10) {
                         System.out.println("+hellooou+" + numeroColumnas);
                         cargando cargar = new cargando();
                         

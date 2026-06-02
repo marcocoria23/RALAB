@@ -132,7 +132,7 @@ public class ReadCSV_Part_Act_Huelga {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    if (numeroColumnas == 19) {
+                    if (numeroColumnas == 18) {
                         System.out.println("+hellooou+" + numeroColumnas);
                         cargando cargar = new cargando();
                         

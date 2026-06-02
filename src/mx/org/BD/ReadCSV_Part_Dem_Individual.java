@@ -133,7 +133,7 @@ public class ReadCSV_Part_Dem_Individual {
                     int numeroColumnas = 0;
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
-                    if (numeroColumnas == 22) {
+                    if (numeroColumnas == 21) {
                         System.out.println("+hellooou+" + numeroColumnas);
                         cargando cargar = new cargando();
                         

@@ -132,7 +132,7 @@ public class ReadCSV_Part_Act_Individual {
                     CSVRecord firstRecord = csvParser.iterator().next();
                     numeroColumnas = firstRecord.size();
                     System.out.println("numero de columnas en csv=" + numeroColumnas);
-                    if (numeroColumnas == 15) {
+                    if (numeroColumnas == 14) {
                         System.out.println("+hellooou+" + numeroColumnas);
                         cargando cargar = new cargando();
                         

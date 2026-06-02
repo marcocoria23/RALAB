@@ -521,7 +521,7 @@ public class PCleaner extends javax.swing.JFrame {
     con = OracleDAOFactory.creaConexion();       
      LProgress.setVisible(true);
      jProgressBar1.setVisible(true);    
-     String[] ArrayTablas = new String[42];
+     String[] ArrayTablas = new String[43];
      V3Querys V3Q=new V3Querys();
      int Progress=3;
     ArrayTablas[0]="V3_TR_AUDIENCIASJL";
@@ -565,7 +565,8 @@ public class PCleaner extends javax.swing.JFrame {
     ArrayTablas[38]="V3_TMP_PREF_CREDITOJL";
     ArrayTablas[39]="V3_TMP_TERCERIASJL";
     ArrayTablas[40]="V3_TMP_EJECUCIONJL";   
-    ArrayTablas[41]="V3_TMP_CONTROL_EXPEDIENTEJL";   
+    ArrayTablas[41]="V3_TMP_CONTROL_EXPEDIENTEJL";
+    ArrayTablas[42]="V3_ERRORES_INSERT_RALABTMP"; 
     
     try {
         st = con.prepareCall("{call RESPALDOV3_XENTIDAD(?, ?, ?)}");
@@ -587,7 +588,7 @@ public class PCleaner extends javax.swing.JFrame {
             }
     }
             
-    for (int i=0;i<=41;i++)
+    for (int i=0;i<=42;i++)
     {
         V3Q.CleanerBD(ArrayTablas[i],clave_entidad,clave_organo,periodo);
         Progress=Progress+3;
