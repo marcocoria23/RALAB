@@ -216,8 +216,14 @@ public class ReadCSV_Part_Act_Individual {
                             con = null;
                         }
                     } catch (SQLException ex) {
-                        throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
-                    }
+    JOptionPane.showMessageDialog(
+        null,
+            "Tabla: V3_TMP_PART_ACT_INDIVIDUALJL\n" +
+        "[actualiza]: " + ex.getLocalizedMessage(),
+        "Error SQL",
+        JOptionPane.ERROR_MESSAGE
+    );
+}
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8");

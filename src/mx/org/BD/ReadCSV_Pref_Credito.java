@@ -206,8 +206,14 @@ public class ReadCSV_Pref_Credito {
                             con = null;
                         }
                     } catch (SQLException ex) {
-                        throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
-                    }
+    JOptionPane.showMessageDialog(
+        null,
+            "Tabla: V3_TMP_PREF_CREDITOJL\n" +
+        "[actualiza]: " + ex.getLocalizedMessage(),
+        "Error SQL",
+        JOptionPane.ERROR_MESSAGE
+    );
+}
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8");

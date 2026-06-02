@@ -230,9 +230,15 @@ public static String impErro = "",RutaT="";
                             con.close();
                             con = null;
                         }
-                    } catch (SQLException ex) {
-                        throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
-                    }
+              } catch (SQLException ex) {
+    JOptionPane.showMessageDialog(
+        null,
+            "Tabla: V3_TMP_CONTROL_EXPEDIENTEJL\n" +
+        "[actualiza]: " + ex.getLocalizedMessage(),
+        "Error SQL",
+        JOptionPane.ERROR_MESSAGE
+    );
+}
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "El archivo no esta en formato UTF-8");

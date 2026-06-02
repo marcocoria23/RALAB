@@ -32,7 +32,10 @@ ResultSet resul;
 public ArrayList PeriodoNE(String clave_organo,String entidad){
      conexion.Conectar();
       Array = new ArrayList();
-      sql="select unique(PERIODO)PERIODO from V3_TR_control_expedientejl where clave_organo='"+clave_organo+"' or substr(clave_organo,0,2)='"+entidad+"' order by 1";
+      sql="select unique(PERIODO)PERIODO from V3_TR_control_expedientejl where clave_organo='"+clave_organo+"' or substr(clave_organo,0,2)='"+entidad+"' "
+              + " UNION"
+              + " select unique(PERIODO)PERIODO from V3_TMP_control_expedientejl where clave_organo='"+clave_organo+"' or substr(clave_organo,0,2)='"+entidad+"'"
+              + " order by 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
