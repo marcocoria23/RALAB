@@ -1,7 +1,7 @@
 package Screen_laborales;
 
 import Conexion.ConexionPostgreSQL;
-import Desencriptador.RALABE.ExecuteDesencriptador;
+import EXECUTE.RALABE.Execute;
 import LeerQuery.QueryPostgreSQL;
 import LeerQuery.QueryRalabDes;
 import LeerQuery.beans.Act.to.V3.V3_TR_CONTROL_EXPEDIENTEJL;

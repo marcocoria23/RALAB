@@ -4,8 +4,9 @@
  */
 package Screen_laborales;
 
-import PrepararArchivos.ExtraeExe;
+import EXECUTE.RALABE.Execute;
 import java.awt.Color;
+
 
 /**
  *
@@ -22,6 +23,7 @@ public class PPrepararArchivos extends javax.swing.JFrame {
         initComponents();
          this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
+        jProgressBar1.setVisible(false);
     }
 
     /**
@@ -40,6 +42,7 @@ public class PPrepararArchivos extends javax.swing.JFrame {
         RBVertical = new javax.swing.JRadioButton();
         RBPlantillas = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -78,8 +81,13 @@ public class PPrepararArchivos extends javax.swing.JFrame {
                 .addGap(0, 163, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +99,9 @@ public class PPrepararArchivos extends javax.swing.JFrame {
                     .addComponent(RBPlantillas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(56, 56, 56))
+                .addGap(18, 18, 18)
+                .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,18 +132,19 @@ public class PPrepararArchivos extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
       new Thread(() -> {
-        ExtraeExe exe =new ExtraeExe();
+        Execute exe=new Execute();
+          
         procesando pro= new procesando();
         if (RBHorizontal.isSelected()){
-            exe.ejecutarExeDesdeResources("/PrepararArchivos/convrt_bd_frmto_hotizontal_a_csv.exe", pro,"convrt_bd_frmto_hotizontal_a_csv");
+            exe.ejecutarExeDesdeResources("\\Desktop\\PrepararArchivos\\convrt_bd_frmto_hotizontal_a_csv.exe",jProgressBar1);
             jButton1.setEnabled(false);
         }
         if (RBVertical.isSelected()){
-           exe.ejecutarExeDesdeResources("/PrepararArchivos/convert_formato_vertical_a_csv.exe", pro,"convert_formato_vertical_a_csv");
+           exe.ejecutarExeDesdeResources("\\Desktop\\PrepararArchivos\\convert_formato_vertical_a_csv.exe",jProgressBar1);
              jButton1.setEnabled(false);
         }
         if (RBPlantillas.isSelected()){
-            exe.ejecutarExeDesdeResources("/PrepararArchivos/convert_formato_bd_a_csv.exe", pro,"convert_formato_bd_a_csv");
+             exe.ejecutarExeDesdeResources("\\Desktop\\PrepararArchivos\\convert_formato_bd_a_csv.exe",jProgressBar1);
               jButton1.setEnabled(false);
         }
         pro.setVisible(false);
@@ -180,5 +191,6 @@ public class PPrepararArchivos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JProgressBar jProgressBar1;
     // End of variables declaration//GEN-END:variables
 }

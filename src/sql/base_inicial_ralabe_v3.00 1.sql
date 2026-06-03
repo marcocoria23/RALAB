@@ -5133,6 +5133,7 @@ INSERT INTO public.tc_estatus_demanda VALUES (1, 'Admitida');
 INSERT INTO public.tc_estatus_demanda VALUES (2, 'Desechada');
 INSERT INTO public.tc_estatus_demanda VALUES (3, 'Archivo');
 INSERT INTO public.tc_estatus_demanda VALUES (4, 'No se dio trámite al escrito de demanda');
+INSERT INTO public.tc_estatus_demanda VALUES (5, 'En trámite o prevención');
 INSERT INTO public.tc_estatus_demanda VALUES (-1, 'No identificado');
 
 
