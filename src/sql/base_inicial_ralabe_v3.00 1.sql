@@ -1964,7 +1964,7 @@ CREATE TABLE public.tr_expediente (
     huelga_dias integer,
     monto_solucion double precision,
     porcent_salarios_caidos double precision,
-    comentarios character varying(4000),
+    comentarios character varying(32767),
     fecha_creacion character varying,
     fecha_modificacion character varying,
     usuario_creacion character varying,
