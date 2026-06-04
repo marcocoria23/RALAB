@@ -34,6 +34,7 @@ public class Execute {
                 File exe = new File(rutaExe);
 
                 if (!exe.exists()) {
+                    JOptionPane.showMessageDialog(null, "No se encontró el EXE en: " + rutaExe, "", JOptionPane.INFORMATION_MESSAGE);
                     throw new FileNotFoundException("No se encontró el EXE en: " + rutaExe);
                 }
 
