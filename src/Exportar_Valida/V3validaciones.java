@@ -3990,7 +3990,7 @@ ArrayResult = Desgloses.Desglose_EjecucionNEAnt();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
         
-        
+        /*
                ArrayResult = Ordinario.FECHA_ACTO_PROCESAL_NI();
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + "Contador Datos: " + conDat);
@@ -4129,6 +4129,7 @@ ArrayResult = Desgloses.Desglose_EjecucionNEAnt();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
+        */
         
         ArrayResult = QN.OrdinarioFaseSolExpAJ(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo);
         if (ArrayResult.size() > 0) {
@@ -10493,27 +10494,71 @@ ArrayResult = Desgloses.Desglose_EjecucionNEAnt();
             HSSFRichTextString textoA3 = new HSSFRichTextString(txtC3);
             celdaC3.setCellValue(textoA3);
             filaC3.setHeight((short) 600);
+            
+            // AGREGADO POR MI:
+            
+            
+            for (int i = 0; i < ArrayResult.size(); i++) {
+
+                HSSFRow filaC8 = hoja1.createRow(conDat + i);
+
+                HSSFCell celdaC8 = filaC8.createCell((short) 3);
+
+                celdaC8.setCellStyle(estiloCeldabordes0);
+                celdaC8.setCellType(HSSFCell.CELL_TYPE_STRING);
+
+                String txtC8 = Arrays.toString(ArrayResult.get(i));
+
+                txtC8 = txtC8.replace("[", "")
+                             .replace("]", "")
+                             .replace(" 00:00:00.0", "");
+
+                parts = txtC8.split(",");
+
+                parts0 = parts[3].trim();
+
+                HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
+
+                celdaC8.setCellValue(textoA8);
+
+                filaC8.setHeight((short) 300);
+            }
+
+
+            System.out.println("EN PREVENCION O EN PROCESO ORDINARIO");
+            HSSFRow filaC4 = hoja1.createRow(conEnc);//filaC
+            HSSFCell celdaC4 = filaC4.createCell((short) 3);//COLUMNA
+            celdaC4.setCellStyle(estiloCelda1);
+            celdaC4.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txtC4 = "COMENTARIOS";
+            HSSFRichTextString textoA4 = new HSSFRichTextString(txtC4);
+            celdaC4.setCellValue(textoA4);
+            filaC4.setHeight((short) 600);
+            
+            
+            // HASTA AQUI LLEGA MI NUEVO AGREGADO
+            
 
             //FECHA DE APERTURA DEL EXPEDIENTE
             for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow filaC8 = hoja1.createRow(conDat + i);//filaC
-                HSSFCell celdaC8 = filaC8.createCell((short) 2);//COLUMNA
-                celdaC8.setCellStyle(estiloCeldabordes0);
-                celdaC8.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txtC8 = Arrays.toString(ArrayResult.get(i));
-                txtC8 = txtC8.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                parts = txtC8.split(",");
+                HSSFRow filaC9 = hoja1.createRow(conDat + i);//filaC
+                HSSFCell celdaC9 = filaC9.createCell((short) 2);//COLUMNA
+                celdaC9.setCellStyle(estiloCeldabordes0);
+                celdaC9.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txtC9 = Arrays.toString(ArrayResult.get(i));
+                txtC9 = txtC9.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txtC9.split(",");
                 parts0 = parts[2].trim().replace("2", "Desechada").replace("3", "Archivo").replace("4", "No se dio trámite al escrito de demanda");
        // partsfechas=dateformat.format(parts0);
                 //System.out.println(Arrays.toString(ArrayResult.get(i)));
                 HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
-                celdaC8.setCellValue(textoA8);
-                filaC8.setHeight((short) 300);
+                celdaC9.setCellValue(textoA8);
+                filaC9.setHeight((short) 300);
                 System.out.println("3");
             }
-            System.out.println("4");
+            System.out.println("5");
             HSSFRow filaC5 = hoja1.createRow(conEnc);//filaC
-            HSSFCell celdaC5 = filaC5.createCell((short) 3);//COLUMNA
+            HSSFCell celdaC5 = filaC5.createCell((short) 4);//COLUMNA
             celdaC5.setCellStyle(estiloCelda1);
             celdaC5.setCellType(HSSFCell.CELL_TYPE_STRING);
             String txtC5 = "OBSERVACIONES";
@@ -10524,7 +10569,7 @@ ArrayResult = Desgloses.Desglose_EjecucionNEAnt();
             //Observaciones
             for (int i = 0; i < ArrayResult.size(); i++) {
                 HSSFRow filaE9 = hoja1.createRow(conDat + i);//filaC
-                HSSFCell celdaE9 = filaE9.createCell((short) 3);//COLUMNA
+                HSSFCell celdaE9 = filaE9.createCell((short) 4);//COLUMNA
                 celdaE9.setCellStyle(estiloCeldabordes0);
                 celdaE9.setCellType(HSSFCell.CELL_TYPE_STRING);
                 String txtE9 = "Favor de verificar el campo Estatus_demanda, ya que la Fecha de Apertura del Expediente (FECHA_APERTURA_EXPEDIENTE) excede el plazo máximo permitido de 60 días (2 meses).";
@@ -13276,7 +13321,7 @@ PValidacion validacion = new PValidacion();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
         
-        
+        /*
               ArrayResult = Individual.FECHA_ACTO_PROCESAL_NI();
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + "Contador Datos: " + conDat);
@@ -13414,6 +13459,9 @@ PValidacion validacion = new PValidacion();
             coni = 1;
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
+        
+        */
+      
 
         
         ArrayResult = Q.IndividualFaseSolExpTA(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo);
@@ -20242,10 +20290,9 @@ PValidacion validacion = new PValidacion();
                   ArrayResult = NNindividual.Estatus_Demanda_PrevenProceso();
         if (ArrayResult.size() > 0) {
             System.out.println(ArrayResult.toString());
-            HSSFRow filaC00 = hojaresumenval.createRow(3);//filaC
+            HSSFRow filaC00 = hojaresumenval.createRow(2);//filaC
             HSSFCell celdaC00 = filaC00.createCell((short) 1);//COLUMNA    
             celdaC00.setCellStyle(PAmarillo);
-            System.out.println("1");
             HSSFRow filaC1 = hoja4.createRow(conEnc);//filaC
             HSSFCell celdaC1 = filaC1.createCell((short) 0);//COLUMNA
             celdaC1.setCellStyle(estiloCelda1);
@@ -20269,9 +20316,9 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoA6 = new HSSFRichTextString(parts0);
                 celdaC6.setCellValue(textoA6);
                 filaC6.setHeight((short) 300);
-
+                System.out.println("1");
             }
-
+            System.out.println("2");
             HSSFRow filaC2 = hoja4.createRow(conEnc);//filaC
             HSSFCell celdaC2 = filaC2.createCell((short) 1);//COLUMNA
             celdaC2.setCellStyle(estiloCelda1);
@@ -20295,38 +20342,83 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoA7 = new HSSFRichTextString(parts0);
                 celdaC7.setCellValue(textoA7);
                 filaC7.setHeight((short) 300);
-
+                System.out.println("2");
             }
 
+            System.out.println("3");
             HSSFRow filaC3 = hoja4.createRow(conEnc);//filaC
             HSSFCell celdaC3 = filaC3.createCell((short) 2);//COLUMNA
             celdaC3.setCellStyle(estiloCelda1);
             celdaC3.setCellType(HSSFCell.CELL_TYPE_STRING);
-            String txtC3 = "ESTATUS DE LA DEMANDA";
+            String txtC3 = "ESTATUS DEMANDA";
             HSSFRichTextString textoA3 = new HSSFRichTextString(txtC3);
             celdaC3.setCellValue(textoA3);
             filaC3.setHeight((short) 600);
+            
+            // AGREGADO POR MI:
+            
+            
+            for (int i = 0; i < ArrayResult.size(); i++) {
+
+                HSSFRow filaC8 = hoja4.createRow(conDat + i);
+
+                HSSFCell celdaC8 = filaC8.createCell((short) 3);
+
+                celdaC8.setCellStyle(estiloCeldabordes0);
+                celdaC8.setCellType(HSSFCell.CELL_TYPE_STRING);
+
+                String txtC8 = Arrays.toString(ArrayResult.get(i));
+
+                txtC8 = txtC8.replace("[", "")
+                             .replace("]", "")
+                             .replace(" 00:00:00.0", "");
+
+                parts = txtC8.split(",");
+
+                parts0 = parts[3].trim();
+
+                HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
+
+                celdaC8.setCellValue(textoA8);
+
+                filaC8.setHeight((short) 300);
+            }
+
+
+            System.out.println("EN PREVENCION O EN PROCESO INDIVIDUAL");
+            HSSFRow filaC4 = hoja4.createRow(conEnc);//filaC
+            HSSFCell celdaC4 = filaC4.createCell((short) 3);//COLUMNA
+            celdaC4.setCellStyle(estiloCelda1);
+            celdaC4.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txtC4 = "COMENTARIOS";
+            HSSFRichTextString textoA4 = new HSSFRichTextString(txtC4);
+            celdaC4.setCellValue(textoA4);
+            filaC4.setHeight((short) 600);
+            
+            
+            // HASTA AQUI LLEGA MI NUEVO AGREGADO
+            
 
             //FECHA DE APERTURA DEL EXPEDIENTE
             for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow filaC8 = hoja4.createRow(conDat + i);//filaC
-                HSSFCell celdaC8 = filaC8.createCell((short) 2);//COLUMNA
-                celdaC8.setCellStyle(estiloCeldabordes0);
-                celdaC8.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txtC8 = Arrays.toString(ArrayResult.get(i));
-                txtC8 = txtC8.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                parts = txtC8.split(",");
+                HSSFRow filaC9 = hoja4.createRow(conDat + i);//filaC
+                HSSFCell celdaC9 = filaC9.createCell((short) 2);//COLUMNA
+                celdaC9.setCellStyle(estiloCeldabordes0);
+                celdaC9.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txtC9 = Arrays.toString(ArrayResult.get(i));
+                txtC9 = txtC9.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txtC9.split(",");
                 parts0 = parts[2].trim().replace("2", "Desechada").replace("3", "Archivo").replace("4", "No se dio trámite al escrito de demanda");
        // partsfechas=dateformat.format(parts0);
                 //System.out.println(Arrays.toString(ArrayResult.get(i)));
                 HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
-                celdaC8.setCellValue(textoA8);
-                filaC8.setHeight((short) 300);
-
+                celdaC9.setCellValue(textoA8);
+                filaC9.setHeight((short) 300);
+                System.out.println("3");
             }
-
+            System.out.println("5");
             HSSFRow filaC5 = hoja4.createRow(conEnc);//filaC
-            HSSFCell celdaC5 = filaC5.createCell((short) 3);//COLUMNA
+            HSSFCell celdaC5 = filaC5.createCell((short) 4);//COLUMNA
             celdaC5.setCellStyle(estiloCelda1);
             celdaC5.setCellType(HSSFCell.CELL_TYPE_STRING);
             String txtC5 = "OBSERVACIONES";
@@ -20337,7 +20429,7 @@ PValidacion validacion = new PValidacion();
             //Observaciones
             for (int i = 0; i < ArrayResult.size(); i++) {
                 HSSFRow filaE9 = hoja4.createRow(conDat + i);//filaC
-                HSSFCell celdaE9 = filaE9.createCell((short) 3);//COLUMNA
+                HSSFCell celdaE9 = filaE9.createCell((short) 4);//COLUMNA
                 celdaE9.setCellStyle(estiloCeldabordes0);
                 celdaE9.setCellType(HSSFCell.CELL_TYPE_STRING);
                 String txtE9 = "Favor de verificar el campo Estatus_demanda, ya que la Fecha de Apertura del Expediente (FECHA_APERTURA_EXPEDIENTE) excede el plazo máximo permitido de 60 días (2 meses).";
@@ -20345,7 +20437,7 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoD9 = new HSSFRichTextString(txtE9);
                 celdaE9.setCellValue(textoD9);
                 filaE9.setHeight((short) 300);
-
+                System.out.println("4");
                 coni++;
             }
             conEnc = conEnc + coni;
@@ -22981,7 +23073,7 @@ PValidacion validacion = new PValidacion();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
         
-        
+        /*
                ArrayResult = Colectivo.FECHA_ACTO_PROCESAL_NI();
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + "Contador Datos: " + conDat);
@@ -23120,6 +23212,7 @@ PValidacion validacion = new PValidacion();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
+        */
         
         
         ArrayResult = Q.ColectivoFaseSolExpAD(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo);
@@ -27381,10 +27474,9 @@ PValidacion validacion = new PValidacion();
                   ArrayResult = NNColectivo.Estatus_Demanda_PrevenProceso();
         if (ArrayResult.size() > 0) {
             System.out.println(ArrayResult.toString());
-            HSSFRow filaC00 = hojaresumenval.createRow(3);//filaC
+            HSSFRow filaC00 = hojaresumenval.createRow(2);//filaC
             HSSFCell celdaC00 = filaC00.createCell((short) 1);//COLUMNA    
             celdaC00.setCellStyle(PAmarillo);
-            System.out.println("1");
             HSSFRow filaC1 = hoja7.createRow(conEnc);//filaC
             HSSFCell celdaC1 = filaC1.createCell((short) 0);//COLUMNA
             celdaC1.setCellStyle(estiloCelda1);
@@ -27408,9 +27500,9 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoA6 = new HSSFRichTextString(parts0);
                 celdaC6.setCellValue(textoA6);
                 filaC6.setHeight((short) 300);
-
+                System.out.println("1");
             }
-
+            System.out.println("2");
             HSSFRow filaC2 = hoja7.createRow(conEnc);//filaC
             HSSFCell celdaC2 = filaC2.createCell((short) 1);//COLUMNA
             celdaC2.setCellStyle(estiloCelda1);
@@ -27434,38 +27526,75 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoA7 = new HSSFRichTextString(parts0);
                 celdaC7.setCellValue(textoA7);
                 filaC7.setHeight((short) 300);
-
+                System.out.println("2");
             }
 
+            System.out.println("3");
             HSSFRow filaC3 = hoja7.createRow(conEnc);//filaC
             HSSFCell celdaC3 = filaC3.createCell((short) 2);//COLUMNA
             celdaC3.setCellStyle(estiloCelda1);
             celdaC3.setCellType(HSSFCell.CELL_TYPE_STRING);
-            String txtC3 = "ESTATUS DE LA DEMANDA";
+            String txtC3 = "ESTATUS DEMANDA";
             HSSFRichTextString textoA3 = new HSSFRichTextString(txtC3);
             celdaC3.setCellValue(textoA3);
             filaC3.setHeight((short) 600);
-
-            //FECHA DE APERTURA DEL EXPEDIENTE
+            
+            // AGREGADO POR MI:
+            
+            
             for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow filaC8 = hoja7.createRow(conDat + i);//filaC
-                HSSFCell celdaC8 = filaC8.createCell((short) 2);//COLUMNA
+
+                HSSFRow filaC8 = hoja7.createRow(conDat + i);
+                HSSFCell celdaC8 = filaC8.createCell((short) 3);
                 celdaC8.setCellStyle(estiloCeldabordes0);
                 celdaC8.setCellType(HSSFCell.CELL_TYPE_STRING);
                 String txtC8 = Arrays.toString(ArrayResult.get(i));
-                txtC8 = txtC8.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                txtC8 = txtC8.replace("[", "")
+                             .replace("]", "")
+                             .replace(" 00:00:00.0", "");
                 parts = txtC8.split(",");
+                parts0 = parts[3].trim();
+                HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
+                celdaC8.setCellValue(textoA8);
+
+                filaC8.setHeight((short) 300);
+            }
+
+
+            System.out.println("EN PREVENCION O EN PROCESO ORDINARIO");
+            HSSFRow filaC4 = hoja7.createRow(conEnc);//filaC
+            HSSFCell celdaC4 = filaC4.createCell((short) 3);//COLUMNA
+            celdaC4.setCellStyle(estiloCelda1);
+            celdaC4.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txtC4 = "COMENTARIOS";
+            HSSFRichTextString textoA4 = new HSSFRichTextString(txtC4);
+            celdaC4.setCellValue(textoA4);
+            filaC4.setHeight((short) 600);
+            
+            
+            // HASTA AQUI LLEGA MI NUEVO AGREGADO
+            
+
+            //FECHA DE APERTURA DEL EXPEDIENTE
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow filaC9 = hoja7.createRow(conDat + i);//filaC
+                HSSFCell celdaC9 = filaC9.createCell((short) 2);//COLUMNA
+                celdaC9.setCellStyle(estiloCeldabordes0);
+                celdaC9.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txtC9 = Arrays.toString(ArrayResult.get(i));
+                txtC9 = txtC9.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txtC9.split(",");
                 parts0 = parts[2].trim().replace("2", "Desechada").replace("3", "Archivo").replace("4", "No se dio trámite al escrito de demanda");
        // partsfechas=dateformat.format(parts0);
                 //System.out.println(Arrays.toString(ArrayResult.get(i)));
                 HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
-                celdaC8.setCellValue(textoA8);
-                filaC8.setHeight((short) 300);
-
+                celdaC9.setCellValue(textoA8);
+                filaC9.setHeight((short) 300);
+                System.out.println("3");
             }
-
+            System.out.println("5");
             HSSFRow filaC5 = hoja7.createRow(conEnc);//filaC
-            HSSFCell celdaC5 = filaC5.createCell((short) 3);//COLUMNA
+            HSSFCell celdaC5 = filaC5.createCell((short) 4);//COLUMNA
             celdaC5.setCellStyle(estiloCelda1);
             celdaC5.setCellType(HSSFCell.CELL_TYPE_STRING);
             String txtC5 = "OBSERVACIONES";
@@ -27476,7 +27605,7 @@ PValidacion validacion = new PValidacion();
             //Observaciones
             for (int i = 0; i < ArrayResult.size(); i++) {
                 HSSFRow filaE9 = hoja7.createRow(conDat + i);//filaC
-                HSSFCell celdaE9 = filaE9.createCell((short) 3);//COLUMNA
+                HSSFCell celdaE9 = filaE9.createCell((short) 4);//COLUMNA
                 celdaE9.setCellStyle(estiloCeldabordes0);
                 celdaE9.setCellType(HSSFCell.CELL_TYPE_STRING);
                 String txtE9 = "Favor de verificar el campo Estatus_demanda, ya que la Fecha de Apertura del Expediente (FECHA_APERTURA_EXPEDIENTE) excede el plazo máximo permitido de 60 días (2 meses).";
@@ -27484,7 +27613,7 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoD9 = new HSSFRichTextString(txtE9);
                 celdaE9.setCellValue(textoD9);
                 filaE9.setHeight((short) 300);
-
+                System.out.println("4");
                 coni++;
             }
             conEnc = conEnc + coni;
@@ -31040,7 +31169,7 @@ PValidacion validacion = new PValidacion();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
         
-        
+        /*
                ArrayResult = Huelga.FECHA_ACTO_PROCESAL_NI();
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + "Contador Datos: " + conDat);
@@ -31178,7 +31307,7 @@ PValidacion validacion = new PValidacion();
             coni = 1;
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
-
+*/
         
         
         ArrayResult = Q.HuelgaFaseSolExpHu(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo);
@@ -38665,6 +38794,7 @@ PValidacion validacion = new PValidacion();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
         
+        /*
         
                ArrayResult = Economico.FECHA_ACTO_PROCESAL_NI();
         if (ArrayResult.size() > 0) {
@@ -38804,7 +38934,7 @@ PValidacion validacion = new PValidacion();
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
-        
+        */
         
         ArrayResult = Q.Colectivo_EconomFaseSolExpAPC(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo);
         if (ArrayResult.size() > 0) {
@@ -41996,10 +42126,9 @@ PValidacion validacion = new PValidacion();
                   ArrayResult = Colect.Estatus_Demanda_PrevenProceso();
         if (ArrayResult.size() > 0) {
             System.out.println(ArrayResult.toString());
-            HSSFRow filaC00 = hojaresumenval.createRow(3);//filaC
+            HSSFRow filaC00 = hojaresumenval.createRow(2);//filaC
             HSSFCell celdaC00 = filaC00.createCell((short) 1);//COLUMNA    
             celdaC00.setCellStyle(PAmarillo);
-            System.out.println("1");
             HSSFRow filaC1 = hoja13.createRow(conEnc);//filaC
             HSSFCell celdaC1 = filaC1.createCell((short) 0);//COLUMNA
             celdaC1.setCellStyle(estiloCelda1);
@@ -42023,9 +42152,9 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoA6 = new HSSFRichTextString(parts0);
                 celdaC6.setCellValue(textoA6);
                 filaC6.setHeight((short) 300);
-
+                System.out.println("1");
             }
-
+            System.out.println("2");
             HSSFRow filaC2 = hoja13.createRow(conEnc);//filaC
             HSSFCell celdaC2 = filaC2.createCell((short) 1);//COLUMNA
             celdaC2.setCellStyle(estiloCelda1);
@@ -42049,38 +42178,83 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoA7 = new HSSFRichTextString(parts0);
                 celdaC7.setCellValue(textoA7);
                 filaC7.setHeight((short) 300);
-
+                System.out.println("2");
             }
 
+            System.out.println("3");
             HSSFRow filaC3 = hoja13.createRow(conEnc);//filaC
             HSSFCell celdaC3 = filaC3.createCell((short) 2);//COLUMNA
             celdaC3.setCellStyle(estiloCelda1);
             celdaC3.setCellType(HSSFCell.CELL_TYPE_STRING);
-            String txtC3 = "ESTATUS DE LA DEMANDA";
+            String txtC3 = "ESTATUS DEMANDA";
             HSSFRichTextString textoA3 = new HSSFRichTextString(txtC3);
             celdaC3.setCellValue(textoA3);
             filaC3.setHeight((short) 600);
+            
+            // AGREGADO POR MI:
+            
+            
+            for (int i = 0; i < ArrayResult.size(); i++) {
+
+                HSSFRow filaC8 = hoja13.createRow(conDat + i);
+
+                HSSFCell celdaC8 = filaC8.createCell((short) 3);
+
+                celdaC8.setCellStyle(estiloCeldabordes0);
+                celdaC8.setCellType(HSSFCell.CELL_TYPE_STRING);
+
+                String txtC8 = Arrays.toString(ArrayResult.get(i));
+
+                txtC8 = txtC8.replace("[", "")
+                             .replace("]", "")
+                             .replace(" 00:00:00.0", "");
+
+                parts = txtC8.split(",");
+
+                parts0 = parts[3].trim();
+
+                HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
+
+                celdaC8.setCellValue(textoA8);
+
+                filaC8.setHeight((short) 300);
+            }
+
+
+            System.out.println("EN PREVENCION O EN PROCESO ORDINARIO");
+            HSSFRow filaC4 = hoja13.createRow(conEnc);//filaC
+            HSSFCell celdaC4 = filaC4.createCell((short) 3);//COLUMNA
+            celdaC4.setCellStyle(estiloCelda1);
+            celdaC4.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txtC4 = "COMENTARIOS";
+            HSSFRichTextString textoA4 = new HSSFRichTextString(txtC4);
+            celdaC4.setCellValue(textoA4);
+            filaC4.setHeight((short) 600);
+            
+            
+            // HASTA AQUI LLEGA MI NUEVO AGREGADO
+            
 
             //FECHA DE APERTURA DEL EXPEDIENTE
             for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow filaC8 = hoja13.createRow(conDat + i);//filaC
-                HSSFCell celdaC8 = filaC8.createCell((short) 2);//COLUMNA
-                celdaC8.setCellStyle(estiloCeldabordes0);
-                celdaC8.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txtC8 = Arrays.toString(ArrayResult.get(i));
-                txtC8 = txtC8.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                parts = txtC8.split(",");
+                HSSFRow filaC9 = hoja13.createRow(conDat + i);//filaC
+                HSSFCell celdaC9 = filaC9.createCell((short) 2);//COLUMNA
+                celdaC9.setCellStyle(estiloCeldabordes0);
+                celdaC9.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txtC9 = Arrays.toString(ArrayResult.get(i));
+                txtC9 = txtC9.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txtC9.split(",");
                 parts0 = parts[2].trim().replace("2", "Desechada").replace("3", "Archivo").replace("4", "No se dio trámite al escrito de demanda");
        // partsfechas=dateformat.format(parts0);
                 //System.out.println(Arrays.toString(ArrayResult.get(i)));
                 HSSFRichTextString textoA8 = new HSSFRichTextString(parts0);
-                celdaC8.setCellValue(textoA8);
-                filaC8.setHeight((short) 300);
-
+                celdaC9.setCellValue(textoA8);
+                filaC9.setHeight((short) 300);
+                System.out.println("3");
             }
-
+            System.out.println("5");
             HSSFRow filaC5 = hoja13.createRow(conEnc);//filaC
-            HSSFCell celdaC5 = filaC5.createCell((short) 3);//COLUMNA
+            HSSFCell celdaC5 = filaC5.createCell((short) 4);//COLUMNA
             celdaC5.setCellStyle(estiloCelda1);
             celdaC5.setCellType(HSSFCell.CELL_TYPE_STRING);
             String txtC5 = "OBSERVACIONES";
@@ -42091,7 +42265,7 @@ PValidacion validacion = new PValidacion();
             //Observaciones
             for (int i = 0; i < ArrayResult.size(); i++) {
                 HSSFRow filaE9 = hoja13.createRow(conDat + i);//filaC
-                HSSFCell celdaE9 = filaE9.createCell((short) 3);//COLUMNA
+                HSSFCell celdaE9 = filaE9.createCell((short) 4);//COLUMNA
                 celdaE9.setCellStyle(estiloCeldabordes0);
                 celdaE9.setCellType(HSSFCell.CELL_TYPE_STRING);
                 String txtE9 = "Favor de verificar el campo Estatus_demanda, ya que la Fecha de Apertura del Expediente (FECHA_APERTURA_EXPEDIENTE) excede el plazo máximo permitido de 60 días (2 meses).";
@@ -42099,7 +42273,7 @@ PValidacion validacion = new PValidacion();
                 HSSFRichTextString textoD9 = new HSSFRichTextString(txtE9);
                 celdaE9.setCellValue(textoD9);
                 filaE9.setHeight((short) 300);
-
+                System.out.println("4");
                 coni++;
             }
             conEnc = conEnc + coni;

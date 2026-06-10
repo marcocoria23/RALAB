@@ -111,20 +111,86 @@ public ArrayList Estatus_Demanda_PrevenProceso(){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT \n" +
-"    CLAVE_ORGANO,\n" +
-"    EXPEDIENTE_CLAVE,\n" +
-"    FECHA_APERTURA_EXPEDIENTE,\n" +
-"    DECODE(ESTATUS_DEMANDA, '5', 'En trámite o prevención') AS ESTATUS_DEMANDA,\n" +
-"    REPLACE(COMENTARIOS, ',', '') AS COMENTARIOS,\n" +
-"    PERIODO\n" +
-"FROM V3_TR_COLECT_ECONOMJL  \n" +
-"WHERE ESTATUS_DEMANDA = 5\n" +
-"  AND FECHA_APERTURA_EXPEDIENTE < ADD_MONTHS(SYSDATE, -2)\n" +
+"    T1.CLAVE_ORGANO,\n" +
+"    T1.EXPEDIENTE_CLAVE,\n" +
+"    T1.FECHA_APERTURA_EXPEDIENTE,\n" +
+"    DECODE(T1.ESTATUS_DEMANDA, '5', 'En trámite o prevención') AS ESTATUS_DEMANDA,\n" +
+"    REPLACE(T1.COMENTARIOS, ',', '') AS COMENTARIOS,\n" +
+"    T1.PERIODO\n" +
+"FROM V3_TR_COLECT_ECONOMJL T1\n" +
+"WHERE T1.ESTATUS_DEMANDA = 5\n" +
+"  AND T1.FECHA_APERTURA_EXPEDIENTE < ADD_MONTHS(SYSDATE, -2)\n" +
+"\n" +
 "  AND (\n" +
-"        (SUBSTR(CLAVE_ORGANO, 0, 2) = '"+PValidacion.clave_entidad+"' \n" +
-"         AND PERIODO = '"+PValidacion.periodo+"')\n" +
-"        OR (CLAVE_ORGANO = '"+PValidacion.clave_organo+"' AND PERIODO = '"+PValidacion.periodo+"')\n" +
-"        )";     
+"        (SUBSTR(T1.CLAVE_ORGANO, 0, 2) = '"+PValidacion.clave_entidad+"' \n" +
+"         AND T1.PERIODO = '"+PValidacion.periodo+"')\n" +
+"\n" +
+"        OR \n" +
+"\n" +
+"        (T1.CLAVE_ORGANO = '"+PValidacion.clave_organo+"' \n" +
+"         AND T1.PERIODO = '"+PValidacion.periodo+"')\n" +
+"      )\n" +
+"\n" +
+"  AND EXISTS (\n" +
+"\n" +
+"        SELECT 1\n" +
+"        FROM V3_TR_COLECT_ECONOMJL T2\n" +
+"        WHERE T2.CLAVE_ORGANO = T1.CLAVE_ORGANO\n" +
+"          AND T2.EXPEDIENTE_CLAVE = T1.EXPEDIENTE_CLAVE\n" +
+"          AND T2.ESTATUS_DEMANDA = 5\n" +
+"\n" +
+"          /* periodo anterior */\n" +
+"          AND (\n" +
+"\n" +
+"                /* año-mes anterior */\n" +
+"                (\n" +
+"                    TO_NUMBER(\n" +
+"                        '20' || SUBSTR(T2.PERIODO, -2) ||\n" +
+"                        LPAD(\n" +
+"                            CASE\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'ENE' THEN '1'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'FEB' THEN '2'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'MAR' THEN '3'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'ABR' THEN '4'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'MAY' THEN '5'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'JUN' THEN '6'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'JUL' THEN '7'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'AGO' THEN '8'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'SEP' THEN '9'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'OCT' THEN '10'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'NOV' THEN '11'\n" +
+"                                WHEN REGEXP_SUBSTR(T2.PERIODO,'[A-Z]{3}(?=/)') = 'DIC' THEN '12'\n" +
+"                            END\n" +
+"                        ,2,'0')\n" +
+"                    )\n" +
+"\n" +
+"                    <\n" +
+"\n" +
+"                    TO_NUMBER(\n" +
+"                        '20' || SUBSTR(T1.PERIODO, -2) ||\n" +
+"                        LPAD(\n" +
+"                            CASE\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'ENE' THEN '1'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'FEB' THEN '2'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'MAR' THEN '3'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'ABR' THEN '4'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'MAY' THEN '5'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'JUN' THEN '6'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'JUL' THEN '7'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'AGO' THEN '8'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'SEP' THEN '9'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'OCT' THEN '10'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'NOV' THEN '11'\n" +
+"                                WHEN REGEXP_SUBSTR(T1.PERIODO,'[A-Z]{3}(?=/)') = 'DIC' THEN '12'\n" +
+"                            END\n" +
+"                        ,2,'0')\n" +
+"                    )\n" +
+"\n" +
+"                )\n" +
+"\n" +
+"          )\n" +
+"\n" +
+"  )";     
       //System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -132,7 +198,8 @@ public ArrayList Estatus_Demanda_PrevenProceso(){
               Array.add(new String[]{
                   resul.getString("CLAVE_ORGANO"),
                   resul.getString("EXPEDIENTE_CLAVE"),
-                  resul.getString("ESTATUS_DEMANDA")
+                  resul.getString("ESTATUS_DEMANDA"),
+                  resul.getString("COMENTARIOS")
                 });
           }
       conexion.close();
