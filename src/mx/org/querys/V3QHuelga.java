@@ -783,7 +783,7 @@ public ArrayList Fecha_Levant_HuelgaNE(){
 "to_char(FECHA_ESTALLAM_HUELGA,'DD/MM/YYYY')FECHA_ESTALLAM_HUELGA,to_char(FECHA_EMPLAZAMIENTO,'DD/MM/YYYY')FECHA_EMPLAZAMIENTO\n" +
 ",to_char(FECHA_RESOLU_HUELGA,'DD/MM/YYYY')FECHA_RESOLU_HUELGA,to_char(FECHA_LEVANT_HUELGA,'DD/MM/YYYY')FECHA_LEVANT_HUELGA,PERIODO\n" +
 "from V3_TR_HUELGAJL WHERE\n" +
-"((( FASE_SOLI_EXPEDIENTE=7 and ESTATUS_EXPEDIENTE=1) and (EMPLAZAMIENTO_HUELGA<>1 or prehuelga<>1 or ESTALLAMIENTO_HUELGA<>1 or FECHA_RESOLU_HUELGA IN (NULL,'09/09/1899') or FECHA_ESTALLAM_HUELGA IN (NULL,'09/09/1899') or FECHA_LEVANT_HUELGA IN (NULL,'09/09/1899')))  and  ((substr(clave_organo,0,2)='"+PValidacion.clave_entidad+"' and periodo='"+PValidacion.periodo+"') or (clave_organo='"+PValidacion.clave_organo+"' and periodo='"+PValidacion.periodo+"')))";
+"((( FASE_SOLI_EXPEDIENTE=7 and ESTATUS_EXPEDIENTE=1) and (EMPLAZAMIENTO_HUELGA<>1 or prehuelga<>1 or ESTALLAMIENTO_HUELGA<>1 ))  and  ((substr(clave_organo,0,2)='"+PValidacion.clave_entidad+"' and periodo='"+PValidacion.periodo+"') or (clave_organo='"+PValidacion.clave_organo+"' and periodo='"+PValidacion.periodo+"')))";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -796,10 +796,6 @@ public ArrayList Fecha_Levant_HuelgaNE(){
                   resul.getString("EMPLAZAMIENTO_HUELGA"),
                   resul.getString("prehuelga"),
                   resul.getString("ESTALLAMIENTO_HUELGA"),
-                  resul.getString("FECHA_ESTALLAM_HUELGA"),
-                  resul.getString("FECHA_EMPLAZAMIENTO"),
-                  resul.getString("FECHA_RESOLU_HUELGA"),
-                  resul.getString("FECHA_LEVANT_HUELGA"),
                   resul.getString("PERIODO")
                   
                 });            
@@ -812,6 +808,50 @@ public ArrayList Fecha_Levant_HuelgaNE(){
     return Array;
  }  
   
+  
+  public ArrayList HuelgaFechaEstallamientoNullNI(){
+      conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT * FROM (\n" +
+"SELECT \n" +
+"CLAVE_ORGANO, \n" +
+"EXPEDIENTE_CLAVE,\n" +
+"DECODE(ESTATUS_EXPEDIENTE,1,'Solucionado')ESTATUS_EXPEDIENTE,\n" +
+"decode(FASE_SOLI_EXPEDIENTE,7,'Huelga')FASE_SOLI_EXPEDIENTE,\n" +
+"DECODE(ESTALLAMIENTO_HUELGA,'1','SI','2','NO')ESTALLAMIENTO_HUELGA,\n" +
+"to_char(FECHA_ESTALLAM_HUELGA,'DD/MM/YYYY')FECHA_ESTALLAM_HUELGA,\n" +
+"PERIODO\n" +
+"FROM V3_TR_HUELGAJL WHERE FECHA_ESTALLAM_HUELGA IN (Null, '09/09/1899') AND FASE_SOLI_EXPEDIENTE = 7 AND ESTATUS_EXPEDIENTE = 1\n" +
+")\n" +
+"WHERE (\n" +
+"        (SUBSTR(CLAVE_ORGANO, 0, 2) = '"+PValidacion.clave_entidad+"' \n" +
+"         AND PERIODO = '"+PValidacion.periodo+"')\n" +
+"\n" +
+"        OR \n" +
+"\n" +
+"        (CLAVE_ORGANO = '"+PValidacion.clave_organo+"' \n" +
+"         AND PERIODO = '"+PValidacion.periodo+"'))";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("EXPEDIENTE_CLAVE"),
+                  resul.getString("ESTATUS_EXPEDIENTE"),
+                  resul.getString("FASE_SOLI_EXPEDIENTE"),
+                  resul.getString("ESTALLAMIENTO_HUELGA"),
+                  resul.getString("FECHA_ESTALLAM_HUELGA")
+                  
+                });            
+  
+   }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
   
   
    public ArrayList EMPLAZAMIENTO_HUELGA(){

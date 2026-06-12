@@ -34779,108 +34779,9 @@ PValidacion validacion = new PValidacion();
                 fila8D.setHeight((short) 300);
             }
 
-            HSSFRow fila3E = hoja10.createRow(conEnc);//FILA
-            HSSFCell celda3E = fila3E.createCell((short) 7);//COLUMNA
-            celda3E.setCellStyle(estiloCelda1);
-            celda3E.setCellType(HSSFCell.CELL_TYPE_STRING);
-            String txt3E = "FECHA DE ESTALLAMIENTO A HUELGA";
-            HSSFRichTextString texto3E = new HSSFRichTextString(txt3E);
-            celda3E.setCellValue(texto3E);
-            fila3E.setHeight((short) 600);
-
-            for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow fila8E = hoja10.createRow(conDat + i);//FILA
-                HSSFCell celda8E = fila8E.createCell((short) 7);//COLUMNA
-                celda8E.setCellStyle(estiloCeldabordes0);
-                celda8E.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txt8E = Arrays.toString(ArrayResult.get(i));
-                txt8E = txt8E.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                parts = txt8E.split(",");
-                parts0 = parts[7].trim();
-       // partsfechas=dateformat.format(parts0);
-                //System.out.println(Arrays.toString(ArrayResult.get(i)));
-                HSSFRichTextString texto8E = new HSSFRichTextString(parts0);
-                celda8E.setCellValue(texto8E);
-                fila8E.setHeight((short) 300);
-            }
-
-            HSSFRow fila3F = hoja10.createRow(conEnc);//FILA
-            HSSFCell celda3F = fila3F.createCell((short) 8);//COLUMNA
-            celda3F.setCellStyle(estiloCelda1);
-            celda3F.setCellType(HSSFCell.CELL_TYPE_STRING);
-            String txt3F = "FECHA DE EMPLAZAMIENTO A HUELGA";
-            HSSFRichTextString texto3F = new HSSFRichTextString(txt3F);
-            celda3F.setCellValue(texto3F);
-            fila3F.setHeight((short) 600);
-
-            for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow fila8F = hoja10.createRow(conDat + i);//FILA
-                HSSFCell celda8F = fila8F.createCell((short) 8);//COLUMNA
-                celda8F.setCellStyle(estiloCeldabordes0);
-                celda8F.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txt8F = Arrays.toString(ArrayResult.get(i));
-                txt8F = txt8F.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                parts = txt8F.split(",");
-                parts0 = parts[8].trim();
-       // partsfechas=dateformat.format(parts0);
-                //System.out.println(Arrays.toString(ArrayResult.get(i)));
-                HSSFRichTextString texto8F = new HSSFRichTextString(parts0);
-                celda8F.setCellValue(texto8F);
-                fila8F.setHeight((short) 300);
-            }
-
-            HSSFRow fila3G = hoja10.createRow(conEnc);//FILA
-            HSSFCell celda3G = fila3G.createCell((short) 9);//COLUMNA
-            celda3G.setCellStyle(estiloCelda1);
-            celda3G.setCellType(HSSFCell.CELL_TYPE_STRING);
-            String txt3G = "FECHA DE RESOLUCION A HUELGA";
-            HSSFRichTextString texto3G = new HSSFRichTextString(txt3G);
-            celda3G.setCellValue(texto3G);
-            fila3G.setHeight((short) 600);
-
-            for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow fila8G = hoja10.createRow(conDat + i);//FILA
-                HSSFCell celda8G = fila8G.createCell((short) 9);//COLUMNA
-                celda8G.setCellStyle(estiloCeldabordes0);
-                celda8G.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txt8G = Arrays.toString(ArrayResult.get(i));
-                txt8G = txt8G.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                parts = txt8G.split(",");
-                parts0 = parts[9].trim();
-       // partsfechas=dateformat.format(parts0);
-                //System.out.println(Arrays.toString(ArrayResult.get(i)));
-                HSSFRichTextString texto8G = new HSSFRichTextString(parts0);
-                celda8G.setCellValue(texto8G);
-                fila8G.setHeight((short) 300);
-            }
-
-            HSSFRow fila3H = hoja10.createRow(conEnc);//FILA
-            HSSFCell celda3H = fila3H.createCell((short) 10);//COLUMNA
-            celda3H.setCellStyle(estiloCelda1);
-            celda3H.setCellType(HSSFCell.CELL_TYPE_STRING);
-            String txt3H = "FECHA DE LEVANTAMIENTO A HUELGA";
-            HSSFRichTextString texto3H = new HSSFRichTextString(txt3H);
-            celda3H.setCellValue(texto3H);
-            fila3H.setHeight((short) 600);
-
-            for (int i = 0; i < ArrayResult.size(); i++) {
-                HSSFRow fila8H = hoja10.createRow(conDat + i);//FILA
-                HSSFCell celda8H = fila8H.createCell((short) 10);//COLUMNA
-                celda8H.setCellStyle(estiloCeldabordes0);
-                celda8H.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txt8H = Arrays.toString(ArrayResult.get(i));
-                txt8H = txt8H.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
-                parts = txt8H.split(",");
-                parts0 = parts[10].trim();
-       // partsfechas=dateformat.format(parts0);
-                //System.out.println(Arrays.toString(ArrayResult.get(i)));
-                HSSFRichTextString texto8H = new HSSFRichTextString(parts0);
-                celda8H.setCellValue(texto8H);
-                fila8H.setHeight((short) 300);
-            }
 
             HSSFRow fila5 = hoja10.createRow(conEnc);//FILA
-            HSSFCell celda5 = fila5.createCell((short) 11);//COLUMNA
+            HSSFCell celda5 = fila5.createCell((short) 7);//COLUMNA
             celda5.setCellStyle(estiloCelda1);
             celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
             String txt5 = "OBSERVACIONES";
@@ -34891,10 +34792,196 @@ PValidacion validacion = new PValidacion();
             //Observaciones
             for (int i = 0; i < ArrayResult.size(); i++) {
                 HSSFRow fila9 = hoja10.createRow(conDat + i);//FILA
-                HSSFCell celda9 = fila9.createCell((short) 11);//COLUMNA
+                HSSFCell celda9 = fila9.createCell((short) 7);//COLUMNA
                 celda9.setCellStyle(estiloCeldabordes0);
                 celda9.setCellType(HSSFCell.CELL_TYPE_STRING);
-                String txt9 = "Cuando fase de solicitud del expediente (FASE_SOLI_EXPEDIENTE)=HUELGA, ¿Hubo estallamiento de la huelga? (ESTALLAMIENTO_HUELGA) debe ser 1 “SI”, ¿Hubo prehuelga? (PREHUELGA)  debe ser 1 “SI”,¿Hubo emplazamiento a huelga? EMPLAZAMIENTO_HUELGA debe ser 1 “SI” .Con sus fechas respectivas.";
+                String txt9 = "Cuando fase de solicitud del expediente (FASE_SOLI_EXPEDIENTE)=HUELGA, ¿Hubo estallamiento de la huelga? (ESTALLAMIENTO_HUELGA) debe ser 1 “SI”, ¿Hubo prehuelga? (PREHUELGA)  debe ser 1 “SI”,¿Hubo emplazamiento a huelga? EMPLAZAMIENTO_HUELGA debe ser 1 “SI”.";
+                //System.out.println(Arrays.toString(ArrayResult.get(i)));
+                HSSFRichTextString texto9 = new HSSFRichTextString(txt9);
+                celda9.setCellValue(texto9);
+                fila9.setHeight((short) 300);
+                coni++;
+            }
+            conEnc = conEnc + coni;
+            conDat = conDat + coni;
+            coni = 1;
+        }
+        
+        ArrayResult = Huelga.HuelgaFechaEstallamientoNullNI();
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + "Contador Datos: " + conDat);
+            HSSFRow fila00 = hojaresumenval.createRow(5);//FILA
+            HSSFCell celda00 = fila00.createCell((short) 1);//COLUMNA    
+            celda00.setCellStyle(PAmarillo);
+
+            HSSFRow fila1 = hoja10.createRow(conEnc);//FILA
+            HSSFCell celda1 = fila1.createCell((short) 0);//COLUMNA
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txt1 = "CLAVE DEL ORGANO";
+            HSSFRichTextString texto1 = new HSSFRichTextString(txt1);
+            celda1.setCellValue(texto1);
+            fila1.setHeight((short) 600);
+
+            //clave_organo
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow fila6 = hoja10.createRow(conDat + i);//FILA
+                HSSFCell celda6 = fila6.createCell((short) 0);//COLUMNA
+                celda6.setCellStyle(estiloCeldabordes0);
+                celda6.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txt6 = Arrays.toString(ArrayResult.get(i));
+                txt6 = txt6.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txt6.split(",");
+                parts0 = parts[0].trim();
+                //System.out.println(Arrays.toString(ArrayResult.get(i)));
+                HSSFRichTextString texto6 = new HSSFRichTextString(parts0);
+                celda6.setCellValue(texto6);
+                fila6.setHeight((short) 300);
+            }
+
+            HSSFRow fila2 = hoja10.createRow(conEnc);//FILA
+            HSSFCell celda2 = fila2.createCell((short) 1);//COLUMNA
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txt2 = "CLAVE DEL EXPEDIENTE";
+            HSSFRichTextString texto2 = new HSSFRichTextString(txt2);
+            celda2.setCellValue(texto2);
+            fila2.setHeight((short) 600);
+
+            //clave del expediente
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow fila7 = hoja10.createRow(conDat + i);//FILA
+                HSSFCell celda7 = fila7.createCell((short) 1);//COLUMNA
+                celda7.setCellStyle(estiloCeldabordes0);
+                celda7.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txt7 = Arrays.toString(ArrayResult.get(i));
+                txt7 = txt7.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txt7.split(",");
+                parts0 = parts[1].trim();
+                //System.out.println(Arrays.toString(ArrayResult.get(i)));
+                HSSFRichTextString texto7 = new HSSFRichTextString(parts0);
+                celda7.setCellValue(texto7);
+                fila7.setHeight((short) 300);
+            }
+
+            HSSFRow fila3 = hoja10.createRow(conEnc);//FILA
+            HSSFCell celda3 = fila3.createCell((short) 2);//COLUMNA
+            celda3.setCellStyle(estiloCelda1);
+            celda3.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txt3 = "ESTATUS_EXPEDIENTE";
+            HSSFRichTextString texto3 = new HSSFRichTextString(txt3);
+            celda3.setCellValue(texto3);
+            fila3.setHeight((short) 600);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow fila8 = hoja10.createRow(conDat + i);//FILA
+                HSSFCell celda8 = fila8.createCell((short) 2);//COLUMNA
+                celda8.setCellStyle(estiloCeldabordes0);
+                celda8.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txt8 = Arrays.toString(ArrayResult.get(i));
+                txt8 = txt8.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txt8.split(",");
+                parts0 = parts[2].trim();
+       // partsfechas=dateformat.format(parts0);
+                //System.out.println(Arrays.toString(ArrayResult.get(i)));
+                HSSFRichTextString texto8 = new HSSFRichTextString(parts0);
+                celda8.setCellValue(texto8);
+                fila8.setHeight((short) 300);
+            }
+
+            HSSFRow fila3A = hoja10.createRow(conEnc);//FILA
+            HSSFCell celda3A = fila3A.createCell((short) 3);//COLUMNA
+            celda3A.setCellStyle(estiloCelda1);
+            celda3A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txt3A = "FASE EXPEDIENTE";
+            HSSFRichTextString texto3A = new HSSFRichTextString(txt3A);
+            celda3A.setCellValue(texto3A);
+            fila3A.setHeight((short) 600);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow fila8A = hoja10.createRow(conDat + i);//FILA
+                HSSFCell celda8A = fila8A.createCell((short) 3);//COLUMNA
+                celda8A.setCellStyle(estiloCeldabordes0);
+                celda8A.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txt8A = Arrays.toString(ArrayResult.get(i));
+                txt8A = txt8A.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txt8A.split(",");
+                parts0 = parts[3].trim();
+       // partsfechas=dateformat.format(parts0);
+                //System.out.println(Arrays.toString(ArrayResult.get(i)));
+                HSSFRichTextString texto8A = new HSSFRichTextString(parts0);
+                celda8A.setCellValue(texto8A);
+                fila8A.setHeight((short) 300);
+            }
+
+            HSSFRow fila3B = hoja10.createRow(conEnc);//FILA
+            HSSFCell celda3B = fila3B.createCell((short) 4);//COLUMNA
+            celda3B.setCellStyle(estiloCelda1);
+            celda3B.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txt3B = "ESTALLAMIENTO_HUELGA";
+            HSSFRichTextString texto3B = new HSSFRichTextString(txt3B);
+            celda3B.setCellValue(texto3B);
+            fila3B.setHeight((short) 600);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow fila8B = hoja10.createRow(conDat + i);//FILA
+                HSSFCell celda8B = fila8B.createCell((short) 4);//COLUMNA
+                celda8B.setCellStyle(estiloCeldabordes0);
+                celda8B.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txt8B = Arrays.toString(ArrayResult.get(i));
+                txt8B = txt8B.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txt8B.split(",");
+                parts0 = parts[4].trim();
+       // partsfechas=dateformat.format(parts0);
+                //System.out.println(Arrays.toString(ArrayResult.get(i)));
+                HSSFRichTextString texto8B = new HSSFRichTextString(parts0);
+                celda8B.setCellValue(texto8B);
+                fila8B.setHeight((short) 300);
+            }
+
+            HSSFRow fila3C = hoja10.createRow(conEnc);//FILA
+            HSSFCell celda3C = fila3C.createCell((short) 5);//COLUMNA
+            celda3C.setCellStyle(estiloCelda1);
+            celda3C.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txt3C = "FECHA_ESTALLAM_HUELGA";
+            HSSFRichTextString texto3C = new HSSFRichTextString(txt3C);
+            celda3C.setCellValue(texto3C);
+            fila3C.setHeight((short) 600);
+
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow fila8C = hoja10.createRow(conDat + i);//FILA
+                HSSFCell celda8C = fila8C.createCell((short) 5);//COLUMNA
+                celda8C.setCellStyle(estiloCeldabordes0);
+                celda8C.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txt8C = Arrays.toString(ArrayResult.get(i));
+                txt8C = txt8C.replace("[", "").replace("]", "").replace(" 00:00:00.0", "");
+                parts = txt8C.split(",");
+                parts0 = parts[5].trim();
+       // partsfechas=dateformat.format(parts0);
+                //System.out.println(Arrays.toString(ArrayResult.get(i)));
+                HSSFRichTextString texto8C = new HSSFRichTextString(parts0);
+                celda8C.setCellValue(texto8C);
+                fila8C.setHeight((short) 300);
+            }
+
+
+
+            HSSFRow fila5 = hoja10.createRow(conEnc);//FILA
+            HSSFCell celda5 = fila5.createCell((short) 6);//COLUMNA
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            String txt5 = "OBSERVACIONES";
+            HSSFRichTextString texto5 = new HSSFRichTextString(txt5);
+            celda5.setCellValue(texto5);
+            fila5.setHeight((short) 600);
+
+            //Observaciones
+            for (int i = 0; i < ArrayResult.size(); i++) {
+                HSSFRow fila9 = hoja10.createRow(conDat + i);//FILA
+                HSSFCell celda9 = fila9.createCell((short) 6);//COLUMNA
+                celda9.setCellStyle(estiloCeldabordes0);
+                celda9.setCellType(HSSFCell.CELL_TYPE_STRING);
+                String txt9 = "Cuando la Fase en la que se solucionó el expediente (FASE_SOLI_EXPEDIENTE) = Huelga, el campo Fecha de estallamiento de la huelga (FECHA_ESTALLAMIENTO_HUELGA) debe contener una fecha válida y no debe registrar el valor \"No identificado\".";
                 //System.out.println(Arrays.toString(ArrayResult.get(i)));
                 HSSFRichTextString texto9 = new HSSFRichTextString(txt9);
                 celda9.setCellValue(texto9);
