@@ -817,5 +817,315 @@ public class V3QOrdinario {
         }
         return Array;
     }
+    
+    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) es solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Fase escrita (9).
+    public ArrayList Fase_Sol_Escrita() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT  SUBSTR(CLAVE_ORGANO,0,2) AS ENTIDAD, EXPEDIENTE_CLAVE, CLAVE_ORGANO, PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, \n"
+                + "DECODE(FASE_SOLI_EXPEDIENTE,\n"
+                + "       1, 'Audiencia preliminar',\n"
+                + "       2, 'Audiencia de juicio',\n"
+                + "       3, 'Tramitación por auto de depuración',\n"
+                + "       4, 'Tramitación sin audiencias',\n"
+                + "       5, 'Emplazamiento a huelga',\n"
+                + "       6, 'Prehuelga',\n"
+                + "       7, 'Huelga',\n"
+                + "       8, 'Audiencia dentro del procedimiento colectivo de naturaleza económica',\n"
+                + "       9, 'Fase escrita',\n"
+                + "       99, 'No identificado') AS FASE_SOLI_EXPEDIENTE,\n"
+                + "ESTATUS_EXPEDIENTE, COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 2\n"
+                + "  AND AUDIENCIA_JUICIO = 2\n"
+                + "  AND ESTATUS_EXPEDIENTE = 1\n"
+                + "  AND FASE_SOLI_EXPEDIENTE NOT IN (9,99) \n"
+                + "  AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
+                + "  OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Audiencia preliminar (1).
+    public ArrayList Fase_Sol_Preliminar() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT SUBSTR(CLAVE_ORGANO,0,2) AS ENTIDAD,EXPEDIENTE_CLAVE, CLAVE_ORGANO, PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, ESTATUS_EXPEDIENTE, DECODE(FASE_SOLI_EXPEDIENTE,\n"
+                + "       1, 'Audiencia preliminar',\n"
+                + "       2, 'Audiencia de juicio',\n"
+                + "       3, 'Tramitación por auto de depuración',\n"
+                + "       4, 'Tramitación sin audiencias',\n"
+                + "       5, 'Emplazamiento a huelga',\n"
+                + "       6, 'Prehuelga',\n"
+                + "       7, 'Huelga',\n"
+                + "       8, 'Audiencia dentro del procedimiento colectivo de naturaleza económica',\n"
+                + "       9, 'Fase escrita',\n"
+                + "       99, 'No identificado') AS FASE_SOLI_EXPEDIENTE,\n"
+                + "    COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 1 \n"
+                + "    AND AUDIENCIA_JUICIO = 2\n"
+                + "    AND ESTATUS_EXPEDIENTE = 1 \n"
+                + "    AND FASE_SOLI_EXPEDIENTE NOT IN (1,99) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = En proceso de solucion (2), la fecha del ultimo acto procesal(FECHA_ACTO_PROCESAL) debe ser igual o mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM).
+    public ArrayList Fecha_Audi_Prelimi() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT SUBSTR(CLAVE_ORGANO,0,2) AS ENTIDAD,EXPEDIENTE_CLAVE, CLAVE_ORGANO, PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, ESTATUS_EXPEDIENTE, FECHA_ACTO_PROCESAL, FECHA_AUDIENCIA_PRELIM, COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 1 \n"
+                + "    AND AUDIENCIA_JUICIO = 2\n"
+                + "    AND ESTATUS_EXPEDIENTE = 2 \n"
+                + "    AND FECHA_ACTO_PROCESAL < FECHA_AUDIENCIA_PRELIM\n"
+                + "    AND FECHA_ACTO_PROCESAL <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "    AND FECHA_AUDIENCIA_PRELIM <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "') OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                String fechaActoProce = resul.getString("FECHA_ACTO_PROCESAL");
+                if (fechaActoProce != null && fechaActoProce.length() >= 10) {
+                    String[] partesFecha = fechaActoProce.substring(0, 10).split("-");
+                    fechaActoProce = partesFecha[2] + "/" + partesFecha[1] + "/" + partesFecha[0]; // DD/MM/YYYY
+                }
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    fechaActoProce,
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+     // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fecha de solución en fase preliminar (FECHA_DICTO_RESOLUCIONAP) debe ser igual o mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM).
+    public ArrayList Fecha_Dicto_ResolAP() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT SUBSTR(CLAVE_ORGANO,0,2) AS ENTIDAD,EXPEDIENTE_CLAVE, CLAVE_ORGANO, PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, ESTATUS_EXPEDIENTE, FECHA_DICTO_RESOLUCIONAP, FECHA_AUDIENCIA_PRELIM, COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 1 \n"
+                + "    AND AUDIENCIA_JUICIO = 2\n"
+                + "    AND ESTATUS_EXPEDIENTE = 1 \n"
+                + "    AND FECHA_DICTO_RESOLUCIONAP < FECHA_AUDIENCIA_PRELIM\n"
+                + "    AND FECHA_DICTO_RESOLUCIONAP <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "    AND FECHA_AUDIENCIA_PRELIM <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                String fechaDictoResolAP = resul.getString("FECHA_DICTO_RESOLUCIONAP");
+                if (fechaDictoResolAP != null && fechaDictoResolAP.length() >= 10) {
+                    String[] partesFecha = fechaDictoResolAP.substring(0, 10).split("-");
+                    fechaDictoResolAP = partesFecha[2] + "/" + partesFecha[1] + "/" + partesFecha[0]; // DD/MM/YYYY
+                }
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    fechaDictoResolAP,
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente debe ser (FASE_SOLI_EXPEDIENTE) = Audiencia de Juicio (2).
+    public ArrayList Fase_Sol_Audi_Juicio() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT SUBSTR(CLAVE_ORGANO,0,2) AS ENTIDAD,EXPEDIENTE_CLAVE, CLAVE_ORGANO, PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, ESTATUS_EXPEDIENTE, DECODE(FASE_SOLI_EXPEDIENTE,\n"
+                + "       1, 'Audiencia preliminar',\n"
+                + "       2, 'Audiencia de juicio',\n"
+                + "       3, 'Tramitación por auto de depuración',\n"
+                + "       4, 'Tramitación sin audiencias',\n"
+                + "       5, 'Emplazamiento a huelga',\n"
+                + "       6, 'Prehuelga',\n"
+                + "       7, 'Huelga',\n"
+                + "       8, 'Audiencia dentro del procedimiento colectivo de naturaleza económica',\n"
+                + "       9, 'Fase escrita',\n"
+                + "       99, 'No identificado') AS FASE_SOLI_EXPEDIENTE,\n"
+                + "    COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 1 \n"
+                + "    AND AUDIENCIA_JUICIO = 1\n"
+                + "    AND ESTATUS_EXPEDIENTE = 1 \n"
+                + "    AND FASE_SOLI_EXPEDIENTE NOT IN (2,99)\n"
+                + "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "') OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                    
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+     // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)?  = Si (1), la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM) debe ser igual o menor a la fecha de audiencia de Juicio (FECHA_AUDIENCIA_JUICIO).
+    public ArrayList Fecha_Audiencia_Preliminar() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT SUBSTR(CLAVE_ORGANO,0,2) AS ENTIDAD, CLAVE_ORGANO,EXPEDIENTE_CLAVE,PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, FECHA_AUDIENCIA_PRELIM, FECHA_AUDIENCIA_JUICIO, COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 1 \n"
+                + "    AND AUDIENCIA_JUICIO = 1\n"
+                + "    AND FECHA_AUDIENCIA_PRELIM > FECHA_AUDIENCIA_JUICIO\n"
+                + "    AND FECHA_AUDIENCIA_PRELIM <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "    AND FECHA_AUDIENCIA_JUICIO <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                String fechaPrelim = resul.getString("FECHA_AUDIENCIA_PRELIM");
+                if (fechaPrelim != null && fechaPrelim.length() >= 10) {
+                    String[] partesFecha = fechaPrelim.substring(0, 10).split("-");
+                    fechaPrelim = partesFecha[2] + "/" + partesFecha[1] + "/" + partesFecha[0]; // DD/MM/YYYY
+                }
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    fechaPrelim,
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solución (2) la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM) y a la fecha de audiencia de Juicio (FECHA_AUDIENCIA_JUICIO).
+    public ArrayList Fecha_Acto_Procesal() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT SUBSTR(CLAVE_ORGANO,0,2) AS ENTIDAD, CLAVE_ORGANO,EXPEDIENTE_CLAVE, PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, ESTATUS_EXPEDIENTE, FECHA_ACTO_PROCESAL, FECHA_AUDIENCIA_PRELIM, FECHA_AUDIENCIA_JUICIO, COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 1\n"
+                + "    AND AUDIENCIA_JUICIO = 1\n"
+                + "    AND ESTATUS_EXPEDIENTE = 2\n"
+                + "    AND (FECHA_ACTO_PROCESAL < FECHA_AUDIENCIA_PRELIM\n"
+                + "        OR FECHA_ACTO_PROCESAL < FECHA_AUDIENCIA_JUICIO)\n"
+                + "    AND FECHA_ACTO_PROCESAL <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "    AND FECHA_AUDIENCIA_PRELIM <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "    AND FECHA_AUDIENCIA_JUICIO <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "') OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                String fechaAP = resul.getString("FECHA_ACTO_PROCESAL");
+                if (fechaAP != null && fechaAP.length() >= 10) {
+                    String[] partesFecha = fechaAP.substring(0, 10).split("-");
+                    fechaAP = partesFecha[2] + "/" + partesFecha[1] + "/" + partesFecha[0]; // DD/MM/YYYY
+                }
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    fechaAP,
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fecha de solución en audiencia de juicio (FECHA_RESOLUCIONAJ) debe ser mayor o igual a la fecha del audiencia de juicio (FECHA_AUDIENCIA_JUICIO).
+    public ArrayList Fecha_Resol_Audi_Juicio() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT SUBSTR(CLAVE_ORGANO,1,2) AS ENTIDAD, CLAVE_ORGANO,EXPEDIENTE_CLAVE, PERIODO, AUDIENCIA_PRELIM, AUDIENCIA_JUICIO, ESTATUS_EXPEDIENTE, FECHA_AUDIENCIA_JUICIO,FECHA_RESOLUCIONAJ, COMENTARIOS\n"
+                + "FROM V3_TR_ORDINARIOJL\n"
+                + "WHERE AUDIENCIA_PRELIM = 1\n"
+                + "    AND AUDIENCIA_JUICIO = 1\n"
+                + "    AND ESTATUS_EXPEDIENTE = 1\n"
+                + "    AND (FECHA_RESOLUCIONAJ < FECHA_AUDIENCIA_JUICIO)\n"
+                + "    AND FECHA_RESOLUCIONAJ <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "    AND FECHA_AUDIENCIA_JUICIO <> TO_DATE('09/09/1899','DD/MM/YYYY')\n"
+                + "AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                String fechaRelAJ = resul.getString("FECHA_RESOLUCIONAJ");
+                if (fechaRelAJ != null && fechaRelAJ.length() >= 10) {
+                    String[] partesFecha = fechaRelAJ.substring(0, 10).split("-");
+                    fechaRelAJ = partesFecha[2] + "/" + partesFecha[1] + "/" + partesFecha[0]; // DD/MM/YYYY
+                }
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    fechaRelAJ,
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
 
 }

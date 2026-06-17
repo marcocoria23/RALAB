@@ -118,8 +118,8 @@ public class PErroresInsertPostgreSQL extends javax.swing.JFrame {
     }
 
     public void TextAreaInicio() {
-            System.out.println("Entidad: " + PMapeoProcesarPostgreSQL.clave_entidad);
-    System.out.println("Periodo: " + PMapeoProcesarPostgreSQL.Periodo);
+        System.out.println("Entidad: " + PMapeoProcesarPostgreSQL.clave_entidad);
+        System.out.println("Periodo: " + PMapeoProcesarPostgreSQL.Periodo);
         int progres = 5;
         String[] ArrayTablas = {
             "TR_ACTOR",
@@ -158,7 +158,7 @@ public class PErroresInsertPostgreSQL extends javax.swing.JFrame {
             progres += 5;
         }
     }
-    
+
     public void DespliegaErroresInicio() {
         limpiarTabla();
         TextAreaInicio();
