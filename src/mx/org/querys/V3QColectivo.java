@@ -47,6 +47,35 @@ ResultSet resul;
         return Array;
     }
     
+    //La fase de solución del expediente no debe ser NI ni null
+    public ArrayList FASE_SOLI_NI() {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, DECODE(ESTATUS_DEMANDA, 1 , 'Admitida') AS ESTATUS_DEMANDA,  DECODE(ESTATUS_EXPEDIENTE, 1, 'Solucionado' ) AS ESTATUS_EXPEDIENTE, NVL(DECODE(FASE_SOLI_EXPEDIENTE, 99, 'No identificado'),'Null') as FASE_SOLI_EXPEDIENTE, COMENTARIOS\n" +
+"FROM V3_TR_COLECTIVOJL\n" +
+"WHERE (FASE_SOLI_EXPEDIENTE = 99\n" +
+"       OR FASE_SOLI_EXPEDIENTE IS NULL) AND ESTATUS_DEMANDA=1 AND ESTATUS_EXPEDIENTE=1\n" +
+" and ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (clave_organo='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("ESTATUS_DEMANDA"),
+                    resul.getString("ESTATUS_EXPEDIENTE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
      //Query de validacion donde la fecha ultimo acto procesal  no debe de ser No identificada
     public ArrayList FECHA_ACTO_PROCESAL_NI() {
         conexion.Conectar();

@@ -888,7 +888,7 @@ public class QNuevos {
                 + "    AND AUDIENCIA_PRELIM = 2\n"
                 + "    AND AUDIENCIA_JUICIO = 2\n"
                 + "    AND ESTATUS_EXPEDIENTE = 1\n"
-                + "    AND FASE_SOLI_EXPEDIENTE NOT IN (9,99)\n"
+                + "    AND FASE_SOLI_EXPEDIENTE NOT IN (4,99)\n"
                 + "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -929,7 +929,7 @@ public class QNuevos {
                 + "  AND AUDIENCIA_PRELIM = 2\n"
                 + "  AND AUDIENCIA_JUICIO = 2\n"
                 + "  AND ESTATUS_EXPEDIENTE = 1\n"
-                + "  AND FASE_SOLI_EXPEDIENTE NOT IN (4,99)\n"
+                + "  AND FASE_SOLI_EXPEDIENTE NOT IN (3,99)\n"
                 + "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
