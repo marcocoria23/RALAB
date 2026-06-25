@@ -55,6 +55,34 @@ public class QueryProcedureActToV3 {
             }
         }
     }
+    
+    public void elimina_v3_TMP_TR(String Cve_Entidad, String Periodo, String Cve_ClaveOrgano,String Tipo_tabla) throws SQLException {
+        CallableStatement st;
+        Connection con = null;
+        con = OracleDAOFactory.creaConexion();
+        try {
+            st = con.prepareCall("{call ELIMINA_V3_GEN(?,?,?,?)}");
+            st.setString(1, Cve_Entidad);
+            st.setString(2, Periodo);
+            st.setString(3, Cve_ClaveOrgano);
+            st.setString(4, Tipo_tabla);
+            st.execute();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e + "Favor de contactar al administrador");
+        } finally {
+            try {
+                if (con != null) {
+                    System.out.println("cierraaa");
+                    con.close();
+                    con = null;
+                }
+            } catch (SQLException ex) {
+                Error = true;
+                JOptionPane.showMessageDialog(null, "Error con el procedure ELIMINA_V3_GEN" + ex);
+                throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
+            }
+        }
+    }
 
     public String Total_Reg_insertadosTR(String Tabla, String entidad, String periodo, String claveorgano) {
         conexion.Conectar();

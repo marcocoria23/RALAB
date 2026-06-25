@@ -459,6 +459,129 @@ public ArrayList PeriodoNEstatus(){
     return Array;
  }
   
+  
+    public ArrayList TRegistrosV3Temporal(String claveorgano,String entidad,String periodo){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="SELECT COUNT(*)\n" +
+"FROM V3_TMP_CONTROL_EXPEDIENTEJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_AUDIENCIASJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_ORDINARIOJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_ACT_ORDINARIOJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_DEM_ORDINARIOJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_INDIVIDUALJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_ACT_INDIVIDUALJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_DEM_INDIVIDUALJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_COLECTIVOJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_ACT_COLECTIVOJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_DEM_COLECTIVOJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_HUELGAJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_ACT_HUELGAJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_DEM_HUELGAJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_COLECT_ECONOMJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_ACT_COLECT_ECONOMJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PART_DEM_COLECT_ECONOMJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_TERCERIASJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PREF_CREDITOJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_PARAPROCESALJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'\n" +
+"UNION ALL\n" +
+"SELECT COUNT(*)\n" +
+"FROM V3_TMP_EJECUCIONJL\n" +
+"WHERE SUBSTR(CLAVE_ORGANO, 0, 2) = '"+entidad+"' AND PERIODO = '"+periodo+"' OR CLAVE_ORGANO = '"+claveorgano+"' AND PERIODO = '"+periodo+"'";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("COUNT(*)")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+  
+  public String Estatus_TMP(String entidad,String claveorgano,String periodo){
+ conexion.Conectar();
+ String TotalReg="";
+      sql="SELECT ESTATUS FROM V3_TMP_CONTROL_EXPEDIENTEJL WHERE CLAVE_ORGANO='"+claveorgano+"' AND PERIODO='"+periodo+"' "
+              + " OR SUBSTR(CLAVE_ORGANO,0,2)='"+entidad+"' AND PERIODO='"+periodo+"'  ";
+      System.out.println(sql);
+     resul=conexion.consultar(sql);
+      try {
+       if (resul.next()) {
+              TotalReg=resul.getString("ESTATUS");
+       }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QEstatus.class.getName()).log(Level.SEVERE, null, ex);
+           // JOptionPane.showInputDialog(null, "Se han eliminado los registros de tabla:V3_ERRORES_INSERT_RALABTMP");
+        }
+      return TotalReg;
+       
+} 
+  
+  
   public String Total_Reg_insertadosTR(String Tabla,String entidad,String claveorgano,String periodo){
  conexion.Conectar();
  String TotalReg="";

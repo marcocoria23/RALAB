@@ -7,9 +7,11 @@ package Screen_laborales;
 
 
 
+import LeerQuery.QueryProcedureActToV3;
 import java.awt.Color;
 import java.awt.FileDialog;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +41,10 @@ import mx.org.BD.ReadCSV_Part_Dem_Individual;
 import mx.org.BD.ReadCSV_Part_Dem_Ordinario;
 import mx.org.BD.ReadCSV_Pref_Credito;
 import mx.org.BD.ReadCSV_Tercerias;
+import mx.org.querys.V1querys;
+import mx.org.querys.V2querysNE;
+import mx.org.querys.V3Querys;
+import mx.org.querys.federal.FedV1Querys;
 
 /**
  *
@@ -50,12 +56,19 @@ public class PInsertTMP extends javax.swing.JFrame {
      * Creates new form PIsnsertTMP
      */
        public static String tabla="",rutaT="",Versiones="",Periodo="",Nombre_archivo="",Directorio="",procedimiento,Carpeta="";
-       public static boolean ventanaAbierta = false,Bandera=false,CarpetaArchivos=false;
+       public static String clave_entidad="",clave_organo="",NMunicipio="",NENTIDAD="",BD="",Estatus="";
+       public static boolean ventanaAbierta = false,Bandera=false,CarpetaArchivos=false,cve_org=false,cve_ent=false;
        String ruta="",TexTabla="",TexProc;
        List<String> testList = new ArrayList<String>();
        List<String> testProc = new ArrayList<String>();
       ReadCSV_Audiencias ReadAud=new ReadCSV_Audiencias();
       ReadCSV_Control_Expediente ReadCtrl=new ReadCSV_Control_Expediente();
+       ArrayList<String[]> ArrayClave_organo,ArrayClave_entidad;
+       V1querys query=new V1querys();//Intanciar clase V1querys con nombre query
+       V2querysNE queryNE=new V2querysNE();//Intanciar clase V2querysNE con nombre queryNE
+       V3Querys V3queryNE=new V3Querys();//Intanciar clase V3querys con nombre V3queryNE
+       FedV1Querys V1FedQuerys=new FedV1Querys();
+       QueryProcedureActToV3 procedure=new QueryProcedureActToV3();
     
     public PInsertTMP() {
         initComponents();
@@ -63,6 +76,13 @@ public class PInsertTMP extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
         PanelI.setVisible(false);
         jRadioButton1.setVisible(false);
+         LEntidad.setVisible(false);
+            LEntidad2.setVisible(false);
+            Jorgano.setVisible(false);
+            CorganoJur.setVisible(false);
+            Jentidad.setVisible(false);
+            Centidad.setVisible(false);
+            jRadioButton2.setSelected(true);
         
         
     }
@@ -77,6 +97,7 @@ public class PInsertTMP extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         R1 = new javax.swing.JRadioButton();
         R2 = new javax.swing.JRadioButton();
         R3 = new javax.swing.JRadioButton();
@@ -95,6 +116,14 @@ public class PInsertTMP extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
+        LEntidad2 = new javax.swing.JLabel();
+        LEntidad = new javax.swing.JLabel();
+        Rclave_entidad = new javax.swing.JRadioButton();
+        Rclave_organo = new javax.swing.JRadioButton();
+        Jentidad = new javax.swing.JLabel();
+        Centidad = new javax.swing.JComboBox();
+        Jorgano = new javax.swing.JLabel();
+        CorganoJur = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
 
@@ -203,6 +232,55 @@ public class PInsertTMP extends javax.swing.JFrame {
             }
         });
 
+        LEntidad2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        LEntidad2.setText("Entidad:");
+
+        LEntidad.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+
+        Rclave_entidad.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(Rclave_entidad);
+        Rclave_entidad.setText("Clave Entidad");
+        Rclave_entidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Rclave_entidadActionPerformed(evt);
+            }
+        });
+
+        Rclave_organo.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup2.add(Rclave_organo);
+        Rclave_organo.setText("Clave Organo");
+        Rclave_organo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Rclave_organoActionPerformed(evt);
+            }
+        });
+
+        Jentidad.setText("Entidad:");
+
+        Centidad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CentidadItemStateChanged(evt);
+            }
+        });
+        Centidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CentidadActionPerformed(evt);
+            }
+        });
+
+        Jorgano.setText("Organo Jurisdiccional:");
+
+        CorganoJur.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CorganoJurItemStateChanged(evt);
+            }
+        });
+        CorganoJur.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CorganoJurActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelILayout = new javax.swing.GroupLayout(PanelI);
         PanelI.setLayout(PanelILayout);
         PanelILayout.setHorizontalGroup(
@@ -211,71 +289,115 @@ public class PInsertTMP extends javax.swing.JFrame {
                 .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelILayout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel4))
-                    .addComponent(Lname)
-                    .addGroup(PanelILayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelILayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(CTablas1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelILayout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton1))
-                    .addGroup(PanelILayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelILayout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3))
-                            .addComponent(Insertar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Insertar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelILayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelILayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jRadioButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jRadioButton2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(Lname)
+                                    .addGroup(PanelILayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelILayout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addComponent(CTablas1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(PanelILayout.createSequentialGroup()
+                                        .addGap(176, 176, 176)
+                                        .addComponent(jRadioButton1))
+                                    .addGroup(PanelILayout.createSequentialGroup()
+                                        .addGap(342, 342, 342)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PanelILayout.createSequentialGroup()
+                                        .addGap(49, 49, 49)
+                                        .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(PanelILayout.createSequentialGroup()
+                                                .addComponent(Jorgano)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(PanelILayout.createSequentialGroup()
+                                                .addComponent(Jentidad)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(PanelILayout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(CPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(PanelILayout.createSequentialGroup()
+                                        .addComponent(Rclave_entidad)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Rclave_organo))))
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(LEntidad2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         PanelILayout.setVerticalGroup(
             PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelILayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(LEntidad2)
+                    .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Lname)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CTablas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
-                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(CPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1))
+                .addGap(26, 26, 26)
+                .addComponent(jRadioButton1)
                 .addGap(32, 32, 32)
                 .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(CTablas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addGap(3, 3, 3)
+                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Rclave_entidad)
+                    .addComponent(Rclave_organo))
+                .addGap(23, 23, 23)
+                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Jentidad)
+                    .addComponent(Centidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Jorgano)
+                    .addComponent(CorganoJur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(CPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelILayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addComponent(jLabel4))
-                    .addGroup(PanelILayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Insertar1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(60, 60, 60))
+                .addGap(14, 14, 14)
+                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(Insertar1))
+                .addGap(16, 16, 16)
+                .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/Logo Laborales.png"))); // NOI18N
@@ -301,7 +423,7 @@ public class PInsertTMP extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(R1)
@@ -309,7 +431,7 @@ public class PInsertTMP extends javax.swing.JFrame {
                 .addComponent(R2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(R3)
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -341,7 +463,7 @@ public class PInsertTMP extends javax.swing.JFrame {
         // TODO add your handling code here:
        if(R1.isSelected()){
         Versiones="";
-        Versiones="V1";
+        Versiones="1.0";
         lLCTablas();
        }
     }//GEN-LAST:event_R1ActionPerformed
@@ -349,7 +471,7 @@ public class PInsertTMP extends javax.swing.JFrame {
     private void R2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R2ActionPerformed
          if(R2.isSelected()){
         Versiones="";
-         Versiones="V2";
+         Versiones="2.0";
           lLCTablas();
          }
     }//GEN-LAST:event_R2ActionPerformed
@@ -357,11 +479,65 @@ public class PInsertTMP extends javax.swing.JFrame {
     private void R3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R3ActionPerformed
         if(R3.isSelected()){
         Versiones="";
-         Versiones="V3";
+         Versiones="3.0";
           lLCTablas();
+          llenaCombo();
+          llenaComboEntidad();
         }
     }//GEN-LAST:event_R3ActionPerformed
 
+     public void llenaCombo(){
+         
+        if (Versiones.equals("1.0") && (BD.equals("Estatal")) )
+        {
+        ArrayClave_organo=query.Clave_organo();    
+        }
+        if (Versiones.equals("2.0") && (BD.equals("Estatal")))
+        {
+        ArrayClave_organo=queryNE.Clave_organoNE();    
+        }
+         if (Versiones.equals("3.0") )
+        {
+        ArrayClave_organo=V3queryNE.Clave_organoNE();    
+        }
+        if (Versiones.equals("1.0") && (BD.equals("Federal")))
+        {
+        ArrayClave_organo=V1FedQuerys.Clave_organoNE();    
+        } 
+         CorganoJur.removeAllItems();
+         for (int i=0;i<ArrayClave_organo.size();i++){
+          String Organo=(Arrays.toString(ArrayClave_organo.get(i)));
+          CorganoJur.addItem(Organo.replace("[","").replace("]",""));
+        }
+    }
+     
+      public void llenaComboEntidad(){
+         
+        if (Versiones.equals("1.0") && (BD.equals("Estatal")))
+        {
+        ArrayClave_entidad=query.Entidad();    
+        }
+        if (Versiones.equals("2.0") && (BD.equals("Estatal")))
+        {
+        ArrayClave_entidad=queryNE.EntidadNE();    
+        }
+        if (Versiones.equals("3.0"))
+        {
+        ArrayClave_entidad=V3queryNE.EntidadNE();    
+        }
+         if (Versiones.equals("1.0") && (BD.equals("Federal")))
+        {
+        ArrayClave_entidad=V1FedQuerys.EntidadNE();    
+        }
+        
+         Centidad.removeAllItems();
+         for (int i=0;i<ArrayClave_entidad.size();i++){
+          String Organo=(Arrays.toString(ArrayClave_entidad.get(i)));
+          Centidad.addItem(Organo.replace("[","").replace("]",""));
+        }
+    }
+    
+    
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         //PMenu menu = new PMenu();
@@ -380,7 +556,7 @@ public class PInsertTMP extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
+ Valores();
         if (!ventanaAbierta) {
           Errores_InsertTMP Error = new Errores_InsertTMP();
             ventanaAbierta = true;
@@ -406,7 +582,7 @@ public class PInsertTMP extends javax.swing.JFrame {
         new Thread(() -> {
             Valores();
             try {
-              
+                
                 ReadCSV_Audiencias readAud=new ReadCSV_Audiencias();
                 ReadCSV_Control_Expediente readControl=new ReadCSV_Control_Expediente();
                 ReadCSV_Ordinario readOrd=new ReadCSV_Ordinario();
@@ -429,10 +605,16 @@ public class PInsertTMP extends javax.swing.JFrame {
                 ReadCSV_Paraprocesal readPar=new ReadCSV_Paraprocesal();
                 ReadCSV_Ejecucion readEjec=new ReadCSV_Ejecucion();
                 Total_Insertados inser=new Total_Insertados();
-                
+                Estatus=V3queryNE.Estatus_TMP(clave_entidad, clave_organo, Periodo);
+                System.out.println("Estatus"+Estatus);
         if(jRadioButton2.isSelected()){        
-           int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Insertar todos los archivos RALAB?", "Alerta!", JOptionPane.YES_NO_OPTION);   
+          
+            if (!CPeriodo.equals(""))
+            {
+             if (Estatus.equals("I")){   
+            int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Insertar todos los archivos RALAB?", "Alerta!", JOptionPane.YES_NO_OPTION);   
            if (resp == JOptionPane.YES_OPTION) {
+               procedure.elimina_v3_TMP_TR(clave_entidad, Periodo, clave_organo, "TMP");
                CTablas1.setSelectedIndex(0);   
                 ReadCtrl.Read_Control_Expediente();
                 jTextField1.setText(readControl.rutaCarpetaArchivos); 
@@ -544,128 +726,21 @@ public class PInsertTMP extends javax.swing.JFrame {
                 // CarpetaArchivos=false; 
                 
            }else{
-              // jRadioButton2.setSelected(false);
-               // CarpetaArchivos=false;   
-               }
-               }else{
-             if (!jTextField1.getText().equals(""))
-               {
-              if (tabla.equals("V3_TMP_CONTROL_EXPEDIENTEJL")) { 
-               
-                ReadCtrl.Read_Control_Expediente();
-                jTextField1.setText(readControl.rutaCarpetaArchivos); 
-                
-               }
-               if (tabla.equals("V3_TMP_AUDIENCIASJL")) { 
-               
-                ReadAud.Read_Audiencias();
-                jTextField1.setText(readAud.rutaCarpetaArchivos);
-                
-               }
-               if (tabla.equals("V3_TMP_ORDINARIOJL")) {  
-              
-                readOrd.Read_Ordinario();
-                jTextField1.setText(readOrd.rutaCarpetaArchivos);
-               
-               }
-               if (tabla.equals("V3_TMP_PART_ACT_ORDINARIOJL")) {  
-               
-                readPartActOrd.Read_Part_Act_Ordinario();
-                jTextField1.setText(readPartActOrd.rutaCarpetaArchivos);
-               
-               }
-               if (tabla.equals("V3_TMP_PART_DEM_ORDINARIOJL")) {  
-               
-                readPartDemOrd.Read_Part_Dem_Ordinario();
-                jTextField1.setText(readPartDemOrd.rutaCarpetaArchivos);
-                
-               }
-               if (tabla.equals("V3_TMP_INDIVIDUALJL")) {  
-                readInd.Read_Individual();
-                jTextField1.setText(readInd.rutaCarpetaArchivos);
-                
-               }
-                 if (tabla.equals("V3_TMP_PART_ACT_INDIVIDUALJL")) {  
-               
-                readPartActInd.Read_Part_Act_Individual();
-                jTextField1.setText(readPartActInd.rutaCarpetaArchivos);
-                
-               }
-                if (tabla.equals("V3_TMP_PART_DEM_INDIVIDUALJL")) {  
-                readPartDemInd.Read_Part_Dem_Individual();
-                jTextField1.setText(readPartDemInd.rutaCarpetaArchivos);
-                
-               }
-                if (tabla.equals("V3_TMP_COLECTIVOJL")) {  
-                readCol.Read_Colectivo();
-                jTextField1.setText(readCol.rutaCarpetaArchivos);
-                
-               }
-                 if (tabla.equals("V3_TMP_PART_ACT_COLECTIVOJL")) {  
-                                    readActCol.Read_Part_Act_Colectivo();
-                jTextField1.setText(readActCol.rutaCarpetaArchivos);
-                
-               }
-                if (tabla.equals("V3_TMP_PART_DEM_COLECTIVOJL")) {  
-                  readDemCol.Read_Part_Dem_colectivo();
-                jTextField1.setText(readDemCol.rutaCarpetaArchivos);
-               
-               }
-                 if (tabla.equals("V3_TMP_HUELGAJL")) {  
-                readHuel.Read_Huelga();
-                jTextField1.setText(readHuel.rutaCarpetaArchivos);
-                
-               }
-                 if (tabla.equals("V3_TMP_PART_ACT_HUELGAJL")) {  
-                  readActHuel.Read_Part_Act_Huelga();
-                jTextField1.setText(readActHuel.rutaCarpetaArchivos);
-                
-               }
-                if (tabla.equals("V3_TMP_PART_DEM_HUELGAJL")) { 
-                 readDemHuel.Read_Part_Dem_Huelga();
-                jTextField1.setText(readDemHuel.rutaCarpetaArchivos);
-               
-               }
-                 if (tabla.equals("V3_TMP_COLECT_ECONOMJL")) {  
-                readColect.Read_Colect_Econom();
-                jTextField1.setText(readColect.rutaCarpetaArchivos);
-               }
-                 if (tabla.equals("V3_TMP_PART_ACT_COLECT_ECONOMJL")) {  
-                 readActColect.Read_Part_Act_Colect_Econom();
-                jTextField1.setText(readActColect.rutaCarpetaArchivos);
-               }
-                if (tabla.equals("V3_TMP_PART_DEM_COLECT_ECONOMJL")) {  
-                 readDemColect.Read_Part_Dem_Colect_Econom();
-                jTextField1.setText(readDemColect.rutaCarpetaArchivos);
-               }
-                if (tabla.equals("V3_TMP_TERCERIASJL")) {  
-                 readTer.Read_Tercerias();
-                jTextField1.setText(readTer.rutaCarpetaArchivos);
-               }
-                if (tabla.equals("V3_TMP_PREF_CREDITOJL")) { 
-                 readPref.Read_Pref_Credito();
-                jTextField1.setText(readPref.rutaCarpetaArchivos);
-               }
-                if (tabla.equals("V3_TMP_PARAPROCESALJL")) {  
-                 readPar.Read_Paraprocesal();
-                jTextField1.setText(readPar.rutaCarpetaArchivos);
-               }
-                 if (tabla.equals("V3_TMP_EJECUCIONJL")) {  
-                 readEjec.Read_Ejecucion();
-                jTextField1.setText(readEjec.rutaCarpetaArchivos);
-               }
-           }else{
-                   JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo");
-               
-        }             
+               JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun archivo");
+           }
+             }else{
+                 JOptionPane.showMessageDialog(null, "Envio ya se encuentra liberado");
+             }
+            }else{
+                JOptionPane.showMessageDialog(null, "Periodo no debe quedar vacio");
+            }
         }
                 
             } catch (IOException ex) {
                 Logger.getLogger(PInsertTMP.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(PInsertTMP.class.getName()).log(Level.SEVERE, null, ex);
             }
-         jRadioButton2.setSelected(false);
-         jRadioButton1.setSelected(false);
-         jTextField1.setText("");
         }).start();
          
     }//GEN-LAST:event_InsertarActionPerformed
@@ -795,6 +870,293 @@ public class PInsertTMP extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void Rclave_entidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rclave_entidadActionPerformed
+        // TODO add your handling code here:
+        //evento valida si el radiobutton  entidad se selecciona muestra LEntidad,LEntidad2,Jentidad,Centidad en jframe PValidacion.
+        if (Rclave_entidad.isSelected())
+        {
+            Valores();
+            NEntidad();
+            LEntidad.setVisible(true);
+            LEntidad2.setVisible(true);
+            Jorgano.setVisible(false);
+            CorganoJur.setVisible(false);
+            Jentidad.setVisible(true);
+            Centidad.setVisible(true);
+            cve_ent=true;
+            cve_org=false;
+        }
+    }//GEN-LAST:event_Rclave_entidadActionPerformed
+
+      public void NEntidad(){
+      if (Centidad.getItemCount()>0)
+    {  
+        switch(Centidad.getSelectedItem().toString()){
+            case "01":
+             LEntidad.setText("Aguascalientes");
+                break;
+            case "02":
+             LEntidad.setText("Baja California");
+                break;
+            case "03":
+                LEntidad.setText("Baja California Sur");
+                break;
+            case "04":
+                LEntidad.setText("Campeche");
+                break;
+            case "05":
+                LEntidad.setText("Coahuila de Zaragoza");
+                break;
+            case "06":
+                LEntidad.setText("Colima");
+                break;
+            case "07":
+                LEntidad.setText("Chiapas");
+                break;
+            case "08":
+                LEntidad.setText("Chihuahua");
+                break;
+            case "09":
+                LEntidad.setText("Ciudad de México");
+                break;
+            case "10":
+                LEntidad.setText("Durango");
+                break;
+            case "11":
+                LEntidad.setText("Guanajuato");
+                break;
+            case "12":
+                LEntidad.setText("Guerrero");
+                break;
+            case "13":
+                LEntidad.setText("Hidalgo");
+                break;
+            case "14":
+                LEntidad.setText("Jalisco");
+                break;
+            case "15":
+                LEntidad.setText("México");
+                break;
+            case "16":
+                LEntidad.setText("Michoacán de Ocampo");
+                break;
+            case "17":
+                LEntidad.setText("Morelos");
+                break;
+            case "18":
+                LEntidad.setText("Nayarit");
+                break;
+            case "19":
+                LEntidad.setText("Nuevo León");
+                break;
+            case "20":
+                LEntidad.setText("Oaxaca");
+                break;
+            case "21":
+                LEntidad.setText("Puebla");
+                break;
+            case "22":
+                LEntidad.setText("Querétaro");
+                break;
+            case "23":
+                LEntidad.setText("Quintana Roo");
+                break;
+            case "24":
+                LEntidad.setText("San Luis Potosí");
+                break;
+            case "25":
+                LEntidad.setText("Sinaloa");
+                break;
+            case "26":
+                LEntidad.setText("Sonora");
+                break;
+            case "27":
+                LEntidad.setText("Tabasco");
+                break;
+            case "28":
+                LEntidad.setText("Tamaulipas");
+                break;
+            case "29":
+                LEntidad.setText("Tlaxcala");
+                break;
+            case "30":
+                LEntidad.setText("Veracruz de Ignacio de la Llave");
+                break;
+            case "31":
+                LEntidad.setText("Yucatán");
+                break;
+            case "32":
+                LEntidad.setText("Zacatecas");
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "No se Encontro Entidad", "Valida", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Favor de contactar al Administrador", "Valida", JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }
+    }
+      
+    private void Rclave_organoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rclave_organoActionPerformed
+        // TODO add your handling code here:
+        //evento valida si el radiobutton  clave de organo se selecciona muestra LEntidad,LEntidad2,Jorgano,CorganoJur en jframe PValidacion.
+        if(Rclave_organo.isSelected())
+        {
+            Valores();
+            NEntidad_COrgano();
+            LEntidad.setVisible(true);
+            LEntidad2.setVisible(true);
+            Jentidad.setVisible(false);
+            Centidad.setVisible(false);
+            Jorgano.setVisible(true);
+            CorganoJur.setVisible(true);
+            cve_org=true;
+            cve_ent=false;
+        }
+    }//GEN-LAST:event_Rclave_organoActionPerformed
+
+       public void NEntidad_COrgano(){  
+      
+    if (CorganoJur.getItemCount()>0)
+    {
+        System.out.println(CorganoJur.getSelectedItem().toString().substring(0, 2));
+        switch(CorganoJur.getSelectedItem().toString().substring(0, 2)){
+            case "01":
+             LEntidad.setText("Aguascalientes");
+                break;
+            case "02":
+             LEntidad.setText("Baja California");
+                break;
+            case "03":
+                LEntidad.setText("Baja California Sur");
+                break;
+            case "04":
+                LEntidad.setText("Campeche");
+                break;
+            case "05":
+                LEntidad.setText("Coahuila de Zaragoza");
+                break;
+            case "06":
+                LEntidad.setText("Colima");
+                break;
+            case "07":
+                LEntidad.setText("Chiapas");
+                break;
+            case "08":
+                LEntidad.setText("Chihuahua");
+                break;
+            case "09":
+                LEntidad.setText("Ciudad de México");
+                break;
+            case "10":
+                LEntidad.setText("Durango");
+                break;
+            case "11":
+                LEntidad.setText("Guanajuato");
+                break;
+            case "12":
+                LEntidad.setText("Guerrero");
+                break;
+            case "13":
+                LEntidad.setText("Hidalgo");
+                break;
+            case "14":
+                LEntidad.setText("Jalisco");
+                break;
+            case "15":
+                LEntidad.setText("México");
+                break;
+            case "16":
+                LEntidad.setText("Michoacán de Ocampo");
+                break;
+            case "17":
+                LEntidad.setText("Morelos");
+                break;
+            case "18":
+                LEntidad.setText("Nayarit");
+                break;
+            case "19":
+                LEntidad.setText("Nuevo León");
+                break;
+            case "20":
+                LEntidad.setText("Oaxaca");
+                break;
+            case "21":
+                LEntidad.setText("Puebla");
+                break;
+            case "22":
+                LEntidad.setText("Querétaro");
+                break;
+            case "23":
+                LEntidad.setText("Quintana Roo");
+                break;
+            case "24":
+                LEntidad.setText("San Luis Potosí");
+                break;
+            case "25":
+                LEntidad.setText("Sinaloa");
+                break;
+            case "26":
+                LEntidad.setText("Sonora");
+                break;
+            case "27":
+                LEntidad.setText("Tabasco");
+                break;
+            case "28":
+                LEntidad.setText("Tamaulipas");
+                break;
+            case "29":
+                LEntidad.setText("Tlaxcala");
+                break;
+            case "30":
+                LEntidad.setText("Veracruz de Ignacio de la Llave");
+                break;
+            case "31":
+                LEntidad.setText("Yucatán");
+                break;
+            case "32":
+                LEntidad.setText("Zacatecas");
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "No se Encontro Entidad", "Valida", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Favor de contactar al Administrador", "Valida", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+        
+    }
+    private void CentidadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CentidadItemStateChanged
+        // TODO add your handling code here:
+        NEntidad();
+    }//GEN-LAST:event_CentidadItemStateChanged
+
+    private void CentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CentidadActionPerformed
+        // TODO add your handling code here:
+        /* if (Centidad.getSelectedItem().toString().equals("04"))
+        {
+
+        }else{
+
+        }*/
+
+        Valores();
+    }//GEN-LAST:event_CentidadActionPerformed
+
+    private void CorganoJurItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CorganoJurItemStateChanged
+        // TODO add your handling code here:
+        NEntidad_COrgano();
+    }//GEN-LAST:event_CorganoJurItemStateChanged
+
+    private void CorganoJurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorganoJurActionPerformed
+        // TODO add your handling code here:
+
+        /* if (CorganoJur.getSelectedItem().toString().substring(0, 2).equals("04"))
+        {
+
+        }else{
+
+        }*/
+        Valores();
+    }//GEN-LAST:event_CorganoJurActionPerformed
+
     
     public void Valores(){
           tabla=CTablas.getSelectedItem().toString();
@@ -811,13 +1173,35 @@ public class PInsertTMP extends javax.swing.JFrame {
             }else{
                 CarpetaArchivos=false; 
             }
+            
+             if(Rclave_organo.isSelected())
+        {
+            clave_entidad="";
+            clave_organo="";
+            clave_organo=CorganoJur.getSelectedItem().toString();
+            NMunicipio=LEntidad.getText();
+            NENTIDAD=LEntidad.getText();
+            tabla=CTablas.getSelectedItem().toString();
+            System.out.println("valoreeeees"+clave_organo+" "+clave_entidad+" "+Periodo+" "+tabla);
+          
+        }
+        else if (Rclave_entidad.isSelected()){
+            clave_entidad="";
+            clave_organo="";
+            clave_entidad=Centidad.getSelectedItem().toString();
+            NMunicipio=LEntidad.getText();
+            NENTIDAD=LEntidad.getText();
+            tabla=CTablas.getSelectedItem().toString();
+            System.out.println("valoreeeees"+clave_organo+" "+clave_entidad+" "+Periodo+" "+tabla);
+           
+        }
         System.out.println(tabla+ruta+Versiones);
     }
     
     public void lLCTablas(){
        PanelI.setVisible(true);
        
-       if (Versiones.equals("V1"))
+       if (Versiones.equals("1.0"))
         {
             System.out.println(Versiones);     
         testList.clear();
@@ -833,7 +1217,7 @@ public class PInsertTMP extends javax.swing.JFrame {
         testList.add("Preferencia de crédito");
         testList.add("Ejecución");  
         }
-        if (Versiones.equals("V2"))
+        if (Versiones.equals("2.0"))
         {
          System.out.println(Versiones);
          testList.clear();   
@@ -855,7 +1239,7 @@ public class PInsertTMP extends javax.swing.JFrame {
         testList.add("T.9.1_pref_cred");  
         testList.add("T.10.1_ejecu");
         }
-         if (Versiones.equals("V3"))
+         if (Versiones.equals("3.0"))
         {
         System.out.println(Versiones);
         testProc.clear();
@@ -928,14 +1312,23 @@ public class PInsertTMP extends javax.swing.JFrame {
     private javax.swing.JTextField CPeriodo;
     private javax.swing.JComboBox CTablas;
     private javax.swing.JComboBox CTablas1;
+    private javax.swing.JComboBox Centidad;
+    private javax.swing.JComboBox CorganoJur;
     private javax.swing.JButton Insertar;
     private javax.swing.JButton Insertar1;
+    private javax.swing.JLabel Jentidad;
+    private javax.swing.JLabel Jorgano;
+    private javax.swing.JLabel LEntidad;
+    private javax.swing.JLabel LEntidad2;
     private javax.swing.JLabel Lname;
     public static javax.swing.JPanel PanelI;
     private javax.swing.JRadioButton R1;
     private javax.swing.JRadioButton R2;
     private javax.swing.JRadioButton R3;
+    private javax.swing.JRadioButton Rclave_entidad;
+    private javax.swing.JRadioButton Rclave_organo;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

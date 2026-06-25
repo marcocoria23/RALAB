@@ -46,7 +46,9 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
          jTable1.getColumnModel().getColumn(6).setPreferredWidth(25);
         jLabel5.setVisible(false);
         jProgressBar1.setVisible(false);
-        Tperiodo.setText(PTMP.Periodo);
+        jRadioButton1.setEnabled(false);
+        RBentidad.setEnabled(false);
+        RBclaveorgano.setEnabled(false);
 
     }
 
@@ -352,18 +354,43 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        Centidad.setVisible(false);
-        Cclaveorgano.setVisible(false);
-        Tperiodo.setVisible(false);
-        Bperiodo.setVisible(false);
-        jLabel4.setVisible(false);
-        Bborrar.setVisible(false);
-        label2.setVisible(false);
+        jRadioButton1.setSelected(true);
+        Tperiodo.setText(PInsertTMP.Periodo);
+        
+        if (PInsertTMP.cve_ent==true){
+              llenaComboEntidad();
+            RBentidad.setSelected(true);
+            RBclaveorgano.setSelected(false);
+            Centidad.setSelectedItem(PInsertTMP.clave_entidad); 
+            Centidad.setVisible(true);
+            Cclaveorgano.setVisible(false);
+            Tperiodo.setVisible(true);
+            Bperiodo.setVisible(true);
+            jLabel4.setVisible(true);
+            entidad ="";
+            entidad = Centidad.getSelectedItem().toString();
+            claveorgano = "";
+        }
+        
+        if (PInsertTMP.cve_org==true){
+            llenaComboClaveorgano();
+            RBentidad.setSelected(false);
+            RBclaveorgano.setSelected(true);
+            Cclaveorgano.setSelectedItem(PInsertTMP.clave_organo);        
+            Cclaveorgano.setVisible(true);
+            Centidad.setVisible(false);
+            Tperiodo.setVisible(true);
+            Bperiodo.setVisible(true);
+            jLabel4.setVisible(true);
+            claveorgano="";
+            claveorgano = Cclaveorgano.getSelectedItem().toString();
+            entidad = "";
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void RBentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBentidadActionPerformed
         // TODO add your handling code here:
-        if (RBentidad.isSelected() == true) {
+       /* if (RBentidad.isSelected() == true) {
             llenaComboEntidad();
             Centidad.setVisible(true);
             Cclaveorgano.setVisible(false);
@@ -376,13 +403,13 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
 
         } else {
             Centidad.setVisible(false);
-        }
+        }*/
 
     }//GEN-LAST:event_RBentidadActionPerformed
 
     private void RBclaveorganoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RBclaveorganoActionPerformed
         // TODO add your handling code here:
-        if (RBclaveorgano.isSelected() == true) {
+       /* if (RBclaveorgano.isSelected() == true) {
             llenaComboClaveorgano();
             Cclaveorgano.setVisible(true);
             Centidad.setVisible(false);
@@ -394,7 +421,7 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
             entidad = "";
         } else {
             Cclaveorgano.setVisible(false);
-        }
+        }*/
     }//GEN-LAST:event_RBclaveorganoActionPerformed
 
     private void BperiodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BperiodoActionPerformed
@@ -572,16 +599,16 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
 
     public void llenaComboEntidad() {
 
-        if (PInsertTMP.Versiones.equals("V1")) {
+        if (PInsertTMP.Versiones.equals("1.0")) {
             ArrayClave_entidad = query.Entidad();
         }
-        if (PInsertTMP.Versiones.equals("V2")) {
+        if (PInsertTMP.Versiones.equals("2.0")) {
             ArrayClave_entidad = queryNE.EntidadNE();
         }
-        if (PInsertTMP.Versiones.equals("V3")) {
+        if (PInsertTMP.Versiones.equals("3.0")) {
             ArrayClave_entidad = V3queryNE.EntidadNE();
         }
-        if (PInsertTMP.Versiones.equals("V1")) {
+        if (PInsertTMP.Versiones.equals("1.0")) {
             ArrayClave_entidad = V1FedQuerys.EntidadNE();
         }
 
@@ -594,16 +621,16 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
 
     public void llenaComboClaveorgano() {
 
-        if (PInsertTMP.Versiones.equals("V1")) {
+        if (PInsertTMP.Versiones.equals("1.0")) {
             ArrayClave_organo = query.Clave_organo();
         }
-        if (PInsertTMP.Versiones.equals("V2")) {
+        if (PInsertTMP.Versiones.equals("2.0")) {
             ArrayClave_organo = queryNE.Clave_organoNE();
         }
-        if (PInsertTMP.Versiones.equals("V3")) {
+        if (PInsertTMP.Versiones.equals("3.0")) {
             ArrayClave_organo = V3queryNE.Clave_organoNE();
         }
-        if (PInsertTMP.Versiones.equals("V1")) {
+        if (PInsertTMP.Versiones.equals("1.0")) {
             ArrayClave_organo = V1FedQuerys.Clave_organoNE();
         }
         Cclaveorgano.removeAllItems();

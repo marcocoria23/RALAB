@@ -4,6 +4,12 @@
  */
 package Screen_laborales;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JTextPane;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import mx.org.BD.ReadCSV_Audiencias;
 import mx.org.BD.ReadCSV_Colect_Econom;
 import mx.org.BD.ReadCSV_Colectivo;
@@ -25,6 +31,7 @@ import mx.org.BD.ReadCSV_Part_Dem_Individual;
 import mx.org.BD.ReadCSV_Part_Dem_Ordinario;
 import mx.org.BD.ReadCSV_Pref_Credito;
 import mx.org.BD.ReadCSV_Tercerias;
+import mx.org.querys.V3Querys;
 
 /**
  *
@@ -50,8 +57,8 @@ public class Total_Insertados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -60,9 +67,7 @@ public class Total_Insertados extends javax.swing.JFrame {
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        jScrollPane1.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -70,14 +75,13 @@ public class Total_Insertados extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -106,35 +110,68 @@ public class Total_Insertados extends javax.swing.JFrame {
         ReadCSV_Pref_Credito readPref = new ReadCSV_Pref_Credito();
         ReadCSV_Paraprocesal readPar = new ReadCSV_Paraprocesal();
         ReadCSV_Ejecucion readEjec = new ReadCSV_Ejecucion();
-         
+        V3Querys Q=new V3Querys();
+        
+       ArrayList<String[]> ArrayResult =Q.TRegistrosV3Temporal(PInsertTMP.clave_organo,PInsertTMP.clave_entidad,PInsertTMP.Periodo);
+        
          String CantidadTexto="";
-         CantidadTexto="Total registros leidos de CSV \n"
-                  + "V3_TMP_CONTROL_EXPEDIENTEJL="+String.valueOf(readControl.TotalRegistros)+"\n"
-                  + "V3_TMP_AUDIENCIASJL="+String.valueOf(readAud.TotalRegistros)+"\n"
-                 + "V3_TMP_ORDINARIOJL="+String.valueOf(readOrd.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_ACT_ORDINARIOJL="+String.valueOf(readPartActOrd.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_DEM_ORDINARIOJL="+String.valueOf(readPartDemOrd.TotalRegistros)+"\n"
-                 + "V3_TMP_INDIVIDUALJL="+String.valueOf(readInd.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_ACT_INDIVIDUALJL="+String.valueOf(readPartActInd.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_DEM_INDIVIDUALJL="+String.valueOf(readPartDemInd.TotalRegistros)+"\n"
-                 + "V3_TMP_COLECTIVOJL="+String.valueOf(readCol.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_ACT_COLECTIVOJL="+String.valueOf(readActCol.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_DEM_COLECTIVOJL="+String.valueOf(readDemCol.TotalRegistros)+"\n"
-                 + "V3_TMP_HUELGAJL="+String.valueOf(readHuel.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_ACT_HUELGAJL="+String.valueOf(readActHuel.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_DEM_HUELGAJL="+String.valueOf(readDemHuel.TotalRegistros)+"\n"
-                 + "V3_TMP_COLECT_ECONOMJL="+String.valueOf(readColect.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_ACT_COLECT_ECONOMJL="+String.valueOf(readActColect.TotalRegistros)+"\n"
-                 + "V3_TMP_PART_DEM_COLECT_ECONOMJL="+String.valueOf(readDemColect.TotalRegistros)+"\n"
-                 + "V3_TMP_TERCERIASJL="+String.valueOf(readTer.TotalRegistros)+"\n"
-                 + "V3_TMP_PREF_CREDITOJL="+String.valueOf(readPref.TotalRegistros)+"\n"
-                 + "V3_TMP_PARAPROCESALJL="+String.valueOf(readPar.TotalRegistros)+"\n"
-                 + "V3_TMP_EJECUCIONJL="+String.valueOf(readEjec.TotalRegistros)+"\n";
-                jTextArea2.setText(CantidadTexto);
+         jTextPane1.setText("");
+      try {
+    StyledDocument doc = jTextPane1.getStyledDocument();
+
+    SimpleAttributeSet titulo = new SimpleAttributeSet();
+    StyleConstants.setForeground(titulo, Color.BLACK);
+    StyleConstants.setBold(titulo, true);
+    doc.insertString(doc.getLength(), "Total registros leídos de CSV VS TMP\n\n", titulo);
+    agregarRegistroColor(jTextPane1, "CSV_CONTROL_EXPEDIENTEJL", readControl.TotalRegistros,"TMP_CONTROL_EXPEDIENTEJL",Integer.parseInt(ArrayResult.get(0)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_AUDIENCIASJL", readAud.TotalRegistros,"TMP_AUDIENCIASJL",Integer.parseInt(ArrayResult.get(1)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_ORDINARIOJL", readOrd.TotalRegistros,"TMP_ORDINARIOJL",Integer.parseInt(ArrayResult.get(2)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_ACT_ORDINARIOJL", readPartActOrd.TotalRegistros,"TMP_PART_ACT_ORDINARIOJL",Integer.parseInt(ArrayResult.get(3)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_DEM_ORDINARIOJL", readPartDemOrd.TotalRegistros,"TMP_PART_DEM_ORDINARIOJL",Integer.parseInt(ArrayResult.get(4)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_INDIVIDUALJL", readInd.TotalRegistros,"TMP_NDIVIDUALJL",Integer.parseInt(ArrayResult.get(5)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_ACT_INDIVIDUALJL", readPartActInd.TotalRegistros,"TMP_PART_ACT_INDIVIDUALJL",Integer.parseInt(ArrayResult.get(6)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_DEM_INDIVIDUALJL", readPartDemInd.TotalRegistros,"TMP_PART_DEM_INDIVIDUALJL",Integer.parseInt(ArrayResult.get(7)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_COLECTIVOJL", readCol.TotalRegistros,"TMP_COLECTIVOJL",Integer.parseInt(ArrayResult.get(8)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_ACT_COLECTIVOJL", readActCol.TotalRegistros,"TMP_PART_ACT_COLECTIVOJL",Integer.parseInt(ArrayResult.get(9)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_DEM_COLECTIVOJL", readDemCol.TotalRegistros,"TMP_PART_DEM_COLECTIVOJL",Integer.parseInt(ArrayResult.get(10)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_HUELGAJL", readHuel.TotalRegistros,"TMP_HUELGAJL",Integer.parseInt(ArrayResult.get(11)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_ACT_HUELGAJL", readActHuel.TotalRegistros,"TMP_PART_ACT_HUELGAJL",Integer.parseInt(ArrayResult.get(12)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_DEM_HUELGAJL", readDemHuel.TotalRegistros,"TMP_PART_DEM_HUELGAJL",Integer.parseInt(ArrayResult.get(13)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_COLECT_ECONOMJL", readColect.TotalRegistros,"TMP_COLECT_ECONOMJL",Integer.parseInt(ArrayResult.get(14)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_ACT_COLECT_ECONOMJL", readActColect.TotalRegistros,"TMP_PART_ACT_COLECT_ECONOMJL",Integer.parseInt(ArrayResult.get(15)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PART_DEM_COLECT_ECONOMJL", readDemColect.TotalRegistros,"TMP_PART_DEM_COLECT_ECONOMJL",Integer.parseInt(ArrayResult.get(16)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_TERCERIASJL", readTer.TotalRegistros,"TMP_TERCERIASJL",Integer.parseInt(ArrayResult.get(17)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PREF_CREDITOJL", readPref.TotalRegistros,"TMP_PREF_CREDITOJL",Integer.parseInt(ArrayResult.get(18)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_PARAPROCESALJL", readPar.TotalRegistros,"TMP_PARAPROCESALJL",Integer.parseInt(ArrayResult.get(19)[0].trim()));
+    agregarRegistroColor(jTextPane1, "CSV_EJECUCIONJL", readEjec.TotalRegistros,"TMP_EJECUCIONJL",Integer.parseInt(ArrayResult.get(20)[0].trim()));
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
         
         
     }//GEN-LAST:event_formWindowOpened
 
+   public void agregarRegistroColor(JTextPane texto, String CSV, int total, String TextTabla, int totalTmp) {
+    try {
+        StyledDocument doc = texto.getStyledDocument();
+
+        SimpleAttributeSet estiloNormal = new SimpleAttributeSet();
+        StyleConstants.setForeground(estiloNormal, Color.BLACK);
+        SimpleAttributeSet estiloRojo = new SimpleAttributeSet();
+        StyleConstants.setForeground(estiloRojo, Color.RED);
+        StyleConstants.setBold(estiloRojo, true);
+        doc.insertString(doc.getLength(), CSV + " = ", estiloNormal);
+        doc.insertString(doc.getLength(), String.valueOf(total), estiloRojo);
+        doc.insertString(doc.getLength(), "    |    " + TextTabla + " = ", estiloNormal);
+        doc.insertString(doc.getLength(), String.valueOf(totalTmp), estiloRojo);
+        doc.insertString(doc.getLength(), "\n", estiloNormal);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+    
     /**
      * @param args the command line arguments
      */
@@ -161,7 +198,7 @@ public class Total_Insertados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }
