@@ -6,6 +6,7 @@
 package Screen_laborales;
 
 import Conexion.OracleDAOFactory;
+import LeerQuery.QueryProcedureActToV3;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -594,15 +595,21 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                   
+             V3Querys pro=new V3Querys(); 
+             String Estatus=pro.Estatus_TR(clave_entidad, clave_organo, periodo);
             new Thread(() -> {
             Valores();
             try {
+              if (Estatus.equals("I")){    
              cargando carga= new cargando();
              carga.setVisible(true);
              InsertTR tr = new InsertTR();
              tr.InsertaTR();
              carga.setVisible(false);
+              }else
+              {
+                  JOptionPane.showMessageDialog(null, "Envio ya se encuentra liberado");
+              }
             } catch (IOException ex) {
                 Logger.getLogger(PInsertTMP.class.getName()).log(Level.SEVERE, null, ex);
             }

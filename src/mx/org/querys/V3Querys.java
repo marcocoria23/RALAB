@@ -582,6 +582,27 @@ public ArrayList PeriodoNEstatus(){
 } 
   
   
+  public String Estatus_TR(String entidad,String claveorgano,String periodo){
+ conexion.Conectar();
+ String TotalReg="";
+      sql="SELECT ESTATUS FROM V3_TR_CONTROL_EXPEDIENTEJL WHERE CLAVE_ORGANO='"+claveorgano+"' AND PERIODO='"+periodo+"' "
+              + " OR SUBSTR(CLAVE_ORGANO,0,2)='"+entidad+"' AND PERIODO='"+periodo+"'  ";
+      System.out.println(sql);
+     resul=conexion.consultar(sql);
+      try {
+       if (resul.next()) {
+              TotalReg=resul.getString("ESTATUS");
+       }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QEstatus.class.getName()).log(Level.SEVERE, null, ex);
+           // JOptionPane.showInputDialog(null, "Se han eliminado los registros de tabla:V3_ERRORES_INSERT_RALABTMP");
+        }
+      return TotalReg;
+       
+} 
+  
+  
   public String Total_Reg_insertadosTR(String Tabla,String entidad,String claveorgano,String periodo){
  conexion.Conectar();
  String TotalReg="";
