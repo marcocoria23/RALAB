@@ -436,9 +436,7 @@ public class PInsertTMP extends javax.swing.JFrame {
                CTablas1.setSelectedIndex(0);   
                 ReadCtrl.Read_Control_Expediente();
                 jTextField1.setText(readControl.rutaCarpetaArchivos); 
-                
-                
-                
+
                 CTablas1.setSelectedIndex(1);   
                 ReadAud.Read_Audiencias();
                 jTextField1.setText(readAud.rutaCarpetaArchivos);
