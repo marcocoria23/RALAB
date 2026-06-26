@@ -26,7 +26,7 @@ public class QEstatus {
 OracleConexion conexion = new OracleConexion();
 OracleConexionFederal conexionFed= new OracleConexionFederal();
 OracleConexionDesarrollo conexionED = new OracleConexionDesarrollo ();
-String sql;
+String sql,sqltmp;
 ArrayList<String[]> Array;
  ResultSet resul; 
 
@@ -66,32 +66,53 @@ ArrayList<String[]> Array;
  
  public void V3CambioEstatus(){
  conexion.Conectar();
-     String sql1="",sql2="",sql3="";  
-     sql1="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='CE' WHERE ESTATUS='CEU' and CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"'";
+     String sql2="",sql2tmp="",sql3="",sql3tmp="";  
      sql2="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='I' WHERE ESTATUS='IU' and CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"'";
-     sql3="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='C' WHERE ESTATUS='CU' and CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"'";          
-      if (PCambioEstatus.estatus.equals("CE")){
-          sql="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='CEU' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";     
-      }
-      if(PCambioEstatus.estatus.equals("I")){
+     sql2tmp="UPDATE V3_TMP_CONTROL_EXPEDIENTEJL SET ESTATUS='I' WHERE ESTATUS='IU' and CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"'";
+     sql3="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='C' WHERE ESTATUS='CU' and CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"'"; 
+     sql3tmp="UPDATE V3_TMP_CONTROL_EXPEDIENTEJL SET ESTATUS='C' WHERE ESTATUS='CU' and CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"'";
+      
+      int resp = JOptionPane.showConfirmDialog(null, "¿Desea asignar estatus al mas actualizado?", "Alerta!", JOptionPane.YES_NO_OPTION);   
+     if (resp == JOptionPane.YES_OPTION) {
+     if(PCambioEstatus.estatus.equals("I")){
           sql="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='IU' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
-      }
+          sqltmp="UPDATE V3_Tmp_CONTROL_EXPEDIENTEJL SET ESTATUS='IU' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
+     }
       if(PCambioEstatus.estatus.equals("C")){
           sql="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='CU' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
+          sqltmp="UPDATE V3_Tmp_CONTROL_EXPEDIENTEJL SET ESTATUS='CU' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
       }
-      System.out.println(sql1);
-      System.out.println(sql);
-      
       try {
-      conexion.escribir(sql1);
       conexion.escribir(sql2);
       conexion.escribir(sql3);
       conexion.escribir(sql); 
+       conexion.escribir(sqltmp); 
       conexion.close();
      } catch (SQLException ex) {
             Logger.getLogger(QEstatus.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showInputDialog(null, "No se han podido actualizar los datos"+ex);
         }
+      }else{
+        if(PCambioEstatus.estatus.equals("I")){
+          sql="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='I' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
+           sqltmp="UPDATE V3_tmp_CONTROL_EXPEDIENTEJL SET ESTATUS='I' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
+        }
+      if(PCambioEstatus.estatus.equals("C")){
+          sql="UPDATE V3_TR_CONTROL_EXPEDIENTEJL SET ESTATUS='C' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
+          sqltmp="UPDATE V3_tmp_CONTROL_EXPEDIENTEJL SET ESTATUS='C' WHERE CLAVE_ORGANO='"+PCambioEstatus.clave_organo+"' AND PERIODO='"+PCambioEstatus.periodo+"'";    
+      }
+       try {
+      conexion.escribir(sql2);
+      conexion.escribir(sql3);
+      conexion.escribir(sql); 
+       conexion.escribir(sqltmp); 
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(QEstatus.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showInputDialog(null, "No se han podido actualizar los datos"+ex);
+        }
+     }
+      
        
 }
  
