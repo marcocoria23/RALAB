@@ -1081,7 +1081,7 @@ public class V3QOrdinario {
         return Array;
     }
     
-    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solución (2) la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM) y a la fecha de audiencia de Juicio (FECHA_AUDIENCIA_JUICIO).
+    // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solución (2) la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM) y mayor o igual a la fecha de audiencia de Juicio (FECHA_AUDIENCIA_JUICIO).
     public ArrayList Fecha_Acto_Procesal() {
         conexion.Conectar();
         Array = new ArrayList();

@@ -10218,7 +10218,7 @@ public class V3validaciones {
             for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
                 String claveOrgano = entry.getKey();
                 List<String> expedientes = entry.getValue();
-                String textoExpedientes = String.join(" , ", expedientes);
+             String textoExpedientes = String.join(" , ", expedientes);
                 String totalCasos;
                 if (claveOrgano.equals("General")) {
                     totalCasos = String.valueOf(ArrayResult.size());
@@ -10722,7 +10722,7 @@ public class V3validaciones {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solución (2) la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM) y a la fecha de audiencia de Juicio (FECHA_AUDIENCIA_JUICIO)."
+                        "Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solución (2) la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM) y mayor o igual a la fecha de audiencia de Juicio (FECHA_AUDIENCIA_JUICIO)."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);

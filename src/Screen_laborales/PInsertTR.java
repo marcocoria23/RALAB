@@ -9,6 +9,7 @@ import Conexion.OracleDAOFactory;
 import LeerQuery.QueryProcedureActToV3;
 import java.awt.Color;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -41,6 +42,7 @@ public class PInsertTR extends javax.swing.JFrame {
  V2querysNE queryNE=new V2querysNE();//Intanciar clase V2querysNE con nombre queryNE
  V3Querys V3queryNE=new V3Querys();//Intanciar clase V3querys con nombre V3queryNE
 FedV1Querys V1FedQuerys=new FedV1Querys();
+ QueryProcedureActToV3 procedure=new QueryProcedureActToV3();
  
     public PInsertTR() {
         initComponents();
@@ -602,6 +604,11 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
             try {
               if (Estatus.equals("I")){    
              cargando carga= new cargando();
+                  try {
+                      procedure.elimina_v3_TMP_TR(clave_entidad, periodo, clave_organo, "TR");
+                  } catch (SQLException ex) {
+                      Logger.getLogger(PInsertTR.class.getName()).log(Level.SEVERE, null, ex);
+                  }
              carga.setVisible(true);
              InsertTR tr = new InsertTR();
              tr.InsertaTR();
