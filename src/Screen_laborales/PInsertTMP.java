@@ -611,7 +611,7 @@ public class PInsertTMP extends javax.swing.JFrame {
           
             if (!CPeriodo.equals(""))
             {
-             if (Estatus.equals("I")){   
+             if (Estatus.equals("I") || Estatus.equals("") ){   
             int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro de Insertar todos los archivos RALAB?", "Alerta!", JOptionPane.YES_NO_OPTION);   
            if (resp == JOptionPane.YES_OPTION) {
                procedure.elimina_v3_TMP_TR(clave_entidad, Periodo, clave_organo, "TMP");

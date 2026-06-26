@@ -602,7 +602,7 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
             new Thread(() -> {
             Valores();
             try {
-              if (Estatus.equals("I")){    
+              if (Estatus.equals("I") || Estatus.equals("")){    
              cargando carga= new cargando();
                   try {
                       procedure.elimina_v3_TMP_TR(clave_entidad, periodo, clave_organo, "TR");
