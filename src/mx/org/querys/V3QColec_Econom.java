@@ -429,9 +429,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("fecha_pres_demanda")
                 });
@@ -459,9 +459,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_ADMISION_DEMANDA"),
                   resul.getString("fecha_pres_demanda")
                 });
@@ -489,9 +489,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("Fecha_Admision_Demanda")
                 });
@@ -516,9 +516,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("Fecha_audiencia_Econom")
                 });
@@ -544,9 +544,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("Fecha_audiencia_Econom")
                 });
@@ -573,9 +573,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("Fecha_resolucion")
                 });
@@ -605,9 +605,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
+                  resul.getString("clave_organo"),
+                  resul.getString("expediente_clave"),
                   resul.getString("ENTIDAD_CLAVE"),
-                  resul.getString("CLAVE_ORGANO"),
-                  resul.getString("EXPEDIENTE_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_PRES_DEMANDA"),
                   resul.getString("ID_AUDIENCIA")
@@ -639,9 +639,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
+                  resul.getString("clave_organo"),
+                  resul.getString("expediente_clave"),
                   resul.getString("ENTIDAD_CLAVE"),
-                  resul.getString("CLAVE_ORGANO"),
-                  resul.getString("EXPEDIENTE_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("ID_AUDIENCIA")
@@ -676,9 +676,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
+                  resul.getString("clave_organo"),
+                  resul.getString("expediente_clave"),
                   resul.getString("ENTIDAD_CLAVE"),
-                  resul.getString("CLAVE_ORGANO"),
-                  resul.getString("EXPEDIENTE_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_ADMISION_DEMANDA"),
                   resul.getString("ID_AUDIENCIA")

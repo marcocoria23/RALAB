@@ -128,8 +128,8 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("clave_organo"),
-                    resul.getString("expediente_clave"),
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTES"),});
             }
             conexion.close();
@@ -156,8 +156,8 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("clave_organo"),
-                    resul.getString("expediente_clave"),
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTES"),});
             }
             conexion.close();
@@ -183,8 +183,8 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("clave_organo"),
-                    resul.getString("expediente_clave"),
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTES"),});
             }
             conexion.close();
@@ -208,8 +208,8 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("clave_organo"),
-                    resul.getString("expediente_clave"),
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("periodo"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE")
                 });
@@ -264,8 +264,8 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("clave_organo"),
-                    resul.getString("expediente_clave"),
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("periodo"),
                     resul.getString("FECHA_PRES_DEMANDA")
                 });
@@ -510,9 +510,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("fecha_pres_demanda")
                 });
@@ -538,9 +538,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_ADMI_DEMANDA"),
                     resul.getString("fecha_pres_demanda")
                 });
@@ -566,9 +566,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("Fecha_Acto_Procesal")
                 });
@@ -594,9 +594,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("fecha_admi_demanda")
                 });
@@ -622,9 +622,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("fecha_audiencia_juicio")
                 });
@@ -650,9 +650,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("fecha_audiencia_prelim")
                 });
@@ -678,9 +678,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_DICTO_RESOLUCIONFE")
                 });
@@ -706,9 +706,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_DICTO_RESOLUCIONAP")
                 });
@@ -734,9 +734,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_RESOLUCIONAJ")
                 });
@@ -766,9 +766,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ENTIDAD_CLAVE"),
                     resul.getString("CLAVE_ORGANO"),
                     resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("ENTIDAD_CLAVE"),
                     resul.getString("FECHA_AUDIEN_CELEBRADA"),
                     resul.getString("FECHA_PRES_DEMANDA"),
                     resul.getString("ID_AUDIENCIA")
@@ -798,9 +798,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ENTIDAD_CLAVE"),
                     resul.getString("CLAVE_ORGANO"),
                     resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("ENTIDAD_CLAVE"),
                     resul.getString("FECHA_AUDIEN_CELEBRADA"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("ID_AUDIENCIA")
@@ -831,9 +831,9 @@ public class V3QOrdinario {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ENTIDAD_CLAVE"),
                     resul.getString("CLAVE_ORGANO"),
                     resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("ENTIDAD_CLAVE"),
                     resul.getString("FECHA_AUDIEN_CELEBRADA"),
                     resul.getString("FECHA_ADMI_DEMANDA"),
                     resul.getString("ID_AUDIENCIA")

@@ -296,9 +296,9 @@ public ArrayList FECHA_CONCLUSION_FUT(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ESTATUS_EXPE"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("ESTATUS_EXPE"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_PRESENTACION")
                 });
@@ -324,9 +324,9 @@ public ArrayList Fecha_ConclusionNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ESTATUS_EXPE"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("ESTATUS_EXPE"),
                   resul.getString("fecha_apertura_expediente"),
                   resul.getString("fecha_conclusion")
                 });

@@ -318,9 +318,9 @@ public class V3QParaprocesal {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_PRESENTA_SOLI")
                 });
@@ -346,9 +346,9 @@ public class V3QParaprocesal {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("FECHA_ADMISION_SOLI"),
                     resul.getString("FECHA_PRESENTA_SOLI")
                 });
@@ -374,9 +374,9 @@ public class V3QParaprocesal {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_ADMISION_SOLI")
                 });
@@ -402,9 +402,9 @@ public class V3QParaprocesal {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("ESTATUS_EXPEDIENTE"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("Fecha_Conclusion_Expe"),
                     resul.getString("comentarios")

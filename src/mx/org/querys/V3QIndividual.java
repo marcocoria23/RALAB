@@ -566,9 +566,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("fecha_pres_demanda")
                 });
@@ -594,9 +594,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_ADMI_DEMANDA"),
                     resul.getString("fecha_pres_demanda")
                 });
@@ -622,9 +622,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("fecha_admi_demanda"),
                     resul.getString("COMENTARIOS")
@@ -651,9 +651,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_DEPURACION")
                 });
@@ -679,9 +679,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_AUDIENCIA_PRELIM")
                 });
@@ -707,9 +707,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_AUDIENCIA_JUICIO")
                 });
@@ -735,9 +735,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("Fecha_Acto_procesal")
                 });
@@ -763,9 +763,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_DICTO_RESOLUCION_AD")
                 });
@@ -791,9 +791,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_RESOLUCION_TA")
                 });
@@ -819,9 +819,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_DICTO_RESOLUCION_AP")
                 });
@@ -847,9 +847,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
-                    resul.getString("entidad_clave"),
                     resul.getString("clave_organo"),
                     resul.getString("expediente_clave"),
+                    resul.getString("entidad_clave"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("FECHA_DICTO_RESOLUCION_AJ")
                 });
@@ -878,9 +878,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
+                    resul.getString("clave_organo"),
+                    resul.getString("expediente_clave"),
                     resul.getString("ENTIDAD_CLAVE"),
-                    resul.getString("CLAVE_ORGANO"),
-                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("FECHA_AUDIEN_CELEBRADA"),
                     resul.getString("FECHA_PRES_DEMANDA"),
                     resul.getString("ID_AUDIENCIA")
@@ -910,9 +910,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
+                    resul.getString("clave_organo"),
+                    resul.getString("expediente_clave"),
                     resul.getString("ENTIDAD_CLAVE"),
-                    resul.getString("CLAVE_ORGANO"),
-                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("FECHA_AUDIEN_CELEBRADA"),
                     resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                     resul.getString("ID_AUDIENCIA")
@@ -943,9 +943,9 @@ public class V3QIndividual {
         try {
             while (resul.next()) {
                 Array.add(new String[]{
+                    resul.getString("clave_organo"),
+                    resul.getString("expediente_clave"),
                     resul.getString("ENTIDAD_CLAVE"),
-                    resul.getString("CLAVE_ORGANO"),
-                    resul.getString("EXPEDIENTE_CLAVE"),
                     resul.getString("FECHA_AUDIEN_CELEBRADA"),
                     resul.getString("FECHA_ADMI_DEMANDA"),
                     resul.getString("ID_AUDIENCIA")

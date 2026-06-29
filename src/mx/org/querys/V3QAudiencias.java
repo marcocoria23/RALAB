@@ -38,8 +38,8 @@ public ArrayList FECHA_AUDIEN_CELEBRADA_FUT(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("clave_organo"),
-                  resul.getString("expediente_clave"),
+                  resul.getString("CLAVE_ORGANO"),
+                  resul.getString("EXPEDIENTE_CLAVE"),
                   resul.getString("periodo"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA")
                 });

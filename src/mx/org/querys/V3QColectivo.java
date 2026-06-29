@@ -444,7 +444,7 @@ public ArrayList Duplicidad_expediente(){
  public ArrayList Fecha_PresentacionNE(){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select * from (select entidad_clave,CLAVE_ORGANO,EXPEDIENTE_CLAVE,to_char(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')FECHA_APERTURA_EXPEDIENTE,to_char(fecha_pres_demanda,'dd/mm/yyyy')fecha_pres_demanda,PERIODO\n" +
+      sql="select * from (select CLAVE_ORGANO,EXPEDIENTE_CLAVE,entidad_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')FECHA_APERTURA_EXPEDIENTE,to_char(fecha_pres_demanda,'dd/mm/yyyy')fecha_pres_demanda,PERIODO\n" +
 "from V3_TR_COLECTIVOJL\n" +
 "WHERE to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy') < to_date(FECHA_PRES_DEMANDA,'dd/mm/yyyy')) where  periodo = '"+PValidacion.periodo+"'\n" +
           "and fecha_pres_demanda <> '09/09/1899'  and clave_organo='"+PValidacion.clave_organo+"' or substr(clave_organo,0,2)='"+PValidacion.clave_entidad+"' \n" +
@@ -454,9 +454,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("fecha_pres_demanda")
                 });
@@ -483,9 +483,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_ADMI_DEMANDA"),
                   resul.getString("fecha_pres_demanda")
                 });
@@ -513,9 +513,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("fecha_admi_demanda")
                 });
@@ -541,9 +541,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("fecha_audiencia_juicio")
                 });
@@ -569,9 +569,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("fecha_depuracion")
                 });
@@ -596,9 +596,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("Fecha_Acto_Procesal")
                 });
@@ -624,9 +624,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("fecha_resolucion_aj")
                 });
@@ -652,9 +652,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("Fecha_Dicto_Resolucion_AD")
                 });
@@ -671,7 +671,7 @@ public ArrayList Duplicidad_expediente(){
   public ArrayList Fecha_Aud_Presentacion(){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select * from (SELECT S.ENTIDAD_CLAVE,P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_PRES_DEMANDA,'DD/MM/YYYY') FECHA_PRES_DEMANDA, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n" +
+      sql="select * from (SELECT P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,S.ENTIDAD_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_PRES_DEMANDA,'DD/MM/YYYY') FECHA_PRES_DEMANDA, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n" +
 "FROM V3_TR_AUDIENCIASJL P,V3_TR_COLECTIVOJL S\n" +
 "WHERE P.CLAVE_ORGANO=S.CLAVE_ORGANO AND P.EXPEDIENTE_CLAVE=S.EXPEDIENTE_CLAVE AND P.PERIODO=S.PERIODO\n" +
 "AND P.TIPO_PROCED=3 AND to_date(FECHA_AUDIEN_CELEBRADA,'dd/mm/yyyy') < to_date(FECHA_PRES_DEMANDA,'dd/mm/yyyy') \n" +
@@ -684,9 +684,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("CLAVE_ORGANO"),
                   resul.getString("EXPEDIENTE_CLAVE"),
+                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_PRES_DEMANDA"),
                   resul.getString("ID_AUDIENCIA")
@@ -705,7 +705,7 @@ public ArrayList Duplicidad_expediente(){
   public ArrayList Fecha_Aud_Apertura(){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select * from (SELECT S.ENTIDAD_CLAVE,P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n" +
+      sql="select * from (SELECT P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,S.ENTIDAD_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n" +
 "FROM V3_TR_AUDIENCIASJL P,V3_TR_COLECTIVOJL S\n" +
 "WHERE P.CLAVE_ORGANO=S.CLAVE_ORGANO AND P.EXPEDIENTE_CLAVE=S.EXPEDIENTE_CLAVE AND P.PERIODO=S.PERIODO\n" +
 "AND P.TIPO_PROCED=3 AND to_date(FECHA_AUDIEN_CELEBRADA,'dd/mm/yyyy') < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy') \n" +
@@ -718,9 +718,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("CLAVE_ORGANO"),
                   resul.getString("EXPEDIENTE_CLAVE"),
+                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("ID_AUDIENCIA")
@@ -742,7 +742,7 @@ public ArrayList Duplicidad_expediente(){
   public ArrayList Fecha_Aud_Admision(){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select * from (SELECT S.ENTIDAD_CLAVE,P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_ADMI_DEMANDA,'DD/MM/YYYY') FECHA_ADMI_DEMANDA, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n" +
+      sql="select * from (SELECT P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,S.ENTIDAD_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_ADMI_DEMANDA,'DD/MM/YYYY') FECHA_ADMI_DEMANDA, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n" +
 "FROM V3_TR_AUDIENCIASJL P,V3_TR_COLECTIVOJL S\n" +
 "WHERE P.CLAVE_ORGANO=S.CLAVE_ORGANO AND P.EXPEDIENTE_CLAVE=S.EXPEDIENTE_CLAVE AND P.PERIODO=S.PERIODO\n" +
 "AND P.TIPO_PROCED=3 AND to_date(FECHA_AUDIEN_CELEBRADA,'dd/mm/yyyy') < to_date(FECHA_ADMI_DEMANDA,'dd/mm/yyyy') \n" +
@@ -755,9 +755,9 @@ public ArrayList Duplicidad_expediente(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("CLAVE_ORGANO"),
                   resul.getString("EXPEDIENTE_CLAVE"),
+                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_ADMI_DEMANDA"),
                   resul.getString("ID_AUDIENCIA")

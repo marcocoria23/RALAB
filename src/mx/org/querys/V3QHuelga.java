@@ -515,9 +515,9 @@ public ArrayList FASE_SOLI_NI() {
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_PRESENTA_PETIC")
                 });
@@ -551,9 +551,9 @@ public ArrayList Fecha_EmplazamientoNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_EMPLAZAMIENTO")
                 });
@@ -579,9 +579,9 @@ public ArrayList Fecha_AudienciaNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_AUDIENCIA")
                 });
@@ -607,9 +607,9 @@ public ArrayList Fecha_Acto_ProcesalNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("Fecha_Acto_Procesal")
                 });
@@ -635,9 +635,9 @@ public ArrayList Fecha_Resolu_EmplazNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_RESOLU_EMPLAZ")
                 });
@@ -663,9 +663,9 @@ public ArrayList Fecha_Resolu_HuelgaNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_RESOLU_HUELGA")
                 });
@@ -691,9 +691,9 @@ public ArrayList Fecha_Estallam_HuelgaNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_ESTALLAM_HUELGA")
                 });
@@ -719,9 +719,9 @@ public ArrayList Fecha_Levant_HuelgaNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("entidad_clave"),
                   resul.getString("clave_organo"),
                   resul.getString("expediente_clave"),
+                  resul.getString("entidad_clave"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("FECHA_LEVANT_HUELGA")
                 });
@@ -751,9 +751,9 @@ public ArrayList Fecha_Levant_HuelgaNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("CLAVE_ORGANO"),
                   resul.getString("EXPEDIENTE_CLAVE"),
+                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_PRESENTA_PETIC"),
                   resul.getString("ID_AUDIENCIA")
@@ -785,9 +785,9 @@ public ArrayList Fecha_Levant_HuelgaNE(){
       try {
           while (resul.next()) {
               Array.add(new String[]{
-                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("CLAVE_ORGANO"),
                   resul.getString("EXPEDIENTE_CLAVE"),
+                  resul.getString("ENTIDAD_CLAVE"),
                   resul.getString("FECHA_AUDIEN_CELEBRADA"),
                   resul.getString("FECHA_APERTURA_EXPEDIENTE"),
                   resul.getString("ID_AUDIENCIA")

@@ -758,7 +758,7 @@ System.out.println(sql);
     return Array;
  }
 
-
+//
 public ArrayList SinMotivo_Conflicto(){
       conexion.Conectar();
       Array = new ArrayList();
