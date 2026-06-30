@@ -1031,6 +1031,7 @@ public class QueryLaborales {
                   
          }
         resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+        //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                 while (resul.next()) {
                     ArrayList<String> fila = new ArrayList<>();
                     fila.add(resul.getString(1)); // Añadir la primera columna
@@ -1234,6 +1235,7 @@ public class QueryLaborales {
           
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -1658,6 +1660,7 @@ public class QueryLaborales {
          } 
          
         resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+         //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                 while (resul.next()) {
                     ArrayList<String> fila = new ArrayList<>();
                     fila.add(resul.getString(1)); // Añadir la primera columna
@@ -1761,6 +1764,7 @@ public class QueryLaborales {
           
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -1914,6 +1918,7 @@ public class QueryLaborales {
             }
              //System.out.println("SQL TR_AUDIENCIAS:"+consultaFiltro);
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
            
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
@@ -1984,6 +1989,7 @@ public class QueryLaborales {
             }
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();  
                 int columnas = metaData.getColumnCount();
@@ -2083,6 +2089,8 @@ public class QueryLaborales {
                        consultaFiltro.append( cveOrgano + ")" ); 
             }
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+                System.out.println("Sqllll"+sql);
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -2161,6 +2169,7 @@ public class QueryLaborales {
             
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -2290,6 +2299,7 @@ public class QueryLaborales {
                   
             }
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -2386,6 +2396,7 @@ public class QueryLaborales {
             
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -2876,6 +2887,7 @@ public class QueryLaborales {
                   
             }
         resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+        //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
             try {
                 while (resul.next()) {
                     ArrayList<String> fila = new ArrayList<>();
@@ -2999,6 +3011,7 @@ public class QueryLaborales {
           
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
           ResultSetMetaData metaData = rs.getMetaData();
           int columnas = metaData.getColumnCount();
 
@@ -4171,7 +4184,8 @@ public class QueryLaborales {
                        consultaFiltro.append( cveOrgano + ")  AND ID_MOTIVO_CONFLICTO IS NOT NULL ; "  ); 
                   
             }
-            resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+           resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+           //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -4231,6 +4245,7 @@ public class QueryLaborales {
             }
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
                 file.write("-- Datos exportados de " + "TR_EXP_MOTIVO_CONF" + "\n");
@@ -4715,6 +4730,7 @@ public class QueryLaborales {
             }
                 //System.out.println("queryyyyyyyyyyyyyy"+consultaFiltro);
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -4774,6 +4790,7 @@ public class QueryLaborales {
           
             stmt = conexionDes.getConexion().createStatement();
             rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -5090,6 +5107,7 @@ public class QueryLaborales {
                   
             }
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -5151,6 +5169,7 @@ public class QueryLaborales {
           
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -5379,6 +5398,7 @@ public class QueryLaborales {
                   
             }
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -5440,6 +5460,7 @@ public class QueryLaborales {
           
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -5740,7 +5761,8 @@ public class QueryLaborales {
             }
             
             
-            resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+           resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+           //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -5800,6 +5822,7 @@ public class QueryLaborales {
           
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -6087,6 +6110,7 @@ public class QueryLaborales {
             }
             
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -6149,6 +6173,7 @@ public class QueryLaborales {
             }
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -6354,6 +6379,7 @@ public class QueryLaborales {
             }
             
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -6414,6 +6440,7 @@ public class QueryLaborales {
             }
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -6620,6 +6647,7 @@ public class QueryLaborales {
             
             
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -6682,6 +6710,7 @@ public class QueryLaborales {
             }
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -7003,6 +7032,7 @@ public class QueryLaborales {
             } 
             
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -7062,6 +7092,7 @@ public class QueryLaborales {
              
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -7333,6 +7364,7 @@ public class QueryLaborales {
             }
             
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -7391,7 +7423,8 @@ public class QueryLaborales {
             } 
              
              stmt = conexionDes.getConexion().createStatement();
-             rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
@@ -7474,6 +7507,7 @@ public class QueryLaborales {
             }
             
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -7535,6 +7569,7 @@ public class QueryLaborales {
              
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
                 file.write("-- Datos exportados de " + "TR_EXP_ACTOR" + "\n");
@@ -7613,6 +7648,7 @@ public class QueryLaborales {
                   
             }
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
                         fila.add(resul.getString(1)); // Añadir la primera columna
@@ -7673,6 +7709,7 @@ public class QueryLaborales {
             } 
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
                 file.write("-- Datos exportados de " + "TR_EXPED_DEMANDADO" + "\n");
@@ -8388,6 +8425,7 @@ public class QueryLaborales {
                   
             }
             resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+            //resul = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
             //System.out.println(consultaFiltro.toString().replace(";", ""));
                     while (resul.next()) {
                         ArrayList<String> fila = new ArrayList<>();
@@ -8462,6 +8500,7 @@ public class QueryLaborales {
             } 
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
+             //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
                 file.write("-- Datos exportados de " + "TR_ESPECIFIQUE" + "\n");
