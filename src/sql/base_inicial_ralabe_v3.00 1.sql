@@ -2584,6 +2584,8 @@ INSERT INTO public.tc_demandado VALUES (-1, 'No identificado');
 -- Data for Name: tc_entidad_mpio; Type: TABLE DATA; Schema: public; Owner: admin_ralabe
 --
 
+INSERT INTO public.tc_entidad_mpio VALUES ('2536', '25', 'Sinaloa', '25019', 'Eldorado');
+INSERT INTO public.tc_entidad_mpio VALUES ('2537', '25', 'Sinaloa', '25020', 'Juan José Ríos');
 INSERT INTO public.tc_entidad_mpio VALUES ('1', '1', 'Aguascalientes', '1002', 'Asientos');
 INSERT INTO public.tc_entidad_mpio VALUES ('2', '1', 'Aguascalientes', '1003', 'Calvillo');
 INSERT INTO public.tc_entidad_mpio VALUES ('3', '1', 'Aguascalientes', '1001', 'Aguascalientes');
