@@ -73,6 +73,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  *
@@ -366,10 +368,10 @@ public class V3validaciones {
 
         ResumenNE(libro, hojaresumenval, estiloCelda0, estiloCeldabordes0, encabezado, estiloCelda1);
         Desglose(libro, hoja0, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Control_Expediente(libro, hojaControl_expe, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar);
-        Despliega_Audiencias(libro, hojaAudiencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar);
+       /* Despliega_Control_Expediente(libro, hojaControl_expe, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar);
+        Despliega_Audiencias(libro, hojaAudiencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar);*/
         Despliega_OrdinarioNE(libro, hoja1, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Part_Act_Ordinario(libro, hoja2, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
+        /*Despliega_Part_Act_Ordinario(libro, hoja2, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
         Despliega_Part_Dem_Ordinario(libro, hoja3, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
         Despliega_IndividualNE(libro, hoja4, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
         Despliega_Part_Act_Individual(libro, hoja5, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
@@ -384,7 +386,7 @@ public class V3validaciones {
         Despliega_Part_Act_Nat_econo(libro, hoja14, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
         Despliega_Part_Dem_Nat_econo(libro, hoja15, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
         Despliega_ParaprocesalNE(libro, hoja16, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Ejecucion(libro, hoja17, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
+        Despliega_Ejecucion(libro, hoja17, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);*/
         SaveFileTo(libro, progressBar, f);
     }
 
@@ -3861,39 +3863,59 @@ public class V3validaciones {
             celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
             celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
 
-            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO SE CAMBIA PARA AGRUPAR LAS CLAVES DE ORGANO DE GENERAL A CLAVE_ORGANO,CLAVE_ORGANO
             Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+
             if (ArrayResult.size() < 2500) {
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+
+                    String[] parts = txtD1.split(",");
+
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+
+            } else {
+
+                // Obtener únicamente las claves de órgano sin repetir
+                Set<String> organosUnicos = new LinkedHashSet<>();
                 for (int i = 0; i < ArrayResult.size(); i++) {
                     String txtD1 = Arrays.toString(ArrayResult.get(i));
                     txtD1 = txtD1.replace("[", "")
                             .replace("]", "")
                             .replace(" 00:00:00.0", "");
                     String[] parts = txtD1.split(",");
-                    String claveOrgano = parts[0].trim();
-                    String claveExpediente = parts[1].trim();
-                    expedientesPorOrgano
-                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
-                            .add(claveExpediente);
+                    organosUnicos.add(parts[0].trim());
                 }
-            } else {
-                expedientesPorOrgano.put("General", Arrays.asList("General"));
+                // Concatenar las claves de órgano
+                String organos = String.join(", ", organosUnicos);
+                // Se guarda una sola fila con todos los órganos
+                expedientesPorOrgano.put(organos, Arrays.asList("General"));
             }
-            // CREAR FILAS POR CADA CLAVE DE ORGANO
+// CREAR FILAS POR CADA CLAVE DE ORGANO
             int filaActual = conEnc + 1;
             for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
                 String claveOrgano = entry.getKey();
                 List<String> expedientes = entry.getValue();
                 String textoExpedientes = String.join(" , ", expedientes);
                 String totalCasos;
-                if (claveOrgano.equals("General")) {
+                if (ArrayResult.size() >= 2500) {
                     totalCasos = String.valueOf(ArrayResult.size());
                 } else {
                     totalCasos = String.valueOf(expedientes.size());
                 }
                 HSSFRow filaDatos = hoja1.createRow(filaActual);
                 filaDatos.setHeight((short) 300);
-
                 HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
                 celdaOrgano.setCellStyle(estiloCeldabordes0);
                 celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
@@ -3915,7 +3937,6 @@ public class V3validaciones {
                 celdaTotal.setCellStyle(estiloCeldabordes0);
                 celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
-
                 filaActual++;
             }
             coni = expedientesPorOrgano.size();
@@ -3923,9 +3944,8 @@ public class V3validaciones {
             conEnc = conEnc + coni + 1;
             conDat = conDat + coni + 1;
             coni = 1;
-            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
-
+        
         ArrayResult = Ordinario.FASE_SOLI_NI();
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
@@ -4193,39 +4213,59 @@ public class V3validaciones {
             celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
             celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
 
-            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+   // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO SE CAMBIA PARA AGRUPAR LAS CLAVES DE ORGANO DE GENERAL A CLAVE_ORGANO,CLAVE_ORGANO
             Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+
             if (ArrayResult.size() < 2500) {
+
+                for (int i = 0; i < ArrayResult.size(); i++) {
+
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+
+                    String[] parts = txtD1.split(",");
+
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+
+            } else {
+
+                // Obtener únicamente las claves de órgano sin repetir
+                Set<String> organosUnicos = new LinkedHashSet<>();
                 for (int i = 0; i < ArrayResult.size(); i++) {
                     String txtD1 = Arrays.toString(ArrayResult.get(i));
                     txtD1 = txtD1.replace("[", "")
                             .replace("]", "")
                             .replace(" 00:00:00.0", "");
                     String[] parts = txtD1.split(",");
-                    String claveOrgano = parts[0].trim();
-                    String claveExpediente = parts[1].trim();
-                    expedientesPorOrgano
-                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
-                            .add(claveExpediente);
+                    organosUnicos.add(parts[0].trim());
                 }
-            } else {
-                expedientesPorOrgano.put("General", Arrays.asList("General"));
+                // Concatenar las claves de órgano
+                String organos = String.join(", ", organosUnicos);
+                // Se guarda una sola fila con todos los órganos
+                expedientesPorOrgano.put(organos, Arrays.asList("General"));
             }
-            // CREAR FILAS POR CADA CLAVE DE ORGANO
+// CREAR FILAS POR CADA CLAVE DE ORGANO
             int filaActual = conEnc + 1;
             for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
                 String claveOrgano = entry.getKey();
                 List<String> expedientes = entry.getValue();
                 String textoExpedientes = String.join(" , ", expedientes);
                 String totalCasos;
-                if (claveOrgano.equals("General")) {
+                if (ArrayResult.size() >= 2500) {
                     totalCasos = String.valueOf(ArrayResult.size());
                 } else {
                     totalCasos = String.valueOf(expedientes.size());
                 }
                 HSSFRow filaDatos = hoja1.createRow(filaActual);
                 filaDatos.setHeight((short) 300);
-
                 HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
                 celdaOrgano.setCellStyle(estiloCeldabordes0);
                 celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
@@ -4240,14 +4280,13 @@ public class V3validaciones {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "La Fecha de apertura del expediente (FECHA_APERTURA_EXPEDIENTE) Debe de tener una fecha valida"
+                        "Si se encuentra registro en los campos Forma de solución (FORMA_SOLUCIONAJ), Fecha en la que se dictó la resolución (FECHA_RESOLUCIONAJ) y Monto estipulado en la forma de solución(MONTO_SOLUCION_AJ), el campo Fase en la que se solucionó el expediente (FASE_SOLI_EXPEDIENTE) debe contener la opción Audiencia de Juicio.\""
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
                 celdaTotal.setCellStyle(estiloCeldabordes0);
                 celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
-
                 filaActual++;
             }
             coni = expedientesPorOrgano.size();
@@ -4255,7 +4294,6 @@ public class V3validaciones {
             conEnc = conEnc + coni + 1;
             conDat = conDat + coni + 1;
             coni = 1;
-            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
         ArrayResult = Ordinario.OrdinarioFechaAperturaMenor2020();
