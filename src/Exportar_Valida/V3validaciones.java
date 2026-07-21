@@ -9165,7 +9165,7 @@ public class V3validaciones {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA)"
+                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA) u en su caso, favor de verificar si es competente el expediente."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -17945,7 +17945,7 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA)"
+                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA) u en su caso, favor de verificar si es competente el expediente."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -25659,7 +25659,7 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA)"
+                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA) u en su caso, favor de verificar si es competente el expediente."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -38576,7 +38576,7 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA)"
+                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA) u en su caso, favor de verificar si es competente el expediente."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -41570,7 +41570,7 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA)"
+                        "Cuando incompetencia(INCOMPETENCIA)=Si no debe de capturar apartir de Fecha de presentacion de la demanda(FECHA_PRES_DEMANDA) u en su caso, favor de verificar si es competente el expediente."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
