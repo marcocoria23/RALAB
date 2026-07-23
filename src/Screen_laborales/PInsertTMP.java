@@ -8,9 +8,11 @@ package Screen_laborales;
 
 
 import LeerQuery.QueryProcedureActToV3;
+import LeerQuery.QueryRalFed;
 import java.awt.Color;
 import java.awt.FileDialog;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +43,16 @@ import mx.org.BD.ReadCSV_Part_Dem_Individual;
 import mx.org.BD.ReadCSV_Part_Dem_Ordinario;
 import mx.org.BD.ReadCSV_Pref_Credito;
 import mx.org.BD.ReadCSV_Tercerias;
+import mx.org.BD.federal.ReadCSV_Audiencias_Fed;
+import mx.org.BD.federal.ReadCSV_ColectivoEconomico_Fed;
+import mx.org.BD.federal.ReadCSV_Colectivo_Fed;
+import mx.org.BD.federal.ReadCSV_ControlExpediente_Fed;
+import mx.org.BD.federal.ReadCSV_Ejecucion_Fed;
+import mx.org.BD.federal.ReadCSV_Huelga_Fed;
+import mx.org.BD.federal.ReadCSV_Individual_Fed;
+import mx.org.BD.federal.ReadCSV_Ordinario_Fed;
+import mx.org.BD.federal.ReadCSV_Paraprocesal_Fed;
+import mx.org.BD.federal.ReadCSV_SegSocial_Fed;
 import mx.org.querys.V1querys;
 import mx.org.querys.V2querysNE;
 import mx.org.querys.V3Querys;
@@ -76,13 +88,14 @@ public class PInsertTMP extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);//JFRAME COLOR POR DEFAULT BLANCO
         PanelI.setVisible(false);
         jRadioButton1.setVisible(false);
-         LEntidad.setVisible(false);
-            LEntidad2.setVisible(false);
-            Jorgano.setVisible(false);
-            CorganoJur.setVisible(false);
-            Jentidad.setVisible(false);
-            Centidad.setVisible(false);
-            jRadioButton2.setSelected(true);
+        LEntidad.setVisible(false);
+        LEntidad2.setVisible(false);
+        Jorgano.setVisible(false);
+        CorganoJur.setVisible(false);
+        Jentidad.setVisible(false);
+        Centidad.setVisible(false);
+        jRadioButton2.setSelected(true);
+        PVersiones.setVisible(false);
         
         
     }
@@ -98,9 +111,7 @@ public class PInsertTMP extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        R1 = new javax.swing.JRadioButton();
-        R2 = new javax.swing.JRadioButton();
-        R3 = new javax.swing.JRadioButton();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         PanelI = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -126,6 +137,14 @@ public class PInsertTMP extends javax.swing.JFrame {
         CorganoJur = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        rbtnEstatal = new javax.swing.JRadioButton();
+        rbtnFederal = new javax.swing.JRadioButton();
+        PVersiones = new javax.swing.JPanel();
+        R1 = new javax.swing.JRadioButton();
+        R2 = new javax.swing.JRadioButton();
+        R3 = new javax.swing.JRadioButton();
+        R4 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Insert TMP");
@@ -138,30 +157,6 @@ public class PInsertTMP extends javax.swing.JFrame {
             }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
-            }
-        });
-
-        buttonGroup1.add(R1);
-        R1.setText("VERSION 1.0");
-        R1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R1ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(R2);
-        R2.setText("VERSION 2.0");
-        R2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R2ActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(R3);
-        R3.setText("VERSION 3.0");
-        R3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                R3ActionPerformed(evt);
             }
         });
 
@@ -286,43 +281,37 @@ public class PInsertTMP extends javax.swing.JFrame {
         PanelILayout.setHorizontalGroup(
             PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelILayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelILayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelILayout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(PanelILayout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Insertar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelILayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(322, 322, 322)
                         .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelILayout.createSequentialGroup()
                         .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PanelILayout.createSequentialGroup()
-                                .addContainerGap()
+                                .addGap(4, 4, 4)
                                 .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(Lname)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(PanelILayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(CTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelILayout.createSequentialGroup()
-                                        .addGap(49, 49, 49)
-                                        .addComponent(CTablas1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(PanelILayout.createSequentialGroup()
-                                        .addGap(176, 176, 176)
-                                        .addComponent(jRadioButton1))
-                                    .addGroup(PanelILayout.createSequentialGroup()
-                                        .addGap(342, 342, 342)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(377, 377, 377)
+                                        .addComponent(Insertar1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel3)
+                            .addComponent(Lname)
                             .addGroup(PanelILayout.createSequentialGroup()
-                                .addGap(59, 59, 59)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(CTablas, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addGap(49, 49, 49)
+                                .addComponent(CTablas1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addGap(176, 176, 176)
+                                .addComponent(jRadioButton1))
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addGap(342, 342, 342)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(PanelILayout.createSequentialGroup()
+                                .addGap(53, 53, 53)
                                 .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PanelILayout.createSequentialGroup()
                                         .addGap(49, 49, 49)
@@ -342,24 +331,34 @@ public class PInsertTMP extends javax.swing.JFrame {
                                     .addGroup(PanelILayout.createSequentialGroup()
                                         .addComponent(Rclave_entidad)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Rclave_organo))))
-                            .addGroup(PanelILayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(LEntidad2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(Rclave_organo)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(41, Short.MAX_VALUE))
+            .addGroup(PanelILayout.createSequentialGroup()
+                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelILayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel4))
+                    .addGroup(PanelILayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jRadioButton2))
+                    .addGroup(PanelILayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LEntidad2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PanelILayout.setVerticalGroup(
             PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelILayout.createSequentialGroup()
+                .addGap(17, 17, 17)
                 .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(LEntidad2)
                     .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jRadioButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(Lname)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CTablas1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,17 +386,17 @@ public class PInsertTMP extends javax.swing.JFrame {
                 .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(CPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
-                .addGroup(PanelILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(Insertar1))
+                .addComponent(Insertar1)
                 .addGap(16, 16, 16)
                 .addComponent(Insertar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addGap(60, 60, 60))
         );
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ico/Logo Laborales.png"))); // NOI18N
@@ -416,24 +415,127 @@ public class PInsertTMP extends javax.swing.JFrame {
             .addGap(0, 7, Short.MAX_VALUE)
         );
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Seleccione BD"));
+
+        buttonGroup3.add(rbtnEstatal);
+        rbtnEstatal.setText("Estatal");
+        rbtnEstatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnEstatalActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(rbtnFederal);
+        rbtnFederal.setText("Federal");
+        rbtnFederal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnFederalActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnEstatal)
+                    .addComponent(rbtnFederal, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(rbtnEstatal)
+                .addGap(18, 18, 18)
+                .addComponent(rbtnFederal)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PVersiones.setBackground(new java.awt.Color(255, 255, 255));
+        PVersiones.setBorder(javax.swing.BorderFactory.createTitledBorder("Versiones"));
+
+        buttonGroup1.add(R1);
+        R1.setText("VERSION 1.0");
+        R1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R1ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(R2);
+        R2.setText("VERSION 2.0");
+        R2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R2ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(R3);
+        R3.setText("VERSION 3.0");
+        R3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R3ActionPerformed(evt);
+            }
+        });
+
+        R4.setText("VERSION 0.0");
+        R4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R4ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PVersionesLayout = new javax.swing.GroupLayout(PVersiones);
+        PVersiones.setLayout(PVersionesLayout);
+        PVersionesLayout.setHorizontalGroup(
+            PVersionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PVersionesLayout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addComponent(R1)
+                .addGap(51, 51, 51)
+                .addGroup(PVersionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PVersionesLayout.createSequentialGroup()
+                        .addComponent(R4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(PVersionesLayout.createSequentialGroup()
+                        .addComponent(R2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addComponent(R3)
+                        .addGap(54, 54, 54))))
+        );
+        PVersionesLayout.setVerticalGroup(
+            PVersionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PVersionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PVersionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(R1)
+                    .addComponent(R2)
+                    .addComponent(R3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(R4)
+                .addContainerGap())
+        );
+
+        R1.getAccessibleContext().setAccessibleDescription("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(R1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(R2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(R3)
-                .addContainerGap(125, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(PanelI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PVersiones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PanelI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -442,17 +544,14 @@ public class PInsertTMP extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(R1)
-                    .addComponent(R2)
-                    .addComponent(R3))
-                .addGap(18, 18, 18)
-                .addComponent(PanelI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PVersiones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PanelI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
-
-        R1.getAccessibleContext().setAccessibleDescription("");
 
         getAccessibleContext().setAccessibleParent(this);
 
@@ -582,6 +681,10 @@ public class PInsertTMP extends javax.swing.JFrame {
         new Thread(() -> {
             Valores();
             try {
+                if (Versiones.equals("0.0")) { // Federal
+                    insertarFederal();
+                    return;
+                }
                 
                 ReadCSV_Audiencias readAud=new ReadCSV_Audiencias();
                 ReadCSV_Control_Expediente readControl=new ReadCSV_Control_Expediente();
@@ -1157,50 +1260,197 @@ public class PInsertTMP extends javax.swing.JFrame {
         Valores();
     }//GEN-LAST:event_CorganoJurActionPerformed
 
-    
-    public void Valores(){
-          tabla=CTablas.getSelectedItem().toString();
-          rutaT=jTextField1.getText();
-          Periodo=CPeriodo.getText();
-           if (jRadioButton1.isSelected()){
-            Bandera=true;
-        }else
-           {
-              Bandera=false; 
-           }
-            if (jRadioButton2.isSelected()){
-           CarpetaArchivos=true;
-            }else{
-                CarpetaArchivos=false; 
-            }
+    private void rbtnEstatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnEstatalActionPerformed
+        // TODO add your handling code here:
+        if(rbtnEstatal.isSelected()){
+            R1.setVisible(true);
+            R2.setVisible(true);
+            R3.setVisible(true);
+            R4.setVisible(false);
+            PVersiones.setVisible(true);
+            BD="Estatal";
+            Centidad.removeAllItems();
+            CorganoJur.removeAllItems();
             
-             if(Rclave_organo.isSelected())
-        {
-            clave_entidad="";
-            clave_organo="";
-            clave_organo=CorganoJur.getSelectedItem().toString();
-            NMunicipio=LEntidad.getText();
-            NENTIDAD=LEntidad.getText();
-            tabla=CTablas.getSelectedItem().toString();
-            System.out.println("valoreeeees"+clave_organo+" "+clave_entidad+" "+Periodo+" "+tabla);
-          
+            CTablas1.setVisible(true);
+            Lname.setVisible(true);
+            jRadioButton1.setVisible(true);
+            CTablas.setVisible(true);
+            jLabel1.setVisible(true);
+            Rclave_entidad.setVisible(true);
+            Rclave_organo.setVisible(true);
+            CPeriodo.setVisible(true);
+            jLabel5.setVisible(true);
         }
-        else if (Rclave_entidad.isSelected()){
-            clave_entidad="";
-            clave_organo="";
-            clave_entidad=Centidad.getSelectedItem().toString();
-            NMunicipio=LEntidad.getText();
-            NENTIDAD=LEntidad.getText();
-            tabla=CTablas.getSelectedItem().toString();
-            System.out.println("valoreeeees"+clave_organo+" "+clave_entidad+" "+Periodo+" "+tabla);
-           
+    }//GEN-LAST:event_rbtnEstatalActionPerformed
+
+    private void rbtnFederalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFederalActionPerformed
+        if (rbtnFederal.isSelected()) {
+            if (!validarConexionFederal()) {
+                buttonGroup3.clearSelection();   // Desmarca Federal
+                Insertar.setEnabled(false);      // Opcional
+                return;
+            }
+            R1.setVisible(false);
+            R2.setVisible(false);
+            R3.setVisible(false);
+            R4.setVisible(true);
+
+            PVersiones.setVisible(true);
+            BD = "Federal";
+            Centidad.removeAllItems();
+            CorganoJur.removeAllItems();
+            R4ActionPerformed(null);
         }
-        System.out.println(tabla+ruta+Versiones);
+    }//GEN-LAST:event_rbtnFederalActionPerformed
+
+    private void R4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R4ActionPerformed
+        if (R4.isSelected()) {
+            Versiones = "0.0";
+
+            // Ocultar controles que no se utilizarán
+            CTablas1.setVisible(false);
+            Lname.setVisible(false);
+            jRadioButton1.setVisible(false);
+            CTablas.setVisible(false);
+            jLabel1.setVisible(false);
+            Rclave_entidad.setVisible(false);
+            Rclave_organo.setVisible(false);
+            CPeriodo.setVisible(false);
+            jLabel5.setVisible(false);
+
+            Jentidad.setVisible(false);
+            Centidad.setVisible(false);
+            Jorgano.setVisible(false);
+            CorganoJur.setVisible(false);
+            LEntidad.setVisible(false);
+            LEntidad2.setVisible(false);
+
+            lLCTablas();
+        }
+    }//GEN-LAST:event_R4ActionPerformed
+    public void Valores(){
+        rutaT = jTextField1.getText();
+
+        // ===== FEDERAL =====
+        if (Versiones.equals("0.0")) {
+            System.out.println("Ruta Federal: " + rutaT);
+            return;
+        }
+        
+        // ===== ESTATAL =====
+        tabla = CTablas.getSelectedItem().toString();
+        Periodo = CPeriodo.getText();
+
+        if (jRadioButton1.isSelected()) {
+            Bandera = true;
+        } else {
+            Bandera = false;
+        }
+        if (jRadioButton2.isSelected()) {
+            CarpetaArchivos = true;
+        } else {
+            CarpetaArchivos = false;
+        }
+
+        if (Rclave_organo.isSelected()) {
+            clave_entidad = "";
+            clave_organo = "";
+            clave_organo = CorganoJur.getSelectedItem().toString();
+            NMunicipio = LEntidad.getText();
+            NENTIDAD = LEntidad.getText();
+            tabla = CTablas.getSelectedItem().toString();
+            System.out.println("valoreeeees" + clave_organo + " " + clave_entidad + " " + Periodo + " " + tabla);
+
+        } else if (Rclave_entidad.isSelected()) {
+            clave_entidad = "";
+            clave_organo = "";
+            clave_entidad = Centidad.getSelectedItem().toString();
+            NMunicipio = LEntidad.getText();
+            NENTIDAD = LEntidad.getText();
+            tabla = CTablas.getSelectedItem().toString();
+            System.out.println("valoreeeees" + clave_organo + " " + clave_entidad + " " + Periodo + " " + tabla);
+
+        }
+        System.out.println(tabla + ruta + Versiones);
     }
     
-    public void lLCTablas(){
-       PanelI.setVisible(true);
-       
+    private boolean validarConexionFederal() {
+        Connection conTest = null;
+
+        try {
+            conTest = Conexion.OracleDAOFactoryFED.creaConexion();
+
+            if (conTest != null && !conTest.isClosed()) {
+                System.out.println("Conexion Federal confirmada -> ");
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al conectar con la BD Federal:\n" + ex.getMessage());
+        } finally {
+            if (conTest != null) {
+                try {
+                    conTest.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+
+        return false;
+    }
+    
+    private void insertarFederal() {
+        String directorio = jTextField1.getText();
+        if (directorio == null || directorio.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar la carpeta con los archivos CSV");
+            return;
+        }
+        int resp = JOptionPane.showConfirmDialog(null,
+                "¿Está seguro de insertar todos los archivos Federal?",
+                "Alerta!", JOptionPane.YES_NO_OPTION);
+        if (resp != JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ningún archivo");
+            return;
+        }
+
+        try {
+            QueryRalFed eliminaTMP = new QueryRalFed();
+            eliminaTMP.elimina_Federal_TMP();
+
+            ReadCSV_ControlExpediente_Fed readControlFed = new ReadCSV_ControlExpediente_Fed();
+            readControlFed.IN_CONTROL_EXPEDIENTE(directorio + "Control Expediente.csv"); 
+            ReadCSV_Audiencias_Fed readAudFed = new ReadCSV_Audiencias_Fed();
+            readAudFed.IN_AUDIENCIAS(directorio + "T.1.0_audiencias.csv");
+            ReadCSV_Ordinario_Fed readOrdFed = new ReadCSV_Ordinario_Fed();
+            readOrdFed.IN_ORDINARIO(directorio + "T.1.1_ordinario.csv"); 
+            ReadCSV_Individual_Fed readIndFed = new ReadCSV_Individual_Fed();
+            readIndFed.IN_INDIVIDUAL(directorio + "T.2.1_esp_indiv.csv"); 
+            ReadCSV_Colectivo_Fed readColFed = new ReadCSV_Colectivo_Fed();
+            readColFed.IN_COLECTIVO(directorio + "T.3.1_esp_colec.csv"); 
+            ReadCSV_Huelga_Fed readHuelFed = new ReadCSV_Huelga_Fed();
+            readHuelFed.IN_HUELGA(directorio + "T.4.1_huelga.csv"); 
+            ReadCSV_SegSocial_Fed readSegFed = new ReadCSV_SegSocial_Fed();
+            readSegFed.IN_SEG_SOCIAL(directorio + "T.5.1_seg_soc.csv"); 
+            ReadCSV_ColectivoEconomico_Fed readColEcoFed = new ReadCSV_ColectivoEconomico_Fed();
+            readColEcoFed.IN_COLECTIVO_ECONOMICO(directorio + "T.6.1_colec_nat_eco.csv"); 
+            ReadCSV_Paraprocesal_Fed readParFed = new ReadCSV_Paraprocesal_Fed();
+            readParFed.IN_PARAPROCESAL(directorio + "T.7.1_parapro.csv"); 
+            ReadCSV_Ejecucion_Fed readEjecFed = new ReadCSV_Ejecucion_Fed();
+            readEjecFed.IN_EJECUCION(directorio + "T.8.1_ejecu.csv"); 
+            Total_Insertados inser = new Total_Insertados();
+            inser.setVisible(true);
+
+        } catch (Exception ex) {
+            Logger.getLogger(PInsertTMP.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al insertar archivos Federal: " + ex.getMessage());
+        }
+    }
+    
+    public void lLCTablas() {
+        PanelI.setVisible(true);
+
        if (Versiones.equals("1.0"))
         {
             System.out.println(Versiones);     
@@ -1254,19 +1504,24 @@ public class PInsertTMP extends javax.swing.JFrame {
         testProc.add("PREFERENCIA_CREDITO");
         testProc.add("PARAPROCESAL");
         testProc.add("EJECUCION");
-        } 
+        }
+        if (Versiones.equals("0.0")) {
+            System.out.println(Versiones);
+            testList.clear();
+            testProc.clear();
+        }
          CTablas1.removeAllItems();
          
          for (int i=0;i<testProc.size();i++){
           TexProc=testProc.get(i).toString();
            CTablas1.addItem(TexProc);   
         } 
-        
-        
+         
+         
     }
+
     
   
-    
     
     
     
@@ -1321,23 +1576,29 @@ public class PInsertTMP extends javax.swing.JFrame {
     private javax.swing.JLabel LEntidad;
     private javax.swing.JLabel LEntidad2;
     private javax.swing.JLabel Lname;
+    private javax.swing.JPanel PVersiones;
     public static javax.swing.JPanel PanelI;
     private javax.swing.JRadioButton R1;
     private javax.swing.JRadioButton R2;
     private javax.swing.JRadioButton R3;
+    private javax.swing.JRadioButton R4;
     private javax.swing.JRadioButton Rclave_entidad;
     private javax.swing.JRadioButton Rclave_organo;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JRadioButton rbtnEstatal;
+    private javax.swing.JRadioButton rbtnFederal;
     // End of variables declaration//GEN-END:variables
 }

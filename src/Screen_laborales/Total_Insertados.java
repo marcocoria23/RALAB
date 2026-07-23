@@ -4,6 +4,7 @@
  */
 package Screen_laborales;
 
+import LeerQuery.QueryRalFed;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JTextPane;
@@ -31,6 +32,16 @@ import mx.org.BD.ReadCSV_Part_Dem_Individual;
 import mx.org.BD.ReadCSV_Part_Dem_Ordinario;
 import mx.org.BD.ReadCSV_Pref_Credito;
 import mx.org.BD.ReadCSV_Tercerias;
+import mx.org.BD.federal.ReadCSV_Audiencias_Fed;
+import mx.org.BD.federal.ReadCSV_ColectivoEconomico_Fed;
+import mx.org.BD.federal.ReadCSV_Colectivo_Fed;
+import mx.org.BD.federal.ReadCSV_ControlExpediente_Fed;
+import mx.org.BD.federal.ReadCSV_Ejecucion_Fed;
+import mx.org.BD.federal.ReadCSV_Huelga_Fed;
+import mx.org.BD.federal.ReadCSV_Individual_Fed;
+import mx.org.BD.federal.ReadCSV_Ordinario_Fed;
+import mx.org.BD.federal.ReadCSV_Paraprocesal_Fed;
+import mx.org.BD.federal.ReadCSV_SegSocial_Fed;
 import mx.org.querys.V3Querys;
 
 /**
@@ -89,6 +100,10 @@ public class Total_Insertados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if (PInsertTMP.Versiones.equals("0.0")) {
+            mostrarTotalesFederal();
+            return;
+        }
         ReadCSV_Audiencias readAud = new ReadCSV_Audiencias();
         ReadCSV_Control_Expediente readControl = new ReadCSV_Control_Expediente();
         ReadCSV_Ordinario readOrd = new ReadCSV_Ordinario();
@@ -171,6 +186,52 @@ public class Total_Insertados extends javax.swing.JFrame {
         e.printStackTrace();
     }
 }
+   
+    private void mostrarTotalesFederal() {
+
+        ReadCSV_ControlExpediente_Fed readControl = new ReadCSV_ControlExpediente_Fed();
+        ReadCSV_Audiencias_Fed readAudFed = new ReadCSV_Audiencias_Fed();
+        ReadCSV_Ordinario_Fed readOrd = new ReadCSV_Ordinario_Fed();
+        ReadCSV_Individual_Fed readInd = new ReadCSV_Individual_Fed();
+        ReadCSV_Colectivo_Fed readCol = new ReadCSV_Colectivo_Fed();
+        ReadCSV_Huelga_Fed readHuel = new ReadCSV_Huelga_Fed();
+        ReadCSV_SegSocial_Fed readSeg = new ReadCSV_SegSocial_Fed();
+        ReadCSV_ColectivoEconomico_Fed readEco = new ReadCSV_ColectivoEconomico_Fed();
+        ReadCSV_Paraprocesal_Fed readPar = new ReadCSV_Paraprocesal_Fed();
+        ReadCSV_Ejecucion_Fed readEjec = new ReadCSV_Ejecucion_Fed();
+
+        QueryRalFed q = new QueryRalFed();
+        ArrayList<String[]> ArrayResult = q.TRegistrosTMPFederal();
+        jTextPane1.setText("");
+
+        try {
+
+            StyledDocument doc = jTextPane1.getStyledDocument();
+
+            SimpleAttributeSet titulo = new SimpleAttributeSet();
+            StyleConstants.setForeground(titulo, Color.BLACK);
+            StyleConstants.setBold(titulo, true);
+
+            doc.insertString(doc.getLength(),
+                    "Total registros leídos de CSV VS TMP FEDERAL\n\n",
+                    titulo);
+
+            agregarRegistroColor(jTextPane1,"CSV_CONTROL_EXPEDIENTE", readControl.TotalRegistros, "TMP_FED_CONTROL_EXPEDIENTE", Integer.parseInt(ArrayResult.get(0)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_AUDIENCIAS", readAudFed.TotalRegistros, "TMP_FED_AUDIENCIAS", Integer.parseInt(ArrayResult.get(1)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_ORDINARIO", readOrd.TotalRegistros, "TMP_FED_ORDINARIO", Integer.parseInt(ArrayResult.get(2)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_INDIVIDUAL", readInd.TotalRegistros, "TMP_FED_INDIVIDUAL", Integer.parseInt(ArrayResult.get(3)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_COLECTIVO", readCol.TotalRegistros, "TMP_FED_COLECTIVO", Integer.parseInt(ArrayResult.get(4)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_HUELGA", readHuel.TotalRegistros, "TMP_FED_HUELGA", Integer.parseInt(ArrayResult.get(5)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_SEG_SOCIAL", readSeg.TotalRegistros, "TMP_FED_SEG_SOCIAL", Integer.parseInt(ArrayResult.get(6)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_COLECTIVO_ECONOMICO", readEco.TotalRegistros, "TMP_FED_COLECTIVO_ECONOMICO", Integer.parseInt(ArrayResult.get(7)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_PARAPROCESAL", readPar.TotalRegistros, "TMP_FED_PARAPROCESAL", Integer.parseInt(ArrayResult.get(8)[0]));
+            agregarRegistroColor(jTextPane1,"CSV_EJECUCION", readEjec.TotalRegistros, "TMP_FED_EJECUCION", Integer.parseInt(ArrayResult.get(9)[0]));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
     
     /**
      * @param args the command line arguments

@@ -5,6 +5,7 @@
  */
 package Screen_laborales;
 
+import LeerQuery.QueryRalFed;
 import static Screen_laborales.PInsertTMP.ventanaAbierta;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +34,7 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
     PInsertTMP PTMP = new PInsertTMP();
     String[] errorarray;
     String part0 = "", part1 = "", part2 = "", part3 = "", part4 = "", part5 = "", part6 = "", part7 = "", part8 = "";
+    QueryRalFed queryRalFed = new QueryRalFed();
 
     public Errores_InsertTMP() {
         initComponents();
@@ -354,6 +356,25 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        if (PInsertTMP.Versiones.equals("0.0")) {
+
+            jRadioButton1.setEnabled(true);
+            jRadioButton1.setSelected(true);
+
+            RBentidad.setVisible(false);
+            RBclaveorgano.setVisible(false);
+
+            Centidad.setVisible(false);
+            Cclaveorgano.setVisible(false);
+
+            Tperiodo.setVisible(false);
+            Bperiodo.setVisible(false);
+            jLabel4.setVisible(false);
+            Bborrar.setVisible(false);
+
+            return;
+        }
+        
         jRadioButton1.setSelected(true);
         Tperiodo.setText(PInsertTMP.Periodo);
         
@@ -451,6 +472,10 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
 
     private void BmostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BmostrarActionPerformed
         // TODO add your handling code here:
+        if (PInsertTMP.Versiones.equals("0.0")) {
+            mostrarErroresFederal00();
+            return;
+        }
       
         
         periodo = Tperiodo.getText();
@@ -638,6 +663,64 @@ public class Errores_InsertTMP extends javax.swing.JFrame {
             String Organo = (Arrays.toString(ArrayClave_organo.get(i)));
             Cclaveorgano.addItem(Organo.replace("[", "").replace("]", ""));
         }
+    }
+    
+    private void mostrarErroresFederal00() {
+        limpiarTabla();
+        new Thread(() -> {
+            jProgressBar1.setVisible(true);
+            jLabel5.setVisible(true);
+            jLabel3.setText("ALL_TABLES");
+            // Obtiene todos los errores
+            ArrayErroresIns = queryRalFed.TAllErroresInserFed();String[] tablas = {
+                "TMP_FED_CONTROL_EXPEDIENTE",
+                "TMP_FED_AUDIENCIAS",
+                "TMP_FED_ORDINARIO",
+                "TMP_FED_INDIVIDUAL",
+                "TMP_FED_COLECTIVO",
+                "TMP_FED_HUELGA",
+                "TMP_FED_SEG_SOCIAL",
+                "TMP_FED_COLECTIVO_ECONOMICO",
+                "TMP_FED_PARAPROCESAL",
+                "TMP_FED_EJECUCION"
+            };
+
+            AllTRegistrosInse = 0;
+            int progreso = 10;
+            for (String tabla : tablas) {
+                TRegistrosInse = queryRalFed.Total_Reg_insertadosFed(tabla);
+                AllTRegistrosInse += Integer.parseInt(TRegistrosInse);
+                jProgressBar1.setValue(progreso);
+                progreso += 10;
+            }
+            TRegistros = queryRalFed.AllTotal_Reg_NI_Fed();
+            label3.setText("Total Insertados: " + AllTRegistrosInse);
+            label2.setText("Total No Insertados: " + TRegistros);
+            label2.setVisible(true);
+            if (ArrayErroresIns.size() > 0) {
+                Bborrar.setVisible(true);
+                DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+                for (String[] fila : ArrayErroresIns) {
+                    modelo.addRow(new Object[]{
+                        fila[0],
+                        fila[1],
+                        fila[2],
+                        fila[3],
+                        fila[4],
+                        fila[5],
+                        fila[6]
+                    });
+                }
+            } else {
+                Bborrar.setVisible(false);
+                limpiarTabla();
+                JOptionPane.showMessageDialog(null,"No se encontraron registros con Error de insert","Mensaje",JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            jProgressBar1.setVisible(false);
+            jLabel5.setVisible(false);
+
+        }).start();
     }
 
     /**
