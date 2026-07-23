@@ -1652,15 +1652,14 @@ public class QNuevos {
         resul = conexion.consultar(sql);
         try {
             while (resul.next()) {
-                String fechaAP = resul.getString("FECHA_ACTO_PROCESAL");
+               /* String fechaAP = resul.getString("FECHA_ACTO_PROCESAL");
                 if (fechaAP != null && fechaAP.length() >= 10) {
                     String[] partesFecha = fechaAP.substring(0, 10).split("-");
                     fechaAP = partesFecha[2] + "/" + partesFecha[1] + "/" + partesFecha[0]; // DD/MM/YYYY
-                }
+                }*/
                 Array.add(new String[]{
                     resul.getString("CLAVE_ORGANO"),
                     resul.getString("EXPEDIENTE_CLAVE"),
-                    fechaAP,
                     resul.getString("COMENTARIOS")
                 });
             }
