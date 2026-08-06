@@ -1,5 +1,6 @@
 package Exportar_Valida;
 
+import LeerQuery.QueryRalabProd;
 import QuerysNuevosVal.QNuevos;
 import Screen_laborales.PValidacion;
 import static Screen_laborales.PValidacion.periodoAnt;
@@ -392,8 +393,8 @@ public class V3validaciones {
 
     public void ResumenNE(HSSFWorkbook libro, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCeldabordes0, String encabezado, HSSFCellStyle estiloCelda1) {
 
-        PValidacion validacion = new PValidacion();
-
+        
+PValidacion validacion = new PValidacion();
         HSSFRow row0 = hojaresumenval.createRow((short) 0);
         HSSFCell celda0 = row0.createCell((short) 0);
         celda0.setCellStyle(estiloCelda0);
@@ -10274,7 +10275,7 @@ public class V3validaciones {
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
-        ArrayResult = Ordinario.Fase_Sol_Preliminar();
+        ArrayResult = Ordinario.Fase_Sol_Preliminar();//AQUI
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
             HSSFRow fila00 = hojaresumenval.createRow(2);
@@ -43018,12 +43019,26 @@ Border border = BorderFactory.createTitledBorder("Cargando...Ejecucion");
     }
 
     public static void SaveFileTo(HSSFWorkbook libro, JProgressBar progressBar, JFrame frame) throws FileNotFoundException, IOException {
+        //validacion.clave_entidad.equals("")
         PValidacion validacion = new PValidacion();
+        QueryRalabProd prod=new QueryRalabProd();
+        String NARCHIVOFINAL="";
         String NombreEntidad = validacion.NENTIDAD;
         String Periodo = validacion.periodo.replace("/", "-");
+       
+        if (!validacion.clave_entidad.equals(""))
+        {
+            NARCHIVOFINAL="VAL-RALABE-"+validacion.clave_entidad+"-"+NombreEntidad.toUpperCase()+"-"+Periodo+"-"+"R#";
+        } 
+        if (!validacion.clave_organo.equals(""))
+        {
+            String NombreArchivoCO=prod.NombreArchivoClaveOrgano(validacion.clave_organo);
+            NARCHIVOFINAL="VAL-RALABE-"+NombreArchivoCO+"-"+Periodo+"-"+"R#";
+        } 
+        
         DataOutputStream h = null;
         FileDialog d = new FileDialog(new JFrame(), "Save", FileDialog.SAVE);
-        d.setFile(NombreEntidad + " " + Periodo + " R" + ".xls");
+        d.setFile(NARCHIVOFINAL);
         d.setVisible(true);
         String dir;
         dir = d.getDirectory();

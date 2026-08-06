@@ -37,6 +37,26 @@ public class QueryRalabProd {
     return Array;
  }
     
+      public String NombreArchivoClaveOrgano(String Clave_organo){
+     conexion.Conectar();
+      String nombre="";
+      sql="SELECT UNIQUE(NOMBRE_ARCHIVO) AS NOMBRE_ARCHIVO FROM(\n" +
+"SELECT CLAVE_ORGANO||'-'|| UPPER(MUNICIPIO_NOMBRE) AS NOMBRE_ARCHIVO FROM\n" +
+"V3_TR_CONTROL_EXPEDIENTEJL\n" +
+"WHERE CLAVE_ORGANO='"+Clave_organo+"')";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          if (resul.next()) {
+               nombre = resul.getString("NOMBRE_ARCHIVO");
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(FedV1Querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return nombre;
+ }
+    
      public ArrayList periodoEntidadBDPRODUCTOS(String Cve_entidad){
      conexion.Conectar();
       Array = new ArrayList();

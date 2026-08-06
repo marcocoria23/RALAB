@@ -805,7 +805,7 @@ new Thread(() -> {
                 LEntidad.setText("Campeche");
                 break;
             case "05":
-                LEntidad.setText("Coahuila de Zaragoza");
+                LEntidad.setText("Coahuila");
                 break;
             case "06":
                 LEntidad.setText("Colima");
@@ -838,7 +838,7 @@ new Thread(() -> {
                 LEntidad.setText("México");
                 break;
             case "16":
-                LEntidad.setText("Michoacán de Ocampo");
+                LEntidad.setText("Michoacán");
                 break;
             case "17":
                 LEntidad.setText("Morelos");
@@ -880,7 +880,7 @@ new Thread(() -> {
                 LEntidad.setText("Tlaxcala");
                 break;
             case "30":
-                LEntidad.setText("Veracruz de Ignacio de la Llave");
+                LEntidad.setText("Veracruz");
                 break;
             case "31":
                 LEntidad.setText("Yucatán");
