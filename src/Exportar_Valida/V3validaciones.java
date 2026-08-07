@@ -43028,12 +43028,12 @@ Border border = BorderFactory.createTitledBorder("Cargando...Ejecucion");
        
         if (!validacion.clave_entidad.equals(""))
         {
-            NARCHIVOFINAL="VAL-RALABE-"+validacion.clave_entidad+"-"+NombreEntidad.toUpperCase()+"-"+Periodo+"-"+"R#";
+            NARCHIVOFINAL="VAL-OC-RALABE-"+validacion.clave_entidad+"-"+NombreEntidad.toUpperCase()+"-"+Periodo+"-"+"R#";
         } 
         if (!validacion.clave_organo.equals(""))
         {
             String NombreArchivoCO=prod.NombreArchivoClaveOrgano(validacion.clave_organo);
-            NARCHIVOFINAL="VAL-RALABE-"+NombreArchivoCO+"-"+Periodo+"-"+"R#";
+            NARCHIVOFINAL="VAL-OC-RALABE-"+NombreArchivoCO+"-"+Periodo+"-"+"R#";
         } 
         
         DataOutputStream h = null;
