@@ -85,7 +85,7 @@ public class V3validaciones {
 
     ArrayList<String[]> ArrayResult;
     String[] parts;
-    String parts0 = "", parts1 = "", parts2 = "", partsfechas = "", Texto = "", Texto1 = "";
+    String parts0 = "", parts1 = "", parts2 = "", partsfechas = "", Texto = "", Texto1 = "",Con1="",Con2="";
     Progreso pro = new Progreso();
     JFrame f = new JFrame("Progreso Exporta .xls");
 
@@ -366,32 +366,41 @@ public class V3validaciones {
         hoja17.setColumnWidth((short) 2, (short) 6000);
         hoja17.setColumnWidth((short) 3, (short) 6000);
         hoja17.setColumnWidth((short) 4, (short) 30000);
-
-        ResumenNE(libro, hojaresumenval, estiloCelda0, estiloCeldabordes0, encabezado, estiloCelda1);
-        Desglose(libro, hoja0, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Control_Expediente(libro, hojaControl_expe, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar);
-        Despliega_Audiencias(libro, hojaAudiencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar);
-        Despliega_OrdinarioNE(libro, hoja1, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Part_Act_Ordinario(libro, hoja2, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_Part_Dem_Ordinario(libro, hoja3, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_IndividualNE(libro, hoja4, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Part_Act_Individual(libro, hoja5, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_Part_Dem_Individual(libro, hoja6, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_ColectivoNE(libro, hoja7, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Part_Act_Colectivo(libro, hoja8, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_Part_Dem_Colectivo(libro, hoja9, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_HuelgaNE(libro, hoja10, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Part_Act_Huelga(libro, hoja11, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_Part_dem_Huelga(libro, hoja12, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_Colect_EconomNE(libro, hoja13, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Part_Act_Nat_econo(libro, hoja14, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_Part_Dem_Nat_econo(libro, hoja15, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar);
-        Despliega_ParaprocesalNE(libro, hoja16, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
-        Despliega_Ejecucion(libro, hoja17, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar);
+        PValidacion val=new PValidacion();
+        if (val.PValProd.equals(""))
+        {
+           Con1="V3_";
+           Con2="JL";
+        }else{
+            
+        }
+        
+        
+        ResumenNE(libro, hojaresumenval, estiloCelda0, estiloCeldabordes0, encabezado, estiloCelda1,Con1,Con2);
+        Desglose(libro, hoja0, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
+        Despliega_Control_Expediente(libro, hojaControl_expe, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar,Con1,Con2);
+        Despliega_Audiencias(libro, hojaAudiencias, estiloCelda0, estiloCelda1, estiloCeldabordes0, progressBar,Con1,Con2);
+        Despliega_OrdinarioNE(libro, hoja1, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
+        Despliega_Part_Act_Ordinario(libro, hoja2, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_Part_Dem_Ordinario(libro, hoja3, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_IndividualNE(libro, hoja4, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
+        Despliega_Part_Act_Individual(libro, hoja5, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_Part_Dem_Individual(libro, hoja6, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_ColectivoNE(libro, hoja7, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
+        Despliega_Part_Act_Colectivo(libro, hoja8, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_Part_Dem_Colectivo(libro, hoja9, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_HuelgaNE(libro, hoja10, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
+        Despliega_Part_Act_Huelga(libro, hoja11, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_Part_dem_Huelga(libro, hoja12, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_Colect_EconomNE(libro, hoja13, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
+        Despliega_Part_Act_Nat_econo(libro, hoja14, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_Part_Dem_Nat_econo(libro, hoja15, estiloCelda0, estiloCelda1, estiloCeldabordes0, estiloCelda2, progressBar,Con1,Con2);
+        Despliega_ParaprocesalNE(libro, hoja16, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
+        Despliega_Ejecucion(libro, hoja17, hojaresumenval, estiloCelda0, estiloCelda1, estiloCeldabordes0, PAmarillo, progressBar,Con1,Con2);
         SaveFileTo(libro, progressBar, f);
     }
 
-    public void ResumenNE(HSSFWorkbook libro, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCeldabordes0, String encabezado, HSSFCellStyle estiloCelda1) {
+    public void ResumenNE(HSSFWorkbook libro, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCeldabordes0, String encabezado, HSSFCellStyle estiloCelda1,String Con1,String Con2) {
 
         
 PValidacion validacion = new PValidacion();
@@ -547,7 +556,7 @@ PValidacion validacion = new PValidacion();
 
     }
 
-    public void Desglose(HSSFWorkbook libro, HSSFSheet hoja0, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Desglose(HSSFWorkbook libro, HSSFSheet hoja0, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
         int fila = 3;
         V3QDesgloses Desgloses = new V3QDesgloses();
         Border border = BorderFactory.createTitledBorder("Cargando...Desgloses");
@@ -572,7 +581,7 @@ PValidacion validacion = new PValidacion();
         celda1.setCellValue(texto1);
         fila1.setHeight((short) 500);
 
-        ArrayResult = Desgloses.Desglose_OrdinarioNE();
+        ArrayResult = Desgloses.Desglose_OrdinarioNE(Con1,Con2);
         for (int i = 0; i < ArrayResult.size(); i++) {
             HSSFRow fila21 = hoja0.createRow(3 + i);//FILA
             HSSFCell celda21 = fila21.createCell((short) 1);//COLUMNA
@@ -1473,7 +1482,7 @@ PValidacion validacion = new PValidacion();
 
     }
 
-    public void Despliega_Control_Expediente(HSSFWorkbook libro, HSSFSheet hojaControl_expe, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, JProgressBar progressBar) {
+    public void Despliega_Control_Expediente(HSSFWorkbook libro, HSSFSheet hojaControl_expe, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, JProgressBar progressBar,String Con1,String Con2) {
         V3Control_expediente CE = new V3Control_expediente();
         int conEnc = 1, conDat = 2, coni = 1;
         //fecha de admision de la demanda
@@ -1924,7 +1933,7 @@ PValidacion validacion = new PValidacion();
         progressBar.setValue(10);
     }
 
-    public void Despliega_Audiencias(HSSFWorkbook libro, HSSFSheet hojaAudiencias, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, JProgressBar progressBar) {
+    public void Despliega_Audiencias(HSSFWorkbook libro, HSSFSheet hojaAudiencias, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, JProgressBar progressBar,String Con1,String Con2) {
         V3_Audiencias NNV3_Audiencias = new V3_Audiencias();
         V3QAudiencias Audiencias = new V3QAudiencias();
 
@@ -3813,7 +3822,7 @@ PValidacion validacion = new PValidacion();
         progressBar.setValue(15);
     }
 
-    public void Despliega_OrdinarioNE(HSSFWorkbook libro, HSSFSheet hoja1, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Despliega_OrdinarioNE(HSSFWorkbook libro, HSSFSheet hoja1, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
 
         V3QOrdinario Ordinario = new V3QOrdinario();
         V3Ordinario NNOrdinario = new V3Ordinario();
@@ -10950,7 +10959,7 @@ PValidacion validacion = new PValidacion();
         progressBar.setValue(20);
     }
 
-    public void Despliega_Part_Act_Ordinario(HSSFWorkbook libro, HSSFSheet hoja2, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Act_Ordinario(HSSFWorkbook libro, HSSFSheet hoja2, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_act_ordinario Part_ordinarioNE = new V3QPart_act_ordinario();
         V3Part_Act_ordinario NNPart_Act_ordinario = new V3Part_Act_ordinario();
         Border border = BorderFactory.createTitledBorder("Cargando...Part Act Ordinario");
@@ -11751,7 +11760,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(25);
     }
 
-    public void Despliega_Part_Dem_Ordinario(HSSFWorkbook libro, HSSFSheet hoja3, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Dem_Ordinario(HSSFWorkbook libro, HSSFSheet hoja3, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_dem_ordinario Part_ordinarioNE = new V3QPart_dem_ordinario();
         V3Part_Dem_ordinario NNPart_Dem_ordinario = new V3Part_Dem_ordinario();
         Border border = BorderFactory.createTitledBorder("Cargando...Part Dem Ordinario");
@@ -12463,7 +12472,7 @@ if (ArrayResult.size() > 0) {
 
     }
 
-    public void Despliega_IndividualNE(HSSFWorkbook libro, HSSFSheet hoja4, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Despliega_IndividualNE(HSSFWorkbook libro, HSSFSheet hoja4, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
 
         V3QIndividual Individual = new V3QIndividual();
         V3Individual NNindividual = new V3Individual();
@@ -19118,7 +19127,7 @@ if (ArrayResult.size() > 0) {
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
-        int[] contadores = bloqueValidacionesNuevas(hoja4, estiloCelda1, estiloCeldabordes0, Q, conEnc, conDat, coni);
+        int[] contadores = bloqueValidacionesNuevas(hoja4, estiloCelda1, estiloCeldabordes0, Q, conEnc, conDat, coni,Con1,Con2);
         conEnc = contadores[0];
         conDat = contadores[1];
         coni = contadores[2];
@@ -19126,7 +19135,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(35);
     }
 
-    private int[] bloqueValidacionesNuevas(HSSFSheet hoja4, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, QNuevos Q, int conEnc, int conDat, int coni) {
+    private int[] bloqueValidacionesNuevas(HSSFSheet hoja4, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, QNuevos Q, int conEnc, int conDat, int coni,String Con1,String Con2) {
 
         ArrayResult = Q.Individual_FaseSolTSA(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo);
         if (ArrayResult.size() > 0) {
@@ -20111,7 +20120,7 @@ if (ArrayResult.size() > 0) {
         return new int[]{conEnc, conDat, coni};
     }
 
-    public void Despliega_Part_Act_Individual(HSSFWorkbook libro, HSSFSheet hoja5, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Act_Individual(HSSFWorkbook libro, HSSFSheet hoja5, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_act_individual Part_individualNE = new V3QPart_act_individual();
         V3Part_Act_individual NNV3Part_Act_individual = new V3Part_Act_individual();
         Border border = BorderFactory.createTitledBorder("Cargando...Par Act Individual");
@@ -20718,7 +20727,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(40);
     }
 
-    public void Despliega_Part_Dem_Individual(HSSFWorkbook libro, HSSFSheet hoja6, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Dem_Individual(HSSFWorkbook libro, HSSFSheet hoja6, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_dem_individual Part_individualNE = new V3QPart_dem_individual();
         V3Part_Dem_individual NNPart_Dem_individual = new V3Part_Dem_individual();
         Border border = BorderFactory.createTitledBorder("Cargando...Par Dem Individual");
@@ -21423,7 +21432,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(45);
     }
 
-    public void Despliega_ColectivoNE(HSSFWorkbook libro, HSSFSheet hoja7, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Despliega_ColectivoNE(HSSFWorkbook libro, HSSFSheet hoja7, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
 
         V3QColectivo Colectivo = new V3QColectivo();
         V3Colectivo NNColectivo = new V3Colectivo();
@@ -26928,7 +26937,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(50);
     }
 
-    public void Despliega_Part_Act_Colectivo(HSSFWorkbook libro, HSSFSheet hoja8, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Act_Colectivo(HSSFWorkbook libro, HSSFSheet hoja8, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_act_colectivo Part_colectivoNE = new V3QPart_act_colectivo();
         V3Part_Act_colectivo NNPart_Act_colectivo = new V3Part_Act_colectivo();
         Border border = BorderFactory.createTitledBorder("Cargando...Part Act Colectivo");
@@ -27691,7 +27700,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(55);
     }
 
-    public void Despliega_Part_Dem_Colectivo(HSSFWorkbook libro, HSSFSheet hoja9, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Dem_Colectivo(HSSFWorkbook libro, HSSFSheet hoja9, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_dem_colectivo Part_colectivoNE = new V3QPart_dem_colectivo();
         V3Part_Dem_colectivo NNV3Part_Dem_colectivo = new V3Part_Dem_colectivo();
         Border border = BorderFactory.createTitledBorder("Cargando...Part Dem Colectivo");
@@ -28641,7 +28650,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(60);
     }
 
-    public void Despliega_HuelgaNE(HSSFWorkbook libro, HSSFSheet hoja10, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Despliega_HuelgaNE(HSSFWorkbook libro, HSSFSheet hoja10, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
         V3QHuelga Huelga = new V3QHuelga();
         V3Huelga NNHuelga = new V3Huelga();
         QNuevos Q = new QNuevos();
@@ -34239,7 +34248,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(65);
     }
 
-    public void Despliega_Part_Act_Huelga(HSSFWorkbook libro, HSSFSheet hoja11, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Act_Huelga(HSSFWorkbook libro, HSSFSheet hoja11, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_act_huelga Part_huelgaNE = new V3QPart_act_huelga();
         V3Part_Act_huelga NNV3Part_Act_huelga = new V3Part_Act_huelga();
         Border border = BorderFactory.createTitledBorder("Cargando...Par Act Huelga");
@@ -34817,7 +34826,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(65);
     }
 
-    public void Despliega_Part_dem_Huelga(HSSFWorkbook libro, HSSFSheet hoja12, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_dem_Huelga(HSSFWorkbook libro, HSSFSheet hoja12, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_dem_huelga Part_huelgaNE = new V3QPart_dem_huelga();
         V3Part_Dem_huelga NNV3Part_Dem_huelga = new V3Part_Dem_huelga();
         Border border = BorderFactory.createTitledBorder("Cargando...Par Dem Huelga");
@@ -35302,7 +35311,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(70);
     }
 
-    public void Despliega_Colect_EconomNE(HSSFWorkbook libro, HSSFSheet hoja13, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Despliega_Colect_EconomNE(HSSFWorkbook libro, HSSFSheet hoja13, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
 
         V3QColec_Econom Economico = new V3QColec_Econom();
         V3Colect_Econom Colect = new V3Colect_Econom();
@@ -39270,7 +39279,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(75);
     }
 
-    public void Despliega_Part_Act_Nat_econo(HSSFWorkbook libro, HSSFSheet hoja14, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Act_Nat_econo(HSSFWorkbook libro, HSSFSheet hoja14, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_act_nat_eco Part_nat_ecoNE = new V3QPart_act_nat_eco();
         Border border = BorderFactory.createTitledBorder("Cargando...Part Act Colectivo Economico");
         progressBar.setBorder(border);
@@ -39568,7 +39577,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(80);
     }
 
-    public void Despliega_Part_Dem_Nat_econo(HSSFWorkbook libro, HSSFSheet hoja15, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar) {
+    public void Despliega_Part_Dem_Nat_econo(HSSFWorkbook libro, HSSFSheet hoja15, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle estiloCelda2, JProgressBar progressBar,String Con1,String Con2) {
         V3QPart_dem_nat_eco Part_nat_ecoNE = new V3QPart_dem_nat_eco();
         Border border = BorderFactory.createTitledBorder("Cargando...Part Dem Colectivo Economico");
         progressBar.setBorder(border);
@@ -39866,7 +39875,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(85);
     }
 
-    public void Despliega_ParaprocesalNE(HSSFWorkbook libro, HSSFSheet hoja16, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Despliega_ParaprocesalNE(HSSFWorkbook libro, HSSFSheet hoja16, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
 
         V3QParaprocesal Paraprocesal = new V3QParaprocesal();
         V3Paraprocesal NNParaprocesal = new V3Paraprocesal();
@@ -41688,7 +41697,7 @@ if (ArrayResult.size() > 0) {
         progressBar.setValue(90);
     }
 
-    public void Despliega_Ejecucion(HSSFWorkbook libro, HSSFSheet hoja17, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar) {
+    public void Despliega_Ejecucion(HSSFWorkbook libro, HSSFSheet hoja17, HSSFSheet hojaresumenval, HSSFCellStyle estiloCelda0, HSSFCellStyle estiloCelda1, HSSFCellStyle estiloCeldabordes0, HSSFCellStyle PAmarillo, JProgressBar progressBar,String Con1,String Con2) {
         V3QEjecucion Ejecucion = new V3QEjecucion();
         V3Ejecucion NNEjecucion = new V3Ejecucion();
         QNuevos Q = new QNuevos();

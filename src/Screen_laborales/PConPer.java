@@ -134,6 +134,10 @@ if((validacion.version.equals("Estructura_Definitiva") && (validacion.BD.equals(
 {    
 ArrayPeriodo=EDQuerys.PeriodoNE(validacion.clave_organo,validacion.clave_entidad);
 }
+if(validacion.PValProd.equals("BD_PROD")){
+   ArrayPeriodo= V3queryNE.PeriodoNEProductos(validacion.clave_organo,validacion.clave_entidad);
+}
+
 /*
 if((validacion.version.equals("Estructura_Definitiva") && (validacion.BD.equals("Estatal"))) || (tmp.Versiones.equals("V3")) || (tr.Versiones.equals("3.0")) || (PAcum.Versiones.equals("3.0")) || (clean.Versiones.equals("3.0")) )
 {    

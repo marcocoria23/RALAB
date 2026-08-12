@@ -26,11 +26,11 @@ ArrayList<String[]> Array;
 ResultSet resul;    
 
 // Diferencia entre el total de expedientes ordinario vs el desglose de expedientes en procedimiento ordinario.
-public ArrayList Desglose_OrdinarioNE(){
+public ArrayList Desglose_OrdinarioNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select prin.clave_organo clave_organo,Ordinario,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_ordinariojl sec\n" +
+      "left join "+Con1+"TR_ordinario"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,ordinario ORDER BY clave_organo";

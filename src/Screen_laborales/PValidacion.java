@@ -30,7 +30,7 @@ import mx.org.querys.federal.FedV1Querys;
  */
 public class PValidacion extends javax.swing.JFrame {
 
-public static String version="",versionF="",BD="",clave_entidad="",clave_organo="",periodo="",periodoAnt="",NMunicipio="",FechaJI="",FechaJF="",AñoJuridico="",NENTIDAD="";//variables publicas
+public static String version="",versionF="",BD="",clave_entidad="",clave_organo="",periodo="",periodoAnt="",NMunicipio="",FechaJI="",FechaJF="",AñoJuridico="",NENTIDAD="",PValProd="";//variables publicas
 public static int Maximo=0;
 String Clave_organo;
  ArrayList<String[]> ArrayClave_organo,ArrayClave_entidad;
@@ -111,6 +111,7 @@ String Clave_organo;
         Rver2 = new javax.swing.JRadioButton();
         Rver3 = new javax.swing.JRadioButton();
         Rver4 = new javax.swing.JRadioButton();
+        RProd = new javax.swing.JRadioButton();
         JL1 = new javax.swing.JLabel();
         JT1 = new javax.swing.JTextField();
         JT2 = new javax.swing.JTextField();
@@ -387,6 +388,14 @@ String Clave_organo;
             }
         });
 
+        buttonGroup2.add(RProd);
+        RProd.setText("BD Productos");
+        RProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RProdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PversionesLayout = new javax.swing.GroupLayout(Pversiones);
         Pversiones.setLayout(PversionesLayout);
         PversionesLayout.setHorizontalGroup(
@@ -395,11 +404,14 @@ String Clave_organo;
                 .addGap(31, 31, 31)
                 .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Rver3)
-                    .addComponent(Rver2)
                     .addGroup(PversionesLayout.createSequentialGroup()
-                        .addComponent(Rver1)
+                        .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Rver1)
+                            .addComponent(Rver2))
                         .addGap(42, 42, 42)
-                        .addComponent(Rver4)))
+                        .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RProd, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Rver4))))
                 .addContainerGap(255, Short.MAX_VALUE))
         );
         PversionesLayout.setVerticalGroup(
@@ -410,7 +422,9 @@ String Clave_organo;
                     .addComponent(Rver1)
                     .addComponent(Rver4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Rver2)
+                .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Rver2)
+                    .addComponent(RProd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Rver3)
                 .addContainerGap(14, Short.MAX_VALUE))
@@ -600,6 +614,10 @@ String Clave_organo;
         {
         ArrayClave_organo=V1FedQuerys.Clave_organoNE();    
         } 
+        if (RProd.isSelected())
+        {
+             ArrayClave_organo=V3queryNE.Clave_organoNEProductos();    
+        }
          CorganoJur.removeAllItems();
          for (int i=0;i<ArrayClave_organo.size();i++){
           String Organo=(Arrays.toString(ArrayClave_organo.get(i)));
@@ -630,7 +648,10 @@ String Clave_organo;
         {
         ArrayClave_entidad=V1FedQuerys.EntidadNE();    
         }
-        
+         if (RProd.isSelected())
+        {
+             ArrayClave_entidad=V3queryNE.EntidadNEProductos();    
+        }
          Centidad.removeAllItems();
          for (int i=0;i<ArrayClave_entidad.size();i++){
           String Organo=(Arrays.toString(ArrayClave_entidad.get(i)));
@@ -724,7 +745,14 @@ String Clave_organo;
             NMunicipio=LEntidad.getText();
             NENTIDAD=LEntidad.getText();
             System.out.println(clave_entidad+"+"+clave_organo+"+"+periodo+"+"+FechaJI+"+"+FechaJF+"+"+AñoJuridico);
+        }   
+        if (RProd.isSelected()){
+            PValProd="BD_PROD";
         }
+        else{
+            PValProd="";
+        }
+        
     }
     
     //boton de validacion al dar click corre clase V1Validaciones,V2Validaciones o V3validaciones segun la version seleccionada
@@ -1095,6 +1123,18 @@ public void NEntidad_COrgano(){
         // TODO add your handling code here:
     }//GEN-LAST:event_Textoperiodo1ActionPerformed
 
+    private void RProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RProdActionPerformed
+        // TODO add your handling code here:
+         if(RProd.isSelected()){
+            PAgrupamiento.setVisible(true);
+           version="";
+           version="3.0";
+           //PValProd="BD_PROD";
+             llenaCombo();
+             llenaComboEntidad();
+        }
+    }//GEN-LAST:event_RProdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1146,6 +1186,7 @@ public void NEntidad_COrgano(){
     public static javax.swing.JLabel Lable;
     public javax.swing.JPanel PAgrupamiento;
     public static javax.swing.JPanel Pversiones;
+    private javax.swing.JRadioButton RProd;
     private javax.swing.JRadioButton Rclave_entidad;
     private javax.swing.JRadioButton Rclave_organo;
     private javax.swing.JRadioButton Rver1;

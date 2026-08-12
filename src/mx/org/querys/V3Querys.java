@@ -51,6 +51,27 @@ public ArrayList PeriodoNE(String clave_organo,String entidad){
     return Array;
  }
 
+//Query  para el despliegue del periodo unico mandandolo a llamar a la pantalla con nombre PValidacion.
+public ArrayList PeriodoNEProductos(String clave_organo,String entidad){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="select unique(PERIODO)PERIODO from TR_control_expediente where clave_organo='"+clave_organo+"' or substr(clave_organo,0,2)='"+entidad+"' "
+              + " order by 1";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("PERIODO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+
 public ArrayList PeriodoNEstatus(){
      conexion.Conectar();
       Array = new ArrayList();
@@ -76,6 +97,27 @@ public ArrayList PeriodoNEstatus(){
       sql="select unique(CLAVE_ORGANO)as CLAVE_ORGANO from V3_TR_CONTROL_EXPEDIENTEJL\n" +
            "UNION\n" +
            "select unique(CLAVE_ORGANO) as CLAVE_ORGANO from V3_TMP_CONTROL_EXPEDIENTEJL ORDER BY 1";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("CLAVE_ORGANO")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+     
+      //Query  para el despliegue de la clave de organo unica estas claves se mandan a llamar a la pantalla con nombre PValidacion.
+     public ArrayList Clave_organoNEProductos(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="select unique(CLAVE_ORGANO)as CLAVE_ORGANO from TR_CONTROL_EXPEDIENTE\n" +
+           " ORDER BY 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
@@ -136,6 +178,26 @@ public ArrayList PeriodoNEstatus(){
      conexion.Conectar();
       Array = new ArrayList();
       sql="select unique(substr(clave_organo,0,2)) Entidad from V3_TR_control_expedientejl order by 1";
+      System.out.println(sql);
+      resul=conexion.consultar(sql);
+      try {
+          while (resul.next()) {
+              Array.add(new String[]{
+                  resul.getString("Entidad")
+                });
+          }
+      conexion.close();
+     } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return Array;
+ }
+   
+      //Query  para el despliegue de la entidad=substr(clave_organo,0,2) mandandolo a llamar a la pantalla con nombre PValidacion. 
+   public ArrayList EntidadNEProductos(){
+     conexion.Conectar();
+      Array = new ArrayList();
+      sql="select unique(substr(clave_organo,0,2)) Entidad from TR_control_expediente order by 1";
       System.out.println(sql);
       resul=conexion.consultar(sql);
       try {
