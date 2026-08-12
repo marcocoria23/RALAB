@@ -29,10 +29,10 @@ ResultSet resul;
 
 
 //Tipo de asunto no debe de ser =9 No_identificado o Null.
-public ArrayList Tipo_Asunto(){
+public ArrayList Tipo_Asunto(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_ASUNTO,'9','No_identificado') TIPO_ASUNTO,PERIODO from V3_TR_HUELGAJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_ASUNTO,'9','No_identificado') TIPO_ASUNTO,PERIODO from "+Con1+"TR_HUELGA"+Con2+"\n" +
 "WHERE (TIPO_ASUNTO =9 AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       System.out.println(sql);
@@ -55,10 +55,10 @@ public ArrayList Tipo_Asunto(){
 
 
 ////Cuando ¿Hubo emplazamiento a huelga? =No o No identificado, no debe de capturarse Fecha del emplazamiento a huelga.
-public ArrayList Emplaz_huelga(){
+public ArrayList Emplaz_huelga(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(EMPLAZAMIENTO_HUELGA,'2','No','9','No identificado') EMPLAZAMIENTO_HUELGA,PERIODO FROM V3_TR_HUELGAJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(EMPLAZAMIENTO_HUELGA,'2','No','9','No identificado') EMPLAZAMIENTO_HUELGA,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" \n" +
 "WHERE (EMPLAZAMIENTO_HUELGA in (2,9)  AND (FECHA_EMPLAZAMIENTO IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -81,10 +81,10 @@ public ArrayList Emplaz_huelga(){
 
 
 ////Cuando ¿Hubo prehuelga? =No o No identificado, no debe de capturarse ¿Hubo audiencia de conciliación? ni Fecha de audiencia de conciliación.
-public ArrayList Preghuelga(){
+public ArrayList Preghuelga(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(PREHUELGA,'2','No','9','No identificado') PREHUELGA,PERIODO FROM V3_TR_HUELGAJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(PREHUELGA,'2','No','9','No identificado') PREHUELGA,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" \n" +
 "WHERE (PREHUELGA in (2,9)  AND (AUDIENCIA_CONCILIACION IS NOT NULL or FECHA_AUDIENCIA is not null) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -106,10 +106,10 @@ public ArrayList Preghuelga(){
 
 
 ////Cuando ¿Hubo audiencia de conciliación? =No o No identificado, no debe de capturarse Fecha de audiencia de conciliación.
-public ArrayList Aud_conciliacion(){
+public ArrayList Aud_conciliacion(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(AUDIENCIA_CONCILIACION,'2','No','9','No identificado') AUDIENCIA_CONCILIACION,PERIODO FROM V3_TR_HUELGAJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(AUDIENCIA_CONCILIACION,'2','No','9','No identificado') AUDIENCIA_CONCILIACION,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" \n" +
 "WHERE (PREHUELGA in (1)  AND (AUDIENCIA_CONCILIACION in (2,9) and  FECHA_AUDIENCIA is not null) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -130,10 +130,10 @@ public ArrayList Aud_conciliacion(){
  }
 
 ////Cuando ¿Hubo estallamiento de la huelga?=No o No identificado, no debe de capturarse Declaración de licitud de la huelga,Declaración de existencia de la huelga.
-public ArrayList Estallamiento_huelga(){
+public ArrayList Estallamiento_huelga(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTALLAMIENTO_HUELGA,'2','No','9','No identificado') ESTALLAMIENTO_HUELGA,PERIODO FROM V3_TR_HUELGAJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTALLAMIENTO_HUELGA,'2','No','9','No identificado') ESTALLAMIENTO_HUELGA,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" \n" +
 "WHERE (ESTALLAMIENTO_HUELGA in (2,9)  AND (DECLARA_LICITUD_HUELGA IS NOT NULL or DECLARA_EXISTEN_HUELGA is not null) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -156,10 +156,10 @@ public ArrayList Estallamiento_huelga(){
 
 
 //--Estatus del expediente no debe de ser 9=No_identificado.
-public ArrayList Estatus_ExpedienteNI (){
+public ArrayList Estatus_ExpedienteNI (String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,'9','No_identificado') ESTATUS_EXPEDIENTE,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from V3_TR_HUELGAJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,'9','No_identificado') ESTATUS_EXPEDIENTE,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from "+Con1+"TR_HUELGA"+Con2+"\n" +
 "WHERE (ESTATUS_EXPEDIENTE =9 AND(SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       System.out.println(sql);
@@ -186,11 +186,11 @@ public ArrayList Estatus_ExpedienteNI (){
 
 
 ///INCOMPETENCIA NO DEBE SER = NO IDENTIFICADA
-public ArrayList IncompetenciaNI(){
+public ArrayList IncompetenciaNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select * from(\n" +
-"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from V3_TR_HUELGAJL\n" +
+"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from "+Con1+"TR_HUELGA"+Con2+"\n" +
 " where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"')where incompetencia=9"; 
       System.out.println(sql);
@@ -215,12 +215,12 @@ public ArrayList IncompetenciaNI(){
 
 
 ///INCOMPETENCIA NO DEBE SER = NO IDENTIFICADA
-public ArrayList Tipo_IncompetenciaNI(){
+public ArrayList Tipo_IncompetenciaNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select * from(\n" +
 " SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(INCOMPETENCIA,'2','No') INCOMPETENCIA,TIPO_INCOMPETENCIA,PERIODO FROM V3_TR_HUELGAJL WHERE INCOMPETENCIA=2)\n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(INCOMPETENCIA,'2','No') INCOMPETENCIA,TIPO_INCOMPETENCIA,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" WHERE INCOMPETENCIA=2)\n" +
 "WHERE TIPO_INCOMPETENCIA IS NOT NULL  \n" +
 " )where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'"; 
@@ -245,12 +245,12 @@ public ArrayList Tipo_IncompetenciaNI(){
 
 
 //INCOMPETENCIA =SI NO DEBE DE CAPTURAR DESPUES DE ESPECIFIQUE OTRO INCOMPETENCIA
-public ArrayList PivIncompetencia(){
+public ArrayList PivIncompetencia(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from V3_TR_HUELGAJL\n" +
+"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from "+Con1+"TR_HUELGA"+Con2+"\n" +
 "WHERE  FECHA_PRESENTA_PETIC IS NOT NULL OR CANTIDAD_ACTORES IS NOT NULL OR CANTIDAD_DEMANDADOS IS NOT NULL OR\n" +
 "EMPLAZAMIENTO_HUELGA IS NOT NULL OR FECHA_EMPLAZAMIENTO IS NOT NULL OR PREHUELGA IS NOT NULL OR\n" +
 "AUDIENCIA_CONCILIACION IS NOT NULL OR FECHA_AUDIENCIA IS NOT NULL OR ESTALLAMIENTO_HUELGA IS NOT NULL OR\n" +
@@ -283,12 +283,12 @@ public ArrayList PivIncompetencia(){
 
 
 //Favor de verificar
-public ArrayList PivIncompetencia_Noidentificado(){
+public ArrayList PivIncompetencia_Noidentificado(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from V3_TR_HUELGAJL\n" +
+"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from "+Con1+"TR_HUELGA"+Con2+"\n" +
 "WHERE  FECHA_PRESENTA_PETIC IS NOT NULL OR CANTIDAD_ACTORES IS NOT NULL OR CANTIDAD_DEMANDADOS IS NOT NULL OR\n" +
 "EMPLAZAMIENTO_HUELGA IS NOT NULL OR FECHA_EMPLAZAMIENTO IS NOT NULL OR PREHUELGA IS NOT NULL OR\n" +
 "AUDIENCIA_CONCILIACION IS NOT NULL OR FECHA_AUDIENCIA IS NOT NULL OR ESTALLAMIENTO_HUELGA IS NOT NULL OR\n" +
@@ -325,12 +325,12 @@ public ArrayList PivIncompetencia_Noidentificado(){
 
 
 //ESTATUS DEL EXPEDIENTE = EN PROCESO DE RESOLUCION APARTIR DE FORMA_SOLUCIONFE NO DEBE DE CONTESTARSE
-public ArrayList Estatus_Expediente(){
+public ArrayList Estatus_Expediente(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,PERIODO FROM V3_TR_HUELGAJL WHERE FASE_SOLI_EXPEDIENTE IS NOT NULL OR FORMA_SOLUCION_EMPLAZ IS NOT NULL OR\n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" WHERE FASE_SOLI_EXPEDIENTE IS NOT NULL OR FORMA_SOLUCION_EMPLAZ IS NOT NULL OR\n" +
 "ESPECIFI_FORMA_EMPLAZ IS NOT NULL OR FECHA_RESOLU_EMPLAZ IS NOT NULL OR INCREMENTO_SOLICITADO IS NOT NULL OR\n" +
 "INCREMENTO_OTORGADO IS NOT NULL OR FORMA_SOLUCION_HUELGA IS NOT NULL OR ESPECIFI_FORMA_HUELGA IS NOT NULL OR\n" +
 "FECHA_RESOLU_HUELGA IS NOT NULL OR TIPO_SENTENCIA IS NOT NULL OR FECHA_ESTALLAM_HUELGA IS NOT NULL OR\n" +
@@ -355,12 +355,12 @@ public ArrayList Estatus_Expediente(){
 
 
 //ESTATUS DEL EXPEDIENTE = EN PROCESO DE RESOLUCION APARTIR DE FORMA_SOLUCIONFE NO DEBE DE CONTESTARSE
-public ArrayList Fecha_acto_procesal(){
+public ArrayList Fecha_acto_procesal(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "select CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,FECHA_ACTO_PROCESAL,PERIODO\n" +
-"from V3_TR_HUELGAJL WHERE ESTATUS_EXPEDIENTE=1 AND\n" +
+"from "+Con1+"TR_HUELGA"+Con2+" WHERE ESTATUS_EXPEDIENTE=1 AND\n" +
 "FECHA_ACTO_PROCESAL IS NOT NULL) where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"' ";      
 System.out.println(sql);
@@ -382,11 +382,11 @@ System.out.println(sql);
  }
 
 
-public ArrayList Fase_Sol_expNoExiste(){
+public ArrayList Fase_Sol_expNoExiste(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,S.DESCRIPCION FASE_SOLI_EXPEDIENTE\n" +
-"FROM V3_TR_HUELGAJL P, V3_TC_FASE_EXPEDIENTEJL S\n" +
+"FROM "+Con1+"TR_HUELGA"+Con2+" P, "+Con1+"TC_FASE_EXPEDIENTE"+Con2+" S\n" +
 "WHERE  P.FASE_SOLI_EXPEDIENTE=S.ID\n" +
 "AND FASE_SOLI_EXPEDIENTE NOT IN(5,6,7,99) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"' )"; 
@@ -409,10 +409,10 @@ System.out.println(sql);
 
 
 //Cuando Fase de solicitud del expediente (FASE_SOLI_EXPEDIENTE) =No identificado, no debe capturar desde Forma de solución (FORMA_SOLUCION_EMPLAZ) hasta Porcentaje por salarios caídos (SALARIOS_CAIDOS).  O en su caso agregar la fase del expediente si es que hay valor valido en la fecha de resolución.
-public ArrayList Fase_Sol_expNI(){
+public ArrayList Fase_Sol_expNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql=" SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(FASE_SOLI_EXPEDIENTE,'99','No identificado')FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_HUELGAJL \n" +
+      sql=" SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(FASE_SOLI_EXPEDIENTE,'99','No identificado')FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" \n" +
 "WHERE FASE_SOLI_EXPEDIENTE='99' AND (FORMA_SOLUCION_EMPLAZ IS NOT NULL OR  ESPECIFI_FORMA_EMPLAZ IS NOT NULL OR  FECHA_RESOLU_EMPLAZ IS NOT NULL OR  \n" +
 "INCREMENTO_SOLICITADO IS NOT NULL OR  INCREMENTO_OTORGADO IS NOT NULL OR  FORMA_SOLUCION_HUELGA IS NOT NULL OR  ESPECIFI_FORMA_HUELGA IS NOT NULL OR  \n" +
 "FECHA_RESOLU_HUELGA IS NOT NULL OR  TIPO_SENTENCIA IS NOT NULL OR  FECHA_ESTALLAM_HUELGA IS NOT NULL OR \n" +
@@ -438,12 +438,12 @@ System.out.println(sql);
  }
 
 //---CUANDO FASE EN LA QUE SE SOLUCIONO EL EXPEDIENTE=EMPLAZAMIENTO A HUELGA NO DEBE DE CAPTURAR RUBRO Solución (Huelga)
-public ArrayList Fase_Sol_exp_EMPH(){
+public ArrayList Fase_Sol_exp_EMPH(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_HUELGAJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" WHERE \n" +
 "FORMA_SOLUCION_HUELGA IS NOT NULL OR ESPECIFI_FORMA_HUELGA IS NOT NULL OR\n" +
 "FECHA_RESOLU_HUELGA IS NOT NULL OR TIPO_SENTENCIA IS NOT NULL OR FECHA_ESTALLAM_HUELGA IS NOT NULL OR\n" +
 "FECHA_LEVANT_HUELGA IS NOT NULL OR   MONTO_ESTIPULADO IS NOT NULL OR SALARIOS_CAIDOS IS NOT NULL) where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
@@ -471,12 +471,12 @@ System.out.println(sql);
 
 
 //---CUANDO FASE EN LA QUE SE SOLUCIONO EL EXPEDIENTE=Huelga  NO DEBE DE CAPTURAR   Solución (Emplazamiento/Prehuelga)
-public ArrayList Fase_Sol_exp_Huelga(){
+public ArrayList Fase_Sol_exp_Huelga(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_HUELGAJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_HUELGA"+Con2+" WHERE \n" +
 "FORMA_SOLUCION_EMPLAZ IS NOT NULL OR\n" +
 "ESPECIFI_FORMA_EMPLAZ IS NOT NULL OR FECHA_RESOLU_EMPLAZ IS NOT NULL OR INCREMENTO_SOLICITADO IS NOT NULL OR\n" +
 "INCREMENTO_OTORGADO IS NOT NULL) where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
@@ -500,7 +500,7 @@ System.out.println(sql);
 
 
 //---Cuando el expediente No se admitio a tramite la fase de solicitud debe ser emplazamiento a huelga o prehuelga.
-public ArrayList Fase_Sol_Desechamiento(){
+public ArrayList Fase_Sol_Desechamiento(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
@@ -508,7 +508,7 @@ public ArrayList Fase_Sol_Desechamiento(){
 "SELECT P1.CLAVE_ORGANO,P1.EXPEDIENTE_CLAVE,DECODE(P1.FASE_SOLI_EXPEDIENTE,'1','Audiencia preliminar','2','Audiencia de juicio','3','Tramitación por auto de depuración','4','Tramitación sin audiencias','5','Emplazamiento a huelga','6','Prehuelga','7','Huelga','8','Audiencia dentro del procedimiento colectivo de naturaleza económica','9','Fase escrita','99','No identificado') FASE_SOLI_EXPEDIENTE\n" +
 ",DECODE(P1.FORMA_SOLUCION_HUELGA,'1','Sentencia','2','Convenio conciliatorio','3','Desistimiento','4','Caducidad','5','Otra forma de solución (especifique)','9','No Identificado') FORMA_SOLUCION_HUELGA,P1.ESPECIFI_FORMA_HUELGA,P1.COMENTARIOS,P1.PERIODO,P2.DESCRIPCION DES_FASE,P3.DESCRIPCION DES_FORMA_SOLUCION,P4.DESCRIPCION DES_ESPECIFIQUE,P5.DESCRIPCION DES_COMENTARIOS\n" +
 "FROM \n" +
-"V3_TR_HUELGAJL P1,TC_RALAB_FASEJL P2,V3_TC_FASE_EXPEDIENTEJL PP2,TC_RALAB_FORMA_SOLUCIONJL P3,V3_TC_FORMA_SOLUCIONJL PP3,TC_RALAB_ESPECIFIQUEJL P4, TC_RALAB_COMENTARIOSJL P5)\n" +
+""+Con1+"TR_HUELGA"+Con2+" P1,TC_RALAB_FASE"+Con2+" P2,"+Con1+"TC_FASE_EXPEDIENTE"+Con2+" PP2,TC_RALAB_FORMA_SOLUCION"+Con2+" P3,"+Con1+"TC_FORMA_SOLUCION"+Con2+" PP3,TC_RALAB_ESPECIFIQUE"+Con2+" P4, TC_RALAB_COMENTARIOS"+Con2+" P5)\n" +
 "WHERE TRIM(UPPER(FASE_SOLI_EXPEDIENTE)) = TRIM(UPPER(DES_FASE)) AND TRIM(UPPER(FORMA_SOLUCION_HUELGA))=TRIM(UPPER(DES_FORMA_SOLUCION)) AND TRIM(UPPER(ESPECIFI_FORMA_HUELGA)) LIKE TRIM(UPPER(DES_ESPECIFIQUE))\n" +
 "OR TRIM(UPPER(COMENTARIOS)) LIKE TRIM(UPPER(DES_COMENTARIOS))) where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"' "; 
@@ -533,13 +533,13 @@ System.out.println(sql);
  }
 
 
- public ArrayList SinMotivo_Conflicto(){
+ public ArrayList SinMotivo_Conflicto(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT\n" +
 "    CLAVE_ORGANO,EXPEDIENTE_CLAVE,TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')FECHA_APERTURA_EXPEDIENTE\n" +
 "FROM\n" +
-"    V3_TR_HUELGAJL\n" +
+"    "+Con1+"TR_HUELGA"+Con2+"\n" +
 "WHERE\n" +
 "     firma_contrato = 2\n" +
 "     AND revision_contrato = 2\n" +

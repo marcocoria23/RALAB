@@ -27,10 +27,10 @@ ResultSet resul;
 
 
 ///Demandado no debe de ser 9=No identificado
-public ArrayList DemandadoNI(){
+public ArrayList DemandadoNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT  CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'9','No identificado') DEMANDADO,PERIODO  FROM V3_TR_PART_DEM_INDIVIDUALJL\n" +
+      sql="SELECT  CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'9','No identificado') DEMANDADO,PERIODO  FROM "+Con1+"TR_PART_DEM_INDIVIDUAL"+Con2+"\n" +
 "WHERE (DEMANDADO IN (9)) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"')"; 
       System.out.println(sql);
@@ -52,10 +52,10 @@ public ArrayList DemandadoNI(){
  }
 
 ///Cuando Demandado=otro no debe de capturar desde tipo hasta longitud
-public ArrayList Demandado_otro(){
+public ArrayList Demandado_otro(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'5','Otro') DEMANDADO,PERIODO FROM V3_TR_PART_DEM_individualJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'5','Otro') DEMANDADO,PERIODO FROM "+Con1+"TR_PART_DEM_individual"+Con2+"\n" +
 "WHERE (DEMANDADO IN (5)  AND (TIPO IS NOT NULL OR RFC_PATRON IS NOT NULL OR RAZON_SOCIAL_EMPR IS NOT NULL OR\n" +
 "CALLE IS NOT NULL OR N_EXT IS NOT NULL OR N_INT IS NOT NULL OR COLONIA IS NOT NULL OR CP IS NOT NULL OR \n" +
 "ENTIDAD_NOMBRE_EMPR IS NOT NULL OR ENTIDAD_CLAVE_EMPR IS NOT NULL OR MUNICIPIO_NOMBRE_EMPR IS NOT NULL OR\n" +
@@ -80,10 +80,10 @@ public ArrayList Demandado_otro(){
 
 
 ///Cuando Tipo= persona_Fisica no debe de capturar desde  razón social de la empresa o establecimiento  hasta longitud
-public ArrayList Tipo_persona(){
+public ArrayList Tipo_persona(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO,'1','persona_Fisica') TIPO,PERIODO FROM V3_TR_PART_DEM_INDIVIDUALJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO,'1','persona_Fisica') TIPO,PERIODO FROM "+Con1+"TR_PART_DEM_INDIVIDUAL"+Con2+"\n" +
 "WHERE (DEMANDADO IN (1,9) and TIPO IN (1)  AND (RAZON_SOCIAL_EMPR IS NOT NULL OR\n" +
 "CALLE IS NOT NULL OR N_EXT IS NOT NULL OR N_INT IS NOT NULL OR COLONIA IS NOT NULL OR CP IS NOT NULL OR \n" +
 "ENTIDAD_NOMBRE_EMPR IS NOT NULL OR ENTIDAD_CLAVE_EMPR IS NOT NULL OR MUNICIPIO_NOMBRE_EMPR IS NOT NULL OR\n" +

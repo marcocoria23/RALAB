@@ -27,10 +27,10 @@ ResultSet resul;
 
 
 //Estatus del expediente no debe de ser 9=No_identificado.
-public ArrayList Estatus_expedienteNi(){
+public ArrayList Estatus_expedienteNi(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,'9','No_identificado') ESTATUS_EXPEDIENTE,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from V3_TR_PARAPROCESALJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,'9','No_identificado') ESTATUS_EXPEDIENTE,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from "+Con1+"TR_PARAPROCESAL"+Con2+"\n" +
 "WHERE (ESTATUS_EXPEDIENTE =9 AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -54,11 +54,11 @@ public ArrayList Estatus_expedienteNi(){
 
 
 ///INCOMPETENCIA NO DEBE SER = NO IDENTIFICADA
-public ArrayList IncompetenciaNI(){
+public ArrayList IncompetenciaNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select * from(\n" +
-"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from V3_TR_PARAPROCESALJL\n" +
+"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from "+Con1+"TR_PARAPROCESAL"+Con2+"\n" +
 " where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"')where incompetencia=9"; 
       //System.out.println(sql);
@@ -82,12 +82,12 @@ public ArrayList IncompetenciaNI(){
 
 
 //INCOMPETENCIA =SI NO DEBE DE CAPTURAR DESPUES DE ESPECIFIQUE OTRO INCOMPETENCIA
-public ArrayList PivIncompetencia(){
+public ArrayList PivIncompetencia(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO FROM V3_TR_PARAPROCESALJL\n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO FROM "+Con1+"TR_PARAPROCESAL"+Con2+"\n" +
 "WHERE FECHA_PRESENTA_SOLI IS NOT NULL OR  FECHA_ADMISION_SOLI IS NOT NULL OR  PROMOVENTE IS NOT NULL OR \n" +
 "ESPECIFIQUE_PROMOVENTE IS NOT NULL OR  ESTATUS_EXPEDIENTE IS NOT NULL OR  FECHA_CONCLUSION_EXPE IS NOT NULL ) where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') WHERE INCOMPETENCIA=1";      
@@ -107,12 +107,12 @@ public ArrayList PivIncompetencia(){
     return Array;
  }
 
-public ArrayList Estatus_Expediente(){
+public ArrayList Estatus_Expediente(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,2,'En proceso de Resolucion')ESTATUS_EXPEDIENTE,PERIODO FROM V3_TR_PARAPROCESALJL WHERE ESTATUS_EXPEDIENTE=2 AND FECHA_CONCLUSION_EXPE IS NOT NULL  \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,2,'En proceso de Resolucion')ESTATUS_EXPEDIENTE,PERIODO FROM "+Con1+"TR_PARAPROCESAL"+Con2+" WHERE ESTATUS_EXPEDIENTE=2 AND FECHA_CONCLUSION_EXPE IS NOT NULL  \n" +
 ") where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"' )";      
  System.out.println(sql);

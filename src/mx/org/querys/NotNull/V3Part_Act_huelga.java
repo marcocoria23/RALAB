@@ -26,10 +26,10 @@ ResultSet resul;
 
 
 ///Actor no debe ser No identificado
-public ArrayList ActorNI(){
+public ArrayList ActorNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'99','No identificado') Actor,PERIODO FROM V3_TR_PART_ACT_HUELGAJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'99','No identificado') Actor,PERIODO FROM "+Con1+"TR_PART_ACT_HUELGA"+Con2+"\n" +
 "WHERE (ACTOR IN (99)) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') "; 
       System.out.println(sql);
@@ -52,10 +52,10 @@ public ArrayList ActorNI(){
 
 
 //CUANDO ACTOR = Otro  no debe capturar desde Nombre del sindicato hasta No_identificado.
-public ArrayList Actor_Otro(){
+public ArrayList Actor_Otro(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ACTOR,'7','Otro') ACTOR,PERIODO FROM V3_TR_PART_ACT_HUELGAJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ACTOR,'7','Otro') ACTOR,PERIODO FROM "+Con1+"TR_PART_ACT_HUELGA"+Con2+"\n" +
 "WHERE (ACTOR IN (7)  AND (NOMBRE_SINDICATO IS NOT NULL OR REG_ASOC_SINDICAL IS NOT NULL OR TIPO_SINDICATO IS NOT NULL OR\n" +
 "OTRO_ESP_SINDICATO IS NOT NULL OR ORG_OBRERA IS NOT NULL OR NOMBRE_ORG_OBRERA IS NOT NULL OR\n" +
 "OTRO_ESP_OBRERA IS NOT NULL OR  HOMBRES IS NOT NULL OR MUJERES IS NOT NULL OR NO_IDENTIFICADO IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
@@ -81,10 +81,10 @@ public ArrayList Actor_Otro(){
 
 
 //-CUANDO ACTOR = Mayoria_de_Trabajadores  no debe capturar desde Nombre del sindicato hasta Especifique (otra organización obrera)
-public ArrayList Actor_Mayoria(){
+public ArrayList Actor_Mayoria(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ACTOR,'5','Mayoria_de_Trabajadores') ACTOR,PERIODO FROM V3_TR_PART_ACT_HUELGAJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ACTOR,'5','Mayoria_de_Trabajadores') ACTOR,PERIODO FROM "+Con1+"TR_PART_ACT_HUELGA"+Con2+"\n" +
 "WHERE (ACTOR IN (5)  AND (NOMBRE_SINDICATO IS NOT NULL OR REG_ASOC_SINDICAL IS NOT NULL OR TIPO_SINDICATO IS NOT NULL OR\n" +
 "OTRO_ESP_SINDICATO IS NOT NULL OR ORG_OBRERA IS NOT NULL OR NOMBRE_ORG_OBRERA IS NOT NULL OR\n" +
 "OTRO_ESP_OBRERA IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +

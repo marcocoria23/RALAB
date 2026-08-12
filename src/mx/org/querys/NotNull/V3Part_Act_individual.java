@@ -25,10 +25,10 @@ ResultSet resul;
 
 
 ///Actor no debe ser No identificado
-public ArrayList ActorNI(){
+public ArrayList ActorNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'99','No identificado') Actor,PERIODO FROM V3_TR_PART_ACT_INDIVIDUALJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'99','No identificado') Actor,PERIODO FROM "+Con1+"TR_PART_ACT_INDIVIDUAL"+Con2+"\n" +
 "WHERE (ACTOR IN (99)) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') "; 
       System.out.println(sql);
@@ -52,10 +52,10 @@ public ArrayList ActorNI(){
 
 
 ///CUANDO ACTOR = Beneficiario u Otro  no debe capturar desde Sexo hasta jornada
-public ArrayList Actor_otro(){
+public ArrayList Actor_otro(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ACTOR,'6','Beneficiario','7','Otro') ACTOR,PERIODO FROM V3_TR_PART_ACT_INDIVIDUALJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ACTOR,'6','Beneficiario','7','Otro') ACTOR,PERIODO FROM "+Con1+"TR_PART_ACT_INDIVIDUAL"+Con2+"\n" +
 "WHERE (ACTOR IN (6,7)  AND (SEXO IS NOT NULL OR  EDAD  IS NOT NULL OR OCUPACION  IS NOT NULL OR\n" +
 "NSS  IS NOT NULL OR CURP  IS NOT NULL OR RFC_TRABAJADOR  IS NOT NULL OR JORNADA  IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 

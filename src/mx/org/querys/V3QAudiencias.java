@@ -24,11 +24,11 @@ ArrayList<String[]> Array;
 ResultSet resul;
     
 
-public ArrayList FECHA_AUDIEN_CELEBRADA_FUT(){
+public ArrayList FECHA_AUDIEN_CELEBRADA_FUT(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,\n" +
-"TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM V3_TR_AUDIENCIASJL\n" +
+"TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM "+Con1+"TR_AUDIENCIAS"+Con2+"\n" +
 "WHERE \n" +
 "(FECHA_AUDIEN_CELEBRADA > SYSDATE \n" +
 "AND FECHA_AUDIEN_CELEBRADA <> '09/09/1899')\n" +
@@ -52,7 +52,7 @@ public ArrayList FECHA_AUDIEN_CELEBRADA_FUT(){
  }
 
 
-public ArrayList FORMATO_INICIO(){
+public ArrayList FORMATO_INICIO(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select * from(select \n" +
@@ -64,7 +64,7 @@ public ArrayList FORMATO_INICIO(){
 " CASE WHEN LENGTH(regexp_replace(INICIO, '[^0-9]', ''))=4 THEN SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),0,2) \n" +  
 " WHEN LENGTH(regexp_replace(INICIO, '[^0-9]', ''))=3 THEN SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),0,1) END CAM_INICIO, \n" +              
 " PERIODO \n" +
-" from V3_TR_AUDIENCIASJL) WHERE ((INICIO NOT LIKE '%:%' or REPLACE(length(TRIM(INICIO)),' ','')<5 or CAM_INICIO IN ('1','01','2','02','3','03','4','04','5','05','6','06')) AND\n" +
+" from "+Con1+"TR_AUDIENCIAS"+Con2+") WHERE ((INICIO NOT LIKE '%:%' or REPLACE(length(TRIM(INICIO)),' ','')<5 or CAM_INICIO IN ('1','01','2','02','3','03','4','04','5','05','6','06')) AND\n" +
 " (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"'\n" +
 "AND PERIODO='"+PValidacion.periodo+"')) OR ((INICIO NOT LIKE '%:%' or REPLACE(length(TRIM(INICIO)),' ','')<5 or CAM_INICIO IN ('1','01','2','02','3','03','4','04','5','05','6','06')) AND\n" +
 " (CLAVE_ORGANO='"+PValidacion.clave_organo+"'\n" +
@@ -89,7 +89,7 @@ public ArrayList FORMATO_INICIO(){
  }
 
 
-public ArrayList FORMATO_CONCLU(){
+public ArrayList FORMATO_CONCLU(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select * from(select \n" +
@@ -101,7 +101,7 @@ public ArrayList FORMATO_CONCLU(){
 " CASE WHEN LENGTH(regexp_replace(CONCLU, '[^0-9]', ''))=4 THEN SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),0,2) \n" +
 " WHEN LENGTH(regexp_replace(CONCLU, '[^0-9]', ''))=3 THEN SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),0,1) END CAM_CONCLU, \n" +
 " PERIODO \n" +
-" from V3_TR_AUDIENCIASJL) WHERE ((CONCLU NOT LIKE '%:%' or REPLACE(length(TRIM(CONCLU)),' ','')<5 or CAM_CONCLU IN ('1','01','2','02','3','03','4','04','5','05','6','06')) AND\n" +
+" from "+Con1+"TR_AUDIENCIAS"+Con2+") WHERE ((CONCLU NOT LIKE '%:%' or REPLACE(length(TRIM(CONCLU)),' ','')<5 or CAM_CONCLU IN ('1','01','2','02','3','03','4','04','5','05','6','06')) AND\n" +
 " (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"'\n" +
 "AND PERIODO='"+PValidacion.periodo+"')) OR ((CONCLU NOT LIKE '%:%' or REPLACE(length(TRIM(CONCLU)),' ','')<5 or CAM_CONCLU IN ('1','01','2','02','3','03','4','04','5','05','6','06')) AND\n" +
 " (CLAVE_ORGANO='"+PValidacion.clave_organo+"'\n" +
@@ -126,7 +126,7 @@ public ArrayList FORMATO_CONCLU(){
  }
 
 
-public ArrayList SEGUNDOS_INICIO(){
+public ArrayList SEGUNDOS_INICIO(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select \n" +
@@ -136,7 +136,7 @@ public ArrayList SEGUNDOS_INICIO(){
 "  DECODE(TIPO_PROCED,'1','Ordinario','2','Especial Individual','3','Especial Colectivo','4','Huelga','5','Colectivo Ecónomica','9','No identificado') TIPO_PROCED,\n" +
 " INICIO,\n" +
 " PERIODO\n" +
-" from V3_TR_AUDIENCIASJL WHERE ((SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),-2)>59) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"') AND (INICIO NOT IN ('99:99')) ) OR \n" +
+" from "+Con1+"TR_AUDIENCIAS"+Con2+" WHERE ((SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),-2)>59) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"') AND (INICIO NOT IN ('99:99')) ) OR \n" +
 "((SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),-2)>59) AND (CLAVE_ORGANO='"+PValidacion.clave_organo+"' AND PERIODO='"+PValidacion.periodo+"') AND (INICIO NOT IN ('99:99')) )";
       System.out.println(sql);
       resul=conexion.consultar(sql);
@@ -157,7 +157,7 @@ public ArrayList SEGUNDOS_INICIO(){
     return Array;
  }
 
-public ArrayList SEGUNDOS_CONCLU(){
+public ArrayList SEGUNDOS_CONCLU(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select \n" +
@@ -167,7 +167,7 @@ public ArrayList SEGUNDOS_CONCLU(){
 "  DECODE(TIPO_PROCED,'1','Ordinario','2','Especial Individual','3','Especial Colectivo','4','Huelga','5','Colectivo Ecónomica','9','No identificado') TIPO_PROCED, \n" +
 " CONCLU,\n" +
 " PERIODO\n" +
-" from V3_TR_AUDIENCIASJL WHERE ((SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),-2)>59) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"') AND (CONCLU NOT IN ('99:99'))) OR \n" +
+" from "+Con1+"TR_AUDIENCIAS"+Con2+" WHERE ((SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),-2)>59) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"') AND (CONCLU NOT IN ('99:99'))) OR \n" +
 "((SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),-2)>59) AND (CLAVE_ORGANO='"+PValidacion.clave_organo+"' AND PERIODO='"+PValidacion.periodo+"') AND (CONCLU NOT IN ('99:99')))";
       System.out.println(sql);
       resul=conexion.consultar(sql);
@@ -189,7 +189,7 @@ public ArrayList SEGUNDOS_CONCLU(){
  }
 
 
-public ArrayList CONCLU_MENOR(){
+public ArrayList CONCLU_MENOR(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM("
@@ -201,7 +201,7 @@ public ArrayList CONCLU_MENOR(){
 "PERIODO,\n" +
 "case when length(INICIO)<5 then '0'||inicio else INICIO end inicio,\n" +
 "case when length(CONCLU)<5 then '0'||CONCLU else CONCLU end CONCLU \n" +
-" from V3_TR_AUDIENCIASJL WHERE (TO_TIMESTAMP(CONCLU,'HH24:MI') < TO_TIMESTAMP(inicio,'HH24:MI') and (SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),-2)<60) and (SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),-2)<60) AND SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"'\n" +
+" from "+Con1+"TR_AUDIENCIAS"+Con2+" WHERE (TO_TIMESTAMP(CONCLU,'HH24:MI') < TO_TIMESTAMP(inicio,'HH24:MI') and (SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),-2)<60) and (SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),-2)<60) AND SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"'\n" +
 "AND PERIODO='"+PValidacion.periodo+"' AND CONCLU like ('%:%') and inicio like ('%:%')) OR (CLAVE_ORGANO='"+PValidacion.clave_organo+"' AND PERIODO='"+PValidacion.periodo+"' AND  (SUBSTR(regexp_replace(CONCLU, '[^0-9]', ''),-2)<60) and (SUBSTR(regexp_replace(INICIO, '[^0-9]', ''),-2)<60) AND TO_TIMESTAMP(CONCLU,'HH24:MI') < TO_TIMESTAMP(inicio,'HH24:MI') AND CONCLU like ('%:%') and inicio like ('%:%'))  \n"
               + " ) WHERE INICIO NOT IN ('99:99') OR CONCLU NOT IN ('99:99')";
       System.out.println(sql);

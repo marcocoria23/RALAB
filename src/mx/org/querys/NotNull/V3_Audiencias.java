@@ -25,10 +25,10 @@ ArrayList<String[]> Array;
 ResultSet resul;
 
 ///Cuando Tipo de procedimiento =Ordinario no debe de capturar Especial individual,Especial colectivo,Huelga,Colectivo de naturaleza económica
-public ArrayList Aud_Ordinario(){
+public ArrayList Aud_Ordinario(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'1','Ordinario')TIPO_PROCED,PERIODO from V3_TR_AUDIENCIASJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'1','Ordinario')TIPO_PROCED,PERIODO from "+Con1+"TR_AUDIENCIAS"+Con2+"\n" +
 "WHERE \n" +
 "(\n" +
 "ESPECIAL_INDIVI_TA IS NOT NULL OR\n" +
@@ -56,10 +56,10 @@ public ArrayList Aud_Ordinario(){
  }
     
   ///Cuando Tipo de procedimiento =Individual no debe de capturar Ordinario,Especial colectivo,Huelga,Colectivo de naturaleza económica
-public ArrayList Aud_Individual(){
+public ArrayList Aud_Individual(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'2','INDIVIDUAL')TIPO_PROCED,PERIODO from V3_TR_AUDIENCIASJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'2','INDIVIDUAL')TIPO_PROCED,PERIODO from "+Con1+"TR_AUDIENCIAS"+Con2+"\n" +
 "WHERE \n" +
 "(\n" +
 "ORDINARIO_TA IS NOT NULL OR\n" +
@@ -88,10 +88,10 @@ public ArrayList Aud_Individual(){
   
 
 ///Cuando Tipo de procedimiento =Colectivo no debe de capturar Ordinario,Especial Individual,Huelga,Colectivo de naturaleza económica
-public ArrayList Aud_Colectivo(){
+public ArrayList Aud_Colectivo(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'3','Colectivo')TIPO_PROCED,PERIODO from V3_TR_AUDIENCIASJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'3','Colectivo')TIPO_PROCED,PERIODO from "+Con1+"TR_AUDIENCIAS"+Con2+"\n" +
 "WHERE \n" +
 "(\n" +
 "ORDINARIO_TA IS NOT NULL OR\n" +
@@ -120,10 +120,10 @@ public ArrayList Aud_Colectivo(){
 
 
 ///Cuando Tipo de procedimiento =Huelga no debe de capturar Ordinario,Especial Individual,Colectivo,Colectivo de naturaleza económica
-public ArrayList Aud_Huelga(){
+public ArrayList Aud_Huelga(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'4','Huelga')TIPO_PROCED,PERIODO from V3_TR_AUDIENCIASJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'4','Huelga')TIPO_PROCED,PERIODO from "+Con1+"TR_AUDIENCIAS"+Con2+"\n" +
 "WHERE \n" +
 "(\n" +
 "ORDINARIO_TA IS NOT NULL OR\n" +
@@ -151,10 +151,10 @@ public ArrayList Aud_Huelga(){
  }
 
 ///Cuando Tipo de procedimiento =Colectivo Econom no debe de capturar Ordinario,Especial Individual,Colectivo,Huelga
-public ArrayList Aud_Colect_econom(){
+public ArrayList Aud_Colect_econom(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'5','Colectivo Economico')TIPO_PROCED,PERIODO from V3_TR_AUDIENCIASJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_PROCED,'5','Colectivo Economico')TIPO_PROCED,PERIODO from "+Con1+"TR_AUDIENCIAS"+Con2+"\n" +
 "WHERE \n" +
 "(\n" +
 "ORDINARIO_TA IS NOT NULL OR\n" +
@@ -183,14 +183,14 @@ public ArrayList Aud_Colect_econom(){
 
 
 ///Cuando Tipo de procedimiento =Colectivo Econom no debe de capturar Ordinario,Especial Individual,Colectivo,Huelga
-public ArrayList Aud_NE_ORDINARIO(){
+public ArrayList Aud_NE_ORDINARIO(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT UNIQUE(EXPEDIENTE_CLAVE)EXPEDIENTE_CLAVE,CLAVE_ORGANO FROM(\n" +
 "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ID_AUDIENCIA,EXPEDIENTE_CLAVE2,PERIODO FROM(\n" +
 "select S.CLAVE_ORGANO,S.EXPEDIENTE_CLAVE,S.ID_AUDIENCIA,P.EXPEDIENTE_CLAVE EXPEDIENTE_CLAVE2,S.PERIODO\n" +
-"from V3_TR_AUDIENCIASJL S \n" +
-"LEFT JOIN V3_TR_ORDINARIOJL P\n" +
+"from "+Con1+"TR_AUDIENCIAS"+Con2+" S \n" +
+"LEFT JOIN "+Con1+"TR_ORDINARIO"+Con2+" P\n" +
 "ON S.CLAVE_ORGANO=P.CLAVE_ORGANO\n" +
 "AND S.EXPEDIENTE_CLAVE=P.EXPEDIENTE_CLAVE AND S.PERIODO=P.PERIODO\n" +
 "WHERE\n" +
@@ -218,14 +218,14 @@ public ArrayList Aud_NE_ORDINARIO(){
 
 
 ///Cuando Tipo de procedimiento =Colectivo Econom no debe de capturar Ordinario,Especial Individual,Colectivo,Huelga
-public ArrayList Aud_NE_INDIVIDUAL(){
+public ArrayList Aud_NE_INDIVIDUAL(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT UNIQUE(EXPEDIENTE_CLAVE)EXPEDIENTE_CLAVE,CLAVE_ORGANO FROM(\n" +
 "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ID_AUDIENCIA,EXPEDIENTE_CLAVE2,PERIODO FROM(\n" +
 "select S.CLAVE_ORGANO,S.EXPEDIENTE_CLAVE,S.ID_AUDIENCIA,P.EXPEDIENTE_CLAVE EXPEDIENTE_CLAVE2,S.PERIODO\n" +
-"from V3_TR_AUDIENCIASJL S \n" +
-"LEFT JOIN V3_TR_INDIVIDUALJL P\n" +
+"from "+Con1+"TR_AUDIENCIAS"+Con2+" S \n" +
+"LEFT JOIN "+Con1+"TR_INDIVIDUAL"+Con2+" P\n" +
 "ON S.CLAVE_ORGANO=P.CLAVE_ORGANO\n" +
 "AND S.EXPEDIENTE_CLAVE=P.EXPEDIENTE_CLAVE AND S.PERIODO=P.PERIODO\n" +
 "WHERE\n" +
@@ -255,14 +255,14 @@ public ArrayList Aud_NE_INDIVIDUAL(){
 
 
 ///Cuando Tipo de procedimiento =Colectivo Econom no debe de capturar Ordinario,Especial Individual,Colectivo,Huelga
-public ArrayList Aud_NE_COLECTIVO(){
+public ArrayList Aud_NE_COLECTIVO(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT UNIQUE(EXPEDIENTE_CLAVE)EXPEDIENTE_CLAVE,CLAVE_ORGANO FROM(\n" +
 "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ID_AUDIENCIA,EXPEDIENTE_CLAVE2,PERIODO FROM(\n" +
 "select S.CLAVE_ORGANO,S.EXPEDIENTE_CLAVE,S.ID_AUDIENCIA,P.EXPEDIENTE_CLAVE EXPEDIENTE_CLAVE2,S.PERIODO\n" +
-"from V3_TR_AUDIENCIASJL S \n" +
-"LEFT JOIN V3_TR_COLECTIVOJL P\n" +
+"from "+Con1+"TR_AUDIENCIAS"+Con2+" S \n" +
+"LEFT JOIN "+Con1+"TR_COLECTIVO"+Con2+" P\n" +
 "ON S.CLAVE_ORGANO=P.CLAVE_ORGANO\n" +
 "AND S.EXPEDIENTE_CLAVE=P.EXPEDIENTE_CLAVE AND S.PERIODO=P.PERIODO\n" +
 "WHERE\n" +
@@ -291,14 +291,14 @@ public ArrayList Aud_NE_COLECTIVO(){
 
 
 ///Cuando Tipo de procedimiento =Colectivo Econom no debe de capturar Ordinario,Especial Individual,Colectivo,Huelga
-public ArrayList Aud_NE_HUELGA(){
+public ArrayList Aud_NE_HUELGA(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT UNIQUE(EXPEDIENTE_CLAVE)EXPEDIENTE_CLAVE,CLAVE_ORGANO FROM(\n" +
 "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ID_AUDIENCIA,EXPEDIENTE_CLAVE2,PERIODO FROM(\n" +
 "select S.CLAVE_ORGANO,S.EXPEDIENTE_CLAVE,S.ID_AUDIENCIA,P.EXPEDIENTE_CLAVE EXPEDIENTE_CLAVE2,S.PERIODO\n" +
-"from V3_TR_AUDIENCIASJL S \n" +
-"LEFT JOIN V3_TR_HUELGAJL P\n" +
+"from "+Con1+"TR_AUDIENCIAS"+Con2+" S \n" +
+"LEFT JOIN "+Con1+"TR_HUELGA"+Con2+" P\n" +
 "ON S.CLAVE_ORGANO=P.CLAVE_ORGANO\n" +
 "AND S.EXPEDIENTE_CLAVE=P.EXPEDIENTE_CLAVE AND S.PERIODO=P.PERIODO\n" +
 "WHERE\n" +
@@ -327,14 +327,14 @@ public ArrayList Aud_NE_HUELGA(){
 
 
 ///Cuando Tipo de procedimiento =Colectivo Econom no debe de capturar Ordinario,Especial Individual,Colectivo,Huelga
-public ArrayList Aud_NE_COLECT_ECONOM(){
+public ArrayList Aud_NE_COLECT_ECONOM(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT UNIQUE(EXPEDIENTE_CLAVE)EXPEDIENTE_CLAVE,CLAVE_ORGANO FROM(\n" +
 "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ID_AUDIENCIA,EXPEDIENTE_CLAVE2,PERIODO FROM(\n" +
 "select S.CLAVE_ORGANO,S.EXPEDIENTE_CLAVE,S.ID_AUDIENCIA,P.EXPEDIENTE_CLAVE EXPEDIENTE_CLAVE2,S.PERIODO\n" +
-"from V3_TR_AUDIENCIASJL S \n" +
-"LEFT JOIN V3_TR_COLECT_ECONOMJL P\n" +
+"from "+Con1+"TR_AUDIENCIAS"+Con2+" S \n" +
+"LEFT JOIN "+Con1+"TR_COLECT_ECONOM"+Con2+" P\n" +
 "ON S.CLAVE_ORGANO=P.CLAVE_ORGANO\n" +
 "AND S.EXPEDIENTE_CLAVE=P.EXPEDIENTE_CLAVE AND S.PERIODO=P.PERIODO\n" +
 "WHERE\n" +

@@ -26,10 +26,10 @@ ResultSet resul;
 
 
 ///Demandado no debe de ser 9=No identificado
-public ArrayList DemandadoNI(){
+public ArrayList DemandadoNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT  CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'9','No identificado') DEMANDADO,PERIODO  FROM V3_TR_PART_DEM_HUELGAJL\n" +
+      sql="SELECT  CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'9','No identificado') DEMANDADO,PERIODO  FROM "+Con1+"TR_PART_DEM_HUELGA"+Con2+"\n" +
 "WHERE (DEMANDADO IN (9)) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"')"; 
       System.out.println(sql);
@@ -52,10 +52,10 @@ public ArrayList DemandadoNI(){
 
 
 //Cuando Tipo=Persona fisica no debe de capturar desde Razon social hasta longitud
-public ArrayList Persona_fisica(){
+public ArrayList Persona_fisica(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(tipo,'1','Persona_fisica') tipo,PERIODO FROM V3_TR_PART_DEM_HUELGAJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(tipo,'1','Persona_fisica') tipo,PERIODO FROM "+Con1+"TR_PART_DEM_HUELGA"+Con2+"\n" +
 "WHERE (DEMANDADO IN (1) and tipo in (1) AND (RAZON_SOCIAL_EMPR IS NOT NULL OR\n" +
 "CALLE IS NOT NULL OR N_EXT IS NOT NULL OR N_INT IS NOT NULL OR COLONIA IS NOT NULL OR CP IS NOT NULL OR\n" +
 "ENTIDAD_NOMBRE_EMPR IS NOT NULL OR ENTIDAD_CLAVE_EMPR IS NOT NULL OR \n" +

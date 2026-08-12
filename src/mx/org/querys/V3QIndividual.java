@@ -27,11 +27,11 @@ public class V3QIndividual {
 
     
      //Query de validacion donde la fecha de apertura no debe de ser No identificada
-    public ArrayList FECHA_APERTURA_NI() {
+    public ArrayList FECHA_APERTURA_NI(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, FECHA_APERTURA_EXPEDIENTE,COMENTARIOS\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE FECHA_APERTURA_EXPEDIENTE='09/09/1899'\n" +
 " and ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (clave_organo='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
         System.out.println(sql);
@@ -51,11 +51,11 @@ public class V3QIndividual {
         return Array;
     }
     
-        public ArrayList FASE_SOLI_NI() {
+        public ArrayList FASE_SOLI_NI(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, DECODE(ESTATUS_DEMANDA, 1 , 'Admitida') AS ESTATUS_DEMANDA,  DECODE(ESTATUS_EXPEDIENTE, 1, 'Solucionado' ) AS ESTATUS_EXPEDIENTE, NVL(DECODE(FASE_SOLI_EXPEDIENTE, 99, 'No identificado'),'Null') as FASE_SOLI_EXPEDIENTE, COMENTARIOS\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE (FASE_SOLI_EXPEDIENTE = 99\n" +
 "       OR FASE_SOLI_EXPEDIENTE IS NULL) AND ESTATUS_DEMANDA=1 AND ESTATUS_EXPEDIENTE=1\n" +
 " and ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (clave_organo='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
@@ -80,11 +80,11 @@ public class V3QIndividual {
     }
     
      //Query de validacion donde la fecha ultimo acto procesal  no debe de ser No identificada
-    public ArrayList FECHA_ACTO_PROCESAL_NI() {
+    public ArrayList FECHA_ACTO_PROCESAL_NI(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT CLAVE_ORGANO, EXPEDIENTE_CLAVE, FECHA_ACTO_PROCESAL,COMENTARIOS\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE FECHA_ACTO_PROCESAL='09/09/1899'\n" +
 " and ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "' )OR (clave_organo='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
         System.out.println(sql);
@@ -106,7 +106,7 @@ public class V3QIndividual {
     
     
     //Query de validacion donde el  año de la fecha de apertura sea diferente al año de la clave del expediente dependiendo del año judicial del estado de Campeche.
-    public ArrayList Año_JudicialCampeche() {
+    public ArrayList Año_JudicialCampeche(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT * FROM (\n"
@@ -117,7 +117,7 @@ public class V3QIndividual {
                 + "TO_NUMBER(SUBSTR(TO_CHAR(FECHA_APERTURA_EXPEDIENTE, 'DD-MM-YYYY'),-4,4))+1  FECHA_APERTURA_EXPEDIENTES1,\n"
                 + "        substr(TRIM(replace(replace(replace(replace(replace(replace(replace(replace(expediente_clave,'-',''),'I',''),'J',''),'L',''),'/',''),'ll',''),'II',''),'I ','')),-4,4) EXPE_AÑO, \n"
                 + "        PERIODO \n"
-                + "        from V3_TR_individualjl ) WHERE  FECHA_APERTURA_EXPEDIENTE <>EXPE_AÑO) WHERE SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' and periodo = '" + PValidacion.periodo + "'  \n"
+                + "        from "+Con1+"TR_individual"+Con2+" ) WHERE  FECHA_APERTURA_EXPEDIENTE <>EXPE_AÑO) WHERE SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' and periodo = '" + PValidacion.periodo + "'  \n"
                 + "        or clave_organo='" + PValidacion.clave_organo + "' and periodo = '" + PValidacion.periodo + "')  \n"
                 + "        WHERE  FECHA_APERTURA_EXPEDIENTES  \n"
                 + "        NOT BETWEEN     to_date('01/09/'||FECHA_APERTURA_EXPEDIENTE||'')\n"
@@ -139,7 +139,7 @@ public class V3QIndividual {
     }
 
     //Query de validacion donde el  año de la fecha de apertura sea diferente al año de la clave del expediente dependiendo del año judicial del estado de Campeche comprendiendo los años 2020,2021,2022.
-    public ArrayList Año_DIF_Campeche() {
+    public ArrayList Año_DIF_Campeche(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT * FROM (\n"
@@ -148,7 +148,7 @@ public class V3QIndividual {
                 + "        select  clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy') FECHA_APERTURA_EXPEDIENTES ,SUBSTR(TO_CHAR(FECHA_APERTURA_EXPEDIENTE, 'DD-MM-YYYY'),-4,4)  \n"
                 + "        FECHA_APERTURA_EXPEDIENTE,substr(TRIM(replace(replace(replace(replace(replace(replace(replace(replace(replace(expediente_clave,'-',''),'I',''),'J',''),'L',''),'/',''),'ll',''),'II',''),'I ',''),'l','')),-4,4) EXPE_AÑO, \n"
                 + "        PERIODO \n"
-                + "        from V3_TR_individualjl ) WHERE  FECHA_APERTURA_EXPEDIENTE <>EXPE_AÑO) WHERE SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' and periodo = '" + PValidacion.periodo + "'  \n"
+                + "        from "+Con1+"TR_individual"+Con2+" ) WHERE  FECHA_APERTURA_EXPEDIENTE <>EXPE_AÑO) WHERE SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' and periodo = '" + PValidacion.periodo + "'  \n"
                 + "        or clave_organo='" + PValidacion.clave_organo + "' and periodo = '" + PValidacion.periodo + "') WHERE EXPE_AÑO NOT IN " + PValidacion.AñoJuridico + " ";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -167,7 +167,7 @@ public class V3QIndividual {
     }
 
     //Query de validacion donde el año de la fecha de apertura es diferente al año de la clave del expediente.
-    public ArrayList Año_Expe_IndividualNE() {
+    public ArrayList Año_Expe_IndividualNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT * FROM(\n"
@@ -175,7 +175,7 @@ public class V3QIndividual {
                 + "select  clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy') FECHA_APERTURA_EXPEDIENTES ,SUBSTR(TO_CHAR(FECHA_APERTURA_EXPEDIENTE, 'DD-MM-YYYY'),-4,4) \n"
                 + "FECHA_APERTURA_EXPEDIENTE,SUBSTR(regexp_replace(expediente_clave, '[^0-9]', ''),-4,4)  EXPE_AÑO,\n"
                 + "PERIODO,COMENTARIOS\n"
-                + "from V3_TR_individualjl ) WHERE  FECHA_APERTURA_EXPEDIENTE <>EXPE_AÑO AND EXPE_AÑO NOT IN ('2021','2022','2023','2020','2024','2025')) WHERE SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' and periodo = '" + PValidacion.periodo + "' \n"
+                + "from "+Con1+"TR_individual"+Con2+" ) WHERE  FECHA_APERTURA_EXPEDIENTE <>EXPE_AÑO AND EXPE_AÑO NOT IN ('2021','2022','2023','2020','2024','2025')) WHERE SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' and periodo = '" + PValidacion.periodo + "' \n"
                 + "or clave_organo='" + PValidacion.clave_organo + "' and periodo = '" + PValidacion.periodo + "'";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -195,11 +195,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_APERTURA_EXPEDIENTE_FUT() {
+    public ArrayList FECHA_APERTURA_EXPEDIENTE_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY')FECHA_APERTURA_EXPEDIENTE,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_APERTURA_EXPEDIENTE> SYSDATE \n"
                 + "AND FECHA_APERTURA_EXPEDIENTE <> '09/09/1899')\n"
@@ -222,11 +222,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_PRES_DEMANDA_FUT() {
+    public ArrayList FECHA_PRES_DEMANDA_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_PRES_DEMANDA,'DD/MM/YYYY')FECHA_PRES_DEMANDA,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_PRES_DEMANDA> SYSDATE \n"
                 + "AND FECHA_PRES_DEMANDA <> '09/09/1899')\n"
@@ -250,14 +250,14 @@ public class V3QIndividual {
     }
     
     // La Fecha de apertura del expediente (FECHA_APERTURA_EXPEDIENTE) no debe ser menor al primero de enero del 2020.
-    public ArrayList IndividualFechaAperturaMenor2020() {
+    public ArrayList IndividualFechaAperturaMenor2020(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT \n" +
 "    CLAVE_ORGANO,\n" +
 "    EXPEDIENTE_CLAVE,\n" +
 "    TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY')FECHA_APERTURA_EXPEDIENTE\n" +
-"FROM V3_TR_INDIVIDUALJL\n" +
+"FROM "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE FECHA_APERTURA_EXPEDIENTE < DATE '2020-01-01'\n" +
 "  AND MOD(EXTRACT(YEAR FROM FECHA_APERTURA_EXPEDIENTE), 100) <> 99\n" +
 "and  ((substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "'  and periodo='" + PValidacion.periodo + "' ) or  (clave_organo='" + PValidacion.clave_organo + "'  and periodo='" + PValidacion.periodo + "' ))";
@@ -279,11 +279,11 @@ public class V3QIndividual {
     }
    
 
-    public ArrayList FECHA_ADMI_DEMANDA_FUT() {
+    public ArrayList FECHA_ADMI_DEMANDA_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_ADMI_DEMANDA,'DD/MM/YYYY')FECHA_ADMI_DEMANDA,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_ADMI_DEMANDA> SYSDATE \n"
                 + "AND FECHA_ADMI_DEMANDA <> '09/09/1899')\n"
@@ -306,11 +306,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_DEPURACION_FUT() {
+    public ArrayList FECHA_DEPURACION_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_DEPURACION,'DD/MM/YYYY')FECHA_DEPURACION,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_DEPURACION> SYSDATE \n"
                 + "AND FECHA_DEPURACION <> '09/09/1899')\n"
@@ -333,11 +333,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_AUDIENCIA_PRELIM_FUT() {
+    public ArrayList FECHA_AUDIENCIA_PRELIM_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_AUDIENCIA_PRELIM,'DD/MM/YYYY')FECHA_AUDIENCIA_PRELIM,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_AUDIENCIA_PRELIM> SYSDATE \n"
                 + "AND FECHA_AUDIENCIA_PRELIM <> '09/09/1899')\n"
@@ -360,11 +360,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_AUDIENCIA_JUICIO_FUT() {
+    public ArrayList FECHA_AUDIENCIA_JUICIO_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_AUDIENCIA_JUICIO,'DD/MM/YYYY')FECHA_AUDIENCIA_JUICIO,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_AUDIENCIA_JUICIO> SYSDATE \n"
                 + "AND FECHA_AUDIENCIA_JUICIO <> '09/09/1899')\n"
@@ -387,11 +387,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_ACTO_PROCESAL_FUT() {
+    public ArrayList FECHA_ACTO_PROCESAL_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_ACTO_PROCESAL,'DD/MM/YYYY')FECHA_ACTO_PROCESAL,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_ACTO_PROCESAL> SYSDATE \n"
                 + "AND FECHA_ACTO_PROCESAL <> '09/09/1899')\n"
@@ -414,11 +414,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_DICTO_RESOLUCION_AD_FUT() {
+    public ArrayList FECHA_DICTO_RESOLUCION_AD_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_DICTO_RESOLUCION_AD,'DD/MM/YYYY')FECHA_DICTO_RESOLUCION_AD,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_DICTO_RESOLUCION_AD> SYSDATE \n"
                 + "AND FECHA_DICTO_RESOLUCION_AD <> '09/09/1899')\n"
@@ -441,11 +441,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_RESOLUCION_TA_FUT() {
+    public ArrayList FECHA_RESOLUCION_TA_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_RESOLUCION_TA,'DD/MM/YYYY')FECHA_RESOLUCION_TA,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_RESOLUCION_TA> SYSDATE \n"
                 + "AND FECHA_RESOLUCION_TA <> '09/09/1899')\n"
@@ -468,11 +468,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_DICTO_RESOLUCION_AP_FUT() {
+    public ArrayList FECHA_DICTO_RESOLUCION_AP_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_DICTO_RESOLUCION_AP,'DD/MM/YYYY')FECHA_DICTO_RESOLUCION_AP,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_DICTO_RESOLUCION_AP> SYSDATE \n"
                 + "AND FECHA_DICTO_RESOLUCION_AP <> '09/09/1899')\n"
@@ -495,11 +495,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList FECHA_DICTO_RESOLUCION_AJ_FUT() {
+    public ArrayList FECHA_DICTO_RESOLUCION_AJ_FUT(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT clave_organo, expediente_clave, periodo, TO_CHAR(FECHA_DICTO_RESOLUCION_AJ,'DD/MM/YYYY')FECHA_DICTO_RESOLUCION_AJ,\n"
-                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  V3_TR_INDIVIDUALJL  \n"
+                + "TO_CHAR(SYSDATE,'DD/MM/YYYY') FROM  "+Con1+"TR_INDIVIDUAL"+Con2+"  \n"
                 + "WHERE \n"
                 + "(FECHA_DICTO_RESOLUCION_AJ> SYSDATE \n"
                 + "AND FECHA_DICTO_RESOLUCION_AJ <> '09/09/1899')\n"
@@ -522,15 +522,15 @@ public class V3QIndividual {
         return Array;
     }
 
-   public ArrayList Duplicidad_expediente() {
+   public ArrayList Duplicidad_expediente(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
-        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY')FECHA_APERTURA_EXPEDIENTE,TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))expediente_clave2,PERIODO FROM V3_TR_INDIVIDUALJL\n"
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY')FECHA_APERTURA_EXPEDIENTE,TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))expediente_clave2,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+"\n"
                 + "WHERE CLAVE_ORGANO||TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))||PERIODO\n"
                 + "IN(\n"
                 + "SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE2||PERIODO FROM(\n"
                 + "SELECT CLAVE_ORGANO,COUNT(expediente_clave2)CUENTAexpediente_clave2,expediente_clave2,PERIODO FROM(\n"
-                + "select CLAVE_ORGANO,expediente_clave,TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))expediente_clave2,PERIODO from V3_TR_INDIVIDUALJL \n"
+                + "select CLAVE_ORGANO,expediente_clave,TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))expediente_clave2,PERIODO from "+Con1+"TR_INDIVIDUAL"+Con2+" \n"
                 + "WHERE (SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "') or (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "')  \n"
                 + "ORDER BY CLAVE_ORGANO,expediente_clave2)\n"
                 + "GROUP BY CLAVE_ORGANO,expediente_clave2,PERIODO)WHERE CUENTAexpediente_clave2>1)\n"
@@ -553,11 +553,11 @@ public class V3QIndividual {
     }
 
 
-    public ArrayList Fecha_PresentacionNE() {
+    public ArrayList Fecha_PresentacionNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,CLAVE_ORGANO,EXPEDIENTE_CLAVE,to_char(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')FECHA_APERTURA_EXPEDIENTE,to_char(fecha_pres_demanda,'dd/mm/yyyy')fecha_pres_demanda,PERIODO\n"
-                + "from V3_TR_INDIVIDUALJL\n"
+                + "from "+Con1+"TR_INDIVIDUAL"+Con2+"\n"
                 + "WHERE to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy') < to_date(FECHA_PRES_DEMANDA,'dd/mm/yyyy')) where  periodo = '" + PValidacion.periodo + "'\n"
                 + "and fecha_pres_demanda <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and fecha_pres_demanda <> '09/09/1899'  and periodo = '" + PValidacion.periodo + "'\n";
@@ -581,11 +581,11 @@ public class V3QIndividual {
     }
 
     //ls fecha de admision de la demanda no debe de ser menor a la fecha depresentacion de la demanda
-    public ArrayList Fecha_PresentacionAdmiNE() {
+    public ArrayList Fecha_PresentacionAdmiNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,CLAVE_ORGANO,EXPEDIENTE_CLAVE,to_char(FECHA_ADMI_DEMANDA,'dd/mm/yyyy')FECHA_ADMI_DEMANDA,to_char(fecha_pres_demanda,'dd/mm/yyyy')fecha_pres_demanda,PERIODO \n"
-                + "from V3_TR_INDIVIDUALJL \n"
+                + "from "+Con1+"TR_INDIVIDUAL"+Con2+" \n"
                 + "WHERE to_date(FECHA_ADMI_DEMANDA,'dd/mm/yyyy') < to_date(FECHA_PRES_DEMANDA,'dd/mm/yyyy')) where  periodo = '" + PValidacion.periodo + "'\n"
                 + "and fecha_pres_demanda <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and fecha_pres_demanda <> '09/09/1899'  and periodo = '" + PValidacion.periodo + "'\n";
@@ -609,11 +609,11 @@ public class V3QIndividual {
     }
 
   //Query de validacion donde la fecha de admision no debe de ser menor a la fecha de apertura del expediente
-    public ArrayList Fecha_Admi_demandaNE() {
+    public ArrayList Fecha_Admi_demandaNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(fecha_admi_demanda,'DD/MM/YYYY') fecha_admi_demanda ,periodo,COMENTARIOS\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and fecha_admi_demanda <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and fecha_admi_demanda <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(fecha_admi_demanda,'dd/mm/yyyy')  < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -638,11 +638,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la Fecha de auto de depuración no debe de ser menor o igual  a la fecha de apertura del expediente
-    public ArrayList Fecha_DepuracionNE() {
+    public ArrayList Fecha_DepuracionNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(FECHA_DEPURACION,'DD/MM/YYYY') FECHA_DEPURACION  ,periodo\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and FECHA_DEPURACION <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and FECHA_DEPURACION <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(FECHA_DEPURACION,'dd/mm/yyyy')  <= to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -666,11 +666,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la Fecha de audiencia preliminar no debe de ser menor o igual a la fecha de apertura del expediente
-    public ArrayList Fecha_Audiencia_PrelimNE() {
+    public ArrayList Fecha_Audiencia_PrelimNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(FECHA_AUDIENCIA_PRELIM,'DD/MM/YYYY') FECHA_AUDIENCIA_PRELIM  ,periodo\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and FECHA_AUDIENCIA_PRELIM <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and FECHA_AUDIENCIA_PRELIM <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(FECHA_AUDIENCIA_PRELIM,'dd/mm/yyyy')  <= to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -694,11 +694,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la Fecha de audiencia de juicio no debe de ser menor o igual a la fecha de apertura del expediente
-    public ArrayList Fecha_Audiencia_JuicioNE() {
+    public ArrayList Fecha_Audiencia_JuicioNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(FECHA_AUDIENCIA_JUICIO,'DD/MM/YYYY') FECHA_AUDIENCIA_JUICIO ,periodo\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and FECHA_AUDIENCIA_JUICIO <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and FECHA_AUDIENCIA_JUICIO <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "') where  to_date(FECHA_AUDIENCIA_JUICIO,'dd/mm/yyyy')  <= to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -722,11 +722,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la Fecha del último acto procesal no debe de ser menor  a la fecha de apertura del expediente
-    public ArrayList Fecha_Acto_procesalNE() {
+    public ArrayList Fecha_Acto_procesalNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(Fecha_Acto_procesal,'DD/MM/YYYY') Fecha_Acto_procesal ,periodo\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and Fecha_Acto_procesal <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and Fecha_Acto_procesal <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(Fecha_Acto_procesal,'dd/mm/yyyy')  < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -750,11 +750,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la  Fecha en la que se dictó la resolución (auto depuracion) no debe de ser menor a la fecha de apertura del expediente
-    public ArrayList Fecha_Dicto_Resolucion_AdNE() {
+    public ArrayList Fecha_Dicto_Resolucion_AdNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(FECHA_DICTO_RESOLUCION_AD,'DD/MM/YYYY') FECHA_DICTO_RESOLUCION_AD  ,periodo\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and FECHA_DICTO_RESOLUCION_AD <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and FECHA_DICTO_RESOLUCION_AD <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(FECHA_DICTO_RESOLUCION_AD,'dd/mm/yyyy')  < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -778,11 +778,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la  Fecha en la que se dictó la resolución (Tramitación sin audiencias) no debe de ser menor a la fecha de apertura del expediente
-    public ArrayList Fecha_Resolucion_TaNE() {
+    public ArrayList Fecha_Resolucion_TaNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(FECHA_RESOLUCION_TA,'DD/MM/YYYY') FECHA_RESOLUCION_TA  ,periodo\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and FECHA_RESOLUCION_TA <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and FECHA_RESOLUCION_TA <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(FECHA_RESOLUCION_TA,'dd/mm/yyyy')  < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -806,11 +806,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la  Fecha en la que se dictó la resolución  (Audiencia preliminar) no debe de ser menor a la fecha de apertura del expediente
-    public ArrayList Fecha_Resolucion_ApNE() {
+    public ArrayList Fecha_Resolucion_ApNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(FECHA_DICTO_RESOLUCION_AP,'DD/MM/YYYY') FECHA_DICTO_RESOLUCION_AP ,periodo\n"
-                + "from V3_TR_individualjl where periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where periodo = '" + PValidacion.periodo + "'\n"
                 + "and FECHA_DICTO_RESOLUCION_AP <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and FECHA_DICTO_RESOLUCION_AP <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(FECHA_DICTO_RESOLUCION_AP,'dd/mm/yyyy')  < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -834,11 +834,11 @@ public class V3QIndividual {
     }
 
 //Query de validacion donde la  Fecha en la que se dictó la resolución  (Audiencia de juicio) no debe de ser menor a la fecha de apertura del expediente
-    public ArrayList Fecha_Resolucion_AjNE() {
+    public ArrayList Fecha_Resolucion_AjNE(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (select entidad_clave,clave_organo,expediente_clave,to_char(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE,to_char(FECHA_DICTO_RESOLUCION_AJ,'DD/MM/YYYY') FECHA_DICTO_RESOLUCION_AJ ,periodo\n"
-                + "from V3_TR_individualjl where  periodo = '" + PValidacion.periodo + "'\n"
+                + "from "+Con1+"TR_individual"+Con2+" where  periodo = '" + PValidacion.periodo + "'\n"
                 + "and FECHA_DICTO_RESOLUCION_AJ <> '09/09/1899'  and clave_organo='" + PValidacion.clave_organo + "' or substr(clave_organo,0,2)='" + PValidacion.clave_entidad + "' \n"
                 + "and FECHA_DICTO_RESOLUCION_AJ <> '09/09/1899'\n"
                 + "and periodo = '" + PValidacion.periodo + "' ) where  to_date(FECHA_DICTO_RESOLUCION_AJ,'dd/mm/yyyy')  < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')";
@@ -862,11 +862,11 @@ public class V3QIndividual {
     }
 
 // LA FECHA DE AUDIENCIA CELEBRARA NO DEBE SER MENOR A LA FECHA DE PRESENTACION DE LA DEMANDA
-    public ArrayList Fecha_Aud_Presentacion() {
+    public ArrayList Fecha_Aud_Presentacion(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (SELECT S.ENTIDAD_CLAVE,P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_PRES_DEMANDA,'DD/MM/YYYY') FECHA_PRES_DEMANDA, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n"
-                + "FROM V3_TR_AUDIENCIASJL P,V3_TR_INDIVIDUALJL S\n"
+                + "FROM "+Con1+"TR_AUDIENCIAS"+Con2+" P,"+Con1+"TR_INDIVIDUAL"+Con2+" S\n"
                 + "WHERE P.CLAVE_ORGANO=S.CLAVE_ORGANO AND P.EXPEDIENTE_CLAVE=S.EXPEDIENTE_CLAVE AND P.PERIODO=S.PERIODO\n"
                 + "AND P.TIPO_PROCED=2 AND to_date(FECHA_AUDIEN_CELEBRADA,'dd/mm/yyyy') < to_date(FECHA_PRES_DEMANDA,'dd/mm/yyyy') \n"
                 + " )where periodo = '" + PValidacion.periodo + "'\n"
@@ -894,11 +894,11 @@ public class V3QIndividual {
         return Array;
     }
 
-    public ArrayList Fecha_Aud_Apertura() {
+    public ArrayList Fecha_Aud_Apertura(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (SELECT S.ENTIDAD_CLAVE,P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY') FECHA_APERTURA_EXPEDIENTE, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n"
-                + "FROM V3_TR_AUDIENCIASJL P,V3_TR_INDIVIDUALJL S\n"
+                + "FROM "+Con1+"TR_AUDIENCIAS"+Con2+" P,"+Con1+"TR_INDIVIDUAL"+Con2+" S\n"
                 + "WHERE P.CLAVE_ORGANO=S.CLAVE_ORGANO AND P.EXPEDIENTE_CLAVE=S.EXPEDIENTE_CLAVE AND P.PERIODO=S.PERIODO\n"
                 + "AND P.TIPO_PROCED=2 AND to_date(FECHA_AUDIEN_CELEBRADA,'dd/mm/yyyy') < to_date(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy') \n"
                 + " )where periodo = '" + PValidacion.periodo + "'\n"
@@ -927,11 +927,11 @@ public class V3QIndividual {
     }
 
     //ORDINARIO LA FECHA DE AUDIENCIA CELEBRARA NO DEBE SER MENOR A LA FECHA DE PRESENTACION DE LA DEMANDA
-    public ArrayList Fecha_Aud_Admision() {
+    public ArrayList Fecha_Aud_Admision(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();
         sql = "select * from (SELECT S.ENTIDAD_CLAVE,P.CLAVE_ORGANO,P.EXPEDIENTE_CLAVE,to_char(P.FECHA_AUDIEN_CELEBRADA,'DD/MM/YYYY')FECHA_AUDIEN_CELEBRADA,to_char(S.FECHA_ADMI_DEMANDA,'DD/MM/YYYY') FECHA_ADMI_DEMANDA, P.TIPO_PROCED,P.PERIODO,P.ID_AUDIENCIA\n"
-                + "FROM V3_TR_AUDIENCIASJL P,V3_TR_INDIVIDUALJL S\n"
+                + "FROM "+Con1+"TR_AUDIENCIAS"+Con2+" P,"+Con1+"TR_INDIVIDUAL"+Con2+" S\n"
                 + "WHERE P.CLAVE_ORGANO=S.CLAVE_ORGANO AND P.EXPEDIENTE_CLAVE=S.EXPEDIENTE_CLAVE AND P.PERIODO=S.PERIODO\n"
                 + "AND P.TIPO_PROCED=2 AND to_date(FECHA_AUDIEN_CELEBRADA,'dd/mm/yyyy') < to_date(FECHA_ADMI_DEMANDA,'dd/mm/yyyy') \n"
                 + " )where periodo = '" + PValidacion.periodo + "'\n"

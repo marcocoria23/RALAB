@@ -30,10 +30,10 @@ ResultSet resul;
 
 
 ///Tipo de asunto no debe de ser =9 No_identificado
-public ArrayList Tipo_Asunto(){
+public ArrayList Tipo_Asunto(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_ASUNTO,'9','No_identificado') TIPO_ASUNTO,PERIODO from V3_TR_INDIVIDUALJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_ASUNTO,'9','No_identificado') TIPO_ASUNTO,PERIODO from "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE (TIPO_ASUNTO =9 AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -57,10 +57,10 @@ public ArrayList Tipo_Asunto(){
 
 
 //Cuando ¿El trabajador contó con contrato escrito? = No o No identificado, no debe de capturar tipo de contrato
-public ArrayList Contrato_Escrito(){
+public ArrayList Contrato_Escrito(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(CONTRATO_ESCRITO,'2','No','9','No identificado') CONTRATO_ESCRITO,PERIODO FROM V3_TR_INDIVIDUALJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(CONTRATO_ESCRITO,'2','No','9','No identificado') CONTRATO_ESCRITO,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" \n" +
 "WHERE (CONTRATO_ESCRITO in (2,9) and ( TIPO_CONTRATO IS NOT NULL ) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -83,10 +83,10 @@ public ArrayList Contrato_Escrito(){
 
 
 ////Cuando ¿Se anexó constancia de no conciliación expedida por el Centro Conciliación?=NO O NO IDENTIFICADO no debe de capturar Clave/identificador de la constancia
-public ArrayList Centro_conciliacion(){
+public ArrayList Centro_conciliacion(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(CONSTANCIA_CONS_EXPEDIDA,'2','No','9','No identificado') CONSTANCIA_CONS_EXPEDIDA,PERIODO FROM V3_TR_INDIVIDUALJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(CONSTANCIA_CONS_EXPEDIDA,'2','No','9','No identificado') CONSTANCIA_CONS_EXPEDIDA,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE (CONSTANCIA_CONS_EXPEDIDA in (2,9) and incompetencia=2 AND (CONSTANCIA_CLAVE IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -110,10 +110,10 @@ public ArrayList Centro_conciliacion(){
 
 
 ////Cuando ¿Se formuló prevención a la demanda?=NO O NO IDENTIFICADO no debe de capturar ¿Se desahogó la prevención de la demanda?
-public ArrayList Preve_demanda(){
+public ArrayList Preve_demanda(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(PREVE_DEMANDA,'2','No','9','No identificado') PREVE_DEMANDA,PERIODO FROM V3_TR_INDIVIDUALJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(PREVE_DEMANDA,'2','No','9','No identificado') PREVE_DEMANDA,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE (PREVE_DEMANDA in (2,9) and incompetencia=2 AND (DESAHOGO_PREV_DEMANDA IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -135,10 +135,10 @@ public ArrayList Preve_demanda(){
 
 
 ////Estatus de la demanda no debe de ser 9=No_identificado.
-public ArrayList Estatus_Demanda(){
+public ArrayList Estatus_Demanda(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_DEMANDA,'9','No_identificado') ESTATUS_DEMANDA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from V3_TR_INDIVIDUALJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_DEMANDA,'9','No_identificado') ESTATUS_DEMANDA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE (ESTATUS_DEMANDA =9 AND (CLAVE_ORGANO||EXPEDIENTE_CLAVE NOT IN ('12035106/2022')) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -162,10 +162,10 @@ public ArrayList Estatus_Demanda(){
 
 
 ////Cuando Estatus de la demanda =Admitida no debe de capturarse Causas que impiden la admisión de la demanda
-public ArrayList Estatus_Demanda_admitida(){
+public ArrayList Estatus_Demanda_admitida(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_DEMANDA,'1','Admitida') ESTATUS_DEMANDA,PERIODO FROM V3_TR_INDIVIDUALJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_DEMANDA,'1','Admitida') ESTATUS_DEMANDA,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" \n" +
 "WHERE (ESTATUS_DEMANDA=1 AND (CAU_IMPI_ADMI_DEMANDA IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -188,10 +188,10 @@ public ArrayList Estatus_Demanda_admitida(){
 
 
 ////Cuando ¿Hubo tramitación por auto de depuración? =No o No identificado, no debe de capturarse Fecha de auto de depuración.
-public ArrayList Tram_depuracion(){
+public ArrayList Tram_depuracion(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TRAMITACION_DEPURACION,'2','No','9','No identificado') TRAMITACION_DEPURACION,PERIODO FROM V3_TR_INDIVIDUALJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TRAMITACION_DEPURACION,'2','No','9','No identificado') TRAMITACION_DEPURACION,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" \n" +
 "WHERE (TRAMITACION_DEPURACION in (2,9) and ESTATUS_DEMANDA=1 AND (FECHA_DEPURACION IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -212,10 +212,10 @@ public ArrayList Tram_depuracion(){
  }
 
 ////Cuando ¿Hubo celebración de audiencia preliminar? =No o No identificado, no debe de capturarse Fecha de audiencia preliminar.
-public ArrayList Audiencia_preliminar(){
+public ArrayList Audiencia_preliminar(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(AUDIENCIA_PRELIM,'2','No','9','No identificado') AUDIENCIA_PRELIM,PERIODO FROM V3_TR_INDIVIDUALJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(AUDIENCIA_PRELIM,'2','No','9','No identificado') AUDIENCIA_PRELIM,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" \n" +
 "WHERE (AUDIENCIA_PRELIM in (2,9) and ESTATUS_DEMANDA=1 AND (FECHA_AUDIENCIA_PRELIM IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -237,10 +237,10 @@ public ArrayList Audiencia_preliminar(){
 
 
 ////Cuando ¿Hubo celebración de audiencia de juicio? =No o No identificado, no debe de capturarse Fecha de audiencia de juicio.
-public ArrayList Audiencia_juicio(){
+public ArrayList Audiencia_juicio(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(AUDIENCIA_JUICIO,'2','No','9','No identificado') AUDIENCIA_JUICIO,PERIODO FROM V3_TR_INDIVIDUALJL \n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(AUDIENCIA_JUICIO,'2','No','9','No identificado') AUDIENCIA_JUICIO,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" \n" +
 "WHERE (AUDIENCIA_JUICIO in (2,9) and ESTATUS_DEMANDA=1 AND (FECHA_AUDIENCIA_JUICIO IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -262,10 +262,10 @@ public ArrayList Audiencia_juicio(){
 
 
 ////Estatus del expediente no debe de ser 9=No_identificado.
-public ArrayList Estatus_ExpedienteNI(){
+public ArrayList Estatus_ExpedienteNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,'9','No identificado') ESTATUS_EXPEDIENTE,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from V3_TR_INDIVIDUALJL\n" +
+      sql="select CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(ESTATUS_EXPEDIENTE,'9','No identificado') ESTATUS_EXPEDIENTE,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE (ESTATUS_EXPEDIENTE =9 AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
       //System.out.println(sql);
@@ -289,11 +289,11 @@ public ArrayList Estatus_ExpedienteNI(){
 
 
 ///INCOMPETENCIA NO DEBE SER = NO IDENTIFICADA
-public ArrayList IncompetenciaNI(){
+public ArrayList IncompetenciaNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select * from(\n" +
-"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from V3_TR_INDIVIDUALJL\n" +
+"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,REPLACE(COMENTARIOS,',','')COMENTARIOS,PERIODO from "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 " where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"')where incompetencia=9"; 
       //System.out.println(sql);
@@ -317,12 +317,12 @@ public ArrayList IncompetenciaNI(){
 
 
 ///INCOMPETENCIA NO DEBE SER = NO IDENTIFICADA
-public ArrayList Tipo_IncompetenciaNI(){
+public ArrayList Tipo_IncompetenciaNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="select * from(\n" +
 " SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(INCOMPETENCIA,'2','No') INCOMPETENCIA,TIPO_INCOMPETENCIA,PERIODO FROM V3_TR_INDIVIDUALJL WHERE INCOMPETENCIA=2)\n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(INCOMPETENCIA,'2','No') INCOMPETENCIA,TIPO_INCOMPETENCIA,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE INCOMPETENCIA=2)\n" +
 "WHERE TIPO_INCOMPETENCIA IS NOT NULL  \n" +
 " )where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'"; 
@@ -347,12 +347,12 @@ public ArrayList Tipo_IncompetenciaNI(){
 
 
 //INCOMPETENCIA =SI NO DEBE DE CAPTURAR DESPUES DE ESPECIFIQUE OTRO INCOMPETENCIA
-public ArrayList PivIncompetencia(){
+public ArrayList PivIncompetencia(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from V3_TR_INDIVIDUALJL\n" +
+"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE  FECHA_PRES_DEMANDA IS NOT NULL OR CONSTANCIA_CONS_EXPEDIDA IS NOT NULL OR CONSTANCIA_CLAVE IS NOT NULL OR \n" +
 "ASUN_EXCEP_CONCILIACION IS NOT NULL OR PREVE_DEMANDA IS NOT NULL OR DESAHOGO_PREV_DEMANDA IS NOT NULL OR \n" +
 "ESTATUS_DEMANDA IS NOT NULL OR CAU_IMPI_ADMI_DEMANDA IS NOT NULL OR FECHA_ADMI_DEMANDA IS NOT NULL OR \n" +
@@ -385,12 +385,12 @@ public ArrayList PivIncompetencia(){
 
 
 //Favor de verificar Incompetencia ya que contiene dato apartir de Tipo de incompetencia (TIPO_INCOMPETENCIA)
-public ArrayList PivIncompetencia_Noindentificado(){
+public ArrayList PivIncompetencia_Noindentificado(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from V3_TR_INDIVIDUALJL\n" +
+"select CLAVE_ORGANO,EXPEDIENTE_CLAVE,INCOMPETENCIA,PERIODO from "+Con1+"TR_INDIVIDUAL"+Con2+"\n" +
 "WHERE TIPO_INCOMPETENCIA IS NOT NULL OR OTRO_ESP_INCOMP IS NOT NULL OR FECHA_PRES_DEMANDA IS NOT NULL OR CONSTANCIA_CONS_EXPEDIDA IS NOT NULL OR CONSTANCIA_CLAVE IS NOT NULL OR \n" +
 "ASUN_EXCEP_CONCILIACION IS NOT NULL OR PREVE_DEMANDA IS NOT NULL OR DESAHOGO_PREV_DEMANDA IS NOT NULL OR \n" +
 "ESTATUS_DEMANDA IS NOT NULL OR CAU_IMPI_ADMI_DEMANDA IS NOT NULL OR FECHA_ADMI_DEMANDA IS NOT NULL OR \n" +
@@ -423,12 +423,12 @@ public ArrayList PivIncompetencia_Noindentificado(){
 
 
 //ESTATUS DEMANDA =DESECHADA,ARCHIVO, NO SE DIO TRAMITE A LA DEMANDA APARTIR DE FECHA_ADMI_DEMANDA NO DEBEN DE CONTESTAR
-public ArrayList Estatus_Demanda_Desechada(){
+public ArrayList Estatus_Demanda_Desechada(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_DEMANDA,PERIODO FROM V3_TR_INDIVIDUALJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_DEMANDA,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE \n" +
 "FECHA_ADMI_DEMANDA IS NOT NULL OR\n" +
 "CANTIDAD_ACTORES IS NOT NULL OR\n" +
 "CANTIDAD_DEMANDADOS IS NOT NULL OR\n" +
@@ -483,12 +483,12 @@ public ArrayList Estatus_Demanda_Desechada(){
 
 
 //ESTATUS DEMANDA =DESECHADA,ARCHIVO, NO SE DIO TRAMITE A LA DEMANDA APARTIR DE FECHA_ADMI_DEMANDA NO DEBEN DE CONTESTAR
-public ArrayList Estatus_Demanda_Noidentificada(){
+public ArrayList Estatus_Demanda_Noidentificada(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_DEMANDA,PERIODO FROM V3_TR_INDIVIDUALJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_DEMANDA,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE \n" +
 "FECHA_ADMI_DEMANDA IS NOT NULL OR\n" +
 "CANTIDAD_ACTORES IS NOT NULL OR\n" +
 "CANTIDAD_DEMANDADOS IS NOT NULL OR\n" +
@@ -542,7 +542,7 @@ public ArrayList Estatus_Demanda_Noidentificada(){
 //EN PROCESO O EN PREVENCION
 
 //EFavor de verificar el campo Estatus_demanda, ya que la Fecha de Apertura del Expediente (FECHA_APERTURA_EXPEDIENTE) excede el plazo máximo permitido de 60 días (2 meses).
-public ArrayList Estatus_Demanda_PrevenProceso(){
+public ArrayList Estatus_Demanda_PrevenProceso(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT \n" +
@@ -552,7 +552,7 @@ public ArrayList Estatus_Demanda_PrevenProceso(){
 "    DECODE(T1.ESTATUS_DEMANDA, '5', 'En trámite o prevención') AS ESTATUS_DEMANDA,\n" +
 "    REPLACE(T1.COMENTARIOS, ',', '') AS COMENTARIOS,\n" +
 "    T1.PERIODO\n" +
-"FROM V3_TR_INDIVIDUALJL T1\n" +
+"FROM "+Con1+"TR_INDIVIDUAL"+Con2+" T1\n" +
 "WHERE T1.ESTATUS_DEMANDA = 5\n" +
 "  AND T1.FECHA_APERTURA_EXPEDIENTE < ADD_MONTHS(SYSDATE, -2)\n" +
 "\n" +
@@ -569,7 +569,7 @@ public ArrayList Estatus_Demanda_PrevenProceso(){
 "  AND EXISTS (\n" +
 "\n" +
 "        SELECT 1\n" +
-"        FROM V3_TR_INDIVIDUALJL T2\n" +
+"        FROM "+Con1+"TR_INDIVIDUAL"+Con2+" T2\n" +
 "        WHERE T2.CLAVE_ORGANO = T1.CLAVE_ORGANO\n" +
 "          AND T2.EXPEDIENTE_CLAVE = T1.EXPEDIENTE_CLAVE\n" +
 "          AND T2.ESTATUS_DEMANDA = 5\n" +
@@ -645,12 +645,12 @@ public ArrayList Estatus_Demanda_PrevenProceso(){
  }
 
 //ESTATUS DEL EXPEDIENTE = EN PROCESO DE RESOLUCION APARTIR DE FORMA_SOLUCIONFE NO DEBE DE CONTESTARSE
-public ArrayList Estatus_Expediente(){
+public ArrayList Estatus_Expediente(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,PERIODO FROM V3_TR_INDIVIDUALJL WHERE FASE_SOLI_EXPEDIENTE IS NOT NULL OR\n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE FASE_SOLI_EXPEDIENTE IS NOT NULL OR\n" +
 "FORMA_SOLUCION_AD IS NOT NULL OR\n" +
 "OTRO_ESP_SOLUCION_AD IS NOT NULL OR\n" +
 "FECHA_DICTO_RESOLUCION_AD IS NOT NULL OR\n" +
@@ -692,12 +692,12 @@ public ArrayList Estatus_Expediente(){
 
 
 //ESTATUS DEL EXPEDIENTE = EN PROCESO DE RESOLUCION APARTIR DE FORMA_SOLUCIONFE NO DEBE DE CONTESTARSE
-public ArrayList Estatus_Expediente_Noidentificado(){
+public ArrayList Estatus_Expediente_Noidentificado(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,PERIODO FROM V3_TR_INDIVIDUALJL WHERE FASE_SOLI_EXPEDIENTE IS NOT NULL OR\n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE FASE_SOLI_EXPEDIENTE IS NOT NULL OR\n" +
 "FORMA_SOLUCION_AD IS NOT NULL OR  FECHA_ACTO_PROCESAL IS NOT NULL OR  \n" +
 "OTRO_ESP_SOLUCION_AD IS NOT NULL OR\n" +
 "FECHA_DICTO_RESOLUCION_AD IS NOT NULL OR\n" +
@@ -737,12 +737,12 @@ public ArrayList Estatus_Expediente_Noidentificado(){
  }
 
 //cuando el estatus del expediente es = solucionado no debe de haber nada en fecha del ultimo acto procesal
-public ArrayList Fecha_acto_procesal(){
+public ArrayList Fecha_acto_procesal(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "select CLAVE_ORGANO,EXPEDIENTE_CLAVE,ESTATUS_EXPEDIENTE,FECHA_ACTO_PROCESAL,PERIODO\n" +
-"from V3_TR_INDIVIDUALJL WHERE ESTATUS_EXPEDIENTE=1 AND\n" +
+"from "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE ESTATUS_EXPEDIENTE=1 AND\n" +
 "FECHA_ACTO_PROCESAL IS NOT NULL) where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"' ";      
 //System.out.println(sql);
@@ -764,11 +764,11 @@ public ArrayList Fecha_acto_procesal(){
  }
 
 
-public ArrayList Fase_Sol_expNoExiste(){
+public ArrayList Fase_Sol_expNoExiste(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,S.DESCRIPCION FASE_SOLI_EXPEDIENTE\n" +
-"FROM V3_TR_INDIVIDUALJL P, V3_TC_FASE_EXPEDIENTEJL S\n" +
+"FROM "+Con1+"TR_INDIVIDUAL"+Con2+" P, "+Con1+"TC_FASE_EXPEDIENTE"+Con2+" S\n" +
 "WHERE  P.FASE_SOLI_EXPEDIENTE=S.ID\n" +
 "AND FASE_SOLI_EXPEDIENTE NOT IN(1,2,3,4,99) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"' )"; 
@@ -790,10 +790,10 @@ System.out.println(sql);
  }
 
 //Cuando Fase de solicitud del expediente (FASE_SOLI_EXPEDIENTE) =No identificado, no debe capturar desde Forma de solución (FORMA_SOLUCION_AD) hasta Monto estipulado en la forma de solución (MONTO_SOLUCION_AJ).  O en su caso agregar la fase del expediente si es que hay valor valido en la fecha de resolución.
-public ArrayList Fase_Sol_expNI(){
+public ArrayList Fase_Sol_expNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="    SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(FASE_SOLI_EXPEDIENTE,'99','No identificado')FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_INDIVIDUALJL \n" +
+      sql="    SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(FASE_SOLI_EXPEDIENTE,'99','No identificado')FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" \n" +
 "WHERE FASE_SOLI_EXPEDIENTE='99' AND (FORMA_SOLUCION_AD IS NOT NULL OR OTRO_ESP_SOLUCION_AD IS NOT NULL OR FECHA_DICTO_RESOLUCION_AD IS NOT NULL OR \n" +
 "TIPO_SENTENCIA_AD IS NOT NULL OR MONTO_SOLUCION_AD IS NOT NULL OR FORMA_SOLUCION_TA IS NOT NULL OR OTRO_ESP_SOLUCION_TA IS NOT NULL OR\n" +
 "FECHA_RESOLUCION_TA IS NOT NULL OR TIPO_SENTENCIA_TA IS NOT NULL OR MONTO_SOLUCIÓN_TA IS NOT NULL OR FORMA_SOLUCION_AP IS NOT NULL OR\n" +
@@ -820,12 +820,12 @@ System.out.println(sql);
  }
 
 //---CUANDO FASE EN LA QUE SE SOLUCIONO EL EXPEDIENTE=Tramitación por auto de depuración
-public ArrayList Fase_Sol_exp_TD(){
+public ArrayList Fase_Sol_exp_TD(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM(\n" +
 "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_INDIVIDUALJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE \n" +
 "FORMA_SOLUCION_TA IS NOT NULL OR\n" +
 "OTRO_ESP_SOLUCION_TA IS NOT NULL OR\n" +
 "FECHA_RESOLUCION_TA IS NOT NULL OR\n" +
@@ -860,12 +860,12 @@ public ArrayList Fase_Sol_exp_TD(){
 
 
 //---CUANDO FASE EN LA QUE SE SOLUCIONO EL EXPEDIENTE=Tramitación sin audiencias
-public ArrayList Fase_Sol_exp_TA(){
+public ArrayList Fase_Sol_exp_TA(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM (\n"
               + "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_INDIVIDUALJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE \n" +
 "FORMA_SOLUCION_AD IS NOT NULL OR\n" +
 "OTRO_ESP_SOLUCION_AD IS NOT NULL OR\n" +
 "FECHA_DICTO_RESOLUCION_AD IS NOT NULL OR\n" +
@@ -900,12 +900,12 @@ public ArrayList Fase_Sol_exp_TA(){
 
 
 //---CUANDO FASE EN LA QUE SE SOLUCIONO EL EXPEDIENTE=AUDIENCIA PRELIMINAR
-public ArrayList Fase_Sol_exp_AP(){
+public ArrayList Fase_Sol_exp_AP(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM (\n"
               + "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_INDIVIDUALJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE \n" +
 "FORMA_SOLUCION_AD IS NOT NULL OR\n" +
 "OTRO_ESP_SOLUCION_AD IS NOT NULL OR\n" +
 "FECHA_DICTO_RESOLUCION_AD IS NOT NULL OR\n" +
@@ -940,12 +940,12 @@ public ArrayList Fase_Sol_exp_AP(){
  }
 
 //---CUANDO FASE EN LA QUE SE SOLUCIONO EL EXPEDIENTE=AUDIENCIA DE JUICIO
-public ArrayList Fase_Sol_exp_AJ(){
+public ArrayList Fase_Sol_exp_AJ(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT * FROM (\n"
               + "SELECT * FROM(\n" +
-"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM V3_TR_INDIVIDUALJL WHERE \n" +
+"SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,PERIODO FROM "+Con1+"TR_INDIVIDUAL"+Con2+" WHERE \n" +
 "FORMA_SOLUCION_AD IS NOT NULL OR\n" +
 "OTRO_ESP_SOLUCION_AD IS NOT NULL OR\n" +
 "FECHA_DICTO_RESOLUCION_AD IS NOT NULL OR\n" +
@@ -978,13 +978,13 @@ public ArrayList Fase_Sol_exp_AJ(){
     return Array;
  }
 
-public ArrayList SinMotivo_Conflicto(){
+public ArrayList SinMotivo_Conflicto(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
       sql="SELECT\n" +
 "    CLAVE_ORGANO,EXPEDIENTE_CLAVE,TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'dd/mm/yyyy')FECHA_APERTURA_EXPEDIENTE\n" +
 "FROM\n" +
-"    V3_tr_individualJL\n" +
+"    "+Con1+"tr_individual"+Con2+"\n" +
 "WHERE\n" +
 "     indole_trabajo = 2\n" +
 "    AND prestacion_fp = 2\n" +

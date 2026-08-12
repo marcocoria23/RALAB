@@ -24,17 +24,17 @@ ArrayList<String[]> Array;
 ResultSet resul;
 
  //Query de validacion para saber si Actor y Demandado no se encuntra desagregados.
-public ArrayList ExpeNDesglose(){
+public ArrayList ExpeNDesglose(String Con1, String Con2){
   conexion.Conectar();
     Array = new ArrayList();
     sql="select CLAVE_ORGANO, EXPEDIENTE_CLAVE, decode(INCOMPETENCIA,2,'NO') INCOMPETENCIA, DECODE(ESTATUS_DEMANDA,1,'ADMITIDA') ESTATUS_DEMANDA, \n" +
 "CANTIDAD_ACTORES,CANTIDAD_DEMANDADOS\n" +
 "from(\n" +
 "select * from(\n" +
-"select * from V3_tr_COLECT_ECONOMJL where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' \n" +
+"select * from "+Con1+"tr_COLECT_ECONOM"+Con2+" where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' \n" +
 "AND PERIODO ='"+PValidacion.periodo+"' and incompetencia=2 and estatus_demanda=1 OR CLAVE_ORGANO='"+PValidacion.clave_organo+"' \n" +
 "AND PERIODO ='"+PValidacion.periodo+"' and incompetencia=2 and estatus_demanda=1) where \n" +
-" CANTIDAD_DEMANDADOS>0) where expediente_clave not in (select expediente_clave from V3_TR_part_DEM_COLECT_ECONOMJL where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' \n" +
+" CANTIDAD_DEMANDADOS>0) where expediente_clave not in (select expediente_clave from "+Con1+"TR_part_DEM_COLECT_ECONOM"+Con2+" where  SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' \n" +
 "AND PERIODO ='"+PValidacion.periodo+"'  OR CLAVE_ORGANO='"+PValidacion.clave_organo+"' \n" +
 "AND PERIODO ='"+PValidacion.periodo+"')";
 resul=conexion.consultar(sql);
@@ -59,16 +59,16 @@ resul=conexion.consultar(sql);
 
 
 //Query de validacion para saber si Cuando el expediente es incompetencia = SI, Cantidad de Actores y Cantidad de demandados es No aplica por ende no se debe de desglosar actores ni demandados.
-public ArrayList IncompetenciaNE(){
+public ArrayList IncompetenciaNE(String Con1, String Con2){
     conexion.Conectar();
     Array = new ArrayList();
      sql="SELECT * FROM(\n" +
 "SELECT PRIN.CLAVE_ORGANO,PRIN.EXPEDIENTE_CLAVE EXPEDIENTE_CLAVE_PART,SEC.EXPEDIENTE_CLAVE EXPEDIENTE_CLAVE_COLECT_ECONOM,decode(sec.incompetencia,'1','Sí','2','NO')incompetencia FROM(\n" +
 "SELECT UNIQUE(EXPEDIENTE_CLAVE)EXPEDIENTE_CLAVE,CLAVE_ORGANO,PERIODO\n" +
-"FROM V3_TR_part_DEM_COLECT_ECONOMJL\n" +
+"FROM "+Con1+"TR_part_DEM_COLECT_ECONOM"+Con2+"\n" +
 "WHERE SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' AND PERIODO='"+PValidacion.periodo+"'\n" +
 "OR CLAVE_ORGANO='"+PValidacion.clave_organo+"' AND PERIODO='"+PValidacion.periodo+"')PRIN LEFT JOIN\n" +
-"V3_TR_COLECT_ECONOMJL SEC \n" +
+""+Con1+"TR_COLECT_ECONOM"+Con2+" SEC \n" +
 "ON PRIN.CLAVE_ORGANO=SEC.CLAVE_ORGANO AND PRIN.EXPEDIENTE_CLAVE=SEC.EXPEDIENTE_CLAVE \n" +
 "AND PRIN.PERIODO=SEC.PERIODO) WHERE INCOMPETENCIA='Sí'";
 resul=conexion.consultar(sql);
@@ -91,7 +91,7 @@ resul=conexion.consultar(sql);
 
 
 //Query de validacion para saber si La cantidad de Demandados  es diferente a el desglose de Demandados.
-public ArrayList Dif_demandadosNE(){
+public ArrayList Dif_demandadosNE(String Con1, String Con2){
     conexion.Conectar();
     Array = new ArrayList();
     sql="SELECT * FROM(\n" +
@@ -102,11 +102,11 @@ public ArrayList Dif_demandadosNE(){
 + "PRIN.PERIODO\n" +
 "FROM(\n" +
 "select CLAVE_ORGANO,EXPEDIENTE_CLAVE,PERIODO,COUNT(ID_DEMANDADO) DESGLOSE_DEMANDADO\n" +
-"FROM V3_TR_part_DEM_COLECT_ECONOMJL \n" +
+"FROM "+Con1+"TR_part_DEM_COLECT_ECONOM"+Con2+" \n" +
 "WHERE SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' AND ID_DEMANDADO NOT LIKE '%-%'\n" +
 "AND PERIODO ='"+PValidacion.periodo+"' OR CLAVE_ORGANO='"+PValidacion.clave_organo+"' AND ID_DEMANDADO NOT LIKE '%-%'\n" +
 "AND PERIODO ='"+PValidacion.periodo+"'\n" +
-"GROUP BY CLAVE_ORGANO,EXPEDIENTE_CLAVE,PERIODO)PRIN LEFT JOIN V3_TR_COLECT_ECONOMJL SEC\n" +
+"GROUP BY CLAVE_ORGANO,EXPEDIENTE_CLAVE,PERIODO)PRIN LEFT JOIN "+Con1+"TR_COLECT_ECONOM"+Con2+" SEC\n" +
 "ON PRIN.CLAVE_ORGANO=SEC.CLAVE_ORGANO AND PRIN.EXPEDIENTE_CLAVE=SEC.EXPEDIENTE_CLAVE AND \n" +
 "PRIN.PERIODO=SEC.PERIODO) WHERE INCOMPETENCIA<>'1' \n" +
 "AND cantidad_demandados<>DESGLOSE_DEMANDADO";

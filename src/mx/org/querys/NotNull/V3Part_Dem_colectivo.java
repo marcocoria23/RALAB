@@ -27,10 +27,10 @@ ResultSet resul;
 
 
 ///Demandado no debe de ser 9=No identificado
-public ArrayList DemandadoNI(){
+public ArrayList DemandadoNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT  CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'9','No identificado') DEMANDADO,PERIODO  FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+      sql="SELECT  CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'9','No identificado') DEMANDADO,PERIODO  FROM "+Con1+"TR_PART_DEM_COLECTIVO"+Con2+"\n" +
 "WHERE (DEMANDADO IN (9)) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"')"; 
       System.out.println(sql);
@@ -53,10 +53,10 @@ public ArrayList DemandadoNI(){
 
 
 //Cuando Demandado=otro no debe de capturar desde Nombre del sindicato hasta longitud
-public ArrayList Demandado_Otro(){
+public ArrayList Demandado_Otro(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'5','Otro') DEMANDADO,PERIODO  FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'5','Otro') DEMANDADO,PERIODO  FROM "+Con1+"TR_PART_DEM_COLECTIVO"+Con2+"\n" +
 "WHERE (DEMANDADO IN (5)  AND (NOMBRE_SINDICATO_DEM IS NOT NULL OR  REG_ASOC_SINDICAL_DEM IS NOT NULL OR TIPO_SINDICATO_DEM IS NOT NULL OR\n" +
 " OTRO_ESP_SINDICATO_DEM IS NOT NULL OR ORG_OBRERA_DEM IS NOT NULL OR\n" +
 " NOMBRE_ORG_OBRERA_DEM IS NOT NULL OR OTRO_ESP_OBRERA_DEM IS NOT NULL OR  HOMBRES_DEM IS NOT NULL OR\n" +
@@ -87,10 +87,10 @@ public ArrayList Demandado_Otro(){
 
 
 //Cuando Demandado=Sindicato no debe de capturar desde tipo hasta longitud
-public ArrayList Demandado_Sindicato(){
+public ArrayList Demandado_Sindicato(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'2','Sindicato') DEMANDADO,PERIODO FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'2','Sindicato') DEMANDADO,PERIODO FROM "+Con1+"TR_PART_DEM_COLECTIVO"+Con2+"\n" +
 "WHERE (DEMANDADO IN (2)  AND ( TIPO_DEM_PAT IS NOT NULL OR\n" +
 " RFC_PATRON_DEM IS NOT NULL OR RAZON_SOCIAL_EMPR_DEM IS NOT NULL OR \n" +
 " CALLE IS NOT NULL OR N_EXT IS NOT NULL OR N_INT IS NOT NULL OR COLONIA IS NOT NULL OR \n" +
@@ -119,10 +119,10 @@ public ArrayList Demandado_Sindicato(){
 
 
 //Cuando Demandado=Coalicion_de_trabajadores solo debe  capturar Cantidad de trabajadores involucrados,Hombres,Mujeres,No_identificado			
-public ArrayList Demandado_Coalicion(){
+public ArrayList Demandado_Coalicion(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'3','Coalicion_de_trabajadores') DEMANDADO,PERIODO FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'3','Coalicion_de_trabajadores') DEMANDADO,PERIODO FROM "+Con1+"TR_PART_DEM_COLECTIVO"+Con2+"\n" +
 "WHERE (DEMANDADO IN (3)  AND ( NOMBRE_SINDICATO_DEM IS NOT NULL OR  REG_ASOC_SINDICAL_DEM IS NOT NULL OR TIPO_SINDICATO_DEM IS NOT NULL OR\n" +
 " OTRO_ESP_SINDICATO_DEM IS NOT NULL OR ORG_OBRERA_DEM IS NOT NULL OR\n" +
 " NOMBRE_ORG_OBRERA_DEM IS NOT NULL OR OTRO_ESP_OBRERA_DEM IS NOT NULL OR TIPO_DEM_PAT IS NOT NULL OR\n" +
@@ -152,10 +152,10 @@ public ArrayList Demandado_Coalicion(){
 
 
 //Cuando Demandado=Patron no debe de capturar desde Nombre del sindicato hasta No_identificado		
-public ArrayList Demandado_Patron(){
+public ArrayList Demandado_Patron(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'1','Patron') DEMANDADO,PERIODO FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(DEMANDADO,'1','Patron') DEMANDADO,PERIODO FROM "+Con1+"TR_PART_DEM_COLECTIVO"+Con2+"\n" +
 "WHERE (DEMANDADO IN (1)  AND ( NOMBRE_SINDICATO_DEM IS NOT NULL OR  REG_ASOC_SINDICAL_DEM IS NOT NULL OR TIPO_SINDICATO_DEM IS NOT NULL OR\n" +
 " OTRO_ESP_SINDICATO_DEM IS NOT NULL OR ORG_OBRERA_DEM IS NOT NULL OR\n" +
 " NOMBRE_ORG_OBRERA_DEM IS NOT NULL OR OTRO_ESP_OBRERA_DEM IS NOT NULL OR  HOMBRES_DEM IS NOT NULL OR\n" +
@@ -183,10 +183,10 @@ public ArrayList Demandado_Patron(){
 
 
 //Cuando Demandado=Patron y tipo=persona_Fisica no debe de capturar desde Razon social hasta Longitud	
-public ArrayList persona_fisica(){
+public ArrayList persona_fisica(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_SINDICATO_DEM,'1','persona_Fisica') TIPO_SINDICATO_DEM,PERIODO FROM V3_TR_PART_DEM_COLECTIVOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(TIPO_SINDICATO_DEM,'1','persona_Fisica') TIPO_SINDICATO_DEM,PERIODO FROM "+Con1+"TR_PART_DEM_COLECTIVO"+Con2+"\n" +
 "WHERE (DEMANDADO IN (1) AND TIPO_SINDICATO_DEM=1  AND (RAZON_SOCIAL_EMPR_DEM IS NOT NULL OR \n" +
 " CALLE IS NOT NULL OR N_EXT IS NOT NULL OR N_INT IS NOT NULL OR COLONIA IS NOT NULL OR \n" +
 " CP IS NOT NULL OR ENTIDAD_NOMBRE_EMPR IS NOT NULL OR ENTIDAD_CLAVE_EMPR IS NOT NULL OR MUNICIPIO_NOMBRE_EMPR IS NOT NULL OR\n" +

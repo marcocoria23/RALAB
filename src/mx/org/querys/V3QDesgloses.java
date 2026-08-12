@@ -29,7 +29,7 @@ ResultSet resul;
 public ArrayList Desglose_OrdinarioNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,Ordinario,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
+      sql="select prin.clave_organo clave_organo,Ordinario,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
       "left join "+Con1+"TR_ordinario"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
@@ -52,11 +52,11 @@ public ArrayList Desglose_OrdinarioNE(String Con1, String Con2){
  }
 
 // Diferencia entre el total de expedientes individual vs el desglose de expedientes en procedimiento individual.
-public ArrayList Desglose_IndividualNE(){
+public ArrayList Desglose_IndividualNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,ESPECIAL_INDIVI,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_individualjl sec\n" +
+      sql="select prin.clave_organo clave_organo,ESPECIAL_INDIVI,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_individual"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,ESPECIAL_INDIVI ORDER BY clave_organo";
@@ -78,11 +78,11 @@ public ArrayList Desglose_IndividualNE(){
  }
 
 // Diferencia entre el total de expedientes colectivo vs el desglose de expedientes en procedimiento colectivo.
-public ArrayList Desglose_ColectivoNE(){
+public ArrayList Desglose_ColectivoNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,ESPECIAL_COLECT,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_colectivojl sec\n" +
+      sql="select prin.clave_organo clave_organo,ESPECIAL_COLECT,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_colectivo"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,ESPECIAL_COLECT ORDER BY clave_organo";
@@ -104,11 +104,11 @@ public ArrayList Desglose_ColectivoNE(){
  }
  
 // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento Huelga.
-public ArrayList Desglose_HuelgaNE(){
+public ArrayList Desglose_HuelgaNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,HUELGA,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_huelgajl sec\n" +
+      sql="select prin.clave_organo clave_organo,HUELGA,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_huelga"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,HUELGA ORDER BY clave_organo";
@@ -130,11 +130,11 @@ public ArrayList Desglose_HuelgaNE(){
  }
 
 // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento Colectivo econom.
-  public ArrayList Desglose_Colec_EconomNE(){
+  public ArrayList Desglose_Colec_EconomNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,COL_NATU_ECONOMICA,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_colect_economjl sec\n" +
+      sql="select prin.clave_organo clave_organo,COL_NATU_ECONOMICA,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_colect_econom"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,COL_NATU_ECONOMICA ORDER BY clave_organo";
@@ -156,11 +156,11 @@ public ArrayList Desglose_HuelgaNE(){
  }  
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento paraprocesal.
-  public ArrayList Desglose_ParaprocesalNE(){
+  public ArrayList Desglose_ParaprocesalNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,PARAP_VOLUNTARIO,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_paraprocesaljl sec\n" +
+      sql="select prin.clave_organo clave_organo,PARAP_VOLUNTARIO,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_paraprocesal"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,PARAP_VOLUNTARIO ORDER BY clave_organo";
@@ -182,11 +182,11 @@ public ArrayList Desglose_HuelgaNE(){
  }  
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento tercerias.
-  public ArrayList Desglose_TerceriasNE(){
+  public ArrayList Desglose_TerceriasNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,TERCERIAS,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_terceriasjl sec\n" +
+      sql="select prin.clave_organo clave_organo,TERCERIAS,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_tercerias"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,TERCERIAS ORDER BY clave_organo";
@@ -208,11 +208,11 @@ public ArrayList Desglose_HuelgaNE(){
  }  
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento preferencia credito.
-  public ArrayList Desglose_Pref_CreditoNE(){
+  public ArrayList Desglose_Pref_CreditoNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,PREF_CREDITO,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_pref_creditojl sec\n" +
+      sql="select prin.clave_organo clave_organo,PREF_CREDITO,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_pref_credito"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,PREF_CREDITO ORDER BY clave_organo";
@@ -234,11 +234,11 @@ public ArrayList Desglose_HuelgaNE(){
  }
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento ejecucion.
-  public ArrayList Desglose_EjecucionNE(){
+  public ArrayList Desglose_EjecucionNE(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,EJECUCION,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_ejecucionjl sec\n" +
+      sql="select prin.clave_organo clave_organo,EJECUCION,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_ejecucion"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodo+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodo+"' \n" +
       "group by prin.clave_organo,EJECUCION ORDER BY clave_organo";
@@ -262,11 +262,11 @@ public ArrayList Desglose_HuelgaNE(){
   
   
   
-  public ArrayList Desglose_OrdinarioNEAnt(){
+  public ArrayList Desglose_OrdinarioNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,Ordinario,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_ordinariojl sec\n" +
+      sql="select prin.clave_organo clave_organo,Ordinario,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_ordinario"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,ordinario ORDER BY clave_organo";
@@ -288,11 +288,11 @@ public ArrayList Desglose_HuelgaNE(){
  }
 
 // Diferencia entre el total de expedientes individual vs el desglose de expedientes en procedimiento individual.
-public ArrayList Desglose_IndividualNEAnt(){
+public ArrayList Desglose_IndividualNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,ESPECIAL_INDIVI,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_individualjl sec\n" +
+      sql="select prin.clave_organo clave_organo,ESPECIAL_INDIVI,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_individual"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,ESPECIAL_INDIVI ORDER BY clave_organo";
@@ -314,11 +314,11 @@ public ArrayList Desglose_IndividualNEAnt(){
  }
 
 // Diferencia entre el total de expedientes colectivo vs el desglose de expedientes en procedimiento colectivo.
-public ArrayList Desglose_ColectivoNEAnt(){
+public ArrayList Desglose_ColectivoNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,ESPECIAL_COLECT,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_colectivojl sec\n" +
+      sql="select prin.clave_organo clave_organo,ESPECIAL_COLECT,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_colectivo"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,ESPECIAL_COLECT ORDER BY clave_organo";
@@ -340,11 +340,11 @@ public ArrayList Desglose_ColectivoNEAnt(){
  }
  
 // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento Huelga.
-public ArrayList Desglose_HuelgaNEAnt(){
+public ArrayList Desglose_HuelgaNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,HUELGA,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_huelgajl sec\n" +
+      sql="select prin.clave_organo clave_organo,HUELGA,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_huelga"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,HUELGA ORDER BY clave_organo";
@@ -366,11 +366,11 @@ public ArrayList Desglose_HuelgaNEAnt(){
  }
 
 // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento Colectivo econom.
-  public ArrayList Desglose_Colec_EconomNEAnt(){
+  public ArrayList Desglose_Colec_EconomNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,COL_NATU_ECONOMICA,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_colect_economjl sec\n" +
+      sql="select prin.clave_organo clave_organo,COL_NATU_ECONOMICA,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_colect_econom"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,COL_NATU_ECONOMICA ORDER BY clave_organo";
@@ -392,11 +392,11 @@ public ArrayList Desglose_HuelgaNEAnt(){
  }  
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento paraprocesal.
-  public ArrayList Desglose_ParaprocesalNEAnt(){
+  public ArrayList Desglose_ParaprocesalNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,PARAP_VOLUNTARIO,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_paraprocesaljl sec\n" +
+      sql="select prin.clave_organo clave_organo,PARAP_VOLUNTARIO,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_paraprocesal"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,PARAP_VOLUNTARIO ORDER BY clave_organo";
@@ -418,11 +418,11 @@ public ArrayList Desglose_HuelgaNEAnt(){
  }  
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento tercerias.
-  public ArrayList Desglose_TerceriasNEAnt(){
+  public ArrayList Desglose_TerceriasNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,TERCERIAS,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_terceriasjl sec\n" +
+      sql="select prin.clave_organo clave_organo,TERCERIAS,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_tercerias"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,TERCERIAS ORDER BY clave_organo";
@@ -444,11 +444,11 @@ public ArrayList Desglose_HuelgaNEAnt(){
  }  
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento preferencia credito.
-  public ArrayList Desglose_Pref_CreditoNEAnt(){
+  public ArrayList Desglose_Pref_CreditoNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,PREF_CREDITO,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_pref_creditojl sec\n" +
+      sql="select prin.clave_organo clave_organo,PREF_CREDITO,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_pref_credito"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,PREF_CREDITO ORDER BY clave_organo";
@@ -470,11 +470,11 @@ public ArrayList Desglose_HuelgaNEAnt(){
  }
   
   // Diferencia entre el total de expedientes huelga vs el desglose de expedientes en procedimiento ejecucion.
-  public ArrayList Desglose_EjecucionNEAnt(){
+  public ArrayList Desglose_EjecucionNEAnt(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select prin.clave_organo clave_organo,EJECUCION,count(sec.expediente_clave) Total_expe from V3_TR_control_expedientejl PRIN \n" +
-      "left join V3_TR_ejecucionjl sec\n" +
+      sql="select prin.clave_organo clave_organo,EJECUCION,count(sec.expediente_clave) Total_expe from "+Con1+"TR_control_expediente"+Con2+" PRIN \n" +
+      "left join "+Con1+"TR_ejecucion"+Con2+" sec\n" +
       "on  Prin.clave_organo=sec.clave_organo and prin.periodo=sec.periodo\n" +
       "where substr(prin.clave_organo,0,2)='"+PValidacion.clave_entidad+"' and prin.periodo='"+PValidacion.periodoAnt+"'  or prin.clave_organo='"+PValidacion.clave_organo+"'   and prin.periodo='"+PValidacion.periodoAnt+"' \n" +
       "group by prin.clave_organo,EJECUCION ORDER BY clave_organo";

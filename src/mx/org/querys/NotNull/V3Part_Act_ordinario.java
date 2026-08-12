@@ -25,10 +25,10 @@ ResultSet resul;
 
 
 ///Actor no debe ser No identificado
-public ArrayList ActorNI(){
+public ArrayList ActorNI(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'99','No identificado') Actor,PERIODO FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'99','No identificado') Actor,PERIODO FROM "+Con1+"TR_PART_ACT_ORDINARIO"+Con2+"\n" +
 "WHERE (ACTOR IN (99)) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') "; 
       System.out.println(sql);
@@ -53,10 +53,10 @@ public ArrayList ActorNI(){
 
 
 ///CUANDO ACTOR = Trabajador  no debe capturar desde Nombre del sindicato hasta No_identificado.
-public ArrayList Actor_Trabajador(){
+public ArrayList Actor_Trabajador(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'1','Trabajador') Actor,PERIODO FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'1','Trabajador') Actor,PERIODO FROM "+Con1+"TR_PART_ACT_ORDINARIO"+Con2+"\n" +
 "WHERE (ACTOR IN (1)  AND (NOMBRE_SINDICATO IS NOT NULL OR REG_ASOC_SINDICAL IS NOT NULL OR\n" +
 "TIPO_SINDICATO IS NOT NULL OR OTRO_ESP_SINDICATO IS NOT NULL OR ORG_OBRERA IS NOT NULL OR\n" +
 "NOMBRE_ORG_OBRERA IS NOT NULL OR OTRO_ESP_OBRERA IS NOT NULL  OR HOMBRES\n" +
@@ -81,10 +81,10 @@ public ArrayList Actor_Trabajador(){
  }
 
 ///CUANDO ACTOR = Trabajador  no debe capturar desde Nombre del sindicato hasta No_identificado.
-public ArrayList Actor_Sindicato(){
+public ArrayList Actor_Sindicato(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'3','sindicato') Actor,PERIODO  FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'3','sindicato') Actor,PERIODO  FROM "+Con1+"TR_PART_ACT_ORDINARIO"+Con2+"\n" +
 "WHERE (ACTOR IN (3)  AND (SEXO IS NOT NULL OR  EDAD IS NOT NULL OR OCUPACION IS NOT NULL OR NSS IS NOT NULL OR\n" +
 "CURP IS NOT NULL OR RFC_TRABAJADOR IS NOT NULL OR JORNADA IS NOT NULL)AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
@@ -109,10 +109,10 @@ public ArrayList Actor_Sindicato(){
 
 
 ///CUANDO ACTOR = Trabajador  no debe capturar desde Nombre del sindicato hasta No_identificado.
-public ArrayList Actor_Coalicion(){
+public ArrayList Actor_Coalicion(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'4','Coalicion_de_trabajadores') Actor,PERIODO FROM V3_TR_PART_ACT_ORDINARIOJL\n" +
+      sql="SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,DECODE(Actor,'4','Coalicion_de_trabajadores') Actor,PERIODO FROM "+Con1+"TR_PART_ACT_ORDINARIO"+Con2+"\n" +
 "WHERE (ACTOR IN (4)  AND (SEXO IS NOT NULL OR  EDAD IS NOT NULL OR OCUPACION IS NOT NULL OR NSS IS NOT NULL OR\n" +
 "CURP IS NOT NULL OR RFC_TRABAJADOR IS NOT NULL OR JORNADA IS NOT NULL) AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"'))"; 
