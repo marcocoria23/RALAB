@@ -33545,7 +33545,7 @@ if (ArrayResult.size() > 0) {
             coni = 1;
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
-
+        
         ArrayResult = NNHuelga.Fase_Sol_Desechamiento(Con1, Con2);
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);

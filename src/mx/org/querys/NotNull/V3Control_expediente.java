@@ -27,7 +27,7 @@ ResultSet resul;
 public ArrayList Horario(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();
-      sql="select  REPLACE(NOMBRE_ORGANO_JURIS,',','')NOMBRE_ORGANO_JURIS,CLAVE_ORGANO,HORARIO,PERIODO from "+Con1+"TRCONTROL_EXPEDIENTE"+Con2+"\n" +
+      sql="select  REPLACE(NOMBRE_ORGANO_JURIS,',','')NOMBRE_ORGANO_JURIS,CLAVE_ORGANO,HORARIO,PERIODO from "+Con1+"TR_CONTROL_EXPEDIENTE"+Con2+"\n" +
 "    where (LENGTH(TRIM(REPLACE(HORARIO,' ','')))<6)  AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') "; 
       System.out.println(sql);
@@ -54,7 +54,7 @@ public ArrayList SubJuecesHom(String Con1, String Con2){
       sql="SELECT CLAVE_ORGANO,CASE WHEN SUMHOM IS NULL THEN 0 ELSE SUMHOM END SUMHOM,CASE WHEN JUECES_LABORAL_SUB_HOM IS NULL THEN 0 ELSE JUECES_LABORAL_SUB_HOM END JUECES_LABORAL_SUB_HOM,periodo FROM(\n" +
 "SELECT  CLAVE_ORGANO, (TO_NUMBER(TRIM(JUECES_LABORAL_MIX_HOM))+TO_NUMBER(TRIM(JUECES_LABORAL_INDIV_HOM))+TO_NUMBER(TRIM(JUECES_LABORAL_COLEC_HOM)))  SUMHOM,\n" +
 "JUECES_LABORAL_SUB_HOM,periodo \n" +
-"FROM "+Con1+"TRCONTROL_EXPEDIENTE"+Con2+")WHERE TO_NUMBER(SUMHOM)<>TO_NUMBER(JUECES_LABORAL_SUB_HOM)  AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
+"FROM "+Con1+"TR_CONTROL_EXPEDIENTE"+Con2+")WHERE TO_NUMBER(SUMHOM)<>TO_NUMBER(JUECES_LABORAL_SUB_HOM)  AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') "; 
       System.out.println(sql);
       resul=conexion.consultar(sql);
@@ -81,7 +81,7 @@ public ArrayList SubJuecesMuj(String Con1, String Con2){
       sql="SELECT CLAVE_ORGANO,CASE WHEN SUMMUJ IS NULL THEN 0 ELSE SUMMUJ END SUMMUJ,CASE WHEN JUECES_LABORAL_SUB_MUJ IS NULL THEN 0 ELSE JUECES_LABORAL_SUB_MUJ END JUECES_LABORAL_SUB_MUJ,periodo FROM(\n" +
 "SELECT  CLAVE_ORGANO, (TO_NUMBER(TRIM(JUECES_LABORAL_MIX_MUJ))+TO_NUMBER(TRIM(JUECES_LABORAL_INDIV_MUJ))+TO_NUMBER(TRIM(JUECES_LABORAL_COLEC_MUJ)))  SUMMUJ,\n" +
 "JUECES_LABORAL_SUB_MUJ,periodo\n" +
-"FROM "+Con1+"TRCONTROL_EXPEDIENTE"+Con2+")WHERE TO_NUMBER(SUMMUJ)<>TO_NUMBER(JUECES_LABORAL_SUB_MUJ)  AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
+"FROM "+Con1+"TR_CONTROL_EXPEDIENTE"+Con2+")WHERE TO_NUMBER(SUMMUJ)<>TO_NUMBER(JUECES_LABORAL_SUB_MUJ)  AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') "; 
       System.out.println(sql);
       resul=conexion.consultar(sql);
@@ -108,7 +108,7 @@ public ArrayList TotalJueces(String Con1, String Con2){
       sql="SELECT CLAVE_ORGANO,CASE WHEN SUMHM IS NULL THEN 0 ELSE SUMHM END SUMHM,CASE WHEN JUECES_LABORAL_TOTAL IS NULL THEN 0 ELSE JUECES_LABORAL_TOTAL END JUECES_LABORAL_TOTAL,periodo FROM(\n" +
 "SELECT  CLAVE_ORGANO, (TO_NUMBER(TRIM(JUECES_LABORAL_SUB_HOM))+TO_NUMBER(TRIM(JUECES_LABORAL_SUB_MUJ))) SUMHM,\n" +
 "JUECES_LABORAL_TOTAL,periodo\n" +
-"FROM "+Con1+"TRCONTROL_EXPEDIENTE"+Con2+")WHERE TO_NUMBER(SUMHM)<>TO_NUMBER(JUECES_LABORAL_TOTAL)  AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
+"FROM "+Con1+"TR_CONTROL_EXPEDIENTE"+Con2+")WHERE TO_NUMBER(SUMHM)<>TO_NUMBER(JUECES_LABORAL_TOTAL)  AND (SUBSTR(CLAVE_ORGANO,0,2)='"+PValidacion.clave_entidad+"' and periodo = '"+PValidacion.periodo+"' \n" +
 " or clave_organo='"+PValidacion.clave_organo+"' and periodo = '"+PValidacion.periodo+"') "; 
       System.out.println(sql);
       resul=conexion.consultar(sql);
