@@ -19212,7 +19212,7 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) es solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Tramitación sin audiencias (3)."
+                        "Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) es solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Tramitación sin audiencias (4)."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -19309,7 +19309,7 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = Sí (1) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Tramitación por auto de depuración (4)."
+                        "Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = Sí (1) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Tramitación por auto de depuración (3)."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
