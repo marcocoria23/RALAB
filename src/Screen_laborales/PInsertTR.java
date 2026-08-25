@@ -7,8 +7,10 @@ package Screen_laborales;
 
 import Conexion.OracleDAOFactory;
 import LeerQuery.QueryProcedureActToV3;
+import LeerQuery.QueryProcedureTR_Fed;
 import java.awt.Color;
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +54,7 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
         R1.setVisible(false);
         R2.setVisible(false);
         R3.setVisible(false);
+        R4.setVisible(false);
         Jorgano.setVisible(false);
         CorganoJur.setVisible(false);
         Jentidad.setVisible(false);
@@ -96,6 +99,7 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
         R1 = new javax.swing.JRadioButton();
         R2 = new javax.swing.JRadioButton();
         R3 = new javax.swing.JRadioButton();
+        R4 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("INSERT TR");
@@ -229,17 +233,20 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(262, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(LEntidad2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LEntidad2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(LEntidad, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -254,21 +261,19 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(Textoperiodo1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(Rclave_entidad)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Rclave_organo))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(Lname)
                                     .addComponent(jLabel1)
                                     .addComponent(CTablas1, 0, 371, Short.MAX_VALUE)
-                                    .addComponent(CTablas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(CTablas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(31, 31, 31))
         );
         jPanel1Layout.setVerticalGroup(
@@ -353,6 +358,13 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
             }
         });
 
+        R4.setText("VERSION 0.0");
+        R4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                R4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -360,17 +372,18 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(R1)
+                        .addGap(18, 18, 18)
+                        .addComponent(R2)
+                        .addGap(18, 18, 18)
+                        .addComponent(R3)
+                        .addGap(18, 18, 18)
+                        .addComponent(R4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(JOEstatal)
                     .addComponent(JOFederal))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
-                .addComponent(R1)
-                .addGap(18, 18, 18)
-                .addComponent(R2)
-                .addGap(18, 18, 18)
-                .addComponent(R3)
-                .addGap(104, 104, 104))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,7 +395,8 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(R1)
                     .addComponent(R2)
-                    .addComponent(R3))
+                    .addComponent(R3)
+                    .addComponent(R4))
                 .addContainerGap(9, Short.MAX_VALUE))
         );
 
@@ -597,6 +611,66 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        jButton1.setEnabled(false);
+        
+        if (BD.equals("Federal") && Versiones.equals("0.0")) { // Flujo Federal 0.0
+        new Thread(() -> {
+            String[] tablasFed = {
+                "TR_FED_AUDIENCIAS",
+                "TR_FED_COLECTIVO",
+                "TR_FED_COLECTIVO_ECONOMICO",
+                "TR_FED_COLECTIVO_ECONOMICO_PREST_RECL",
+                "TR_FED_COLECTIVO_PREST_RECL",
+                "TR_FED_CONTROL_EXPEDIENTE",
+                "TR_FED_EJECUCION",
+                "TR_FED_HUELGA",
+                "TR_FED_HUELGA_PREST_RECL",
+                "TR_FED_INDIVIDUAL",
+                "TR_FED_INDIVIDUAL_PREST_RECL",
+                "TR_FED_ORDINARIO",
+                "TR_FED_ORDINARIO_PREST_RECL",
+                "TR_FED_PARAPROCESAL",
+                "TR_FED_PARAPROCESAL_PREST_RECL",
+                "TR_FED_SEG_SOCIAL",
+                "TR_FED_SEG_SOCIAL_PREST_RECL"
+            };
+
+            try {
+                // 1) BORRADO TR
+                try {
+                    new QueryProcedureTR_Fed().elimina_tr_fed();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PInsertTR.class.getName()).log(Level.SEVERE, null, ex);
+                    javax.swing.SwingUtilities.invokeLater(() ->
+                        JOptionPane.showMessageDialog(null, "Error al eliminar TR Federal: " + ex.getMessage()));
+                    return;
+                }
+
+                // 2) INSERCIÓN TR
+                StringBuilder resumen = new StringBuilder();
+                int totalGeneral = 0;
+
+                for (String tablaActual : tablasFed) {
+                    try {
+                        int registros = insertaTablaFederal(tablaActual);   
+                        totalGeneral += registros;
+                        resumen.append(tablaActual).append(": ").append(registros).append(" registros\n");
+                    } catch (Exception ex) {
+                        Logger.getLogger(PInsertTR.class.getName()).log(Level.SEVERE, null, ex);
+                        resumen.append(tablaActual).append(": ERROR - ").append(ex.getMessage()).append("\n");
+                    }
+                }
+
+                final String resumenFinal = resumen.toString();
+                final int total = totalGeneral;
+                javax.swing.SwingUtilities.invokeLater(()
+                        -> new Total_InsertadosTR().setVisible(true));
+            } finally {
+                javax.swing.SwingUtilities.invokeLater(() -> jButton1.setEnabled(true));
+            }
+        }).start();
+
+    } else { // Flujo actual de Estatal V3
              V3Querys pro=new V3Querys(); 
              String Estatus=pro.Estatus_TR(clave_entidad, clave_organo, periodo);
             new Thread(() -> {
@@ -620,7 +694,8 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
             } catch (IOException ex) {
                 Logger.getLogger(PInsertTMP.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }).start();      
+        }).start();    
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void Rclave_entidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rclave_entidadActionPerformed
@@ -705,7 +780,9 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
             R1.setVisible(true);
             R2.setVisible(true);
             R3.setVisible(true);
+            R4.setVisible(false);
             BD="Estatal";
+            jPanel1.setVisible(false);
             Centidad.removeAllItems();
             CorganoJur.removeAllItems();
         }
@@ -715,6 +792,15 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
     private void JOFederalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JOFederalActionPerformed
         // TODO add your handling code here:
         if(JOFederal.isSelected()){
+            if (!validarConexionFederal()){
+                buttonGroup2.clearSelection();   // Desmarca Federal
+                jButton1.setEnabled(false);      // Opcional
+                return;
+            }
+            R1.setVisible(false);
+            R2.setVisible(false);
+            R3.setVisible(false);
+            R4.setVisible(true);
             BD="Federal";
             Centidad.removeAllItems();
             CorganoJur.removeAllItems();
@@ -732,21 +818,56 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-       Valores();
-        if (!ventanaAbierta) {
-            Errores_InsertTR Error = new Errores_InsertTR();
-            ventanaAbierta = true;
-            Error.setVisible(true);
+        if (BD.equals("Federal") && Versiones.equals("0.0")) {   // <-- NUEVO: rama Federal
+            if (!ventanaAbierta) {
+                PErrores_InsertTR_Fed ErrorFed = new PErrores_InsertTR_Fed();
+                ventanaAbierta = true;
+                ErrorFed.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "La ventana de errores de insert ya está abierta.");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "La ventana de errores de insert ya está abierta.");
-        }
 
+            Valores();
+            if (!ventanaAbierta) {
+                Errores_InsertTR Error = new Errores_InsertTR();
+                ventanaAbierta = true;
+                Error.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "La ventana de errores de insert ya está abierta.");
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void Textoperiodo1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Textoperiodo1KeyReleased
         // TODO add your handling code here:
         Valores();
     }//GEN-LAST:event_Textoperiodo1KeyReleased
+
+    private void R4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_R4ActionPerformed
+        if (R4.isSelected()) {
+            Versiones = "";
+            Versiones = "0.0";
+            
+            jPanel1.setVisible(true); 
+            
+            // ocultacion de componentes que no se van a utilizar 
+            Lname.setVisible(false);
+            CTablas1.setVisible(false);
+            jLabel1.setVisible(false);
+            CTablas.setVisible(false);
+            LEntidad2.setVisible(false);
+            Rclave_entidad.setVisible(false);
+            Rclave_organo.setVisible(false);
+            Centidad.setVisible(false);
+            Jentidad.setVisible(false);
+            Jorgano.setVisible(false);
+            CorganoJur.setVisible(false);
+            jLabel4.setVisible(false);
+            Textoperiodo1.setVisible(false);
+            jButton2.setVisible(false);
+        }
+    }//GEN-LAST:event_R4ActionPerformed
   
      public  void Valores(){
         if(Rclave_organo.isSelected())
@@ -833,6 +954,11 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
         testProc.add("PARAPROCESAL");
         testProc.add("EJECUCION");
         } 
+         if (Versiones.equals("0.0")) {
+            System.out.println(Versiones);
+            testList.clear();
+            testProc.clear();
+        }
          CTablas1.removeAllItems();
          
          for (int i=0;i<testProc.size();i++){
@@ -1062,6 +1188,75 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
     }
         
     }
+
+     
+     private boolean validarConexionFederal() {
+        Connection conTest = null;
+
+        try {
+            conTest = Conexion.OracleDAOFactoryFED.creaConexion();
+
+            if (conTest != null && !conTest.isClosed()) {
+                System.out.println("Conexion Federal confirmada -> ");
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al conectar con la BD Federal:\n" + ex.getMessage());
+        } finally {
+            if (conTest != null) {
+                try {
+                    conTest.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+
+        return false;
+    }
+     
+    // NUEVO: método de mapeo tabla -> clase/método correspondiente -- federal
+    private int insertaTablaFederal(String tabla) throws Exception {
+        switch (tabla) {
+            case "TR_FED_AUDIENCIAS":
+                return new LeerQuery.beans.federal.TR_FED_AUDIENCIAS().IN_FED_AUDIENCIAS();
+            case "TR_FED_COLECTIVO":
+                return new LeerQuery.beans.federal.TR_FED_COLECTIVO().IN_FED_COLECTIVO();
+            case "TR_FED_COLECTIVO_ECONOMICO":
+                return new LeerQuery.beans.federal.TR_FED_COLECTIVO_ECONOMICO().IN_FED_COLECTIVO_ECONOMICO();
+            case "TR_FED_COLECTIVO_ECONOMICO_PREST_RECL":
+                return new LeerQuery.beans.federal.TR_FED_COLECTIVO_ECONOMICO_PREST_RECL().IN_FED_COLECTIVO_ECONOMICO_PREST_RECL();
+            case "TR_FED_COLECTIVO_PREST_RECL":
+                return new LeerQuery.beans.federal.TR_FED_COLECTIVO_PREST_RECL().IN_FED_COLECTIVO_PREST_RECL();
+            case "TR_FED_CONTROL_EXPEDIENTE":
+                return new LeerQuery.beans.federal.TR_FED_CONTROL_EXPEDIENTE().IN_FED_CONTROL_EXPEDIENTE();
+            case "TR_FED_EJECUCION":
+                return new LeerQuery.beans.federal.TR_FED_EJECUCION().IN_FED_EJECUCION();
+            case "TR_FED_HUELGA":
+                return new LeerQuery.beans.federal.TR_FED_HUELGA().IN_FED_HUELGA();
+            case "TR_FED_HUELGA_PREST_RECL":
+                return new LeerQuery.beans.federal.TR_FED_HUELGA_PREST_RECL().IN_FED_HUELGA_PREST_RECL();
+            case "TR_FED_INDIVIDUAL":
+                return new LeerQuery.beans.federal.TR_FED_INDIVIDUAL().IN_FED_INDIVIDUAL();
+            case "TR_FED_INDIVIDUAL_PREST_RECL":
+                return new LeerQuery.beans.federal.TR_FED_INDIVIDUAL_PREST_RECL().IN_FED_INDIVIDUAL_PREST_RECL();
+            case "TR_FED_ORDINARIO":
+                return new LeerQuery.beans.federal.TR_FED_ORDINARIO().IN_FED_ORDINARIO();
+            case "TR_FED_ORDINARIO_PREST_RECL":
+                return new LeerQuery.beans.federal.TR_FED_ORDINARIO_PREST_RECL().IN_FED_ORDINARIO_PREST_RECL();
+            case "TR_FED_PARAPROCESAL":
+                return new LeerQuery.beans.federal.TR_FED_PARAPROCESAL().IN_FED_PARAPROCESAL();
+            case "TR_FED_PARAPROCESAL_PREST_RECL":
+                return new LeerQuery.beans.federal.TR_FED_PARAPROCESAL_PREST_RECL().IN_FED_PARAPROCESAL_PREST_RECL();
+            case "TR_FED_SEG_SOCIAL":
+                return new LeerQuery.beans.federal.TR_FED_SEG_SOCIAL().IN_FED_SEG_SOCIAL();
+            case "TR_FED_SEG_SOCIAL_PREST_RECL":
+                return new LeerQuery.beans.federal.TR_FED_SEG_SOCIAL_PREST_RECL().IN_FED_SEG_SOCIAL_PREST_RECL();
+            default:
+                throw new IllegalArgumentException("Tabla no reconocida: " + tabla);
+        }
+    }
     
     
     /**
@@ -1114,6 +1309,7 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
     private javax.swing.JRadioButton R1;
     private javax.swing.JRadioButton R2;
     private javax.swing.JRadioButton R3;
+    private javax.swing.JRadioButton R4;
     private javax.swing.JRadioButton Rclave_entidad;
     private javax.swing.JRadioButton Rclave_organo;
     public javax.swing.JTextField Textoperiodo1;

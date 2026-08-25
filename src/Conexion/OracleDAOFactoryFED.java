@@ -27,6 +27,11 @@ public class OracleDAOFactoryFED {
         
         try {
             conn = DriverManager.getConnection("jdbc:oracle:thin:@cegopro_bd.inegi.gob.mx:1521/cegopro.inegi.gob.mx","ral_ijf_2024","ral_ijf_2024");
+            if (conn != null) {
+                System.out.println("Conexion Federal exitosa!");
+            } else {
+                System.out.println("Conexion Federal fallida!");
+            }
         } catch (SQLException ex) {
             Logger.getLogger(OracleDAOFactoryFED.class.getName()).log(Level.SEVERE, null, ex);
         }

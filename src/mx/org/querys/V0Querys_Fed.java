@@ -45,5 +45,29 @@ public class V0Querys_Fed {
 
         return Array;
     }
+    
+    public ArrayList Clave_organoTR() {
+        conexion.ConectarFed();
+        Array = new ArrayList();
+
+        sql = "SELECT DISTINCT CLAVE_ORGANO \n"
+                + "FROM TR_FED_CONTROL_EXPEDIENTE \n"
+                + "ORDER BY CLAVE_ORGANO";
+
+        System.out.println(sql);
+        resul = conexion.consultarFed(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V0Querys_Fed.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return Array;
+    }
 
 }

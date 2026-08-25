@@ -70,14 +70,23 @@ public class ReadCSV_Huelga_Fed {
                 int numeroColumnas = 0;
                 CSVRecord firstRecord = csvParser.iterator().next();
                 numeroColumnas = firstRecord.size();
-                System.out.println("numcol" + numeroColumnas);
+                System.out.println("numcol " + numeroColumnas);
                 if (numeroColumnas == 28) {
                     System.out.println("+hellooou+" + numeroColumnas);
                     cargando cargar = new cargando();
                     ArrayList<BeanHuelga> ad = new ArrayList<>();
+                    int filaDebug = 0;  
                     for (CSVRecord record : csvParser) {
+                        filaDebug++;
                         if (detectarCharsetFed.esFilaVacia(record, "TMP_FED_HUELGA")) {
                             continue;
+                        }
+                        if (record.size() != 28) {
+                            System.out.println("FILA " + filaDebug + " tiene " + record.size() + " columnas:");
+                            for (int i = 0; i < record.size(); i++) {
+                                System.out.println("  Col[" + i + "] = " + record.get(i));
+                            }
+                            continue; // saltamos esta fila para que no truene el record.get(27) más abajo
                         }
                         TotalRegistros++;
                         BeanHuelga c = new BeanHuelga();

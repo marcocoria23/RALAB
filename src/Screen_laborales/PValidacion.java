@@ -15,6 +15,7 @@ import Exportar_Valida.V1Validaciones;
 import Exportar_Valida.V2ValidacionesNE;
 import Exportar_Valida.V3validaciones;
 import Exportar_Valida.FED_V1validaciones;
+import Exportar_Valida.RFValidaciones;
 import java.awt.Color;
 import mx.org.querys.NotNull_Estruc_Definitiva.EDQueryGenerales;
 import mx.org.querys.V2querysNE;
@@ -34,6 +35,7 @@ public static String version="",versionF="",BD="",clave_entidad="",clave_organo=
 public static int Maximo=0;
 String Clave_organo;
  ArrayList<String[]> ArrayClave_organo,ArrayClave_entidad;
+ private boolean modoRFed = false;
  V1querys query=new V1querys();//Intanciar clase V1querys con nombre query
  V2querysNE queryNE=new V2querysNE();//Intanciar clase V2querysNE con nombre queryNE
  V3Querys V3queryNE=new V3Querys();//Intanciar clase V3querys con nombre V3queryNE
@@ -47,8 +49,8 @@ String Clave_organo;
  V3validaciones V3ValidaNE= new V3validaciones();
  EDValidaciones EDvalida=new EDValidaciones();
  FED_V1validaciones FedValida=new FED_V1validaciones();
- 
     
+ 
     public PValidacion() {
         initComponents();
         this.setLocationRelativeTo(null);//JFRAME LOCALIZACION AL CENTRO DE LA PANTALLA
@@ -64,6 +66,8 @@ String Clave_organo;
         JT2.setVisible(false);
         JL1.setVisible(false);
         Pversiones.setVisible(false);
+        RFed.setVisible(false);
+        jButton1.setVisible(false);
         JT1.setText("01/09/2021");
         JT2.setText("01/08/2022");
     
@@ -112,6 +116,7 @@ String Clave_organo;
         Rver3 = new javax.swing.JRadioButton();
         Rver4 = new javax.swing.JRadioButton();
         RProd = new javax.swing.JRadioButton();
+        RFed = new javax.swing.JRadioButton();
         JL1 = new javax.swing.JLabel();
         JT1 = new javax.swing.JTextField();
         JT2 = new javax.swing.JTextField();
@@ -396,6 +401,14 @@ String Clave_organo;
             }
         });
 
+        buttonGroup2.add(RFed);
+        RFed.setText("Estructura Ver. 0.0");
+        RFed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RFedActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PversionesLayout = new javax.swing.GroupLayout(Pversiones);
         Pversiones.setLayout(PversionesLayout);
         PversionesLayout.setHorizontalGroup(
@@ -403,16 +416,15 @@ String Clave_organo;
             .addGroup(PversionesLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Rver3)
-                    .addGroup(PversionesLayout.createSequentialGroup()
-                        .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Rver1)
-                            .addComponent(Rver2))
-                        .addGap(42, 42, 42)
-                        .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RProd, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Rver4))))
-                .addContainerGap(255, Short.MAX_VALUE))
+                    .addComponent(Rver1)
+                    .addComponent(Rver2)
+                    .addComponent(Rver3))
+                .addGap(42, 42, 42)
+                .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(RProd, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Rver4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RFed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PversionesLayout.setVerticalGroup(
             PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,7 +438,9 @@ String Clave_organo;
                     .addComponent(Rver2)
                     .addComponent(RProd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Rver3)
+                .addGroup(PversionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Rver3)
+                    .addComponent(RFed))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -561,32 +575,40 @@ String Clave_organo;
     private void Rver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rver2ActionPerformed
         // TODO add your handling code here:
         //EVENTO AL SELECCIONAR RADIO BUTTON Estructura Ver. 2.0 SE ASIGNA VARIABLE version=2.0 corre proceso LLENACOMBO() Y LLENACOMBOENTIDAD()
-        if(Rver2.isSelected()){
+        if(Rver2.isSelected()) {
+            if (modoRFed) {
+                restaurarAgrupamiento();
+            }
             PAgrupamiento.setVisible(true);
            version="";
             version="2.0";
-             llenaCombo();
+             llenaCombo();  
              llenaComboEntidad();
         }
     }//GEN-LAST:event_Rver2ActionPerformed
 
     private void Rver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rver1ActionPerformed
         // TODO add your handling code here:
-       //EVENTO AL SELECCIONAR RADIO BUTTON Estructura Ver. 2.0 SE ASIGNA VARIABLE version=2.0 corre proceso LLENACOMBO() Y LLENACOMBOENTIDAD()
-        if((Rver1.isSelected()) &&  (BD.equals("Estatal"))){
-            PAgrupamiento.setVisible(true);
-            version="";
-            version="1.0";
-             llenaCombo();
-             llenaComboEntidad();
+        if (modoRFed) {
+            restaurarAgrupamiento();
         }
-         if((Rver1.isSelected()) &&  (BD.equals("Federal"))){
-            PAgrupamiento.setVisible(true);
-            version="";
-            version="1.0";
-             llenaCombo();
-             llenaComboEntidad();
-        }
+
+    if((Rver1.isSelected()) &&  (BD.equals("Estatal"))){
+        PAgrupamiento.setVisible(true);
+        jButton1.setVisible(true);
+        version="";
+        version="1.0";
+        llenaCombo();
+        llenaComboEntidad();
+    }
+    if((Rver1.isSelected()) &&  (BD.equals("Federal"))){
+        PAgrupamiento.setVisible(true);
+        jButton1.setVisible(true);
+        version="";
+        version="1.0";
+        llenaCombo();
+        llenaComboEntidad();
+    }
         
         
     }//GEN-LAST:event_Rver1ActionPerformed
@@ -758,6 +780,22 @@ String Clave_organo;
     //boton de validacion al dar click corre clase V1Validaciones,V2Validaciones o V3validaciones segun la version seleccionada
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if (modoRFed) {
+
+            new Thread(() -> {
+                try {
+
+                    System.out.println("ENTRO A VALIDAR RFed");
+
+                    RFValidaciones VOQFValida = new RFValidaciones();
+                    VOQFValida.Valida_LaboralesFED();
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }).start();
+            return;
+        }
       
 new Thread(() -> {
     //Aquí ejecutamos nuestras tareas costosas
@@ -1047,8 +1085,12 @@ public void NEntidad_COrgano(){
     //evento para asignar la version al seleccionar radiobutton Estrucutura ver 3.0
     private void Rver3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rver3ActionPerformed
         // TODO add your handling code here:
-           if(Rver3.isSelected()){
+           if(Rver3.isSelected()) {
+               if (modoRFed) {
+                   restaurarAgrupamiento();
+               }
             PAgrupamiento.setVisible(true);
+            jButton1.setVisible(true);
            version="";
             version="3.0";
              llenaCombo();
@@ -1080,14 +1122,18 @@ public void NEntidad_COrgano(){
     private void JOEstatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JOEstatalActionPerformed
         // TODO add your handling code here:
          if(JOEstatal.isSelected()){
-            Rver2.setVisible(true);
-            Rver3.setVisible(true);
-            Rver4.setVisible(true);
-            Pversiones.setVisible(true);
-            BD="Estatal";
-            Centidad.removeAllItems();
-            CorganoJur.removeAllItems();
-        }
+        Rver2.setVisible(true);
+        Rver3.setVisible(true);
+        Rver4.setVisible(true);
+        Pversiones.setVisible(true);
+        BD="Estatal";
+        Centidad.removeAllItems();
+        CorganoJur.removeAllItems();
+        
+        RFed.setVisible(false);
+        RFed.setSelected(false);
+        modoRFed = false;
+    }
         
         
     }//GEN-LAST:event_JOEstatalActionPerformed
@@ -1095,19 +1141,27 @@ public void NEntidad_COrgano(){
     private void JOFederalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JOFederalActionPerformed
         // TODO add your handling code here:
          if(JOFederal.isSelected()){
-            Rver2.setVisible(false);
-            Rver3.setVisible(false);
-            Pversiones.setVisible(true);
-            BD="Federal";
-            Centidad.removeAllItems();
-            CorganoJur.removeAllItems();
-        }
+        Rver2.setVisible(false);
+        Rver3.setVisible(false);
+        Pversiones.setVisible(true);
+        BD="Federal";
+        Centidad.removeAllItems();
+        CorganoJur.removeAllItems();
+        
+        RFed.setVisible(true);
+        modoRFed = false;
+    }
     }//GEN-LAST:event_JOFederalActionPerformed
 
     private void Rver4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rver4ActionPerformed
         // TODO add your handling code here:
-           if(Rver4.isSelected()){
+
+        if (modoRFed) {
+            restaurarAgrupamiento();
+        }
+           if(Rver4.isSelected()) {
             PAgrupamiento.setVisible(true);
+            jButton1.setVisible(true);
            version="";
             version="Estructura_Definitiva";
              llenaCombo();
@@ -1125,8 +1179,12 @@ public void NEntidad_COrgano(){
 
     private void RProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RProdActionPerformed
         // TODO add your handling code here:
-         if(RProd.isSelected()){
+        if (modoRFed) {
+            restaurarAgrupamiento();
+        }
+         if(RProd.isSelected()) {
             PAgrupamiento.setVisible(true);
+            jButton1.setVisible(true);
            version="";
            version="3.0";
            //PValProd="BD_PROD";
@@ -1135,6 +1193,66 @@ public void NEntidad_COrgano(){
         }
     }//GEN-LAST:event_RProdActionPerformed
 
+    private void RFedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RFedActionPerformed
+        // TODO add your handling code here:
+        if (RFed.isSelected()) {
+
+            modoRFed = true;
+
+            // RFed solamente funciona para Federal
+            BD = "Federal";
+            version = "";
+
+            // PAgrupamiento permanece visible
+            PAgrupamiento.setVisible(true);
+
+            // Ocultar elementos que no utiliza RFed
+            Rclave_organo.setVisible(false);
+            Rclave_entidad.setVisible(false);
+
+            Jentidad.setVisible(false);
+            Centidad.setVisible(false);
+
+            Jorgano.setVisible(false);
+            CorganoJur.setVisible(false);
+
+            LEntidad.setVisible(false);
+            LEntidad2.setVisible(false);
+            jLabel4.setVisible(false);
+            jLabel5.setVisible(false);
+
+            Textoperiodo1.setVisible(false);
+            Textoperiodo2.setVisible(false);
+
+            jButton2.setVisible(false);
+
+            // El único botón visible es Validar
+            jButton1.setVisible(true);
+        }
+    }//GEN-LAST:event_RFedActionPerformed
+    private void restaurarAgrupamiento() {
+        modoRFed = false;
+
+        Rclave_organo.setVisible(true);
+        Rclave_entidad.setVisible(true);
+
+        Jentidad.setVisible(true);
+        Centidad.setVisible(true);
+
+        Jorgano.setVisible(true);
+        CorganoJur.setVisible(true);
+
+        LEntidad.setVisible(true);
+        LEntidad2.setVisible(true);
+
+        Textoperiodo1.setVisible(true);
+        Textoperiodo2.setVisible(true);
+
+        jButton2.setVisible(true);
+
+        // jButton1 sigue siendo el botón general de Validar
+        jButton1.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */
@@ -1186,6 +1304,7 @@ public void NEntidad_COrgano(){
     public static javax.swing.JLabel Lable;
     public javax.swing.JPanel PAgrupamiento;
     public static javax.swing.JPanel Pversiones;
+    private javax.swing.JRadioButton RFed;
     private javax.swing.JRadioButton RProd;
     private javax.swing.JRadioButton Rclave_entidad;
     private javax.swing.JRadioButton Rclave_organo;
