@@ -46,6 +46,10 @@ public class ReadCSV_Ejecucion_Fed {
     public static String rutaCarpetaArchivos = "";
     OracleConexionRalFed conexion = new OracleConexionRalFed();
     Convertir_utf8 conUTF8 = new Convertir_utf8();
+    
+     private String sinNull(String valor) {
+    return valor == null || valor.equalsIgnoreCase("NULL") ? "" : valor;
+}
 
     public void IN_EJECUCION(String Ruta) throws Exception {
 
@@ -81,18 +85,18 @@ public class ReadCSV_Ejecucion_Fed {
                         }
                         TotalRegistros++;
                         BeanEjecucion c = new BeanEjecucion();
-                        c.NOMBRE_ORGANO_JURIS(record.get(0));
-                        c.ID_ORGANOJ(record.get(1));
-                        c.CLAVE_EXPEDIENTE(record.get(2));
-                        c.FECHA_APERTURA_EXPEDIENTE(record.get(3));
-                        c.PREG_MOTIV_CONVENI_CELE(record.get(4));
-                        c.PREG_MOTIV_MEDIA_PROMOC(record.get(5));
-                        c.PREG_MOTIV_LAUDO_ARBIT(record.get(6));
-                        c.PREG_MOTIV_RESOL_COLEC_NAT_ECO(record.get(7));
-                        c.FECHA_PRESENTACION(record.get(8));
-                        c.ID_ESTATUS_EXPED(record.get(9));
-                        c.FECHA_DICTO_SOLUCION(record.get(10));
-                        c.ID_FASE_CONCLU_EXPED(record.get(11));
+                        c.NOMBRE_ORGANO_JURIS(sinNull(record.get(0)));
+                        c.ID_ORGANOJ(sinNull(record.get(1)));
+                        c.CLAVE_EXPEDIENTE(sinNull(record.get(2)));
+                        c.FECHA_APERTURA_EXPEDIENTE(sinNull(record.get(3)));
+                        c.PREG_MOTIV_CONVENI_CELE(sinNull(record.get(4)));
+                        c.PREG_MOTIV_MEDIA_PROMOC(sinNull(record.get(5)));
+                        c.PREG_MOTIV_LAUDO_ARBIT(sinNull(record.get(6)));
+                        c.PREG_MOTIV_RESOL_COLEC_NAT_ECO(sinNull(record.get(7)));
+                        c.FECHA_PRESENTACION(sinNull(record.get(8)));
+                        c.ID_ESTATUS_EXPED(sinNull(record.get(9)));
+                        c.FECHA_DICTO_SOLUCION(sinNull(record.get(10)));
+                        c.ID_FASE_CONCLU_EXPED(sinNull(record.get(11)));
                         ad.add(c);
                     }
                     System.out.println("entro 1");

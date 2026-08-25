@@ -46,6 +46,10 @@ public class ReadCSV_Audiencias_Fed {
     public static String rutaCarpetaArchivos = "";
     OracleConexionRalFed conexion = new OracleConexionRalFed();
     Convertir_utf8 conUTF8 = new Convertir_utf8();
+    
+    private String sinNull(String valor) {
+    return valor == null || valor.equalsIgnoreCase("NULL") ? "" : valor;
+}
 
     public void IN_AUDIENCIAS(String Ruta) throws Exception {
 
@@ -81,15 +85,15 @@ public class ReadCSV_Audiencias_Fed {
                         }
                         TotalRegistros++;
                         BeanAudiencias c = new BeanAudiencias();
-                        c.NOMBRE_ORGANO_JURIS(record.get(0));
-                        c.ID_ORGANOJ(record.get(1));
-                        c.CLAVE_EXPEDIENTE(record.get(2));
-                        c.ID_PROCEDIMIENTO(record.get(3));
-                        c.ID_AUDIENCIA(record.get(4));
-                        c.ID_TIPO_AUDIENCIA(record.get(5));
-                        c.FECHA_CELEBRACION(record.get(6));
-                        c.DURACI_INICIO(record.get(7));
-                        c.DURACI_CONCLUSION(record.get(8));
+                        c.NOMBRE_ORGANO_JURIS(sinNull(record.get(0)));
+                        c.ID_ORGANOJ(sinNull(record.get(1)));
+                        c.CLAVE_EXPEDIENTE(sinNull(record.get(2)));
+                        c.ID_PROCEDIMIENTO(sinNull(record.get(3)));
+                        c.ID_AUDIENCIA(sinNull(record.get(4)));
+                        c.ID_TIPO_AUDIENCIA(sinNull(record.get(5)));
+                        c.FECHA_CELEBRACION(sinNull(record.get(6)));
+                        c.DURACI_INICIO(sinNull(record.get(7)));
+                        c.DURACI_CONCLUSION(sinNull(record.get(8)));
                         ad.add(c);
                     }
                     System.out.println("entro 1");

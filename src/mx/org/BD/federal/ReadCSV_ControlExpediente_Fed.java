@@ -46,6 +46,10 @@ public class ReadCSV_ControlExpediente_Fed {
     public static String rutaCarpetaArchivos = "";
     OracleConexionRalFed conexion = new OracleConexionRalFed();
     Convertir_utf8 conUTF8 = new Convertir_utf8();
+    
+    private String sinNull(String valor) {
+    return valor == null || valor.equalsIgnoreCase("NULL") ? "" : valor;
+}
 
     public void IN_CONTROL_EXPEDIENTE(String Ruta) throws Exception {
 
@@ -62,6 +66,8 @@ public class ReadCSV_ControlExpediente_Fed {
         boolean Inserta = true;
         con = OracleDAOFactoryFED.creaConexion();
         System.out.println("Conexion existosa: FEDERAL");
+        
+        
 
         try {
             Charset charset = detectarCharsetFed.detectarCharset(rutaArchivoCSV);
@@ -81,35 +87,35 @@ public class ReadCSV_ControlExpediente_Fed {
                         }
                         TotalRegistros++;
                         BeanControlExpediente c = new BeanControlExpediente();
-                        c.ID(record.get(0));
-                        c.NOMBRE_ORGANO_JURIS(record.get(1));
-                        c.ID_ORGANO(record.get(2));
-                        c.SEDE(record.get(3));
-                        c.JUECES_LABORAL_TOTAL(record.get(4));
-                        c.JUECES_LABORAL_TOT_HOM(record.get(5));
-                        c.JUECES_LABORAL_TOT_MUJ(record.get(6));
-                        c.HORARIO(record.get(7));
-                        c.ENTIDAD_NOMBRE(record.get(8));
-                        c.ENTIDAD_CLAVE(record.get(9));
-                        c.MUNICIPIO_NOMBRE(record.get(10));
-                        c.MUNICIPIO_CLAVE(record.get(11));
-                        c.DOMICILIO(record.get(12));
-                        c.LATITUD(record.get(13));
-                        c.LONGITUD(record.get(14));
-                        c.CIRCUNS_ORG_JUR(record.get(15));
-                        c.JURISDICCION(record.get(16));
-                        c.ORDINARIO(record.get(17));
-                        c.ESPECIAL_INDIVI(record.get(18));
-                        c.ESPECIAL_COLECT(record.get(19));
-                        c.HUELGA(record.get(20));
-                        c.SEGURIDAD_SOCIAL(record.get(21));
-                        c.COL_NATU_ECONOMICA(record.get(22));
-                        c.PARAP_VOLUNTARIO(record.get(23));
-                        c.EJECUCION(record.get(24));
-                        c.FECHA_ALTA(record.get(25));
-                        c.FECHA_BAJA(record.get(26));
-                        c.ACTIVO(record.get(27));
-                        c.OBSERVACIONES(record.get(28));
+                        c.ID(sinNull(record.get(0)));
+                        c.NOMBRE_ORGANO_JURIS(sinNull(record.get(1)));
+                        c.ID_ORGANO(sinNull(record.get(2)));
+                        c.SEDE(sinNull(record.get(3)));
+                        c.JUECES_LABORAL_TOTAL(sinNull(record.get(4)));
+                        c.JUECES_LABORAL_TOT_HOM(sinNull(record.get(5)));
+                        c.JUECES_LABORAL_TOT_MUJ(sinNull(record.get(6)));
+                        c.HORARIO(sinNull(record.get(7)));
+                        c.ENTIDAD_NOMBRE(sinNull(record.get(8)));
+                        c.ENTIDAD_CLAVE(sinNull(record.get(9)));
+                        c.MUNICIPIO_NOMBRE(sinNull(record.get(10)));
+                        c.MUNICIPIO_CLAVE(sinNull(record.get(11)));
+                        c.DOMICILIO(sinNull(record.get(12)));
+                        c.LATITUD(sinNull(record.get(13)));
+                        c.LONGITUD(sinNull(record.get(14)));
+                        c.CIRCUNS_ORG_JUR(sinNull(record.get(15)));
+                        c.JURISDICCION(sinNull(record.get(16)));
+                        c.ORDINARIO(sinNull(record.get(17)));
+                        c.ESPECIAL_INDIVI(sinNull(record.get(18)));
+                        c.ESPECIAL_COLECT(sinNull(record.get(19)));
+                        c.HUELGA(sinNull(record.get(20)));
+                        c.SEGURIDAD_SOCIAL(sinNull(record.get(21)));
+                        c.COL_NATU_ECONOMICA(sinNull(record.get(22)));
+                        c.PARAP_VOLUNTARIO(sinNull(record.get(23)));
+                        c.EJECUCION(sinNull(record.get(24)));
+                        c.FECHA_ALTA(sinNull(record.get(25)));
+                        c.FECHA_BAJA(sinNull(record.get(26)));
+                        c.ACTIVO(sinNull(record.get(27)));
+                        c.OBSERVACIONES(sinNull(record.get(28)));
                         ad.add(c);
                     }
                     System.out.println("entro 1");

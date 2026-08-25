@@ -47,6 +47,10 @@ public class ReadCSV_ColectivoEconomico_Fed {
     OracleConexionRalFed conexion = new OracleConexionRalFed();
     Convertir_utf8 conUTF8 = new Convertir_utf8();
 
+    private String sinNull(String valor) {
+    return valor == null || valor.equalsIgnoreCase("NULL") ? "" : valor;
+}
+    
     public void IN_COLECTIVO_ECONOMICO(String Ruta) throws Exception {
 
         String rutaArchivoCSV = Ruta;
@@ -81,39 +85,39 @@ public class ReadCSV_ColectivoEconomico_Fed {
                         }
                         TotalRegistros++;
                         BeanColectivoEconomico c = new BeanColectivoEconomico();
-                        c.NOMBRE_ORGANO_JURIS(record.get(0));
-                        c.ID_ORGANOJ(record.get(1));
-                        c.CLAVE_EXPEDIENTE(record.get(2));
-                        c.FECHA_APERTURA_EXPEDIENTE(record.get(3));
-                        c.ID_TIPO_ASUNTO(record.get(4));
-                        c.ID_NAT_CONFLICTO(record.get(5));
-                        c.RAMA_INVOLUC(record.get(6));
-                        c.ENTIDAD_ORGANO(record.get(7));
-                        c.ENTIDAD_PATRON(record.get(8));
-                        c.MUNICIPIO_PATRON(record.get(9));
-                        c.NUEVAS_COND_TRABAJO(record.get(10));
-                        c.AVISO_SUSP_COLECTIVA(record.get(11));
-                        c.PREG_INCOMPETENCIA(record.get(12));
-                        c.ID_TIPO_INCOMPETENCIA(record.get(13));
-                        c.FECHA_PRESENTACION(record.get(14));
-                        c.PREG_CONSTANCIA(record.get(15));
-                        c.PREG_EXCEP_CONCILIA(record.get(16));
-                        c.PREG_PREVENCION(record.get(17));
-                        c.ID_ESTATUS_DEMANDA(record.get(18));
-                        c.ID_CAUSA_IMP_DEM(record.get(19));
-                        c.FECHA_ADM_DEMANDA(record.get(20));
-                        c.CANT_ACTORES(record.get(21));
-                        c.CANT_DEMANDADOS(record.get(22));
-                        c.PREG_CELEBRA_AUD_ECONOM(record.get(23));
-                        c.FECHA_AUD_ECONOM(record.get(24));
-                        c.ID_ESTATUS_EXPED(record.get(25));
-                        c.FECHA_ULT_ACT_PROC(record.get(26));
-                        c.ID_FASE_SOL_EXPED(record.get(27));
-                        c.ID_FORMA_SOLUCION(record.get(28));
-                        c.FECHA_DICTO_SOLUCION(record.get(29));
-                        c.FECHA_SENTENCIA(record.get(30));
-                        c.ID_SENTIDO_SENTEN(record.get(31));
-                        c.ID_EFECTO_SENTENCIA(record.get(32));
+                       c.NOMBRE_ORGANO_JURIS(sinNull(record.get(0)));
+                        c.ID_ORGANOJ(sinNull(record.get(1)));
+                        c.CLAVE_EXPEDIENTE(sinNull(record.get(2)));
+                        c.FECHA_APERTURA_EXPEDIENTE(sinNull(record.get(3)));
+                        c.ID_TIPO_ASUNTO(sinNull(record.get(4)));
+                        c.ID_NAT_CONFLICTO(sinNull(record.get(5)));
+                        c.RAMA_INVOLUC(sinNull(record.get(6)));
+                        c.ENTIDAD_ORGANO(sinNull(record.get(7)));
+                        c.ENTIDAD_PATRON(sinNull(record.get(8)));
+                        c.MUNICIPIO_PATRON(sinNull(record.get(9)));
+                        c.NUEVAS_COND_TRABAJO(sinNull(record.get(10)));
+                        c.AVISO_SUSP_COLECTIVA(sinNull(record.get(11)));
+                        c.PREG_INCOMPETENCIA(sinNull(record.get(12)));
+                        c.ID_TIPO_INCOMPETENCIA(sinNull(record.get(13)));
+                        c.FECHA_PRESENTACION(sinNull(record.get(14)));
+                        c.PREG_CONSTANCIA(sinNull(record.get(15)));
+                        c.PREG_EXCEP_CONCILIA(sinNull(record.get(16)));
+                        c.PREG_PREVENCION(sinNull(record.get(17)));
+                        c.ID_ESTATUS_DEMANDA(sinNull(record.get(18)));
+                        c.ID_CAUSA_IMP_DEM(sinNull(record.get(19)));
+                        c.FECHA_ADM_DEMANDA(sinNull(record.get(20)));
+                        c.CANT_ACTORES(sinNull(record.get(21)));
+                        c.CANT_DEMANDADOS(sinNull(record.get(22)));
+                        c.PREG_CELEBRA_AUD_ECONOM(sinNull(record.get(23)));
+                        c.FECHA_AUD_ECONOM(sinNull(record.get(24)));
+                        c.ID_ESTATUS_EXPED(sinNull(record.get(25)));
+                        c.FECHA_ULT_ACT_PROC(sinNull(record.get(26)));
+                        c.ID_FASE_SOL_EXPED(sinNull(record.get(27)));
+                        c.ID_FORMA_SOLUCION(sinNull(record.get(28)));
+                        c.FECHA_DICTO_SOLUCION(sinNull(record.get(29)));
+                        c.FECHA_SENTENCIA(sinNull(record.get(30)));
+                        c.ID_SENTIDO_SENTEN(sinNull(record.get(31)));
+                        c.ID_EFECTO_SENTENCIA(sinNull(record.get(32)));
                         ad.add(c);
                     }
                     System.out.println("entro 1");

@@ -41,6 +41,10 @@ public class ReadCSV_Paraprocesal_Fed {
     public static String rutaCarpetaArchivos = "";
     OracleConexionRalFed conexion = new OracleConexionRalFed();
     Convertir_utf8 conUTF8 = new Convertir_utf8();
+    
+     private String sinNull(String valor) {
+    return valor == null || valor.equalsIgnoreCase("NULL") ? "" : valor;
+}
 
     public void IN_PARAPROCESAL(String Ruta) throws Exception {
 
@@ -76,26 +80,26 @@ public class ReadCSV_Paraprocesal_Fed {
                         }
                         TotalRegistros++;
                         BeanParaprocesal c = new BeanParaprocesal();
-                        c.NOMBRE_ORGANO_JURIS(record.get(0));
-                        c.ID_ORGANOJ(record.get(1));
-                        c.CLAVE_EXPEDIENTE(record.get(2));
-                        c.FECHA_APERTURA_EXPEDIENTE(record.get(3));
-                        c.RAMA_INVOLUC(record.get(4));
-                        c.PREG_NOTIFICACIONDELAVISODEREC(record.get(5));
-                        c.PREG_OTORGAMIENTOYCANCELACIOND(record.get(6));
-                        c.PREG_SUSPENSIONDELREPARTOADICI(record.get(7));
-                        c.PREG_AUTORIZACIONDEPERSONASMAY(record.get(8));
-                        c.PREG_EXPEDICIONDECONSTANCIASDE(record.get(9));
-                        c.PREG_RECEPCIONDEDINEROPORVIRTU(record.get(10));
-                        c.PREG_DEPOSITODELAINDEMNIZACION(record.get(11));
-                        c.INCOMPETENCIA(record.get(12));
-                        c.ID_TIPO_INCOMPETENCIA(record.get(13));
-                        c.FECHA_PRESENTACION(record.get(14));
-                        c.ID_ESTATUS_SOLI(record.get(15));
-                        c.FECHA_ADM_DEMANDA(record.get(16));
-                        c.ID_PROMOVENTE(record.get(17));
-                        c.ID_ESTATUS_EXPED(record.get(18));
-                        c.FECHA_DICTO_SOLUCION(record.get(19));
+                       c.NOMBRE_ORGANO_JURIS(sinNull(record.get(0)));
+                        c.ID_ORGANOJ(sinNull(record.get(1)));
+                        c.CLAVE_EXPEDIENTE(sinNull(record.get(2)));
+                        c.FECHA_APERTURA_EXPEDIENTE(sinNull(record.get(3)));
+                        c.RAMA_INVOLUC(sinNull(record.get(4)));
+                        c.PREG_NOTIFICACIONDELAVISODEREC(sinNull(record.get(5)));
+                        c.PREG_OTORGAMIENTOYCANCELACIOND(sinNull(record.get(6)));
+                        c.PREG_SUSPENSIONDELREPARTOADICI(sinNull(record.get(7)));
+                        c.PREG_AUTORIZACIONDEPERSONASMAY(sinNull(record.get(8)));
+                        c.PREG_EXPEDICIONDECONSTANCIASDE(sinNull(record.get(9)));
+                        c.PREG_RECEPCIONDEDINEROPORVIRTU(sinNull(record.get(10)));
+                        c.PREG_DEPOSITODELAINDEMNIZACION(sinNull(record.get(11)));
+                        c.INCOMPETENCIA(sinNull(record.get(12)));
+                        c.ID_TIPO_INCOMPETENCIA(sinNull(record.get(13)));
+                        c.FECHA_PRESENTACION(sinNull(record.get(14)));
+                        c.ID_ESTATUS_SOLI(sinNull(record.get(15)));
+                        c.FECHA_ADM_DEMANDA(sinNull(record.get(16)));
+                        c.ID_PROMOVENTE(sinNull(record.get(17)));
+                        c.ID_ESTATUS_EXPED(sinNull(record.get(18)));
+                        c.FECHA_DICTO_SOLUCION(sinNull(record.get(19)));
                         ad.add(c);
                     }
                     System.out.println("entro 1");
