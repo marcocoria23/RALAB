@@ -660,7 +660,7 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
                         resumen.append(tablaActual).append(": ERROR - ").append(ex.getMessage()).append("\n");
                     }
                 }
-
+                 jButton1.setEnabled(true);
                 final String resumenFinal = resumen.toString();
                 final int total = totalGeneral;
                 javax.swing.SwingUtilities.invokeLater(()
@@ -687,6 +687,7 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
              InsertTR tr = new InsertTR();
              tr.InsertaTR();
              carga.setVisible(false);
+             jButton1.setEnabled(true);
               }else
               {
                   JOptionPane.showMessageDialog(null, "Envio ya se encuentra liberado");

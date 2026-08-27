@@ -50,7 +50,7 @@ public class ReadCSV_Ordinario_Fed {
      private String sinNull(String valor) {
     return valor == null || valor.equalsIgnoreCase("NULL") ? "" : valor;
 }
-
+     
     public void IN_ORDINARIO(String Ruta) throws Exception {
 
         String rutaArchivoCSV = Ruta;
