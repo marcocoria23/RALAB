@@ -34,7 +34,7 @@ public class Errores_InsertTR extends javax.swing.JFrame {
      String[] errorarray;
      String part0 = "", part1 = "", part2 = "", part3 = "", part4 = "", part5 = "", part6 = "", part7 = "", part8 = "",T_reg="",T_regNI="",T_regTMP="",texto="";
      int TTRegNI=0;
-    public static String Ttabla="",Tclave_organo="",Tclave_expediente="",Tid="";
+    public static String Ttabla="",Tclave_organo="",Tclave_expediente="",Tid="",TPeriodo="";
     // JFrame f = new JFrame("Progreso Conteo Registristros TR");
      
     
@@ -241,11 +241,13 @@ public class Errores_InsertTR extends javax.swing.JFrame {
           Ttabla="";
           Tclave_organo="";
           Tclave_expediente="";
-          Tid="";      
+          Tid=""; 
+          TPeriodo="";
           Ttabla=model.getValueAt(selectedRowIndex, 0).toString();
           Tclave_organo=model.getValueAt(selectedRowIndex, 1).toString();
           Tclave_expediente=model.getValueAt(selectedRowIndex, 2).toString();
           Tid=model.getValueAt(selectedRowIndex, 3).toString();
+          TPeriodo=PInsertTR.periodo;
           Reg_NI Reg= new Reg_NI();
           Reg.setVisible(true);
          }

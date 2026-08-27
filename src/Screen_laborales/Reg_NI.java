@@ -68,7 +68,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_CONTROL_EXPEDIENTEJL\n" +
 "  WHERE CLAVE_ORGANO||PERIODO  NOT IN (SELECT CLAVE_ORGANO||PERIODO  FROM V3_TR_CONTROL_EXPEDIENTEJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' ) OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"' );");    
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"' ) OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"' );");    
         }
        if (Ttabla.equals("V3_TR_AUDIENCIASJL")){
            jTextArea1.setText("select * from(\n" +
@@ -91,7 +91,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_AUDIENCIASJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_AUDIENCIA  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_AUDIENCIA  FROM V3_TR_AUDIENCIASJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        } 
        if (Ttabla.equals("V3_TR_ORDINARIOJL")){
            jTextArea1.setText("select * from(\n" +
@@ -193,7 +193,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "FROM V3_TMP_ORDINARIOJL \n" +
 " WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_ORDINARIOJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }  
        if (Ttabla.equals("V3_TR_PART_ACT_ORDINARIOJL")){
            jTextArea1.setText("select * from(\n" +
@@ -227,7 +227,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_ACT_ORDINARIOJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  FROM V3_TR_PART_ACT_ORDINARIOJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }  
        if (Ttabla.equals("V3_TR_PART_DEM_ORDINARIOJL")){
            jTextArea1.setText("select * from(\n" +
@@ -256,7 +256,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_DEM_ORDINARIOJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  FROM V3_TR_PART_DEM_ORDINARIOJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }  
       if (Ttabla.equals("V3_TR_INDIVIDUALJL")){
            jTextArea1.setText("select * from(\n" +
@@ -342,7 +342,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "FROM V3_TMP_INDIVIDUALJL\n" +
 "WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_INDIVIDUALJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }   
        if (Ttabla.equals("V3_TR_PART_ACT_INDIVIDUALJL")){
            jTextArea1.setText("select * from(\n" +
@@ -364,7 +364,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_ACT_INDIVIDUALJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  FROM V3_TR_PART_ACT_INDIVIDUALJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }  
        if (Ttabla.equals("V3_TR_PART_DEM_INDIVIDUALJL")){
            jTextArea1.setText("select * from(\n" +
@@ -393,7 +393,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_DEM_INDIVIDUALJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  FROM V3_TR_PART_DEM_INDIVIDUALJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }  
     if (Ttabla.equals("V3_TR_COLECTIVOJL")){
            jTextArea1.setText("select * from(\n" +
@@ -469,7 +469,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_COLECTIVOJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_COLECTIVOJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
      if (Ttabla.equals("V3_TR_PART_ACT_COLECTIVOJL")){
            jTextArea1.setText("select * from(\n" +
@@ -509,7 +509,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_ACT_COLECTIVOJL  \n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  FROM V3_TR_PART_ACT_COLECTIVOJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
       if (Ttabla.equals("V3_TR_PART_DEM_COLECTIVOJL")){
            jTextArea1.setText("select * from(\n" +
@@ -549,7 +549,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_DEM_COLECTIVOJL  \n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  FROM V3_TR_PART_DEM_COLECTIVOJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
        if (Ttabla.equals("V3_TR_HUELGAJL")){
            jTextArea1.setText("select * from(\n" +
@@ -610,7 +610,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_HUELGAjl\n" +
 " WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_HUELGAJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
         if (Ttabla.equals("V3_TR_PART_ACT_HUELGAJL")){
            jTextArea1.setText("select * from(\n" +
@@ -636,7 +636,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_ACT_HUELGAJL \n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  FROM v3_tr_part_act_huelgajl) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
          if (Ttabla.equals("V3_TR_PART_DEM_HUELGAJL")){
            jTextArea1.setText("select * from(\n" +
@@ -665,7 +665,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_DEM_HUELGAJL \n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  FROM V3_TR_PART_DEM_HUELGAJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
           if (Ttabla.equals("V3_TR_COLECT_ECONOMJL")){
            jTextArea1.setText("select * from(\n" +
@@ -728,7 +728,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_COLECT_ECONOMJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_COLECT_ECONOMJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
            if (Ttabla.equals("V3_TR_PART_ACT_COLECT_ECONOMJL")){
            jTextArea1.setText("select * from(\n" +
@@ -769,7 +769,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_ACT_COLECT_ECONOMJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_ACTOR  FROM V3_TR_PART_ACT_COLECT_ECONOMJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
             if (Ttabla.equals("V3_TR_PART_DEM_COLECT_ECONOMJL")){
            jTextArea1.setText("select * from(\n" +
@@ -809,7 +809,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PART_DEM_COLECT_ECONOMJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO||ID_DEMANDADO  FROM V3_TR_PART_DEM_COLECT_ECONOMJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
              if (Ttabla.equals("V3_TR_TERCERIASJL")){
            jTextArea1.setText("select * from(\n" +
@@ -830,7 +830,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 " FROM V3_TMP_TERCERIASJL \n" +
 " WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_TERCERIASJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
               if (Ttabla.equals("V3_TR_PREF_CREDITOJL")){
            jTextArea1.setText("select * from(\n" +
@@ -851,7 +851,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PREF_CREDITOJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_PREF_CREDITOJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
                if (Ttabla.equals("V3_TR_PARAPROCESALJL")){
            jTextArea1.setText("select * from(\n" +
@@ -878,7 +878,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_PARAPROCESALJL\n" +
 "   WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_PARAPROCESALJL) --WHERE ANIO=p_anio) AND ANIO=p_anio\n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
                 if (Ttabla.equals("V3_TR_EJECUCIONJL")){
            jTextArea1.setText("select * from(\n" +
@@ -896,7 +896,7 @@ public class Reg_NI extends javax.swing.JFrame {
 "PERIODO\n" +
 "  FROM V3_TMP_EJECUCIONJL\n" +
 "  WHERE CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  NOT IN (SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE||PERIODO  FROM V3_TR_EJECUCIONJL) --WHERE ANIO=p_anio) AND ANIO=p_anio  \n" +
-" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"') OR SUBSTR(CLAVE_ORGANO,0,2) IN ('"+PInsertTR.clave_entidad+"');");
+" order by CLAVE_ORGANO)where CLAVE_ORGANO IN ('"+PInsertTR.clave_organo+"' and periodo='"+PInsertTR.periodo+"') OR SUBSTR(CLAVE_ORGANO,0,2 and periodo='"+PInsertTR.periodo+"') IN ('"+PInsertTR.clave_entidad+"');");
        }
     
     }
