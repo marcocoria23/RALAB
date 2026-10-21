@@ -279,12 +279,14 @@ public class V3QParaprocesal {
         conexion.Conectar();
         Array = new ArrayList();
         sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,TO_CHAR(FECHA_APERTURA_EXPEDIENTE,'DD/MM/YYYY')FECHA_APERTURA_EXPEDIENTE,TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))expediente_clave2,PERIODO FROM "+Con1+"TR_PARAPROCESAL"+Con2+"\n"
-                + "WHERE CLAVE_ORGANO||TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))||PERIODO\n"
+                + "WHERE EXTRACT(YEAR FROM FECHA_APERTURA_EXPEDIENTE) = EXTRACT(YEAR FROM SYSDATE) \n"
+                + "AND CLAVE_ORGANO||TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))||PERIODO\n"
                 + "IN(\n"
                 + "SELECT CLAVE_ORGANO||EXPEDIENTE_CLAVE2||PERIODO FROM(\n"
                 + "SELECT CLAVE_ORGANO,COUNT(expediente_clave2)CUENTAexpediente_clave2,expediente_clave2,PERIODO FROM(\n"
                 + "select CLAVE_ORGANO,expediente_clave,TO_NUMBER(regexp_replace(expediente_clave, '[^0-9]', ''))expediente_clave2,PERIODO from "+Con1+"TR_PARAPROCESAL"+Con2+" \n"
-                + "WHERE (SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "') or (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "')  \n"
+                + "WHERE ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "') or (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "')) \n"
+                + "AND EXTRACT(YEAR FROM FECHA_APERTURA_EXPEDIENTE) = EXTRACT(YEAR FROM SYSDATE) \n"
                 + "ORDER BY CLAVE_ORGANO,expediente_clave2)\n"
                 + "GROUP BY CLAVE_ORGANO,expediente_clave2,PERIODO)WHERE CUENTAexpediente_clave2>1)\n"
                 + "ORDER BY CLAVE_ORGANO,expediente_clave2";

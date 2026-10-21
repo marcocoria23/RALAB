@@ -75,7 +75,7 @@ public class ReadCSV_Huelga_Fed {
                 CSVRecord firstRecord = csvParser.iterator().next();
                 numeroColumnas = firstRecord.size();
                 System.out.println("numcol " + numeroColumnas);
-                if (numeroColumnas == 28) {
+                if (numeroColumnas == 34) {
                     System.out.println("+hellooou+" + numeroColumnas);
                     cargando cargar = new cargando();
                     ArrayList<BeanHuelga> ad = new ArrayList<>();
@@ -85,7 +85,7 @@ public class ReadCSV_Huelga_Fed {
                         if (detectarCharsetFed.esFilaVacia(record, "TMP_FED_HUELGA")) {
                             continue;
                         }
-                        if (record.size() != 28) {
+                        if (record.size() != 34) {
                             System.out.println("FILA " + filaDebug + " tiene " + record.size() + " columnas:");
                             for (int i = 0; i < record.size(); i++) {
                                 System.out.println("  Col[" + i + "] = " + record.get(i));
