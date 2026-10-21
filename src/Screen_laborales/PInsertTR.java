@@ -675,6 +675,12 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
              String Estatus=pro.Estatus_TR(clave_entidad, clave_organo, periodo);
             new Thread(() -> {
             Valores();
+            
+            // Condición anidada para la entidad de Veracruz y pueda ejecutar el procedimiento 
+            String entidadEfectivaVer = !clave_entidad.isEmpty()
+            ? clave_entidad
+            : (clave_organo.length() >= 2 ? clave_organo.substring(0, 2) : "");
+            
             try {
               if (Estatus.equals("I") || Estatus.equals("")){    
              cargando carga= new cargando();
@@ -686,6 +692,17 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
              carga.setVisible(true);
              InsertTR tr = new InsertTR();
              tr.InsertaTR();
+             
+             // Procedimiento para la actualizacion de datos solo para veracruz 
+             if("30".equals(entidadEfectivaVer)){
+                 System.out.println("Entro if procedimiento Veracruz" + entidadEfectivaVer);
+                 try{
+                     procedure.Actualiza_Datos_Veracruz();
+                     System.out.println("Se ejecutó procedimiento de Veracruz");
+                 }catch(SQLException  ex){
+                     Logger.getLogger(PInsertTR.class.getName()).log(Level.SEVERE, null, ex);
+                 }
+             }
              carga.setVisible(false);
              jButton1.setEnabled(true);
               }else
@@ -895,7 +912,7 @@ FedV1Querys V1FedQuerys=new FedV1Querys();
            
         }
     }
-    
+     
     
      public void lLCTablas(){
        jPanel1.setVisible(true);
