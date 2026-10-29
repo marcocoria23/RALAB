@@ -22,7 +22,10 @@ import LeerQuery.beans.TMP_TR_EXP_SUSPENSION;
 import LeerQuery.beans.TMP_TR_EXP_TERMINACION;
 import LeerQuery.beans.TMP_TR_EXP_VIOLACION;
 import LeerQuery.beans.TMP_TR_GENERAL;
+import LeerQuery.beans.TMP_TR_JUSTIFICANTE;
 import LeerQuery.beans.TMP_TR_ORGANOJ;
+import LeerQuery.beans.TMP_TR_RESGUARDO_DETALLE;
+import LeerQuery.beans.TMP_TR_RESGUARDO_EXPEDIENTE;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -446,6 +449,10 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
         TMP_TR_EXP_ACTOR    tmp_tr_exp_actor  = new TMP_TR_EXP_ACTOR();
         TMP_TR_EXP_DEMANDADO   tmp_tr_exp_demandado = new TMP_TR_EXP_DEMANDADO();
         TMP_TR_ESPECIFIQUE   tmp_tr_especifique = new TMP_TR_ESPECIFIQUE();
+        // Se agrega para las tablas nuevas 
+        TMP_TR_JUSTIFICANTE tmp_tr_justificantes = new TMP_TR_JUSTIFICANTE();
+        TMP_TR_RESGUARDO_DETALLE tmp_tr_resguardo_detalle = new TMP_TR_RESGUARDO_DETALLE();
+        TMP_TR_RESGUARDO_EXPEDIENTE tmp_tr_resguardo_expediente =  new TMP_TR_RESGUARDO_EXPEDIENTE();
         procesando carga= new procesando();
         QueryRalabDes queryRalabDes  = new  QueryRalabDes();
         PConPerProcesar per = new PConPerProcesar();
@@ -541,7 +548,22 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                           //TR_ESPECIFIQUE
                          ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique(cveEntidad, periodo , "",BDProductos);
                          if( !listaRegistrosEspecifique.isEmpty() )
-                         tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
+                         tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique); 
+                           // Se agrega para las tablas nuevas 
+                           // TR_RESGUARDO_EXPEDIENTE 
+                           ArrayList<ArrayList<String>> listaRegistrosResgExp = queryLaboral.DBO_Tr_Resguardo_Expediente(cveEntidad, periodo, "", BDProductos);
+                           if (!listaRegistrosResgExp.isEmpty()) {
+                               tmp_tr_resguardo_expediente.TMP_TR_RESGUARDO_EXPEDIENTE(listaRegistrosResgExp);
+                           }
+                           // TR_RESGUARDO_DETALLE 
+                           ArrayList<ArrayList<String>> listaRegistrosResgDet = queryLaboral.DBO_Tr_Resguardo_Detalle(cveEntidad, periodo, "", BDProductos);
+                           if (!listaRegistrosResgDet.isEmpty()) {
+                               tmp_tr_resguardo_detalle.TMP_TR_RESGUARDO_DETALLE(listaRegistrosResgDet);
+                           }
+                           // TR_JUSTIFICANTE
+                           ArrayList<ArrayList<String>> listaRegistrosJustificante = queryLaboral.DBO_Tr_Justificante(cveEntidad, periodo, "", BDProductos);
+                           if (!listaRegistrosJustificante.isEmpty())
+                               tmp_tr_justificantes.TMP_TR_JUSTIFICANTE(listaRegistrosJustificante);
                          queryRalabDes.merge_id_expediente(cveEntidad, "", periodo);
                          queryRalabDes.enable_tr_exp_pk_ralalb();   
                          queryRalabDes.act_esp_procedure(cveEntidad, "", periodo);
@@ -567,6 +589,9 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                                     queryLaboral.DBO_Tr_Exp_Actor_Inserts(cveEntidad, "" , periodo , sqlVirgenTemporal);
                                     queryLaboral.DBO_Tr_Exp_Demandado_Inserts(cveEntidad, "" , periodo , sqlVirgenTemporal);
                                     queryLaboral.DBO_Tr_Especifique_Inserts(cveEntidad, "" , periodo , sqlVirgenTemporal);
+                                    queryLaboral.DBO_Tr_Justificante_Inserts(cveEntidad, "", periodo, sqlVirgenTemporal); // Se agrega para las tablas nuevas 
+                                    queryLaboral.DBO_Tr_Resguardo_Detalle_Inserts(cveEntidad, "", periodo, sqlVirgenTemporal);
+                                    queryLaboral.DBO_Tr_Resguardo_Expediente_Inserts(cveEntidad, "", periodo, sqlVirgenTemporal);
                                     JFileChooser fileChooser = new JFileChooser();
                                     fileChooser.setDialogTitle("Guardar archivo de texto");
                                     String nombreArchivo = "MIG-DEFAULT LIBERADO.sql";
@@ -621,7 +646,6 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
               JOptionPane.showMessageDialog(null, "Para procesar la información, se debe ingresar la entidad y el periodo, favor de verificar ", "Mensaje", JOptionPane.ERROR_MESSAGE);  
              
          }
-        //derechos de autor la webona
          if(   Rclave_organo.isSelected() ){
             String clavOrgano = (String)  CorganoJur.getSelectedItem();
             String periodo    = Textoperiodo1.getText(); 
@@ -712,6 +736,19 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                          //TR_ESPECIFIQUE
                          if( !listaRegistrosEspecifique.isEmpty() )
                          tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
+                         // Se agrega para las tablas nuevas 
+                         // TR_JUSTIFICANTE
+                         ArrayList<ArrayList<String>> listaRegistrosJustificaciones = queryLaboral.DBO_Tr_Justificante("", periodo , clavOrgano,BDProductos);
+                         if(!listaRegistrosJustificaciones.isEmpty())
+                             tmp_tr_justificantes.TMP_TR_JUSTIFICANTE(listaRegistrosJustificaciones);
+                         // TR_RESGUARDO_DETALLE
+                         ArrayList<ArrayList<String>> listaRegistrosResgDetalle = queryLaboral.DBO_Tr_Resguardo_Detalle("", periodo , clavOrgano,BDProductos);
+                         if(!listaRegistrosResgDetalle.isEmpty())
+                             tmp_tr_resguardo_detalle.TMP_TR_RESGUARDO_DETALLE(listaRegistrosResgDetalle);
+                         // TR_RESGUARDO_EXPEDIENTE
+                         ArrayList<ArrayList<String>> listaRegistrosResgExpediente = queryLaboral.DBO_Tr_Resguardo_Expediente("", periodo , clavOrgano,BDProductos);
+                         if(!listaRegistrosResgExpediente.isEmpty())
+                             tmp_tr_resguardo_expediente.TMP_TR_RESGUARDO_EXPEDIENTE(listaRegistrosResgExpediente);
                             queryRalabDes.merge_id_expediente(null,  clavOrgano , periodo);
                          queryRalabDes.enable_tr_exp_pk_ralalb(); 
                          queryRalabDes.act_esp_procedure("", clavOrgano, periodo);
@@ -737,6 +774,9 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                              queryLaboral.DBO_Tr_Exp_Actor_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Exp_Demandado_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Especifique_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
+                             queryLaboral.DBO_Tr_Justificante_Inserts("", clavOrgano , periodo , sqlVirgenTemporal); // Se agregan para las tablas nuevas 
+                             queryLaboral.DBO_Tr_Resguardo_Detalle_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
+                             queryLaboral.DBO_Tr_Resguardo_Expediente_Inserts("", clavOrgano , periodo , sqlVirgenTemporal);
                              JFileChooser fileChooser = new JFileChooser();
                              fileChooser.setDialogTitle("Guardar archivo de texto");
                              String nombreArchivo = "MIG-DEFAULT LIBERADO.sql";
@@ -783,6 +823,7 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
             else 
               JOptionPane.showMessageDialog(null, "Para procesar la información, se debe ingresar la entidad y el periodo, favor de verificar ", "Mensaje", JOptionPane.ERROR_MESSAGE);  
         }
+         /*
           if(   Rclave_organo1.isSelected() ){
                if(!ClaveOrgano.getText().equals("") ){
                 String[] clavOrgano =   ClaveOrgano.getText().split(",");
@@ -884,6 +925,21 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                          ArrayList<ArrayList<String>> listaRegistrosEspecifique =  queryLaboral.DBO_Tr_Especifique("", "" , filtro,BDProductos );
                          if( !listaRegistrosEspecifique.isEmpty() )
                          tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaRegistrosEspecifique);
+                           // Se agrega para tablas nuevas 
+                           // TR_JUSTIFICANTE
+                           ArrayList<ArrayList<String>> listaRegistrosJustificante = queryLaboral.DBO_Tr_Justificante("", "", filtro, BDProductos);
+                           if (!listaRegistrosJustificante.isEmpty()) {
+                               tmp_tr_justificantes.TMP_TR_JUSTIFICANTE(listaRegistrosJustificante);
+                           }
+                           // TR_RESGUARDO_DETALLE
+                           ArrayList<ArrayList<String>> listaRegistrosResgDetalle = queryLaboral.DBO_Tr_Resguardo_Detalle("", "", filtro, BDProductos);
+                           if (!listaRegistrosResgDetalle.isEmpty()) {
+                               tmp_tr_resguardo_detalle.TMP_TR_RESGUARDO_DETALLE(listaRegistrosResgDetalle);
+                           }
+                           // TR_RESGUARDO_EXPEDIENTE
+                           ArrayList<ArrayList<String>> listaRegistrosResgExpediente = queryLaboral.DBO_Tr_Resguardo_Expediente("", "", filtro, BDProductos);
+                           if (!listaRegistrosResgExpediente.isEmpty())
+                               tmp_tr_resguardo_expediente.TMP_TR_RESGUARDO_EXPEDIENTE(listaRegistrosResgExpediente);
                          for(String clave : clavOrgano){
                               queryRalabDes.merge_id_expediente(null,  clave , null);
                          }
@@ -909,6 +965,10 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
                              queryLaboral.DBO_Tr_Exp_Actor_Inserts("", filtro , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Exp_Demandado_Inserts("", filtro , periodo , sqlVirgenTemporal);
                              queryLaboral.DBO_Tr_Especifique_Inserts("", filtro , periodo , sqlVirgenTemporal);
+                             // se agregan para las tablas nuevas 
+                             queryLaboral.DBO_Tr_Justificante_Inserts("", filtro, periodo, sqlVirgenTemporal);
+                             queryLaboral.DBO_Tr_Resguardo_Detalle_Inserts("", filtro, periodo, sqlVirgenTemporal);
+                             queryLaboral.DBO_Tr_Resguardo_Expediente_Inserts("", filtro, periodo, sqlVirgenTemporal);
                              JFileChooser fileChooser = new JFileChooser();
                              fileChooser.setDialogTitle("Guardar archivo de texto");
                              String nombreArchivo = "MIG-DEFAULT LIBERADO.sql";
@@ -949,7 +1009,7 @@ public class PMapeoProcesarV3ToAct extends javax.swing.JFrame {
             } 
             else 
               JOptionPane.showMessageDialog(null, "Para procesar la información, debes ingresar las claves de organos.", "Mensaje", JOptionPane.ERROR_MESSAGE);  
-          }     
+          }     */
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void CorganoJurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorganoJurActionPerformed

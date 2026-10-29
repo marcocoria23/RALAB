@@ -8537,10 +8537,449 @@ public class QueryLaborales {
                 }
         }
     }
-          
-        
-        
+         
+         
+    public ArrayList<ArrayList<String>> DBO_Tr_Justificante(String cveEntidad, String periodo, String cveOrgano, String BDProductos) throws SQLException {
+        conexion = conexion.Conectar();
+        arrayList = new ArrayList<>();
 
-  }
-    
+        String CON1 = "", CON2 = "";
+        if (BDProductos.equals("")) {
+            CON1 = "V3_";
+            CON2 = "JL";
+        } else {
+            CON1 = "";
+            CON2 = "";
+        }
 
+        StringBuilder sql = new StringBuilder(
+                "SELECT * FROM " + CON1 + "TR_JUSTIFICANTE" + CON2);
+
+        boolean tieneEntidad = cveEntidad != null && !cveEntidad.isEmpty();
+        boolean tieneOrgano = cveOrgano != null && !cveOrgano.isEmpty();
+
+        if (tieneEntidad || tieneOrgano) {
+            sql.append(" WHERE 1 = 1 ");
+
+            if (tieneEntidad) {
+                sql.append(" AND SUBSTR(ID_ORGANOJ, 1, 2) = '")
+                        .append(cveEntidad.replace("'", "''")).append("' ");
+            }
+
+            if (tieneOrgano) {
+                sql.append(" AND ID_ORGANOJ IN (")
+                        .append(cveOrgano).append(") ");
+            }
+        }
+
+        ResultSet resul = null;
+        Statement stmt = null;
+
+        try {
+            stmt = conexion.getConexion().createStatement();
+            resul = stmt.executeQuery(sql.toString());
+
+            ResultSetMetaData metaData = resul.getMetaData();
+            int columnas = metaData.getColumnCount();
+
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+
+                for (int i = 1; i <= columnas; i++) {
+                    fila.add(resul.getString(i));
+                }
+
+                arrayList.add(fila);
+            }
+
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return arrayList;
+    }
+
+    public void DBO_Tr_Justificante_Inserts(String cveEntidad, String cveOrgano, String periodo, File sqlVirgen) throws SQLException, IOException {
+        FileWriter file = new FileWriter(sqlVirgen, true);
+        conexionDes = conexionDes.Conectar();
+
+        String sql = "SELECT * FROM TR_JUSTIFICANTE;";
+        ResultSet rs = null;
+        Statement stmt = null;
+
+        try {
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+
+            boolean tieneEntidad = cveEntidad != null && !cveEntidad.isEmpty();
+            boolean tieneOrgano = cveOrgano != null && !cveOrgano.isEmpty();
+
+            if (tieneEntidad || tieneOrgano) {
+                consultaFiltro.append(" WHERE 1 = 1 ");
+
+                if (tieneEntidad) {
+                    consultaFiltro.append(" AND SUBSTR(ID_ORGANOJ, 1, 2) = '")
+                            .append(cveEntidad.replace("'", "''"))
+                            .append("' ");
+                }
+
+                if (tieneOrgano) {
+                    consultaFiltro.append(" AND ID_ORGANOJ IN (")
+                            .append(cveOrgano)
+                            .append(") ");
+                }
+            }
+
+            stmt = conexionDes.getConexion().createStatement();
+            rs = stmt.executeQuery(consultaFiltro.toString());
+            //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnas = metaData.getColumnCount();
+            file.write("-- Datos exportados de " + "TR_JUSTIFICANTE" + "\n");
+            while (rs.next()) {
+                StringBuilder insertQuery = new StringBuilder("INSERT INTO " + "public.TR_JUSTIFICANTE" + " (");
+                // Agregar nombres de columnas
+                for (int i = 1; i <= columnas; i++) {
+                    insertQuery.append(metaData.getColumnName(i));
+                    if (i < columnas) {
+                        insertQuery.append(", ");
+                    }
+                }
+                insertQuery.append(" ) VALUES (");
+                // Agregar valores
+                for (int i = 1; i <= columnas; i++) {
+                    String valor = rs.getString(i);
+                    insertQuery.append(valor == null ? "NULL" : "'" + valor.replace("'", "''") + "'"); // Manejo de NULL y comillas
+                    if (i < columnas) {
+                        insertQuery.append(", ");
+                    }
+                }
+                insertQuery.append("); \n");
+                file.write(insertQuery.toString());
+            }
+            file.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                conexionDes.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public ArrayList<ArrayList<String>> DBO_Tr_Resguardo_Detalle(String cveEntidad, String periodo, String cveOrgano, String BDProductos) throws SQLException {
+        conexion = conexion.Conectar();
+        arrayList = new ArrayList<>();
+
+        String CON1 = "", CON2 = "";
+        if (BDProductos.equals("")) {
+            CON1 = "V3_";
+            CON2 = "JL";
+        } else {
+            CON1 = "";
+            CON2 = "";
+        }
+
+        String tablaDetalle = CON1 + "TR_RESGUARDO_DETALLE" + CON2;
+        String tablaExpediente = CON1 + "TR_RESGUARDO_EXPEDIENTE" + CON2;
+
+        StringBuilder sql = new StringBuilder(
+                "SELECT t.* FROM " + tablaDetalle + " t");
+
+        boolean tieneEntidad = cveEntidad != null && !cveEntidad.isEmpty();
+        boolean tieneOrgano = cveOrgano != null && !cveOrgano.isEmpty();
+
+        if (tieneEntidad || tieneOrgano) {
+            sql.append(" WHERE EXISTS (SELECT 1 FROM ")
+                    .append(tablaExpediente)
+                    .append(" e WHERE e.ID_RESGUARDO = t.ID_RESGUARDO ");
+
+            if (tieneEntidad) {
+                sql.append(" AND SUBSTR(e.ID_ORGANOJ, 1, 2) = '")
+                        .append(cveEntidad.replace("'", "''")).append("' ");
+            }
+
+            if (tieneOrgano) {
+                sql.append(" AND e.ID_ORGANOJ IN (")
+                        .append(cveOrgano).append(") ");
+            }
+
+            sql.append(") ");
+        }
+
+        ResultSet resul = null;
+        Statement stmt = null;
+
+        try {
+            stmt = conexion.getConexion().createStatement();
+            resul = stmt.executeQuery(sql.toString());
+
+            ResultSetMetaData metaData = resul.getMetaData();
+            int columnas = metaData.getColumnCount();
+
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+
+                for (int i = 1; i <= columnas; i++) {
+                    fila.add(resul.getString(i));
+                }
+
+                arrayList.add(fila);
+            }
+
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return arrayList;
+    }
+
+    public void DBO_Tr_Resguardo_Detalle_Inserts(String cveEntidad, String cveOrgano, String periodo, File sqlVirgen) throws SQLException, IOException {
+        FileWriter file = new FileWriter(sqlVirgen, true);
+        conexionDes = conexionDes.Conectar();
+        String sql = "SELECT * FROM TR_RESGUARDO_DETALLE;";
+        ResultSet rs = null;
+        Statement stmt = null;
+
+        try {
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+
+            boolean tieneEntidad = cveEntidad != null && !cveEntidad.isEmpty();
+            boolean tieneOrgano = cveOrgano != null && !cveOrgano.isEmpty();
+
+            if (tieneEntidad || tieneOrgano) {
+                consultaFiltro = new StringBuilder(
+                        "SELECT t.* FROM TR_RESGUARDO_DETALLE t "
+                        + "WHERE EXISTS ("
+                        + "SELECT 1 FROM TR_RESGUARDO_EXPEDIENTE e "
+                        + "WHERE e.ID_RESGUARDO = t.ID_RESGUARDO ");
+
+                if (tieneEntidad) {
+                    consultaFiltro.append(" AND SUBSTR(e.ID_ORGANOJ, 1, 2) = '")
+                            .append(cveEntidad.replace("'", "''"))
+                            .append("' ");
+                }
+
+                if (tieneOrgano) {
+                    consultaFiltro.append(" AND e.ID_ORGANOJ IN (")
+                            .append(cveOrgano)
+                            .append(") ");
+                }
+
+                consultaFiltro.append(")");
+            }
+
+            stmt = conexionDes.getConexion().createStatement();
+            rs = stmt.executeQuery(consultaFiltro.toString());
+            //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnas = metaData.getColumnCount();
+            file.write("-- Datos exportados de " + "TR_RESGUARDO_DETALLE" + "\n");
+            while (rs.next()) {
+                StringBuilder insertQuery = new StringBuilder("INSERT INTO " + "public.TR_RESGUARDO_DETALLE" + " (");
+                // Agregar nombres de columnas
+                for (int i = 1; i <= columnas; i++) {
+                    insertQuery.append(metaData.getColumnName(i));
+                    if (i < columnas) {
+                        insertQuery.append(", ");
+                    }
+                }
+                insertQuery.append(" ) VALUES (");
+                // Agregar valores
+                for (int i = 1; i <= columnas; i++) {
+                    String valor = rs.getString(i);
+                    insertQuery.append(valor == null ? "NULL" : "'" + valor.replace("'", "''") + "'"); // Manejo de NULL y comillas
+                    if (i < columnas) {
+                        insertQuery.append(", ");
+                    }
+                }
+                insertQuery.append("); \n");
+                file.write(insertQuery.toString());
+            }
+            file.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                conexionDes.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public ArrayList<ArrayList<String>> DBO_Tr_Resguardo_Expediente(String cveEntidad, String periodo, String cveOrgano, String BDProductos) throws SQLException {
+        conexion = conexion.Conectar();
+        arrayList = new ArrayList<>();
+
+        String CON1 = "", CON2 = "";
+        if (BDProductos.equals("")) {
+            CON1 = "V3_";
+            CON2 = "JL";
+        } else {
+            CON1 = "";
+            CON2 = "";
+        }
+
+        StringBuilder sql = new StringBuilder(
+                "SELECT * FROM " + CON1 + "TR_RESGUARDO_EXPEDIENTE" + CON2);
+
+        boolean tieneEntidad = cveEntidad != null && !cveEntidad.isEmpty();
+        boolean tieneOrgano = cveOrgano != null && !cveOrgano.isEmpty();
+
+        if (tieneEntidad || tieneOrgano) {
+            sql.append(" WHERE 1 = 1 ");
+
+            if (tieneEntidad) {
+                sql.append(" AND SUBSTR(ID_ORGANOJ, 1, 2) = '")
+                        .append(cveEntidad.replace("'", "''")).append("' ");
+            }
+
+            if (tieneOrgano) {
+                sql.append(" AND ID_ORGANOJ IN (")
+                        .append(cveOrgano).append(") ");
+            }
+        }
+
+        ResultSet resul = null;
+        Statement stmt = null;
+
+        try {
+            stmt = conexion.getConexion().createStatement();
+            resul = stmt.executeQuery(sql.toString());
+
+            ResultSetMetaData metaData = resul.getMetaData();
+            int columnas = metaData.getColumnCount();
+
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+
+                for (int i = 1; i <= columnas; i++) {
+                    fila.add(resul.getString(i));
+                }
+
+                arrayList.add(fila);
+            }
+
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return arrayList;
+    }
+
+    public void DBO_Tr_Resguardo_Expediente_Inserts(String cveEntidad, String cveOrgano, String periodo, File sqlVirgen) throws SQLException, IOException {
+        FileWriter file = new FileWriter(sqlVirgen, true);
+        conexionDes = conexionDes.Conectar();
+        String sql = "SELECT * FROM TR_RESGUARDO_EXPEDIENTE;";
+        ResultSet rs = null;
+        Statement stmt = null;
+
+        try {
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+
+            boolean tieneEntidad = cveEntidad != null && !cveEntidad.isEmpty();
+            boolean tieneOrgano = cveOrgano != null && !cveOrgano.isEmpty();
+
+            if (tieneEntidad || tieneOrgano) {
+                consultaFiltro.append(" WHERE 1 = 1 ");
+
+                if (tieneEntidad) {
+                    consultaFiltro.append(" AND SUBSTR(ID_ORGANOJ, 1, 2) = '")
+                            .append(cveEntidad.replace("'", "''"))
+                            .append("' ");
+                }
+
+                if (tieneOrgano) {
+                    consultaFiltro.append(" AND ID_ORGANOJ IN (")
+                            .append(cveOrgano)
+                            .append(") ");
+                }
+            }
+
+            stmt = conexionDes.getConexion().createStatement();
+            rs = stmt.executeQuery(consultaFiltro.toString());
+            //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
+            ResultSetMetaData metaData = rs.getMetaData();
+            int columnas = metaData.getColumnCount();
+            file.write("-- Datos exportados de " + "TR_RESGUARDO_EXPEDIENTE" + "\n");
+            while (rs.next()) {
+                StringBuilder insertQuery = new StringBuilder("INSERT INTO " + "public.TR_RESGUARDO_EXPEDIENTE" + " (");
+                // Agregar nombres de columnas
+                for (int i = 1; i <= columnas; i++) {
+                    insertQuery.append(metaData.getColumnName(i));
+                    if (i < columnas) {
+                        insertQuery.append(", ");
+                    }
+                }
+                insertQuery.append(" ) VALUES (");
+                // Agregar valores
+                for (int i = 1; i <= columnas; i++) {
+                    String valor = rs.getString(i);
+                    insertQuery.append(valor == null ? "NULL" : "'" + valor.replace("'", "''") + "'"); // Manejo de NULL y comillas
+                    if (i < columnas) {
+                        insertQuery.append(", ");
+                    }
+                }
+                insertQuery.append("); \n");
+                file.write(insertQuery.toString());
+            }
+            file.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                conexionDes.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+}

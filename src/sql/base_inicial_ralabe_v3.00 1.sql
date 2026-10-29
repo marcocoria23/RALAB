@@ -248,6 +248,306 @@ CREATE TABLE public.tc_concepto_reclamado (
     descripcion character varying(4000) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS public.tr_justificante
+(
+    id_justificante character varying COLLATE pg_catalog."default" NOT NULL,
+    id_organoj character varying COLLATE pg_catalog."default",
+    clave_expediente character varying COLLATE pg_catalog."default",
+    tipo_procedimiento character varying COLLATE pg_catalog."default",
+    variable text COLLATE pg_catalog."default",
+    justificacion text COLLATE pg_catalog."default",
+    fecha_cambio character varying COLLATE pg_catalog."default",
+    usuario text COLLATE pg_catalog."default",
+    CONSTRAINT tr_justificante_pkey PRIMARY KEY (id_justificante)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tr_justificante
+    OWNER to admin_ralabe;
+
+
+/* ============================================================
+   RALABE
+   TABLAS PARA RESPALDO DE EXPEDIENTES ELIMINADOS
+
+   Estas tablas conservan:
+   - Expediente eliminado
+   - Demandantes o actores
+   - Demandados
+   - Audiencias
+   - Relaciones expediente-actor
+   - Relaciones expediente-demandado
+   - Fecha y usuario de eliminación
+   ============================================================ */
+
+
+/* ============================================================
+   1. ENCABEZADO DEL RESPALDO
+   ============================================================ */
+
+CREATE TABLE IF NOT EXISTS public.tr_resguardo_expediente
+(
+    id_resguardo UUID NOT NULL,
+
+    id_expediente_original INTEGER NOT NULL,
+
+    id_organoj CHARACTER VARYING(4000) NOT NULL,
+
+    clave_expediente CHARACTER VARYING(4000) NOT NULL,
+
+    id_tipo_expediente INTEGER NOT NULL,
+
+    fecha_eliminacion TIMESTAMP WITH TIME ZONE
+        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    usuario_eliminacion CHARACTER VARYING(255) NOT NULL,
+
+    total_registros INTEGER
+        NOT NULL DEFAULT 0,
+
+    estado_resguardo CHARACTER VARYING(30)
+        NOT NULL DEFAULT 'EN_PROCESO',
+
+    CONSTRAINT pk_tr_resguardo_expediente
+        PRIMARY KEY (id_resguardo),
+
+    CONSTRAINT chk_tr_resguardo_total_registros
+        CHECK (total_registros >= 0),
+
+    CONSTRAINT chk_tr_resguardo_estado
+        CHECK
+        (
+            estado_resguardo IN
+            (
+                'EN_PROCESO',
+                'RESGUARDADO',
+                'DESCARGADO'
+            )
+        )
+);
+
+
+/* ============================================================
+   2. DETALLE DEL RESPALDO
+
+   La columna datos guarda como JSONB la fila completa original
+   de la tabla indicada en nombre_tabla.
+   ============================================================ */
+
+CREATE TABLE IF NOT EXISTS public.tr_resguardo_detalle
+(
+    id_detalle BIGSERIAL NOT NULL,
+
+    id_resguardo UUID NOT NULL,
+
+    nombre_tabla CHARACTER VARYING(100) NOT NULL,
+
+    clave_original CHARACTER VARYING(4200) NOT NULL,
+
+    orden_visualizacion INTEGER NOT NULL,
+
+    datos JSONB NOT NULL,
+
+    fecha_resguardo TIMESTAMP WITH TIME ZONE
+        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT pk_tr_resguardo_detalle
+        PRIMARY KEY (id_detalle),
+
+    CONSTRAINT fk_tr_resguardo_detalle_encabezado
+        FOREIGN KEY (id_resguardo)
+        REFERENCES public.tr_resguardo_expediente
+            (id_resguardo)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+
+    CONSTRAINT chk_tr_resguardo_orden
+        CHECK (orden_visualizacion > 0),
+
+    CONSTRAINT chk_tr_resguardo_nombre_tabla
+        CHECK
+        (
+            nombre_tabla IN
+            (
+                'tr_expediente',
+                'tr_actor',
+                'tr_demandado',
+                'tr_exp_actor',
+                'tr_exped_demandado',
+                'tr_audiencia'
+            )
+        )
+);
+
+
+/* ============================================================
+   3. ÍNDICES DEL ENCABEZADO
+   ============================================================ */
+
+/* Búsqueda por identificador original del expediente. */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_expediente_original
+ON public.tr_resguardo_expediente
+    (id_expediente_original);
+
+
+/* Ordenamiento y búsqueda por fecha de eliminación. */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_fecha_eliminacion
+ON public.tr_resguardo_expediente
+    (fecha_eliminacion DESC);
+
+
+/* Búsqueda de respaldos por usuario. */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_usuario_eliminacion
+ON public.tr_resguardo_expediente
+    (usuario_eliminacion);
+
+
+/* Búsqueda de respaldos terminados o pendientes. */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_estado
+ON public.tr_resguardo_expediente
+    (estado_resguardo);
+
+
+/*
+ * Índice parcial utilizado por la descarga administrativa.
+ *
+ * ResguardoEliminadosExcelService consulta únicamente
+ * respaldos con estado RESGUARDADO.
+ */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_estado_fecha
+ON public.tr_resguardo_expediente
+    (fecha_eliminacion DESC)
+WHERE estado_resguardo = 'RESGUARDADO';
+
+
+/* ============================================================
+   4. ÍNDICES DEL DETALLE
+   ============================================================ */
+
+/* Recupera todos los detalles de un folio de respaldo. */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_detalle_id_resguardo
+ON public.tr_resguardo_detalle
+    (id_resguardo);
+
+
+/*
+ * Recupera una sección específica:
+ * expediente, actores, demandados o audiencias.
+ */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_detalle_resguardo_tabla
+ON public.tr_resguardo_detalle
+    (
+        id_resguardo,
+        nombre_tabla,
+        orden_visualizacion
+    );
+
+
+/* Consultas generales por tabla de origen. */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_detalle_nombre_tabla
+ON public.tr_resguardo_detalle
+    (nombre_tabla);
+
+
+/*
+ * Índice GIN para búsquedas futuras dentro del JSONB.
+ *
+ * Por ejemplo:
+ * buscar por id_actor, id_demandado, RFC u otro valor
+ * almacenado dentro de datos.
+ */
+CREATE INDEX IF NOT EXISTS
+    idx_resguardo_detalle_datos_gin
+ON public.tr_resguardo_detalle
+USING GIN (datos);
+
+
+/* ============================================================
+   5. COMENTARIOS DE DOCUMENTACIÓN
+   ============================================================ */
+
+COMMENT ON TABLE public.tr_resguardo_expediente IS
+'Encabezado administrativo de los expedientes eliminados de RALABE. Registra el expediente original, fecha, usuario y estado del respaldo.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.id_resguardo IS
+'Identificador UUID único asignado al respaldo.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.id_expediente_original IS
+'Identificador que tenía el expediente antes de ser eliminado.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.id_organoj IS
+'Clave del órgano jurisdiccional al que pertenecía el expediente.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.clave_expediente IS
+'Clave original del expediente eliminado.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.id_tipo_expediente IS
+'Tipo de expediente registrado antes de la eliminación.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.fecha_eliminacion IS
+'Fecha y hora en que se realizó la eliminación.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.usuario_eliminacion IS
+'Usuario autenticado que realizó la eliminación.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.total_registros IS
+'Cantidad total de filas almacenadas en tr_resguardo_detalle para el respaldo.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_expediente.estado_resguardo IS
+'Estado del respaldo: EN_PROCESO, RESGUARDADO o DESCARGADO.';
+
+
+COMMENT ON TABLE public.tr_resguardo_detalle IS
+'Conserva como JSONB las filas originales relacionadas con cada expediente eliminado.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_detalle.id_detalle IS
+'Identificador consecutivo del registro de detalle.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_detalle.id_resguardo IS
+'Folio UUID que relaciona el detalle con el encabezado del respaldo.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_detalle.nombre_tabla IS
+'Nombre de la tabla de origen de la fila respaldada.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_detalle.clave_original IS
+'Identificador original de la fila o clave compuesta de una tabla relacional.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_detalle.orden_visualizacion IS
+'Orden utilizado para consultar, exportar o restaurar las secciones del respaldo.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_detalle.datos IS
+'Fila completa original convertida a formato JSONB.';
+
+COMMENT ON COLUMN
+    public.tr_resguardo_detalle.fecha_resguardo IS
+'Fecha y hora en que la fila fue copiada al respaldo.';
+
+
+
 
 ALTER TABLE public.tc_concepto_reclamado OWNER TO admin_ralabe;
 
@@ -1964,7 +2264,7 @@ CREATE TABLE public.tr_expediente (
     huelga_dias integer,
     monto_solucion double precision,
     porcent_salarios_caidos double precision,
-    comentarios character varying(32767),
+    comentarios character varying(4000),
     fecha_creacion character varying,
     fecha_modificacion character varying,
     usuario_creacion character varying,
@@ -2584,8 +2884,6 @@ INSERT INTO public.tc_demandado VALUES (-1, 'No identificado');
 -- Data for Name: tc_entidad_mpio; Type: TABLE DATA; Schema: public; Owner: admin_ralabe
 --
 
-INSERT INTO public.tc_entidad_mpio VALUES ('2536', '25', 'Sinaloa', '25019', 'Eldorado');
-INSERT INTO public.tc_entidad_mpio VALUES ('2537', '25', 'Sinaloa', '25020', 'Juan José Ríos');
 INSERT INTO public.tc_entidad_mpio VALUES ('1', '1', 'Aguascalientes', '1002', 'Asientos');
 INSERT INTO public.tc_entidad_mpio VALUES ('2', '1', 'Aguascalientes', '1003', 'Calvillo');
 INSERT INTO public.tc_entidad_mpio VALUES ('3', '1', 'Aguascalientes', '1001', 'Aguascalientes');
@@ -5279,12 +5577,9 @@ INSERT INTO public.tc_motivo_conflicto VALUES (4, 'Violación de contrato');
 INSERT INTO public.tc_motivo_conflicto VALUES (5, 'Riesgo de trabajo');
 INSERT INTO public.tc_motivo_conflicto VALUES (6, 'Revisión y firma de contrato');
 INSERT INTO public.tc_motivo_conflicto VALUES (7, 'Participación de utilidades');
-INSERT INTO public.tc_motivo_conflicto VALUES (8, 'Otro motivo del conflicto
-(especifique)
-');
+INSERT INTO public.tc_motivo_conflicto VALUES (8, 'Otro motivo del conflicto(especifique)');
 INSERT INTO public.tc_motivo_conflicto VALUES (9, 'Jornada inhumana por lo notoriamente excesiva, dada la índole del trabajo');
-INSERT INTO public.tc_motivo_conflicto VALUES (10, 'Contrato de trabajo para la prestación de los servicios de trabajadores mexicanos fuera de la República');
-                                                    
+INSERT INTO public.tc_motivo_conflicto VALUES (10, 'Contrato de trabajo para la prestación de los servicios de trabajadores mexicanos fuera de la República');                                                    
 INSERT INTO public.tc_motivo_conflicto VALUES (11, 'Habitación en arrendamiento al trabajador');
 INSERT INTO public.tc_motivo_conflicto VALUES (12, 'Ejercitar acciones individuales y colectivas que deriven de la obligación de capacitación o adiestramiento');
 INSERT INTO public.tc_motivo_conflicto VALUES (13, 'Determinación de la antigüedad de los trabajadores de planta y/o suplentes');
@@ -5294,7 +5589,7 @@ INSERT INTO public.tc_motivo_conflicto VALUES (16, 'Designación de beneficiario
 INSERT INTO public.tc_motivo_conflicto VALUES (17, 'Designación de beneficiarios del trabajador desaparecido por un acto delincuencial');
 INSERT INTO public.tc_motivo_conflicto VALUES (18, 'Terminación de la relación laboral por perdida por apresamiento o siniestro del buque');
 INSERT INTO public.tc_motivo_conflicto VALUES (19, 'Convenio de trabajos encaminados a la recuperación de los restos del buque o de la carga');
-INSERT INTO public.tc_motivo_conflicto VALUES (20, 'Obligación especial patronal del pago a los tripulantes por gastos de traslados o  repatriación al lugar de contratación');
+INSERT INTO public.tc_motivo_conflicto VALUES (20, 'Obligación especial patronal del pago a los tripulantes por gastos de traslados o repatriación al lugar de contratación');
 INSERT INTO public.tc_motivo_conflicto VALUES (21, 'Determinación de indemnización por riesgos de trabajo');
 INSERT INTO public.tc_motivo_conflicto VALUES (22, 'Pago de indemnización en los casos de muerte o desaparición derivada de actos delincuenciales o por riesgo de trabajo');
 INSERT INTO public.tc_motivo_conflicto VALUES (23, 'Desacuerdo de la designación de los médicos de la empresa');
@@ -5379,7 +5674,7 @@ INSERT INTO public.tc_motivo_solic_prom VALUES (10, 'Cancelación de fianza o de
 INSERT INTO public.tc_motivo_solic_prom VALUES (11, 'Pago de Indemnización (art.49 LFT)');
 INSERT INTO public.tc_motivo_solic_prom VALUES (12, 'Aviso a un órgano jurisdiccional para que notifique el derecho preferente de los trabajadores frente al remate o adjudicación de los bienes embargados al patrón');
 INSERT INTO public.tc_motivo_solic_prom VALUES (13, 'Aviso a una autoridad administrativa para que notifique el derecho preferente de los trabajadores frente al remate o adjudicación de los bienes embargados al patrón');
-INSERT INTO public.tc_motivo_solic_prom VALUES (14, 'Otro motivo de la solicitud o promoción (especifique) ');
+INSERT INTO public.tc_motivo_solic_prom VALUES (14, 'Otro motivo de la solicitud o promoción (especifique)');
 INSERT INTO public.tc_motivo_solic_prom VALUES (15, 'Incumplimiento de sentencia');
 INSERT INTO public.tc_motivo_solic_prom VALUES (16, 'Incumplimiento de convenio celebrado ante el Centro de Conciliación Laboral');
 INSERT INTO public.tc_motivo_solic_prom VALUES (17, 'Incumplimiento de convenio celebrado en sede judicial');
@@ -5922,7 +6217,7 @@ INSERT INTO public.tc_org_obr VALUES (-1, 'No identificado');
 -- Data for Name: tc_patron; Type: TABLE DATA; Schema: public; Owner: admin_ralabe
 --
 
-INSERT INTO public.tc_patron VALUES (1, 'Persona física ');
+INSERT INTO public.tc_patron VALUES (1, 'Persona física');
 INSERT INTO public.tc_patron VALUES (2, 'Persona moral');
 INSERT INTO public.tc_patron VALUES (-1, 'No identificado');
 
@@ -6001,6 +6296,7 @@ INSERT INTO public.tc_respuesta_simple VALUES (-1, 'No identificado');
 
 INSERT INTO public.tc_roles VALUES (1, 'Capturista');
 INSERT INTO public.tc_roles VALUES (2, 'Administrador');
+INSERT INTO public.tc_roles VALUES (3, 'Master');
 
 
 --
@@ -6395,8 +6691,8 @@ INSERT INTO public.tc_violacion_dh VALUES (-1, 'No identificado');
 -- Data for Name: tr_usuarios; Type: TABLE DATA; Schema: public; Owner: admin_ralabe
 --
 
-INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (1, 'XAXX010101000', '$2a$10$Dj8K899YX22Qm6KA5z7FUOaZpZvUeygQDP.08Ij3XX9uqZU9zcWCK', 2, '18-09-2025 12:00:00', '', 'ADMINISTRADOR', 'ADMIN', NULL, NULL, '', '', 'XAXX010101000','6.1.0','6.1.0' );
-
+INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (1, 'XAXX010101000', '$2a$10$Dj8K899YX22Qm6KA5z7FUOaZpZvUeygQDP.08Ij3XX9uqZU9zcWCK', 2, '18-09-2025 12:00:00', '', 'ADMINISTRADOR', 'ADMIN', NULL, NULL, '', '', 'XAXX010101000','0.1.1.1-beta','0.1.1.1-beta' );
+INSERT INTO public.tr_usuarios OVERRIDING SYSTEM VALUE VALUES (100, 'INEGI-RALABE-2026', '$2a$10$u0Sshz4uCA8se.9OlMTbseD3m1QtNkIkvY7qEbTceiQVy/BxzZhgG', 3, '01-01-2026 00:00:00', '', 'SUPER', 'USUARIO', NULL, NULL, '', '', 'INEGI-RALABE-2026', NULL, NULL);
 
 --
 -- TOC entry 5563 (class 0 OID 0)

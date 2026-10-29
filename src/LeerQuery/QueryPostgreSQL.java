@@ -1216,6 +1216,46 @@ public class QueryPostgreSQL {
         return arrayList;
     }
     
+        public ArrayList<ArrayList<String>> DBO_Tr_Justificante(String usuario , String contrasenia  , String periodo,String bd  ) throws SQLException {
+       Statement stmt =  conexion.conectar(usuario, contrasenia,bd).createStatement();
+       arrayList = new ArrayList<>();
+        String sql = " SELECT P.ACTORES_ID,S.ID_ORGANOJ,P.ID_EXPEDIENTE, '" + periodo +"' PERIODO , NULL ID_UNIQUE\n" +
+                    "FROM TR_EXP_ACTOR P INNER JOIN TR_EXPEDIENTE S ON P.ID_EXPEDIENTE=S.ID_EXPEDIENTE ; ";
+            try {
+        StringBuilder consultaFiltro = new StringBuilder();
+        consultaFiltro.append(sql.replace(";", ""));
+       
+        resul = stmt.executeQuery(consultaFiltro.toString());
+                while (resul.next()) {
+                    ArrayList<String> fila = new ArrayList<>();
+                    fila.add(resul.getString(1)); // Añadir la primera columna
+                    fila.add(resul.getString(2)); // Añadir la segunda columna
+                    fila.add(resul.getString(3)); // Añadir la tercera columna
+                    fila.add(resul.getString(4)); // Añadir la cuarta columna
+                    fila.add(resul.getString(5)); // Añadir la quinta columna
+                    arrayList.add(fila); // Agregar la fila a la lista principal
+                }
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(QueryLaborales.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "Error en la tabla TR_EXP_ACTOR " + ex);
+                throw ex;
+            } 
+            
+            finally {
+                try {
+                    if (resul != null) {
+                        resul.close();
+                    }
+                    conexion.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+      
+        return arrayList;
+    }
+    
     
     
 }
