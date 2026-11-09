@@ -166,6 +166,7 @@ public class ReadCSV_Audiencias {
                             c.SetPERIODO(Periodo);
                             //System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + Periodo);
                             ad.add(c);
+                            /*
                            if(record.get(3).equals("1") && !(record.get(5).equals("") || record.get(5).equals("1") || record.get(5).equals("2") || record.get(5).equals("6") || record.get(5).equals("9")) ){
                                
                                if(record.get(3).equals("1") && (record.get(5).equals("3")))
@@ -203,7 +204,7 @@ public class ReadCSV_Audiencias {
                           if(record.get(3).equals("5") && !(record.get(9).equals("") || record.get(9).equals("5") || record.get(9).equals("6") || record.get(9).equals("9")) ){
                                 JOptionPane.showMessageDialog(null, "Error en el campo COL_NATU_ECONOMICA_TA fuera de catalogo  Clave_organo:"+record.get(1) +" Expediente:"+record.get(2)+ " Id_audiencia:"+record.get(4)+ " nota: campo COL_NATU_ECONOMICA_TA solo puede tener opcion 5,6 Y 9");
                                 Inserta=false;
-                                    }   
+                                    }   */
                         }
                         
                  System.out.println("entro 1");
