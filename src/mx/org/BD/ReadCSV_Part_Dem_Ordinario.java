@@ -167,11 +167,11 @@ public class ReadCSV_Part_Dem_Ordinario {
                             c.SetPERIODO(Periodo);
                             // System.out.println(record.get(0) + ":" + record.get(1) + ":" + record.get(2) + ":" + record.get(3) + ":" + record.get(4) + ":" + record.get(5) + ":" + record.get(6) + ":" + record.get(7) + ":" + record.get(8) + ":" + record.get(9) + ":" + record.get(10) + ":" + record.get(11) + ":" + record.get(12) + ":" + record.get(13) + ":" + record.get(14) + ":" + record.get(15));
                             ad.add(c);
-
+/*
                             if (record.get(4).equals("2") || record.get(4).equals("3") || record.get(4).equals("4")) {
                                 JOptionPane.showMessageDialog(null, "Error en el campo Demandado fuera de catalogo  Clave_organo:" + record.get(1) + " Expediente:" + record.get(2) + "Id_demandado:" + record.get(3) + " nota: campo Demandado solo puede tener opcion 1,5 Y 9");
                                 Inserta = false;
-                            }
+                            }*/
                         }
                         System.out.println("entro 1");
                         if (TotalRegistros > 0) {
