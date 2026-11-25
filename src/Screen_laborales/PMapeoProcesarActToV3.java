@@ -13,6 +13,7 @@ import LeerQuery.beans.Act.to.V3.V3_TR_CONTROL_EXPEDIENTEJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_EJECUCION;
 import LeerQuery.beans.Act.to.V3.V3_TR_HUELGAJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_INDIVIDUAL;
+import LeerQuery.beans.Act.to.V3.V3_TR_JUSTIFICANTEJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_ORDINARIOJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_PARAPROCESALJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_PART_ACT_COLECTIVOJL;
@@ -26,6 +27,8 @@ import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_HUELGAJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_INDIVIDUALJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_PART_DEM_ORDINARIO;
 import LeerQuery.beans.Act.to.V3.V3_TR_PREF_CREDITOJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_RESGUARDO_DETALLEJL;
+import LeerQuery.beans.Act.to.V3.V3_TR_RESGUARDO_EXPEDIENTEJL;
 import LeerQuery.beans.Act.to.V3.V3_TR_TERCERIASJL;
 import java.awt.Color;
 import java.sql.ResultSet;
@@ -305,6 +308,10 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
         V3_TR_PARAPROCESALJL PARAPRO = new V3_TR_PARAPROCESALJL();
         V3_TR_PREF_CREDITOJL PREFCR = new V3_TR_PREF_CREDITOJL();
         V3_TR_EJECUCION EJECU = new V3_TR_EJECUCION();
+        //Se agregan tablas nuevas 
+        V3_TR_JUSTIFICANTEJL JUST = new V3_TR_JUSTIFICANTEJL();
+        V3_TR_RESGUARDO_DETALLEJL RESDET = new V3_TR_RESGUARDO_DETALLEJL();
+        V3_TR_RESGUARDO_EXPEDIENTEJL RESEXP = new V3_TR_RESGUARDO_EXPEDIENTEJL();
       new Thread(() -> { 
           try{
               Valores();
@@ -321,84 +328,97 @@ public class PMapeoProcesarActToV3 extends javax.swing.JFrame {
               CE.V3_TR_CONTROL_EXPEDIENTEJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_AUDIENCIASJL");
-              jProgressBar1.setValue(16);
+              jProgressBar1.setValue(15);
               AU.V3_TR_AUDIENCIASJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_ORDINARIOJL");
-              jProgressBar1.setValue(20);
+              jProgressBar1.setValue(18);
               ORDI.V3_TR_ORDINARIOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_ACT_ORDINARIOJL");
-              jProgressBar1.setValue(24);
+              jProgressBar1.setValue(21);
               PAORDI.V3_TR_PART_ACT_ORDINARIOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_DEM_ORDINARIO");
-              jProgressBar1.setValue(28);
+              jProgressBar1.setValue(24);
               PDORDI.V3_TR_PART_DEM_ORDINARIO(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_INDIVIDUAL");
-              jProgressBar1.setValue(32);
+              jProgressBar1.setValue(27);
               INDI.V3_TR_INDIVIDUALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_ACT_INDIVIDUALJL");
-              jProgressBar1.setValue(36);
+              jProgressBar1.setValue(30);
               PAINDI.V3_TR_PART_ACT_INDIVIDUALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_DEM_INDIVIDUALJL");
-              jProgressBar1.setValue(40);
+              jProgressBar1.setValue(33);
               PDINDI.V3_TR_PART_DEM_INDIVIDUALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_COLECTIVOJL");
-              jProgressBar1.setValue(44);
+              jProgressBar1.setValue(36);
               COLE.V3_TR_COLECTIVOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_ACT_COLECTIVOJL");
-              jProgressBar1.setValue(48);
+              jProgressBar1.setValue(39);
               PACOLE.V3_TR_PART_ACT_COLECTIVOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_DEM_COLECTIVO");
-              jProgressBar1.setValue(52);
+              jProgressBar1.setValue(42);
               PDCOLE.V3_TR_PART_DEM_COLECTIVO(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_HUELGAJL");
-              jProgressBar1.setValue(56);
+              jProgressBar1.setValue(45);
               HUE.V3_TR_HUELGAJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_ACT_HUELGAJL");
-              jProgressBar1.setValue(60);
+              jProgressBar1.setValue(48);
               PAHUE.V3_TR_PART_ACT_HUELGAJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_DEM_HUELGAJL");
-              jProgressBar1.setValue(64);
+              jProgressBar1.setValue(52);
               PDHUE.V3_TR_PART_DEM_HUELGAJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_COLECT_ECONOMJL");
-              jProgressBar1.setValue(68);
+              jProgressBar1.setValue(55);
               COECO.V3_TR_COLECT_ECONOMJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_ACT_COLECT_ECONOMJL");
-              jProgressBar1.setValue(72);
+              jProgressBar1.setValue(58);
               PACOECO.V3_TR_PART_ACT_COLECT_ECONOMJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PART_DEM_COLECT_ECONOMJL");
-              jProgressBar1.setValue(76);
+              jProgressBar1.setValue(62);
               PDCOECO.V3_TR_PART_DEM_COLECT_ECONOMJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_TERCERIASJL");
-              jProgressBar1.setValue(80);
+              jProgressBar1.setValue(65);
               TER.V3_TR_TERCERIASJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PARAPROCESALJL");
-              jProgressBar1.setValue(85);
+              jProgressBar1.setValue(68);
               PARAPRO.V3_TR_PARAPROCESALJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_PREF_CREDITOJL");
-              jProgressBar1.setValue(90);
+              jProgressBar1.setValue(72);
               PREFCR.V3_TR_PREF_CREDITOJL(Cve_Entidad,Periodo,Cve_ClaveOrgano);
               
               LTabla.setText("Insertando... V3_TR_EJECUCIONJL");
-              jProgressBar1.setValue(95);
+              jProgressBar1.setValue(75);
               EJECU.V3_TR_EJECUCIONJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
+              
+              //Se agregan tablas nuevas 
+              LTabla.setText("Insertando... V3_TR_JUSTIFICANTEJL");
+              jProgressBar1.setValue(80);
+              JUST.V3_TR_JUSTIFICANTEJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_RESGUARDO_DETALLEJL");
+              jProgressBar1.setValue(85);
+              RESDET.V3_TR_RESGARDO_DETALLEJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
+              
+              LTabla.setText("Insertando... V3_TR_RESGUARDO_EXPEDIENTEJL");
+              jProgressBar1.setValue(90);
+              RESEXP.V3_TR_RESGUARDO_EXPEDIENTEJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
               
               jProgressBar1.setValue(100);
               

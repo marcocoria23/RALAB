@@ -1,0 +1,101 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package LeerQuery.beans.Act.to.V3;
+
+import Conexion.OracleDAOFactory;
+import LeerQuery.QuerysBdActToV3;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import oracle.jdbc.OracleTypes;
+import oracle.sql.ARRAY;
+import oracle.sql.ArrayDescriptor;
+import oracle.sql.STRUCT;
+import oracle.sql.StructDescriptor;
+
+/**
+ *
+ * @author ANDREA.HERNANDEZL
+ */
+public class V3_TR_RESGUARDO_EXPEDIENTEJL {
+
+    public void V3_TR_RESGUARDO_EXPEDIENTEJL(String Cve_Entidad, String Periodo, String Cve_ClaveOrgano) throws Exception {
+        QuerysBdActToV3 QControlExp = new QuerysBdActToV3();
+        ARRAY array_to_pass;
+        CallableStatement st;
+        Connection con = null;
+        STRUCT[] structs;
+        StructDescriptor sd;
+        ArrayDescriptor descriptor;
+        int CFilas = 0;
+        try {
+            con = OracleDAOFactory.creaConexion();
+            ArrayList<BeanV3_TR_RESGUARDO_EXPEDIENTE> ad = new ArrayList<>();
+            ArrayList<ArrayList<String>> fila = QControlExp.V3_TR_RESGUARDO_EXPEDIENTEJL(Cve_Entidad, Periodo, Cve_ClaveOrgano);
+            if (fila != null) {
+                for (int i = 0; i < fila.size(); i++) {
+                    BeanV3_TR_RESGUARDO_EXPEDIENTE c = new BeanV3_TR_RESGUARDO_EXPEDIENTE();
+                    ArrayList<String> filaActual = fila.get(i);
+                    for (int j = 0; j < 10; j++) {
+                        c.setID_RESGUARDO(filaActual.get(0));
+                        c.setID_EXPEDIENTE_ORIGINAL(filaActual.get(1));
+                        c.setID_ORGANOJ(filaActual.get(2));
+                        c.setCLAVE_EXPEDIENTE(filaActual.get(3));
+                        c.setID_TIPO_EXPEDIENTE(filaActual.get(4));
+                        c.setFECHA_ELIMINACION(filaActual.get(5));
+                        c.setUSUARIO_ELIMINACION(filaActual.get(6));
+                        c.setTOTAL_REGISTROS(filaActual.get(7));
+                        c.setESTADO_RESGUARDO(filaActual.get(8));
+                        c.setPERIODO(filaActual.get(9));
+                    }
+                    ad.add(c);
+                    CFilas++;
+                }
+                if (CFilas > 0) {
+                    sd = StructDescriptor.createDescriptor("OBJ_V3_TR_RESGUARDO_EXPEDIENTEJL", con);
+                    structs = new STRUCT[ad.size()];
+                    System.out.println("entro 1");
+                    System.out.println("tamaño " + ad.size());
+                    for (int i = 0; i < ad.size(); i++) {
+                        structs[i] = new STRUCT(sd, con, ad.get(i).toArray());
+                    }
+                    System.out.println("entro 2");
+                    descriptor = ArrayDescriptor.createDescriptor("ARR_OBJ_V3_TR_RESGUARDO_EXPEDIENTEJL", con);
+                    System.out.println("entro 3");
+                    array_to_pass = new ARRAY(descriptor, con, structs);
+                    System.out.println("entro 4");
+                    st = con.prepareCall("{? = call(PKG_INTEGRADORV3.ResguardoExpediente(?))}");
+                    System.out.println("entro 5");
+                    st.registerOutParameter(1, OracleTypes.INTEGER);
+                    System.out.println("entro 6");
+                    st.setArray(2, array_to_pass);
+                    System.out.println("entro 7");
+                    st.execute();
+                    System.out.println("entro 8");
+                } else {
+                    JOptionPane.showMessageDialog(null, "V3_TR_RESGUARDO_EXPEDIENTEJL sin registros");
+                }
+            }
+        } catch (Exception ex) {
+            throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
+        } finally {
+            try {
+                array_to_pass = null;
+                structs = null;
+                descriptor = null;
+                if (con != null) {
+                    System.out.println("cierraaa");
+                    con.close();
+                    con = null;
+                }
+            } catch (SQLException ex) {
+                throw new SQLException("[actualiza]: " + ex.getLocalizedMessage());
+            }
+        }
+    }
+
+}

@@ -41,7 +41,7 @@ public class TMP_TR_RESGUARDO_EXPEDIENTE {
                 for (int i = 0; i < fila.size(); i++) {
                     BeanTR_RESGUARDO_EXPEDIENTE c = new BeanTR_RESGUARDO_EXPEDIENTE();
                     ArrayList<String> filaActual = fila.get(i);
-                    for (int j = 0; j < 9; j++) {
+                    for (int j = 0; j < 10; j++) {
                         c.setID_RESGUARDO(filaActual.get(0));
                         c.setID_EXPEDIENTE_ORIGINAL(filaActual.get(1));
                         c.setID_ORGANOJ(filaActual.get(2));
@@ -51,6 +51,7 @@ public class TMP_TR_RESGUARDO_EXPEDIENTE {
                         c.setUSUARIO_ELIMINACION(filaActual.get(6));
                         c.setTOTAL_REGISTROS(filaActual.get(7));
                         c.setESTADO_RESGUARDO(filaActual.get(8));
+                        c.setPERIODO(filaActual.get(9));
                     }
                     ad.add(c);
                     CFilas++;

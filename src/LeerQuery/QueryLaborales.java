@@ -197,7 +197,7 @@ public class QueryLaborales {
 "    NULL AS id_fase_concl_ejec,\n" +
 "    \n" +
 "    -- Columna combinada para id_forma_solucion\n" +
-"    COALESCE(FORMA_SOLUCIONFE, FORMA_SOLUCIONAP, FORMA_SOLUCIONAJ) AS id_forma_solucion,\n" +
+"     COALESCE(POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONFE',FORMA_SOLUCIONFE), POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONAP',FORMA_SOLUCIONAP),POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCIONAJ',FORMA_SOLUCIONAJ)) AS id_forma_solucion,\n" +
 "    \n" +
 "    -- Columna combinada para fecha_dicto_solucion_u\n" +
 "    COALESCE(FECHA_DICTO_RESOLUCIONFE, FECHA_DICTO_RESOLUCIONAP, FECHA_RESOLUCIONAJ) AS fecha_dicto_solucion,\n" +
@@ -302,7 +302,7 @@ public class QueryLaborales {
 "    NULL AS id_fase_concl_ejec,  -- Columna en blanco\n" +
 "    \n" +
 "    -- Columna combinada para id_forma_solucion\n" +
-"    COALESCE(FORMA_SOLUCION_AD, FORMA_SOLUCION_TA, FORMA_SOLUCION_AP, FORMA_SOLUCION_AJ) AS id_forma_solucion,\n" +
+"    COALESCE(POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AD',FORMA_SOLUCION_AD), POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_TA',FORMA_SOLUCION_TA), POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AP',FORMA_SOLUCION_AP), POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AJ',FORMA_SOLUCION_AJ)) AS id_forma_solucion,\n" +
 "    \n" +
 "    -- Columna combinada para fecha_dicto_solucion_u\n" +
 "    COALESCE(FECHA_DICTO_RESOLUCION_AD, FECHA_RESOLUCION_TA, FECHA_DICTO_RESOLUCION_AP, FECHA_DICTO_RESOLUCION_AJ) AS fecha_dicto_solucion,\n" +
@@ -407,7 +407,7 @@ public class QueryLaborales {
 "    NULL AS id_fase_concl_ejec,  -- Columna en blanco\n" +
 "    \n" +
 "    -- Columna combinada para id_forma_solucion\n" +
-"    COALESCE(FORMA_SOLUCION_AD, FORMA_SOLUCION_AJ) AS id_forma_solucion,\n" +
+"    COALESCE(POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AD',FORMA_SOLUCION_AD), POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_AJ',FORMA_SOLUCION_AJ)) AS id_forma_solucion,\n" +
 "    \n" +
 "    -- Columna combinada para fecha_dicto_solucion\n" +
 "    COALESCE(FECHA_DICTO_RESOLUCION_AD, FECHA_RESOLUCION_AJ) AS fecha_dicto_solucion,\n" +
@@ -507,7 +507,7 @@ public class QueryLaborales {
 "    CASE WHEN FASE_SOLI_EXPEDIENTE = 99 THEN -1 ELSE FASE_SOLI_EXPEDIENTE END AS id_fase_sol_exped,\n" +
 "    NULL AS fecha_concl_ejecu,\n" +
 "    NULL AS id_fase_concl_ejec,\n" +
-"    COALESCE(FORMA_SOLUCION_EMPLAZ, FORMA_SOLUCION_HUELGA) AS id_forma_solucion,\n" +
+"    COALESCE(POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_EMPLAZ',FORMA_SOLUCION_EMPLAZ), POSTGRES_TC_FORMA_SOLUCION('FORMA_SOLUCION_HUELGA',FORMA_SOLUCION_HUELGA)) AS id_forma_solucion,\n" +
 "    COALESCE(FECHA_RESOLU_EMPLAZ, FECHA_RESOLU_HUELGA) AS fecha_dicto_solucion,\n" +
 "    INCREMENTO_SOLICITADO AS porcent_solicitado,\n" +
 "    INCREMENTO_OTORGADO AS porcent_otorgado,\n" +
@@ -1130,13 +1130,12 @@ public class QueryLaborales {
       
         return arrayList;
     }
-    
+
     
     
 
        public void DBO_Tr_Expedientes_Exportar_Inserts(String cveEntidad , String cveOrgano , String periodo , File sqlVirgen ) throws SQLException, IOException {
-        
-     
+
       FileWriter file = new FileWriter(sqlVirgen, true);
         conexionDes = conexionDes.Conectar();
         String sql = " select    id_expediente  ,\n" +
@@ -1232,50 +1231,48 @@ public class QueryLaborales {
                        consultaFiltro.append(" id_organoj  IN (" ); 
                        consultaFiltro.append( cveOrgano + ")" ); 
             }
-          
              stmt = conexionDes.getConexion().createStatement();
              rs = stmt.executeQuery(consultaFiltro.toString().replace(";", ""));
              //rs = stmt.executeQuery(sql.replace(";", ""));//todas las entidades
-
+ 
                 ResultSetMetaData metaData = rs.getMetaData();
                 int columnas = metaData.getColumnCount();
-
+ 
                 file.write("-- Datos exportados de " + "TR_EXPEDIENTE" + "\n");
-
+ 
                 while (rs.next()) {
                     StringBuilder insertQuery = new StringBuilder("INSERT INTO " + "public.TR_EXPEDIENTE" + " (");
-
+ 
                     // Agregar nombres de columnas
                     for (int i = 1; i <= columnas; i++) {
                            insertQuery.append(metaData.getColumnName(i));
                            if (i < columnas) insertQuery.append(", ");
                     }
-
+ 
                     insertQuery.append(" , fecha_creacion , fecha_modificacion ,  usuario_creacion ,  usuario_modificacion ) VALUES (");
-
+ 
                     // Agregar valores
                     for (int i = 1; i <= columnas; i++) {
                         String valor = rs.getString(i);
                         insertQuery.append(valor == null ? "NULL" : "'" + valor.replace("'", "''") + "'"); // Manejo de NULL y comillas
                         if (i < columnas) insertQuery.append(", ");
                     }
-
+ 
                     insertQuery.append(", null , null , null , null );\n");
-
+ 
                     // Escribir en el archivo
                     file.write(insertQuery.toString());
-
-
+ 
+ 
                 }
               file.close();
-                
 
+ 
         }
         catch(Exception e){
             e.printStackTrace();
         }
         finally {
-            
              try {
                     if (rs != null) {
                         rs.close();
@@ -1284,13 +1281,9 @@ public class QueryLaborales {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            
         }
-        
-              
-                     
-       } 
-       
+
+       }
        
      public ArrayList<ArrayList<String>> DBO_Tr_Demandado(String cveEntidad , String periodo , String cveOrgano,String BDProductos ) throws SQLException {
         conexion = conexion.Conectar();

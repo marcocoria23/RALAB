@@ -41,7 +41,7 @@ public class TMP_TR_RESGUARDO_DETALLE {
                 for (int i = 0; i < fila.size(); i++) {
                     BeanTR_RESGUARDO_DETALLE c = new BeanTR_RESGUARDO_DETALLE();
                     ArrayList<String> filaActual = fila.get(i);
-                    for (int j = 0; j < 7; j++) {
+                    for (int j = 0; j < 8; j++) {
                         c.setID_DETALLE(filaActual.get(0));
                         c.setID_RESGUARDO(filaActual.get(1));
                         c.setNOMBRE_TABLA(filaActual.get(2));
@@ -49,6 +49,7 @@ public class TMP_TR_RESGUARDO_DETALLE {
                         c.setORDEN_VISUALIZACION(filaActual.get(4));
                         c.setDATOS(filaActual.get(5));
                         c.setFECHA_RESGUARDO(filaActual.get(6));
+                        c.setPERIODO(filaActual.get(7));
                     }
                     ad.add(c);
                     CFilas++;

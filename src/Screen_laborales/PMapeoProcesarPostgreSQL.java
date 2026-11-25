@@ -23,7 +23,10 @@ import LeerQuery.beans.TMP_TR_EXP_SUSPENSION;
 import LeerQuery.beans.TMP_TR_EXP_TERMINACION;
 import LeerQuery.beans.TMP_TR_EXP_VIOLACION;
 import LeerQuery.beans.TMP_TR_GENERAL;
+import LeerQuery.beans.TMP_TR_JUSTIFICANTE;
 import LeerQuery.beans.TMP_TR_ORGANOJ;
+import LeerQuery.beans.TMP_TR_RESGUARDO_DETALLE;
+import LeerQuery.beans.TMP_TR_RESGUARDO_EXPEDIENTE;
 import java.awt.Color;
 import java.awt.FileDialog;
 import java.awt.event.KeyAdapter;
@@ -431,6 +434,10 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
         TMP_TR_EXP_ACTOR tmp_tr_exp_actor = new TMP_TR_EXP_ACTOR();
         TMP_TR_EXP_DEMANDADO tmp_tr_exp_demandado = new TMP_TR_EXP_DEMANDADO();
         TMP_TR_ESPECIFIQUE tmp_tr_especifique =  new TMP_TR_ESPECIFIQUE();
+        // Se agregan tablas nuevas
+        TMP_TR_JUSTIFICANTE tmp_tr_justificante = new TMP_TR_JUSTIFICANTE();
+        TMP_TR_RESGUARDO_DETALLE tmp_tr_resguardo_detalle = new TMP_TR_RESGUARDO_DETALLE();
+        TMP_TR_RESGUARDO_EXPEDIENTE tmp_tr_resguardo_expediente = new TMP_TR_RESGUARDO_EXPEDIENTE();
         String periodo = Textoperiodo1.getText();
         procesando procesar = new procesando();
         if (!periodo.equals("")) {
@@ -537,7 +544,22 @@ public class PMapeoProcesarPostgreSQL extends javax.swing.JFrame {
                         ArrayList<ArrayList<String>> listaTrEspecifique = queryPostgreSQL.DBO_Tr_ESPECIFIQUE(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
                         if (!listaTrEspecifique.isEmpty()) {
                             tmp_tr_especifique.TMP_TR_ESPECIFIQUE(listaTrEspecifique);
-                        }     
+                        }
+                        // 20.- TR_JUSTIFICANTE
+                        ArrayList<ArrayList<String>> listaTrJustificante = queryPostgreSQL.DBO_Tr_Justificante(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrJustificante.isEmpty()) {
+                            tmp_tr_justificante.TMP_TR_JUSTIFICANTE(listaTrJustificante);
+                        }
+                        // 21.- TR_RESGUARDO_DETALLE
+                        ArrayList<ArrayList<String>> listaTrResguardoDetalle = queryPostgreSQL.DBO_Tr_Resguardo_Detalle(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrResguardoDetalle.isEmpty()) {
+                            tmp_tr_resguardo_detalle.TMP_TR_RESGUARDO_DETALLE(listaTrResguardoDetalle);
+                        }
+                        // 22.- TR_RESGUARDO_DETALLE
+                        ArrayList<ArrayList<String>> listaTrResguardoExpediente = queryPostgreSQL.DBO_Tr_Resguardo_Expediente(usuario.getText(), contrasenia.getText(), periodo, CBD.getSelectedItem().toString());
+                        if (!listaTrResguardoExpediente.isEmpty()) {
+                            tmp_tr_resguardo_expediente.TMP_TR_RESGUARDO_EXPEDIENTE(listaTrResguardoExpediente);
+                        }
                         int registrosObservaciones = queryRalabDes.consultarRalabObservaciones("", clavOrgano, periodo);
                         if (registrosObservaciones == 0) { // verificar si existen errores en la tabla de observaciones 
                             JOptionPane.showMessageDialog(null, "Se finalizo el proceso base datos PostgreSQL a Oracle ", "Información", JOptionPane.INFORMATION_MESSAGE);

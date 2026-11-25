@@ -1216,46 +1216,151 @@ public class QueryPostgreSQL {
         return arrayList;
     }
     
-        public ArrayList<ArrayList<String>> DBO_Tr_Justificante(String usuario , String contrasenia  , String periodo,String bd  ) throws SQLException {
-       Statement stmt =  conexion.conectar(usuario, contrasenia,bd).createStatement();
-       arrayList = new ArrayList<>();
-        String sql = " SELECT P.ACTORES_ID,S.ID_ORGANOJ,P.ID_EXPEDIENTE, '" + periodo +"' PERIODO , NULL ID_UNIQUE\n" +
-                    "FROM TR_EXP_ACTOR P INNER JOIN TR_EXPEDIENTE S ON P.ID_EXPEDIENTE=S.ID_EXPEDIENTE ; ";
-            try {
-        StringBuilder consultaFiltro = new StringBuilder();
-        consultaFiltro.append(sql.replace(";", ""));
-       
-        resul = stmt.executeQuery(consultaFiltro.toString());
-                while (resul.next()) {
-                    ArrayList<String> fila = new ArrayList<>();
-                    fila.add(resul.getString(1)); // Añadir la primera columna
-                    fila.add(resul.getString(2)); // Añadir la segunda columna
-                    fila.add(resul.getString(3)); // Añadir la tercera columna
-                    fila.add(resul.getString(4)); // Añadir la cuarta columna
-                    fila.add(resul.getString(5)); // Añadir la quinta columna
-                    arrayList.add(fila); // Agregar la fila a la lista principal
-                }
-            } 
-            catch (SQLException ex) {
-                Logger.getLogger(QueryLaborales.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(null, "Error en la tabla TR_EXP_ACTOR " + ex);
-                throw ex;
-            } 
-            
-            finally {
-                try {
-                    if (resul != null) {
-                        resul.close();
-                    }
-                    conexion.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+       public ArrayList<ArrayList<String>> DBO_Tr_Justificante(String usuario, String contrasenia, String periodo, String bd) throws SQLException {
+        Statement stmt = conexion.conectar(usuario, contrasenia, bd).createStatement();
+        arrayList = new ArrayList<>();
+        String sql = "SELECT \n"
+                + "ID_JUSTIFICANTE,\n"
+                + "ID_ORGANOJ,\n"
+                + "CLAVE_EXPEDIENTE,\n"
+                + "TIPO_PROCEDIMIENTO,\n"
+                + "VARIABLE,\n"
+                + "JUSTIFICACION,\n"
+                + "FECHA_CAMBIO,\n"
+                + "USUARIO,\n"
+                + "'" + periodo + "' AS PERIODO\n"
+                + "FROM TR_JUSTIFICANTE";
+        try {
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+
+            resul = stmt.executeQuery(consultaFiltro.toString());
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+                fila.add(resul.getString(1)); // Añadir la primera columna
+                fila.add(resul.getString(2)); // Añadir la segunda columna
+                fila.add(resul.getString(3)); // Añadir la tercera columna
+                fila.add(resul.getString(4)); // Añadir la cuarta columna
+                fila.add(resul.getString(5)); // Añadir la quinta columna
+                fila.add(resul.getString(6)); // Añadir la quinta columna
+                fila.add(resul.getString(7)); // Añadir la quinta columna
+                fila.add(resul.getString(8)); // Añadir la quinta columna
+                fila.add(resul.getString(9)); // Añadir la quinta columna
+                arrayList.add(fila); // Agregar la fila a la lista principal
             }
-      
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryLaborales.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error en la tabla TR_JUSTIFICANTE " + ex);
+            throw ex;
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
         return arrayList;
     }
-    
-    
-    
+
+    public ArrayList<ArrayList<String>> DBO_Tr_Resguardo_Detalle(String usuario, String contrasenia, String periodo, String bd) throws SQLException {
+        Statement stmt = conexion.conectar(usuario, contrasenia, bd).createStatement();
+        arrayList = new ArrayList<>();
+        String sql = "SELECT\n"
+                + "    P1.ID_DETALLE,\n"
+                + "    P1.ID_RESGUARDO,\n"
+                + "    P1.NOMBRE_TABLA,\n"
+                + "    P1.CLAVE_ORIGINAL,\n"
+                + "    P1.ORDEN_VISUALIZACION,\n"
+                + "    P1.DATOS,\n"
+                + "    P1.FECHA_RESGUARDO,\n"
+                + "    '" + periodo + "' AS PERIODO\n"
+                + "FROM TR_RESGUARDO_DETALLE P1, TR_RESGUARDO_EXPEDIENTE P3\n"
+                + "WHERE P1.ID_RESGUARDO = P3.ID_RESGUARDO;";
+        try {
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+            resul = stmt.executeQuery(consultaFiltro.toString());
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+                fila.add(resul.getString(1)); // Añadir la primera columna
+                fila.add(resul.getString(2)); // Añadir la segunda columna
+                fila.add(resul.getString(3)); // Añadir la tercera columna
+                fila.add(resul.getString(4)); // Añadir la cuarta columna
+                fila.add(resul.getString(5)); // Añadir la quinta columna
+                fila.add(resul.getString(6)); // Añadir la sexta columna
+                fila.add(resul.getString(7)); // Añadir la séptima columna
+                fila.add(resul.getString(8)); // Añadir la séptima columna
+                arrayList.add(fila); // Agregar la fila a la lista principal
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryLaborales.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error en la tabla TR_RESGUARDO_DETALLE " + ex);
+            throw ex;
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return arrayList;
+    }
+
+    public ArrayList<ArrayList<String>> DBO_Tr_Resguardo_Expediente(String usuario, String contrasenia, String periodo, String bd) throws SQLException {
+        Statement stmt = conexion.conectar(usuario, contrasenia, bd).createStatement();
+        arrayList = new ArrayList<>();
+        String sql = "SELECT \n"
+                + "ID_RESGUARDO,\n"
+                + "ID_EXPEDIENTE_ORIGINAL,\n"
+                + "ID_ORGANOJ,\n"
+                + "CLAVE_EXPEDIENTE,\n"
+                + "ID_TIPO_EXPEDIENTE,\n"
+                + "FECHA_ELIMINACION,\n"
+                + "USUARIO_ELIMINACION,\n"
+                + "TOTAL_REGISTROS,\n"
+                + "ESTADO_RESGUARDO,\n"
+                + "'\" + periodo + \"' AS PERIODO\n"
+                + "FROM TR_RESGUARDO_EXPEDIENTE;";
+        try {
+            StringBuilder consultaFiltro = new StringBuilder();
+            consultaFiltro.append(sql.replace(";", ""));
+            resul = stmt.executeQuery(consultaFiltro.toString());
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+                fila.add(resul.getString(1)); // Añadir la primera columna
+                fila.add(resul.getString(2)); // Añadir la segunda columna
+                fila.add(resul.getString(3)); // Añadir la tercera columna
+                fila.add(resul.getString(4)); // Añadir la cuarta columna
+                fila.add(resul.getString(5)); // Añadir la quinta columna
+                fila.add(resul.getString(6)); // Añadir la sexta columna
+                fila.add(resul.getString(7)); // Añadir la séptima columna
+                fila.add(resul.getString(8)); // Añadir la séptima columna
+                fila.add(resul.getString(9)); // Añadir la séptima columna
+                fila.add(resul.getString(10)); // Añadir la séptima columna
+                arrayList.add(fila); // Agregar la fila a la lista principal
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QueryLaborales.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error en la tabla TR_RESGUARDO_EXPEDIENTE " + ex);
+            throw ex;
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return arrayList;
+    }
+
 }

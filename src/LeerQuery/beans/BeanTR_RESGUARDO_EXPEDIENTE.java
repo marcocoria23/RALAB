@@ -27,6 +27,7 @@ public class BeanTR_RESGUARDO_EXPEDIENTE extends Bean implements SQLData {
     private String USUARIO_ELIMINACION;
     private String TOTAL_REGISTROS;
     private String ESTADO_RESGUARDO;
+    private String PERIODO;
 
     public String getID_RESGUARDO() {
         return ID_RESGUARDO;
@@ -100,6 +101,14 @@ public class BeanTR_RESGUARDO_EXPEDIENTE extends Bean implements SQLData {
         this.ESTADO_RESGUARDO = ESTADO_RESGUARDO;
     }
 
+    public String getPERIODO() {
+        return PERIODO;
+    }
+
+    public void setPERIODO(String PERIODO) {
+        this.PERIODO = PERIODO;
+    }
+
     @Override
     public Object[] getLlave() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -141,7 +150,8 @@ public class BeanTR_RESGUARDO_EXPEDIENTE extends Bean implements SQLData {
             getFECHA_ELIMINACION(),
             getUSUARIO_ELIMINACION(),
             getTOTAL_REGISTROS(),
-            getESTADO_RESGUARDO()
+            getESTADO_RESGUARDO(),
+            getPERIODO()
         };
         return array;
     }

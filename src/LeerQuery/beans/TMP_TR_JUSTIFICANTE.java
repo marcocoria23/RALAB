@@ -40,7 +40,7 @@ public class TMP_TR_JUSTIFICANTE {
                 for (int i = 0; i < fila.size(); i++) {
                     BeanTR_JUSTIFICANTE c = new BeanTR_JUSTIFICANTE();
                     ArrayList<String> filaActual = fila.get(i);
-                    for (int j = 0; j < 8; j++) {
+                    for (int j = 0; j < 9; j++) {
                         c.setID_JUSTIFICANTE(filaActual.get(0));
                         c.setID_ORGANOJ(filaActual.get(1));
                         c.setCLAVE_EXPEDIENTE(filaActual.get(2));
@@ -49,6 +49,7 @@ public class TMP_TR_JUSTIFICANTE {
                         c.setJUSTIFICACION(filaActual.get(5));
                         c.setFECHA_CAMBIO(filaActual.get(6));
                         c.setUSUARIO(filaActual.get(7));
+                        c.setPERIODO(filaActual.get(8));
                     }
                     ad.add(c);
                     CFilas++;

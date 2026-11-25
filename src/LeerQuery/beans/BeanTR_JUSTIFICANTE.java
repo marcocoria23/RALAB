@@ -26,6 +26,7 @@ public class BeanTR_JUSTIFICANTE extends Bean implements SQLData {
     private String JUSTIFICACION;
     private String FECHA_CAMBIO;
     private String USUARIO;
+    private String PERIODO;
 
     public String getID_JUSTIFICANTE() {
         return ID_JUSTIFICANTE;
@@ -91,6 +92,14 @@ public class BeanTR_JUSTIFICANTE extends Bean implements SQLData {
         this.USUARIO = USUARIO;
     }
 
+    public String getPERIODO() {
+        return PERIODO;
+    }
+
+    public void setPERIODO(String PERIODO) {
+        this.PERIODO = PERIODO;
+    }
+
     @Override
     public Object[] getLlave() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -131,7 +140,8 @@ public class BeanTR_JUSTIFICANTE extends Bean implements SQLData {
             getVARIABLE(),
             getJUSTIFICACION(),
             getFECHA_CAMBIO(),
-            getUSUARIO()
+            getUSUARIO(),
+            getPERIODO()
         };
         return array;
     }

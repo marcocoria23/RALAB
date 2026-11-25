@@ -25,6 +25,7 @@ public class BeanTR_RESGUARDO_DETALLE extends Bean implements SQLData {
     private String ORDEN_VISUALIZACION;
     private String DATOS;
     private String FECHA_RESGUARDO;
+    private String PERIODO;
 
     public String getSQLTypeName() {
         return SQLTypeName;
@@ -90,6 +91,14 @@ public class BeanTR_RESGUARDO_DETALLE extends Bean implements SQLData {
         this.FECHA_RESGUARDO = FECHA_RESGUARDO;
     }
 
+    public String getPERIODO() {
+        return PERIODO;
+    }
+
+    public void setPERIODO(String PERIODO) {
+        this.PERIODO = PERIODO;
+    }
+
     @Override
     public Object[] getLlave() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -124,7 +133,8 @@ public class BeanTR_RESGUARDO_DETALLE extends Bean implements SQLData {
             getCLAVE_ORIGINAL(),
             getORDEN_VISUALIZACION(),
             getDATOS(),
-            getFECHA_RESGUARDO()
+            getFECHA_RESGUARDO(),
+            getPERIODO(),
         };
         return array;
     }

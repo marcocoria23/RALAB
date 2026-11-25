@@ -5,6 +5,7 @@
 package LeerQuery;
 
 import Conexion.OracleConexionDesarrollo;
+import java.sql.Clob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -4542,7 +4543,153 @@ public ArrayList<ArrayList<String>> V3_TR_EJECUCIONJL (String cveEntidad , Strin
       
         return arrayList;
     }
+    
+      public ArrayList<ArrayList<String>> V3_TR_JUSTIFICANTEJL(String cveEntidad, String periodo, String cveOrgano) throws SQLException {
+        conexionDes = conexionDes.Conectar();
+        arrayList = new ArrayList<>();
+        String sql = "SELECT ID_JUSTIFICANTE,\n"
+                + "ID_ORGANOJ,\n"
+                + "CLAVE_EXPEDIENTE,\n"
+                + "TIPO_PROCEDIMIENTO,\n"
+                + "VARIABLE,\n"
+                + "JUSTIFICACION,\n"
+                + "FECHA_CAMBIO,\n"
+                + "USUARIO,\n"
+                + "PERIODO\n"
+                + "FROM TR_JUSTIFICANTE\n"
+                + "WHERE (SUBSTR(ID_ORGANOJ,0,2) = '" + cveEntidad + "' AND PERIODO = '" + periodo + "' ) OR ( ID_ORGANOJ = '" + cveOrgano + "' AND PERIODO = '" + periodo + "' )";
+        try {
+            Statement stmt = conexionDes.getConexion().createStatement();
+            System.out.println(sql);
+            resul = stmt.executeQuery(sql);
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+                fila.add(resul.getString(1));
+                fila.add(resul.getString(2));
+                fila.add(resul.getString(3));
+                fila.add(resul.getString(4));
+                fila.add(resul.getString(5));
+                fila.add(resul.getString(6));
+                fila.add(resul.getString(7));
+                fila.add(resul.getString(8));
+                fila.add(resul.getString(9));
+                arrayList.add(fila);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuerysBdActToV3.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al leer la tabla V3_TR_JUSTIFICANTEJL" + ex);
+            throw ex;
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                conexionDes.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return arrayList;
+    }
 
+    public ArrayList<ArrayList<String>> V3_TR_RESGUARDO_DETALLEJL(String cveEntidad, String periodo, String cveOrgano) throws SQLException {
+        conexionDes = conexionDes.Conectar();
+        arrayList = new ArrayList<>();
 
+        String sql = "SELECT ID_DETALLE,\n"
+                + "P1.ID_RESGUARDO,\n"
+                + "NOMBRE_TABLA,\n"
+                + "CLAVE_ORIGINAL,\n"
+                + "ORDEN_VISUALIZACION,\n"
+                + "DATOS,\n"
+                + "FECHA_RESGUARDO,\n"
+                + "P1.PERIODO\n"
+                + "FROM TR_RESGUARDO_DETALLE P1, TR_RESGUARDO_EXPEDIENTE P3\n"
+                + "WHERE P1.ID_RESGUARDO = P3.ID_RESGUARDO\n"
+                + "AND (SUBSTR(P3.ID_ORGANOJ,0,2) = '" + cveEntidad + "' AND P1.PERIODO = '" + periodo + "' ) OR ( P3.ID_ORGANOJ = '" + cveOrgano + "' AND P1.PERIODO = '" + periodo + "' )";
+
+        try {
+            Statement stmt = conexionDes.getConexion().createStatement();
+            System.out.println(sql);
+            resul = stmt.executeQuery(sql);
+
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+                fila.add(resul.getString(1));
+                fila.add(resul.getString(2));
+                fila.add(resul.getString(3));
+                fila.add(resul.getString(4));
+                fila.add(resul.getString(5));
+                fila.add(resul.getString(6));
+                fila.add(resul.getString(7));
+                fila.add(resul.getString(8));
+                arrayList.add(fila);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuerysBdActToV3.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al leer la tabla V3_TR_RESGUARDO_DETALLEJL" + ex);
+            throw ex;
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                conexionDes.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return arrayList;
+    }
+
+    public ArrayList<ArrayList<String>> V3_TR_RESGUARDO_EXPEDIENTEJL(String cveEntidad, String periodo, String cveOrgano) throws SQLException {
+        conexionDes = conexionDes.Conectar();
+        arrayList = new ArrayList<>();
+        String sql = "SELECT ID_RESGUARDO,\n"
+                + "ID_EXPEDIENTE_ORIGINAL,\n"
+                + "ID_ORGANOJ,\n"
+                + "CLAVE_EXPEDIENTE,\n"
+                + "ID_TIPO_EXPEDIENTE,\n"
+                + "FECHA_ELIMINACION,\n"
+                + "USUARIO_ELIMINACION,\n"
+                + "TOTAL_REGISTROS,\n"
+                + "ESTADO_RESGUARDO,\n"
+                + "PERIODO\n"
+                + "FROM TR_RESGUARDO_EXPEDIENTE\n"
+                + "WHERE (SUBSTR(ID_ORGANOJ,0,2) = '" + cveEntidad + "' AND PERIODO = '" + periodo + "' ) OR ( ID_ORGANOJ = '" + cveOrgano + "' AND PERIODO = '" + periodo + "' )";
+        try {
+            Statement stmt = conexionDes.getConexion().createStatement();
+            System.out.println(sql);
+            resul = stmt.executeQuery(sql);
+            while (resul.next()) {
+                ArrayList<String> fila = new ArrayList<>();
+                fila.add(resul.getString(1));
+                fila.add(resul.getString(2));
+                fila.add(resul.getString(3));
+                fila.add(resul.getString(4));
+                fila.add(resul.getString(5));
+                fila.add(resul.getString(6));
+                fila.add(resul.getString(7));
+                fila.add(resul.getString(8));
+                fila.add(resul.getString(9));
+                fila.add(resul.getString(10));
+                arrayList.add(fila);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuerysBdActToV3.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Error al leer la tabla V3_TR_RESGUARDO_EXPEDIENTEJL" + ex);
+            throw ex;
+        } finally {
+            try {
+                if (resul != null) {
+                    resul.close();
+                }
+                conexionDes.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return arrayList;
+    }
 
 }

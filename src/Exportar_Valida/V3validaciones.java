@@ -224,23 +224,23 @@ public class V3validaciones {
         hoja0.setColumnWidth((short) 21, (short) 4000);
 
         HSSFSheet hojaControl_expe = libro.createSheet("ControlExpediente");
-        hojaControl_expe.setColumnWidth((short) 0, (short) 15000);
+        hojaControl_expe.setColumnWidth((short) 0, (short) 6000);
         hojaControl_expe.setColumnWidth((short) 1, (short) 6000);
         hojaControl_expe.setColumnWidth((short) 2, (short) 6000);
-        hojaControl_expe.setColumnWidth((short) 3, (short) 30000);
-        hojaControl_expe.setColumnWidth((short) 4, (short) 30000);
+        hojaControl_expe.setColumnWidth((short) 3, (short) 6000);
+        hojaControl_expe.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hojaAudiencias = libro.createSheet("Audiencias");
         hojaAudiencias.setColumnWidth((short) 0, (short) 6000);
         hojaAudiencias.setColumnWidth((short) 1, (short) 6000);
-        hojaAudiencias.setColumnWidth((short) 2, (short) 6000);
-        hojaAudiencias.setColumnWidth((short) 3, (short) 13000);
-        hojaAudiencias.setColumnWidth((short) 4, (short) 13000);
+        hojaAudiencias.setColumnWidth((short) 2, (short) 27800);
+        hojaAudiencias.setColumnWidth((short) 3, (short) 6000);
+        hojaAudiencias.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja1 = libro.createSheet("Ordinario");
         hoja1.setColumnWidth((short) 0, (short) 6000);
         hoja1.setColumnWidth((short) 1, (short) 6000);
-        hoja1.setColumnWidth((short) 2, (short) 6000);
+        hoja1.setColumnWidth((short) 2, (short) 27800);
         hoja1.setColumnWidth((short) 3, (short) 6000);
         hoja1.setColumnWidth((short) 4, (short) 6000);
         hoja1.setColumnWidth((short) 5, (short) 6000);
@@ -248,21 +248,21 @@ public class V3validaciones {
         HSSFSheet hoja2 = libro.createSheet("Part_Act_Ordinario");
         hoja2.setColumnWidth((short) 0, (short) 6000);
         hoja2.setColumnWidth((short) 1, (short) 6000);
-        hoja2.setColumnWidth((short) 2, (short) 6000);
+        hoja2.setColumnWidth((short) 2, (short) 27800);
         hoja2.setColumnWidth((short) 3, (short) 6000);
-        hoja2.setColumnWidth((short) 4, (short) 30000);
+        hoja2.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja3 = libro.createSheet("Part_Dem_Ordinario");
         hoja3.setColumnWidth((short) 0, (short) 6000);
         hoja3.setColumnWidth((short) 1, (short) 6000);
-        hoja3.setColumnWidth((short) 2, (short) 6000);
+        hoja3.setColumnWidth((short) 2, (short) 27800);
         hoja3.setColumnWidth((short) 3, (short) 6000);
-        hoja3.setColumnWidth((short) 4, (short) 30000);
+        hoja3.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja4 = libro.createSheet("Individual");
         hoja4.setColumnWidth((short) 0, (short) 6000);
         hoja4.setColumnWidth((short) 1, (short) 6000);
-        hoja4.setColumnWidth((short) 2, (short) 6000);
+        hoja4.setColumnWidth((short) 2, (short) 27800);
         hoja4.setColumnWidth((short) 3, (short) 6000);
         hoja4.setColumnWidth((short) 4, (short) 6000);
         hoja4.setColumnWidth((short) 5, (short) 6000);
@@ -270,21 +270,21 @@ public class V3validaciones {
         HSSFSheet hoja5 = libro.createSheet("Part_Act_Individual");
         hoja5.setColumnWidth((short) 0, (short) 6000);
         hoja5.setColumnWidth((short) 1, (short) 6000);
-        hoja5.setColumnWidth((short) 2, (short) 6000);
+        hoja5.setColumnWidth((short) 2, (short) 27800);
         hoja5.setColumnWidth((short) 3, (short) 6000);
-        hoja5.setColumnWidth((short) 4, (short) 30000);
+        hoja5.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja6 = libro.createSheet("Part_Dem_Individual");
         hoja6.setColumnWidth((short) 0, (short) 6000);
         hoja6.setColumnWidth((short) 1, (short) 6000);
-        hoja6.setColumnWidth((short) 2, (short) 6000);
+        hoja6.setColumnWidth((short) 2, (short) 27800);
         hoja6.setColumnWidth((short) 3, (short) 6000);
-        hoja6.setColumnWidth((short) 4, (short) 30000);
+        hoja6.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja7 = libro.createSheet("Colectivo");
         hoja7.setColumnWidth((short) 0, (short) 6000);
         hoja7.setColumnWidth((short) 1, (short) 6000);
-        hoja7.setColumnWidth((short) 2, (short) 6000);
+        hoja7.setColumnWidth((short) 2, (short) 27800);
         hoja7.setColumnWidth((short) 3, (short) 6000);
         hoja7.setColumnWidth((short) 4, (short) 6000);
         hoja7.setColumnWidth((short) 5, (short) 6000);
@@ -292,21 +292,21 @@ public class V3validaciones {
         HSSFSheet hoja8 = libro.createSheet("Part_Act_Colectivo");
         hoja8.setColumnWidth((short) 0, (short) 6000);
         hoja8.setColumnWidth((short) 1, (short) 6000);
-        hoja8.setColumnWidth((short) 2, (short) 6000);
+        hoja8.setColumnWidth((short) 2, (short) 27800);
         hoja8.setColumnWidth((short) 3, (short) 6000);
-        hoja8.setColumnWidth((short) 4, (short) 30000);
+        hoja8.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja9 = libro.createSheet("Part_Dem_Colectivo");
         hoja9.setColumnWidth((short) 0, (short) 6000);
         hoja9.setColumnWidth((short) 1, (short) 6000);
-        hoja9.setColumnWidth((short) 2, (short) 6000);
+        hoja9.setColumnWidth((short) 2, (short) 27800);
         hoja9.setColumnWidth((short) 3, (short) 6000);
-        hoja9.setColumnWidth((short) 4, (short) 30000);
+        hoja9.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja10 = libro.createSheet("Huelga");
         hoja10.setColumnWidth((short) 0, (short) 6000);
         hoja10.setColumnWidth((short) 1, (short) 6000);
-        hoja10.setColumnWidth((short) 2, (short) 6000);
+        hoja10.setColumnWidth((short) 2, (short) 27800);
         hoja10.setColumnWidth((short) 3, (short) 6000);
         hoja10.setColumnWidth((short) 4, (short) 6000);
         hoja10.setColumnWidth((short) 5, (short) 6000);
@@ -319,21 +319,21 @@ public class V3validaciones {
         HSSFSheet hoja11 = libro.createSheet("Part_Act_Huelga");
         hoja11.setColumnWidth((short) 0, (short) 6000);
         hoja11.setColumnWidth((short) 1, (short) 6000);
-        hoja11.setColumnWidth((short) 2, (short) 6000);
+        hoja11.setColumnWidth((short) 2, (short) 27800);
         hoja11.setColumnWidth((short) 3, (short) 6000);
-        hoja11.setColumnWidth((short) 4, (short) 30000);
+        hoja11.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja12 = libro.createSheet("Part_Dem_Huelga");
         hoja12.setColumnWidth((short) 0, (short) 6000);
         hoja12.setColumnWidth((short) 1, (short) 6000);
-        hoja12.setColumnWidth((short) 2, (short) 6000);
+        hoja12.setColumnWidth((short) 2, (short) 27800);
         hoja12.setColumnWidth((short) 3, (short) 6000);
-        hoja12.setColumnWidth((short) 4, (short) 30000);
+        hoja12.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja13 = libro.createSheet("Colect_Econom");
         hoja13.setColumnWidth((short) 0, (short) 6000);
         hoja13.setColumnWidth((short) 1, (short) 6000);
-        hoja13.setColumnWidth((short) 2, (short) 6000);
+        hoja13.setColumnWidth((short) 2, (short) 27800);
         hoja13.setColumnWidth((short) 3, (short) 6000);
         hoja13.setColumnWidth((short) 4, (short) 6000);
         hoja13.setColumnWidth((short) 5, (short) 6000);
@@ -341,31 +341,31 @@ public class V3validaciones {
         HSSFSheet hoja14 = libro.createSheet("Part_Act_Col_Econom");
         hoja14.setColumnWidth((short) 0, (short) 6000);
         hoja14.setColumnWidth((short) 1, (short) 6000);
-        hoja14.setColumnWidth((short) 2, (short) 6000);
+        hoja14.setColumnWidth((short) 2, (short) 27800);
         hoja14.setColumnWidth((short) 3, (short) 6000);
-        hoja14.setColumnWidth((short) 4, (short) 30000);
+        hoja14.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja15 = libro.createSheet("Part_Dem_Col_Econom");
         hoja15.setColumnWidth((short) 0, (short) 6000);
         hoja15.setColumnWidth((short) 1, (short) 6000);
-        hoja15.setColumnWidth((short) 2, (short) 6000);
+        hoja15.setColumnWidth((short) 2, (short) 27800);
         hoja15.setColumnWidth((short) 3, (short) 6000);
-        hoja15.setColumnWidth((short) 4, (short) 30000);
+        hoja15.setColumnWidth((short) 4, (short) 6000);
 
         HSSFSheet hoja16 = libro.createSheet("Paraprocesal");
         hoja16.setColumnWidth((short) 0, (short) 6000);
         hoja16.setColumnWidth((short) 1, (short) 6000);
-        hoja16.setColumnWidth((short) 2, (short) 6000);
+        hoja16.setColumnWidth((short) 2, (short) 27800);
         hoja16.setColumnWidth((short) 3, (short) 6000);
-        hoja16.setColumnWidth((short) 4, (short) 30000);
-        hoja16.setColumnWidth((short) 5, (short) 30000);
+        hoja16.setColumnWidth((short) 4, (short) 6000);
+        hoja16.setColumnWidth((short) 5, (short) 6000);
 
         HSSFSheet hoja17 = libro.createSheet("Ejecucion");
         hoja17.setColumnWidth((short) 0, (short) 6000);
         hoja17.setColumnWidth((short) 1, (short) 6000);
-        hoja17.setColumnWidth((short) 2, (short) 6000);
+        hoja17.setColumnWidth((short) 2, (short) 27800);
         hoja17.setColumnWidth((short) 3, (short) 6000);
-        hoja17.setColumnWidth((short) 4, (short) 30000);
+        hoja17.setColumnWidth((short) 4, (short) 3000);
         PValidacion val = new PValidacion();
         if (val.PValProd.equals("")) {
             Con1 = "V3_";
