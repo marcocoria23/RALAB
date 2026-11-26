@@ -892,6 +892,36 @@ public class V3QOrdinario {
         return Array;
     }
     
+    // Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Fase escrita (9). ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser solucionado (1)
+    public ArrayList Fase_Sol_Escrita2(String Con1, String Con2){
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM "+Con1+"TR_ORDINARIO"+Con2+"\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=9\n" +
+"AND (\n" +
+" AUDIENCIA_PRELIM NOT IN (2,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,99)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
+                + "  OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
     // Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Audiencia preliminar (1).
     public ArrayList Fase_Sol_Preliminar(String Con1, String Con2){
         conexion.Conectar();
@@ -913,6 +943,37 @@ public class V3QOrdinario {
                 + "    AND AUDIENCIA_JUICIO = 2\n"
                 + "    AND ESTATUS_EXPEDIENTE = 1 \n"
                 + "    AND FASE_SOLI_EXPEDIENTE NOT IN (1,99) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    
+     // Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Audiencia preliminar (1), ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1).
+    public ArrayList Fase_Sol_Preliminar2(String Con1, String Con2){
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM "+Con1+"TR_ORDINARIO"+Con2+"\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=1\n" +
+"AND (\n" +
+" AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,99)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
+                + "  OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
@@ -1028,6 +1089,37 @@ public class V3QOrdinario {
                 + "    AND ESTATUS_EXPEDIENTE = 1 \n"
                 + "    AND FASE_SOLI_EXPEDIENTE NOT IN (2,99)\n"
                 + "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "') OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                    
+                });
+
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    // Cuando la fase de solución del expediente es igual a (FASE_SOLI_EXPEDIENTE) = Audiencia de Juicio (2),¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1), .
+    public ArrayList Fase_Sol_Audi_Juicio2(String Con1, String Con2){
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_ORDINARIOJL\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=2\n" +
+"AND (\n" +
+" AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (1,99)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
+                + "  OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {

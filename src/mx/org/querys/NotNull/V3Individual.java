@@ -859,7 +859,7 @@ public ArrayList Fase_Sol_exp_TD(String Con1, String Con2){
  }
 
 
-//---CUANDO FASE EN LA QUE SE SOLUCIONO EL EXPEDIENTE=Tramitación sin audiencias
+//---Cuando la fase del expediente = (Tramitacion sin audiencias) no debe de capturarse (Tramitacion por auto depuracion),(audiencia preliminar),(audiencia de juicio)
 public ArrayList Fase_Sol_exp_TA(String Con1, String Con2){
       conexion.Conectar();
       Array = new ArrayList();

@@ -908,6 +908,36 @@ public class QNuevos {
         return Array;
     }
     
+    
+    // cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Tramitación sin audiencias (3), ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? debe ser = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = solucionado (1).
+    public ArrayList Individual_FaseSolTSA2(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=4\n" +
+"AND (TRAMITACION_DEPURACION NOT IN (2,99)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (2,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,99))" +
+ "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
     // Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = Sí (1) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Tramitación por auto de depuración (4).
     public ArrayList Individual_FaseSolTPAD(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
         conexion.Conectar();
@@ -931,6 +961,35 @@ public class QNuevos {
                 + "  AND ESTATUS_EXPEDIENTE = 1\n"
                 + "  AND FASE_SOLI_EXPEDIENTE NOT IN (3,99)\n"
                 + "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    // Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Tramitación por auto de depuración (4), ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? debe ser = Sí (1) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1) .
+    public ArrayList Individual_FaseSolTPAD2(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=3\n" +
+"AND (TRAMITACION_DEPURACION NOT IN (1,99)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (2,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,99))" +
+ "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
         try {
@@ -1064,6 +1123,36 @@ public class QNuevos {
         return Array;
     }
     
+     // Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = audiencia preliminar,(1)¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? debe ser = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Si (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1).
+    public ArrayList Individual_FaseSolAP2(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=1\n" +
+"AND (TRAMITACION_DEPURACION NOT IN (2,99)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,99))"+
+ "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";                
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
+    
     // Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = si (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solucion (2), la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser igual o mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM).
     public ArrayList Individual_FechaUAP(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
         conexion.Conectar();
@@ -1183,6 +1272,36 @@ public class QNuevos {
         }
         return Array;
     }
+    
+     // Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = audiencia de juicio (2), ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? debe ser = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Si (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = SI (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1) .
+    public ArrayList Individual_FaseSolAJ2(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=2\n" +
+"AND (TRAMITACION_DEPURACION NOT IN (2,99)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (1,99))" +
+"    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
     
     // Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solución (2) la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser mayor a la fecha de audiencia preliminar (FECHA_AUDIENCIA_PRELIM ) y  mayor o igual a la fecha de audiencia de juicio (FECHA_AUDIENCIA_JUICIO). 
     public ArrayList Individual_FechaUAPAPAJ(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
@@ -1304,6 +1423,36 @@ public class QNuevos {
         }
         return Array;
     }
+    
+    
+     // Cuando la fase de solución del expediente debe ser (FASE_SOLI_EXPEDIENTE) = Tramitación por auto de depuración (3), ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION)? debe ser = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1).
+    public ArrayList Colectivo_FaseSolTPAD2(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
+        conexion.Conectar();
+        Array = new ArrayList();
+        sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_COLECTIVOJL\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=3\n" +
+"AND (\n" +
+" AUTO_DEPURACION NOT IN (1,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,99))"+
+ "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";               
+        System.out.println(sql);
+        resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
 
     // Cuando ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = en proceso de solución (2), la fecha del último acto procesal (FECHA_ACTO_PROCESAL) debe ser igual o mayor a la Fecha de auto de depuración (FECHA_DEPURACION).
     public ArrayList Colectivo_FechaAP(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
@@ -1377,7 +1526,7 @@ public class QNuevos {
         return Array;
     }
 
-    /// Cuando ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION) = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Audiencia de Juicio (2).
+    /// Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Audiencia de Juicio (2), ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION) debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1).
     public ArrayList Colectivo_FaseSoliAJ(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
         conexion.Conectar();
             Array = new ArrayList();
@@ -1417,6 +1566,36 @@ public class QNuevos {
         return Array;
     }
 
+    /// Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Audiencia de Juicio (2), ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION) debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1).
+      public ArrayList Colectivo_FaseSoliAJ2(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
+        conexion.Conectar();
+            Array = new ArrayList();
+            sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS\n" +
+"FROM V3_TR_COLECTIVOJL\n" +
+"WHERE ESTATUS_EXPEDIENTE=1\n" +
+"AND FASE_SOLI_EXPEDIENTE=2\n" +
+"AND (\n" +
+" AUTO_DEPURACION NOT IN (2,99) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (1,99))" +
+                    "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";              
+            System.out.println(sql);
+            resul = conexion.consultar(sql);
+        try {
+            while (resul.next()) {
+                Array.add(new String[]{
+                    resul.getString("CLAVE_ORGANO"),
+                    resul.getString("EXPEDIENTE_CLAVE"),
+                    resul.getString("FASE_SOLI_EXPEDIENTE"),
+                    resul.getString("COMENTARIOS")
+                });
+            }
+            conexion.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(V1querys.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Array;
+    }
+    
     // Cuando ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION)? = No (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) es igual a solucionado (1) la fecha en la que se dictó la resolución de audiencia de juicio (FECHA_RESOLUCION_AJ) debe ser igual o mayor a la fecha de audiencia de juicio (FECHA_AUDIENCIA_JUICIO).
     public ArrayList Colectivo_FechaResolAJ(String claveorgano, String entidad, String periodo,String Con1, String Con2) {
         conexion.Conectar();

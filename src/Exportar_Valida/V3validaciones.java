@@ -10279,6 +10279,102 @@ public class V3validaciones {
             coni = 1;
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
+        
+          ArrayResult = Ordinario.Fase_Sol_Escrita2(Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            HSSFRow fila00 = hojaresumenval.createRow(2);
+            HSSFCell celda00 = fila00.createCell((short) 1);
+            celda00.setCellStyle(PAmarillo);
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja1.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja1.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Audiencia de Juicio (2), ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION) debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)."
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
 
         ArrayResult = Ordinario.Fase_Sol_Preliminar(Con1, Con2);//AQUI
         if (ArrayResult.size() > 0) {
@@ -10359,6 +10455,102 @@ public class V3validaciones {
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
                         "Cuando ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Audiencia preliminar (1)."
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
+        
+         ArrayResult = Ordinario.Fase_Sol_Preliminar2(Con1, Con2);//AQUI
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            HSSFRow fila00 = hojaresumenval.createRow(2);
+            HSSFCell celda00 = fila00.createCell((short) 1);
+            celda00.setCellStyle(PAmarillo);
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja1.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja1.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Audiencia preliminar (1), ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)."
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -10664,6 +10856,102 @@ public class V3validaciones {
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
+           ArrayResult = Ordinario.Fase_Sol_Audi_Juicio2(Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            HSSFRow fila00 = hojaresumenval.createRow(2);
+            HSSFCell celda00 = fila00.createCell((short) 1);
+            celda00.setCellStyle(PAmarillo);
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja1.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja1.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente es igual a (FASE_SOLI_EXPEDIENTE) = Audiencia de Juicio (2),¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)"
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
+        
         ArrayResult = Ordinario.Fecha_Audiencia_Preliminar(Con1, Con2);
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
@@ -19230,6 +19518,103 @@ if (ArrayResult.size() > 0) {
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
 
+         ArrayResult = Q.Individual_FaseSolTSA2(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            /**
+             * HSSFRow fila00 = hojaresumenval.createRow(2); HSSFCell celda00 =
+             * fila00.createCell((short) 1); celda00.setCellStyle(PAmarillo);*
+             */
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja4.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja4.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Tramitación sin audiencias (3), ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? debe ser = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = solucionado (1)"
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
+        
         ArrayResult = Q.Individual_FaseSolTPAD(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
         if (ArrayResult.size() > 0) {
             System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
@@ -19310,6 +19695,103 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
                         "Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = Sí (1) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Tramitación por auto de depuración (3)."
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
+        
+         ArrayResult = Q.Individual_FaseSolTPAD2(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            /**
+             * HSSFRow fila00 = hojaresumenval.createRow(2); HSSFCell celda00 =
+             * fila00.createCell((short) 1); celda00.setCellStyle(PAmarillo);*
+             */
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja4.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja4.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Tramitación por auto de depuración (4), ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? debe ser = Sí (1) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1) "
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -19617,6 +20099,103 @@ if (ArrayResult.size() > 0) {
             coni = 1;
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
+        
+           ArrayResult = Q.Individual_FaseSolAP2(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            /**
+             * HSSFRow fila00 = hojaresumenval.createRow(2); HSSFCell celda00 =
+             * fila00.createCell((short) 1); celda00.setCellStyle(PAmarillo);*
+             */
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja4.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja4.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente es igual a (FASE_SOLI_EXPEDIENTE) = Audiencia de Juicio (2),¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Si (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)"
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
 
         ArrayResult = Q.Individual_FechaUAP(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
         if (ArrayResult.size() > 0) {
@@ -19892,6 +20471,103 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
                         "Cuando ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? = Si (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = SI (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = audiencia de juicio (2)."
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
+        
+          ArrayResult = Q.Individual_FaseSolAJ2(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            /**
+             * HSSFRow fila00 = hojaresumenval.createRow(2); HSSFCell celda00 =
+             * fila00.createCell((short) 1); celda00.setCellStyle(PAmarillo);*
+             */
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja4.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja4.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = audiencia de juicio (2), ¿Hubo tramitación por auto de depuración (TRAMITACION_DEPURACION)? debe ser = No (2) y ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = Si (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = SI (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)"
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
@@ -26427,6 +27103,102 @@ if (ArrayResult.size() > 0) {
             coni = 1;
             System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
         }
+        
+           ArrayResult = Q.Colectivo_FaseSolTPAD2(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            HSSFRow fila00 = hojaresumenval.createRow(2);
+            HSSFCell celda00 = fila00.createCell((short) 1);
+            celda00.setCellStyle(PAmarillo);
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja7.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja7.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente debe ser (FASE_SOLI_EXPEDIENTE) = Tramitación por auto de depuración (3), ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION)? debe ser = Sí (1) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)."
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
 
         ArrayResult = Q.Colectivo_FechaAP(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
         if (ArrayResult.size() > 0) {
@@ -26699,6 +27471,102 @@ if (ArrayResult.size() > 0) {
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
                         "Cuando ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION) = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) = Solucionado (1), la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Audiencia de Juicio (2)."
+                ));
+
+                HSSFCell celdaTotal = filaDatos.createCell((short) 3);
+                celdaTotal.setCellStyle(estiloCeldabordes0);
+                celdaTotal.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaTotal.setCellValue(new HSSFRichTextString(totalCasos));
+
+                filaActual++;
+            }
+            coni = expedientesPorOrgano.size();
+            System.out.println("contador i: " + coni);
+            conEnc = conEnc + coni + 1;
+            conDat = conDat + coni + 1;
+            coni = 1;
+            System.out.println("contador i: " + conEnc + " " + conDat + " " + ArrayResult.size());
+        }
+        
+          ArrayResult = Q.Colectivo_FaseSoliAJ2(PValidacion.clave_organo, PValidacion.clave_entidad, PValidacion.periodo, Con1, Con2);
+        if (ArrayResult.size() > 0) {
+            System.out.println("contador Encabezado: " + conEnc + " Contador Datos: " + conDat);
+            HSSFRow fila00 = hojaresumenval.createRow(2);
+            HSSFCell celda00 = fila00.createCell((short) 1);
+            celda00.setCellStyle(PAmarillo);
+
+            // ENCABEZADOS
+            HSSFRow filaEncabezado = hoja7.createRow(conEnc);
+            filaEncabezado.setHeight((short) 600);
+
+            HSSFCell celda1 = filaEncabezado.createCell((short) 0);
+            celda1.setCellStyle(estiloCelda1);
+            celda1.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda1.setCellValue(new HSSFRichTextString("CLAVE DEL ORGANO"));
+
+            HSSFCell celda2 = filaEncabezado.createCell((short) 1);
+            celda2.setCellStyle(estiloCelda1);
+            celda2.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda2.setCellValue(new HSSFRichTextString("CLAVE DEL EXPEDIENTE"));
+
+            HSSFCell celda5 = filaEncabezado.createCell((short) 2);
+            celda5.setCellStyle(estiloCelda1);
+            celda5.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5.setCellValue(new HSSFRichTextString("OBSERVACIONES"));
+
+            HSSFCell celda5A = filaEncabezado.createCell((short) 3);
+            celda5A.setCellStyle(estiloCelda1);
+            celda5A.setCellType(HSSFCell.CELL_TYPE_STRING);
+            celda5A.setCellValue(new HSSFRichTextString("Total de casos"));
+
+            // AGRUPAR EXPEDIENTES POR CLAVE DE ORGANO
+            Map<String, List<String>> expedientesPorOrgano = new LinkedHashMap<>();
+            if (ArrayResult.size() < 2500) {
+                for (int i = 0; i < ArrayResult.size(); i++) {
+                    String txtD1 = Arrays.toString(ArrayResult.get(i));
+                    txtD1 = txtD1.replace("[", "")
+                            .replace("]", "")
+                            .replace(" 00:00:00.0", "");
+                    String[] parts = txtD1.split(",");
+                    String claveOrgano = parts[0].trim();
+                    String claveExpediente = parts[1].trim();
+                    expedientesPorOrgano
+                            .computeIfAbsent(claveOrgano, k -> new ArrayList<String>())
+                            .add(claveExpediente);
+                }
+            } else {
+                expedientesPorOrgano.put("General", Arrays.asList("General"));
+            }
+            // CREAR FILAS POR CADA CLAVE DE ORGANO
+            int filaActual = conEnc + 1;
+            for (Map.Entry<String, List<String>> entry : expedientesPorOrgano.entrySet()) {
+                String claveOrgano = entry.getKey();
+                List<String> expedientes = entry.getValue();
+                String textoExpedientes = String.join(" , ", expedientes);
+                String totalCasos;
+                if (claveOrgano.equals("General")) {
+                    totalCasos = String.valueOf(ArrayResult.size());
+                } else {
+                    totalCasos = String.valueOf(expedientes.size());
+                }
+                HSSFRow filaDatos = hoja7.createRow(filaActual);
+                filaDatos.setHeight((short) 300);
+
+                HSSFCell celdaOrgano = filaDatos.createCell((short) 0);
+                celdaOrgano.setCellStyle(estiloCeldabordes0);
+                celdaOrgano.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaOrgano.setCellValue(new HSSFRichTextString(claveOrgano));
+
+                HSSFCell celdaExpediente = filaDatos.createCell((short) 1);
+                celdaExpediente.setCellStyle(estiloCeldabordes0);
+                celdaExpediente.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaExpediente.setCellValue(new HSSFRichTextString(textoExpedientes));
+
+                HSSFCell celdaObs = filaDatos.createCell((short) 2);
+                celdaObs.setCellStyle(estiloCeldabordes0);
+                celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
+                celdaObs.setCellValue(new HSSFRichTextString(
+                        "Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Audiencia de Juicio (2), ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION) debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)"
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
