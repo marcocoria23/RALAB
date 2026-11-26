@@ -892,7 +892,7 @@ public class V3QOrdinario {
         return Array;
     }
     
-    // Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Fase escrita (9). ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser solucionado (1)
+    //  la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Fase escrita (9). ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser solucionado (1)
     public ArrayList Fase_Sol_Escrita2(String Con1, String Con2){
         conexion.Conectar();
         Array = new ArrayList();

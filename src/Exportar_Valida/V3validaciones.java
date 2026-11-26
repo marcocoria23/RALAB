@@ -10358,7 +10358,7 @@ public class V3validaciones {
                 celdaObs.setCellStyle(estiloCeldabordes0);
                 celdaObs.setCellType(HSSFCell.CELL_TYPE_STRING);
                 celdaObs.setCellValue(new HSSFRichTextString(
-                        "Cuando la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) es = Audiencia de Juicio (2), ¿Hubo tramitación por auto de depuración (AUTO_DEPURACION) debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = Sí (1) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser = Solucionado (1)."
+                        "la fase de solución del expediente (FASE_SOLI_EXPEDIENTE) debe ser = Fase escrita (9). ¿Hubo celebración de audiencia preliminar (AUDIENCIA_PRELIM)? debe ser = No (2) y ¿Hubo celebración de audiencia de juicio (AUDIENCIA_JUICIO)? debe ser = No (2) y estatus del expediente (ESTATUS_EXPEDIENTE) debe ser solucionado (1)"
                 ));
 
                 HSSFCell celdaTotal = filaDatos.createCell((short) 3);
