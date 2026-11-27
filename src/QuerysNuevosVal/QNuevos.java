@@ -916,9 +916,9 @@ public class QNuevos {
         sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=4\n" +
-"AND (TRAMITACION_DEPURACION NOT IN (2,99)\n" +
-"OR AUDIENCIA_PRELIM NOT IN (2,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (2,99))" +
+"AND (TRAMITACION_DEPURACION NOT IN (2,9)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (2,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,9))" +
  "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -986,9 +986,9 @@ public class QNuevos {
         sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=3\n" +
-"AND (TRAMITACION_DEPURACION NOT IN (1,99)\n" +
-"OR AUDIENCIA_PRELIM NOT IN (2,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (2,99))" +
+"AND (TRAMITACION_DEPURACION NOT IN (1,9)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (2,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,9))" +
  "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -1130,9 +1130,9 @@ public class QNuevos {
         sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=1\n" +
-"AND (TRAMITACION_DEPURACION NOT IN (2,99)\n" +
-"OR AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (2,99))"+
+"AND (TRAMITACION_DEPURACION NOT IN (2,9)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (1,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,9))"+
  "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";                
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -1280,9 +1280,9 @@ public class QNuevos {
         sql = "SELECT CLAVE_ORGANO,EXPEDIENTE_CLAVE,FASE_SOLI_EXPEDIENTE,COMENTARIOS FROM V3_TR_INDIVIDUALJL\n" +
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=2\n" +
-"AND (TRAMITACION_DEPURACION NOT IN (2,99)\n" +
-"OR AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (1,99))" +
+"AND (TRAMITACION_DEPURACION NOT IN (2,9)\n" +
+"OR AUDIENCIA_PRELIM NOT IN (1,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (1,9))" +
 "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -1433,8 +1433,8 @@ public class QNuevos {
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=3\n" +
 "AND (\n" +
-" AUTO_DEPURACION NOT IN (1,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (2,99))"+
+" AUTO_DEPURACION NOT IN (1,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,9))"+
  "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";               
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -1575,8 +1575,8 @@ public class QNuevos {
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=2\n" +
 "AND (\n" +
-" AUTO_DEPURACION NOT IN (2,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (1,99))" +
+" AUTO_DEPURACION NOT IN (2,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (1,9))" +
                     "    AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + entidad + "' AND PERIODO='" + periodo + "') OR (CLAVE_ORGANO='" + claveorgano + "' AND PERIODO='" + periodo + "'))";              
             System.out.println(sql);
             resul = conexion.consultar(sql);

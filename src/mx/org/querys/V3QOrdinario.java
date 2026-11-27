@@ -900,8 +900,8 @@ public class V3QOrdinario {
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=9\n" +
 "AND (\n" +
-" AUDIENCIA_PRELIM NOT IN (2,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (2,99)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
+" AUDIENCIA_PRELIM NOT IN (2,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,9)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
                 + "  OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -971,8 +971,8 @@ public class V3QOrdinario {
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=1\n" +
 "AND (\n" +
-" AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (2,99)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
+" AUDIENCIA_PRELIM NOT IN (1,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (2,9)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
                 + "  OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
@@ -1117,8 +1117,8 @@ public class V3QOrdinario {
 "WHERE ESTATUS_EXPEDIENTE=1\n" +
 "AND FASE_SOLI_EXPEDIENTE=2\n" +
 "AND (\n" +
-" AUDIENCIA_PRELIM NOT IN (1,99) OR\n" +
-"AUDIENCIA_JUICIO NOT IN (1,99)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
+" AUDIENCIA_PRELIM NOT IN (1,9) OR\n" +
+"AUDIENCIA_JUICIO NOT IN (1,9)) AND ((SUBSTR(CLAVE_ORGANO,0,2)='" + PValidacion.clave_entidad + "' AND PERIODO='" + PValidacion.periodo + "')\n"
                 + "  OR (CLAVE_ORGANO='" + PValidacion.clave_organo + "' AND PERIODO='" + PValidacion.periodo + "'))";
         System.out.println(sql);
         resul = conexion.consultar(sql);
